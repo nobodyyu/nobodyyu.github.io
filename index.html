@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html>
+
+ <!DOCTYPE HTML>
+<html lang="zh-tw">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>沒有人的地盤</title>
-  <meta name="viewport" content="width=device-width">
-  <meta name="description">
+    <title>沒有人的地盤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="AKI YU">
+    
+
+    
+    <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="沒有人的地盤">
 <meta property="og:url" content="http://www.yuaki.com/app/index.html">
@@ -14,64 +20,80 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沒有人的地盤">
 <meta name="twitter:description">
-  
-    <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-</head>
-<body>
-  <div id="container">
-    <div class="mobile-nav-panel">
-	<i class="icon-reorder icon-large"></i>
-</div>
-<header id="header">
-	<h1 class="blog-title">
-		<a href="/">沒有人的地盤</a>
-	</h1>
-	<nav class="nav">
-		<ul>
-			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
-			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
-			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
-		</ul>
-	</nav>
-	<div id="search-form-wrap">
-		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://www.yuaki.com/app"></form>
-	</div>
-</header>
-    <div id="main">
-      
-  
-    <article id="post-How-to-Hexo" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2015/04/07/How-to-Hexo/" class="article-date">
-  <time datetime="2015-04-07T08:12:37.000Z" itemprop="datePublished">2015-04-07</time>
-</a>
-		</span>
-		<span class="meta-elements author">AKI YU</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/04/07/How-to-Hexo/">How to Hexo</a>
-    </h1>
-  
 
-	</header>
-	<div class="entry-content">
+    
+    <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
 		
-    	<h2 id="1-本機環境設定">1.本機環境設定</h2><hr>
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="沒有人的地盤" title="沒有人的地盤"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="沒有人的地盤">沒有人的地盤</a></h1>
+				<h2 class="blog-motto">mobile app development</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:www.yuaki.com/app">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/07/How-to-Hexo/" title="How to Hexo" itemprop="url">How to Hexo</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-07T08:12:37.000Z" itemprop="datePublished"> 發表於 2015-04-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="1-本機環境設定">1.本機環境設定</h2><hr>
 <p>首先你要有<a href="http://www.nodejs.org/" target="_blank" rel="external">node.js</a>，這是一套快速、簡單且功能強大的 Node.js 網誌框架。</p>
 <p>接著你要用 npm install -g hexo 來安裝</p>
 <p>理論上這樣就完成了，發現前面加上 sudo 就可以解決資料夾控制權的問題。</p>
@@ -111,54 +133,60 @@
 <pre><code><span class="string">http:</span><span class="comment">//github帳號.github.io</span>
 </code></pre><p>打完收功</p>
 
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/blog/">blog</a><a href="/tags/hexo/">hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-swift-xmlParser之使用" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2015/04/07/swift-xmlParser之使用/" class="article-date">
-  <time datetime="2015-04-07T06:21:41.000Z" itemprop="datePublished">2015-04-07</time>
-</a>
-		</span>
-		<span class="meta-elements author">AKI YU</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/07/swift-xmlParser之使用/" title="swift-xmlParser之使用" itemprop="url">swift-xmlParser之使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/04/07/swift-xmlParser之使用/">swift-xmlParser之使用</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<ol>
+  <p class="article-time">
+    <time datetime="2015-04-07T06:21:41.000Z" itemprop="datePublished"> 發表於 2015-04-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ol>
 <li>在ViewController後引用所需要的 delegate</li>
 </ol>
 <pre><code><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">ViewController</span>,<span class="title">NSXMLParserDelegate</span> </span>
@@ -199,54 +227,60 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 </li>
 </ol>
 
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ios/">ios</a><a href="/tags/swift/">swift</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/">swift</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-objc-WaterMonitor" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2015/04/07/objc-WaterMonitor/" class="article-date">
-  <time datetime="2015-04-07T02:32:05.000Z" itemprop="datePublished">2015-04-07</time>
-</a>
-		</span>
-		<span class="meta-elements author">AKI YU</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/07/objc-WaterMonitor/" title="objc-WaterMonitor" itemprop="url">objc-WaterMonitor</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/04/07/objc-WaterMonitor/">objc-WaterMonitor</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>原始資料來源：<br><a href="http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx" target="_blank" rel="external">http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx</a></p>
+  <p class="article-time">
+    <time datetime="2015-04-07T02:32:05.000Z" itemprop="datePublished"> 發表於 2015-04-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>原始資料來源：<br><a href="http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx" target="_blank" rel="external">http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx</a></p>
 <h2 id="原始碼"><a href="https://github.com/AKI-YU/WaterMonitor/" target="_blank" rel="external">原始碼</a></h2><h2 id="載點_(待app_store審核)"><a href="https://itunes.apple.com/us/app/tai-wan-shui-ku-shui-wei-jian/id940353315?l=zh&amp;ls=1&amp;mt=8" target="_blank" rel="external">載點</a> (待app store審核)</h2><hr>
 <h2 id="說明">說明</h2><p>有許多資訊人對於週遭環境的關心，但是少了objc的版本，於此補上一份</p>
 <p>內容有</p>
@@ -260,58 +294,235 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 <p><a href="https://github.com/jarvislin/Water-Restriction-Info" target="_blank" rel="external">https://github.com/jarvislin/Water-Restriction-Info</a></p>
 <p>向上面這個專案致敬.</p>
 
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Taiwan/">Taiwan</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objc/">objc</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-  
-
+        
+        
+        <p class="article-more-link">
+          
+       </p>
     </div>
-    <div class="mb-search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:www.yuaki.com/app">
-  </form>
-</div>
-<footer id="footer">
-	<h1 class="footer-blog-title">
-		<a href="/">沒有人的地盤</a>
-	</h1>
-	<span class="copyright">
-		&copy; 2015 AKI YU<br>
-		Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
-		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-	</span>
-</footer>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js" type="text/javascript"></script>
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Taiwan/">Taiwan</a><a href="/tags/ios/">ios</a><a href="/tags/objc/">objc</a>
   </div>
-</body>
-</html>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/ios/" title="ios">ios<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/blog/" title="blog">blog<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/swift/" title="swift">swift<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/objc/" title="objc">objc<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://www.yuaki.com/app/about" target="_blank" title="AKI YU">AKI YU</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
