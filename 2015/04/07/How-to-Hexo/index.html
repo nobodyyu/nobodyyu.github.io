@@ -3,17 +3,38 @@
 <head>
   <meta charset="utf-8">
   
-  <title>沒有人的地盤</title>
+  <title>How to Hexo | 沒有人的地盤</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="沒有人的地盤">
-<meta property="og:url" content="http://www.yuaki.com/app/index.html">
+  <meta name="description" content="1.本機環境設定
+首先你要有node.js，這是一套快速、簡單且功能強大的 Node.js 網誌框架。
+接著你要用 npm install -g hexo 來安裝
+理論上這樣就完成了，發現前面加上 sudo 就可以解決資料夾控制權的問題。
+2.github帳號設定
+有自已的github帳號
+在主頁右上方創建一個新的 [repo] [create new repo]
+Repository name">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Hexo">
+<meta property="og:url" content="http://www.yuaki.com/app/2015/04/07/How-to-Hexo/index.html">
 <meta property="og:site_name" content="沒有人的地盤">
-<meta property="og:description">
+<meta property="og:description" content="1.本機環境設定
+首先你要有node.js，這是一套快速、簡單且功能強大的 Node.js 網誌框架。
+接著你要用 npm install -g hexo 來安裝
+理論上這樣就完成了，發現前面加上 sudo 就可以解決資料夾控制權的問題。
+2.github帳號設定
+有自已的github帳號
+在主頁右上方創建一個新的 [repo] [create new repo]
+Repository name">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="沒有人的地盤">
-<meta name="twitter:description">
+<meta name="twitter:title" content="How to Hexo">
+<meta name="twitter:description" content="1.本機環境設定
+首先你要有node.js，這是一套快速、簡單且功能強大的 Node.js 網誌框架。
+接著你要用 npm install -g hexo 來安裝
+理論上這樣就完成了，發現前面加上 sudo 就可以解決資料夾控制權的問題。
+2.github帳號設定
+有自已的github帳號
+在主頁右上方創建一個新的 [repo] [create new repo]
+Repository name">
   
     <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
   
@@ -63,9 +84,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-How-to-Hexo" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-How-to-Hexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/04/07/How-to-Hexo/" class="article-date">
   <time datetime="2015-04-07T08:12:37.000Z" itemprop="datePublished">2015-04-07</time>
@@ -78,8 +97,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/07/How-to-Hexo/">How to Hexo</a>
+    <h1 class="article-title" itemprop="name">
+      How to Hexo
     </h1>
   
 
@@ -137,140 +156,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-swift-xmlParser之使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/07/swift-xmlParser之使用/" class="article-date">
-  <time datetime="2015-04-07T06:21:41.000Z" itemprop="datePublished">2015-04-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/07/swift-xmlParser之使用/">swift-xmlParser之使用</a>
-    </h1>
+    <a href="/2015/04/07/swift-xmlParser之使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">swift-xmlParser之使用</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>在ViewController後引用所需要的 delegate</li>
-</ol>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">ViewController</span>,<span class="title">NSXMLParserDelegate</span> </span>
-</code></pre><ol>
-<li><p>加入delegate所需要的function</p>
-<pre><code><span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!)</span> </span>{
-<span class="built_in">println</span>(<span class="string">"Element's name is <span class="subst">\(elementName)</span>"</span>)
-<span class="built_in">println</span>(<span class="string">"Element's attributes are <span class="subst">\(attributeDict)</span>"</span>)
-}
-
-<span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, foundCharacters string: String!)</span> </span>{
-}
-
-<span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!)</span> </span>{
-<span class="built_in">println</span>(<span class="string">"End"</span>)
-</code></pre><p> }</p>
-</li>
-</ol>
-<ol>
-<li><p>在接收到資料後，轉為nsdata，並使用parser去執行（以下為範例）</p>
-<pre><code>  let xml = ("<span class="pi">&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;</span><span class="tag">&lt;<span class="title">rsp</span> <span class="attribute">stat</span>=<span class="value">\"fail\"</span>&gt;</span><span class="tag">&lt;<span class="title">err</span> <span class="attribute">code</span>=<span class="value">\"123\"</span> <span class="attribute">msg</span>=<span class="value">\"Failed\"</span> <span class="attribute">desc</span>=<span class="value">\"錯誤\"</span>/&gt;</span><span class="tag">&lt;/<span class="title">rsp</span>&gt;</span>").dataUsingEncoding(NSUTF8StringEncoding)
-var xmlParser: NSXMLParser = NSXMLParser(data: xml)
-xmlParser.delegate = self
-
-xmlParser.parse()
-</code></pre></li>
-</ol>
-<ol>
-<li><p>跑跑看結果是否正確</p>
-<pre><code>Element<span class="attribute">'s</span> name <span class="keyword">is</span> rsp
-Element<span class="attribute">'s</span> attributes are [stat: fail]
-Element<span class="attribute">'s</span> name <span class="keyword">is</span> err
-Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯誤, code: <span class="number">123</span>]
-<span class="keyword">End</span>
-<span class="keyword">End</span>
-</code></pre></li>
-<li><p>收工</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yuaki.com/app/2015/04/07/swift-xmlParser之使用/" data-id="ci871m61x00053176dquv0h09" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/">swift</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-    <article id="post-objc-WaterMonitor" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/07/objc-WaterMonitor/" class="article-date">
-  <time datetime="2015-04-07T02:32:05.000Z" itemprop="datePublished">2015-04-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/07/objc-WaterMonitor/">objc-WaterMonitor</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原始資料來源：<br><a href="http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx" target="_blank" rel="external">http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx</a></p>
-<h2 id="原始碼"><a href="https://github.com/AKI-YU/WaterMonitor/" target="_blank" rel="external">原始碼</a></h2><h2 id="載點_(待app_store審核)"><a href="https://itunes.apple.com/us/app/tai-wan-shui-ku-shui-wei-jian/id940353315?l=zh&amp;ls=1&amp;mt=8" target="_blank" rel="external">載點</a> (待app store審核)</h2><hr>
-<h2 id="說明">說明</h2><p>有許多資訊人對於週遭環境的關心，但是少了objc的版本，於此補上一份</p>
-<p>內容有</p>
-<p>1） html parser</p>
-<p>2） 動畫</p>
-<p>3） today extension</p>
-<p>4） vpon</p>
-<p>5） 其他小技巧</p>
-<hr>
-<h3 id="html_parser_-_TFHpple">html parser - TFHpple</h3><h3 id="water_effect_-_VWWater">water effect - VWWater</h3><hr>
-<p><a href="https://github.com/jarvislin/Water-Restriction-Info" target="_blank" rel="external">https://github.com/jarvislin/Water-Restriction-Info</a></p>
-<p>向上面這個專案致敬.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yuaki.com/app/2015/04/07/objc-WaterMonitor/" data-id="ci871m628000a3176iq92mvly" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Taiwan/">Taiwan</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objc/">objc</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-  
 </section>
         
           <aside id="sidebar">
