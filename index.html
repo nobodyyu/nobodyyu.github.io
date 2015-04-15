@@ -109,11 +109,11 @@
     <div class="article-content">
         
         <h2 id="AdMob網頁設定">AdMob網頁設定</h2><h3 id="1。註冊AdMob_帳號">1。註冊AdMob 帳號</h3><p>不解釋</p>
-<h3 id="2。加入新的應用程式">2。加入新的應用程式</h3><p>點擊<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob01.png" alt="admob01"></p>
+<h3 id="2。加入新的應用程式">2。加入新的應用程式</h3><p>點擊<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob01.png =310x" alt="admob01"></p>
 <p>手動新增應用程式</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob02.png" alt="admob02"></p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob02.png =310x" alt="admob02"></p>
 <p>將廣告單編號複製起來</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob03.png" alt="admob03"></p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob03.png =310x" alt="admob03"></p>
 <h2 id="手機程式">手機程式</h2><h3 id="1。pod_install">1。pod install</h3><p>在專案目錄下新增一個 Podfile 檔</p>
 <pre><code><span class="literal">source</span> <span class="string">'https://github.com/CocoaPods/Specs.git'</span>
 
@@ -122,14 +122,14 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 </code></pre><h3 id="2。在terminal下指令進行安裝">2。在terminal下指令進行安裝</h3><pre><code>pod <span class="keyword">install</span>
 </code></pre><p>安裝好之後，打開新產生的專案的workspace</p>
 <h3 id="3。在xib檔建一個UIView,並且將其class改為">3。在xib檔建一個UIView,並且將其class改為</h3><pre><code>GADBannerView
-</code></pre><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob04.png" alt="admob04"></p>
-<p>接著拉好相對應的 IBOutlet<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob05.png" alt="admob05"></p>
+</code></pre><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob04.png =310x" alt="admob04"></p>
+<p>接著拉好相對應的 IBOutlet<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob05.png =310x" alt="admob05"></p>
 <p>記得import GoogleMobileAds （語法和一般的import不太一樣）</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob06.png" alt="admob06"></p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob06.png =310x" alt="admob06"></p>
 <h3 id="4。在_ViewDidLoad_(or_anywhere)_加入對應的程式碼">4。在 ViewDidLoad (or anywhere) 加入對應的程式碼</h3><pre><code>bannerView.<span class="variable">adUnitID =</span> @<span class="string">"和網頁的那串相同"</span>;
   bannerView.<span class="variable">rootViewController =</span> self;
   [bannerView loadRequest:[GADRequest request]];
-</code></pre><h3 id="5。看到測試用的ad出現">5。看到測試用的ad出現</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob07.png" alt="admob07"></p>
+</code></pre><h3 id="5。看到測試用的ad出現">5。看到測試用的ad出現</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob07.png =310x" alt="admob07"></p>
 <h2 id="AdMob網頁設定啟動">AdMob網頁設定啟動</h2><p>據aircon解釋，在上架一週後可以搜尋得到應用程式，接著進行連結，就可以啟動admob了</p>
 <h2 id="打完收工">打完收工</h2>
         
@@ -185,9 +185,9 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 </header>
     <div class="article-content">
         
-        <h2 id="開始使用GAME_CENTER">開始使用GAME CENTER</h2><h3 id="1。在project裡加入_GameKit-framework">1。在project裡加入 GameKit.framework</h3><h3 id="2。在iOS_Dev_Center_加入對應的AppID，並且在iTunes_Connect新增一個APP">2。在iOS Dev Center 加入對應的AppID，並且在iTunes Connect新增一個APP</h3><h3 id="3。[My_App][xxxApp][Game_Center]下，設定啟用game_center">3。[My App][xxxApp][Game Center]下，設定啟用game center</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_01.png" alt="game01"></p>
-<h3 id="4。新增一個「個別排行榜」">4。新增一個「個別排行榜」</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_02.png" alt="game02"></p>
-<h3 id="5。enable_Game_Center">5。enable Game Center</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_03.png" alt="game03"></p>
+        <h2 id="開始使用GAME_CENTER">開始使用GAME CENTER</h2><h3 id="1。在project裡加入_GameKit-framework">1。在project裡加入 GameKit.framework</h3><h3 id="2。在iOS_Dev_Center_加入對應的AppID，並且在iTunes_Connect新增一個APP">2。在iOS Dev Center 加入對應的AppID，並且在iTunes Connect新增一個APP</h3><h3 id="3。[My_App][xxxApp][Game_Center]下，設定啟用game_center">3。[My App][xxxApp][Game Center]下，設定啟用game center</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_01.png =310x" alt="game01"></p>
+<h3 id="4。新增一個「個別排行榜」">4。新增一個「個別排行榜」</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_02.png =310x" alt="game02"></p>
+<h3 id="5。enable_Game_Center">5。enable Game Center</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_03.png =310x" alt="game03"></p>
 <h3 id="6。加上_GameKitHelper_的程式碼">6。加上 GameKitHelper 的程式碼</h3><h4 id="GameKitHelper-h">GameKitHelper.h</h4><pre><code><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span>
 <span class="preprocessor">#import <span class="title">&lt;GameKit/GameKit.h&gt;</span></span>
 
@@ -339,17 +339,17 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 
 
 <span class="keyword">@end</span>
-</code></pre><h3 id="7。確認Bundle_identifier是否一致">7。確認Bundle identifier是否一致</h3><h3 id="8。確認Capabilities_－_GameCenter_是否無錯誤">8。確認Capabilities － GameCenter 是否無錯誤</h3><h3 id="9。確認info-plist_有無gamekit的Capabilities">9。確認info.plist 有無gamekit的Capabilities</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_04.png" alt="game04"></p>
+</code></pre><h3 id="7。確認Bundle_identifier是否一致">7。確認Bundle identifier是否一致</h3><h3 id="8。確認Capabilities_－_GameCenter_是否無錯誤">8。確認Capabilities － GameCenter 是否無錯誤</h3><h3 id="9。確認info-plist_有無gamekit的Capabilities">9。確認info.plist 有無gamekit的Capabilities</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_04.png =310x" alt="game04"></p>
 <h3 id="10。在程式的啟動點加入_authenticateLocalPlayer">10。在程式的啟動點加入 authenticateLocalPlayer</h3><pre><code><span class="collection">[<span class="collection">[GameKitHelper sharedGameKitHelper]</span> authenticateLocalPlayer]</span><span class="comment">;</span>
 </code></pre><h3 id="11。Submit_Score">11。Submit Score</h3><pre><code><span class="string">[[GameKitHelper sharedGameKitHelper] submitScore:[lblScore.text integerValue]]</span>;
 </code></pre><h3 id="12。Show_LeaderBoard">12。Show LeaderBoard</h3><pre><code><span class="collection">[<span class="collection">[GameKitHelper sharedGameKitHelper]</span> showLeaderboard]</span><span class="comment">;</span>
 </code></pre><h3 id="13。在手機上測試">13。在手機上測試</h3><p>這裡有個小地方要注意一下 iOS8必需要在手機上開啟sandox mode，才能進行開發測試</p>
-<h4 id="[設定]_[Game_Center]_[Sandbox]_設為開啟">[設定] [Game Center] [Sandbox] 設為開啟</h4><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_05.PNG" alt="game05"></p>
-<h4 id="xcode_執行_debug_啟動進入程式後會出現_Game_Center_Sandbox，依序完成">xcode 執行 debug 啟動進入程式後會出現 Game Center Sandbox，依序完成</h4><p>輸入 AppID<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_06.PNG" alt="game06"></p>
-<p>確認 Terms and Conditions<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_07.PNG" alt="game07"></p>
-<p>Create NickName<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_08.PNG" alt="game08"></p>
-<p>Privacy<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_09.PNG" alt="game09"></p>
-<p>回到遊戲後即可看到 Game Center的歡迎訊息<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_10.PNG" alt="game10"></p>
+<h4 id="[設定]_[Game_Center]_[Sandbox]_設為開啟">[設定] [Game Center] [Sandbox] 設為開啟</h4><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_05.PNG =310x" alt="game05"></p>
+<h4 id="xcode_執行_debug_啟動進入程式後會出現_Game_Center_Sandbox，依序完成">xcode 執行 debug 啟動進入程式後會出現 Game Center Sandbox，依序完成</h4><p>輸入 AppID<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_06.PNG =310x" alt="game06"></p>
+<p>確認 Terms and Conditions<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_07.PNG =310x" alt="game07"></p>
+<p>Create NickName<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_08.PNG =310x" alt="game08"></p>
+<p>Privacy<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_09.PNG =310x" alt="game09"></p>
+<p>回到遊戲後即可看到 Game Center的歡迎訊息<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_10.PNG =310x" alt="game10"></p>
 <h1 id="打完收功">打完收功</h1>
         
         
