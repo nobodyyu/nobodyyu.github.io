@@ -1,31 +1,48 @@
 
- <!DOCTYPE HTML>
+  
+    <!DOCTYPE HTML>
 <html lang="zh-tw">
 <head>
   <meta charset="UTF-8">
   
-    <title>Clean Code - TDDs 3 laws | 沒有人的地盤</title>
+    <title>InApp Purchase Tutorial | 沒有人的地盤</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="AKI YU">
     
 
     
-    <meta name="description" content="First Law - You may not write production code until you have written a failing unit test.
+    <meta name="description" content="以下流程，將示範為程式加入inApp Purchase，一次性的購買，用以消除下方的Admob廣告
+1。在[ItunesConnect]裡，為你的app裡設定[App內購買項目]
+[Create New]
+[非消耗性項目]（如果要設定其他項目的話，也是差不多滴）
+[。。。。。] 中略，(沒有什麼項目可以省的)設定完成。－－ 這裡要把產品id記住，後面會用到
 
-Second Law - You may not write more of a unit test than is sufficient to fail, and not compiling is failing.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Clean Code - TDDs 3 laws">
-<meta property="og:url" content="http://www.yuaki.com/app/2015/04/08/Clean-Code-TDDs-3-laws/index.html">
+2。程式部份加入[StoreKit.f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="InApp Purchase Tutorial">
+<meta property="og:url" content="http://www.yuaki.com/app/InApp-Purchase-Tutorial.html">
 <meta property="og:site_name" content="沒有人的地盤">
-<meta property="og:description" content="First Law - You may not write production code until you have written a failing unit test.
+<meta property="og:description" content="以下流程，將示範為程式加入inApp Purchase，一次性的購買，用以消除下方的Admob廣告
+1。在[ItunesConnect]裡，為你的app裡設定[App內購買項目]
+[Create New]
+[非消耗性項目]（如果要設定其他項目的話，也是差不多滴）
+[。。。。。] 中略，(沒有什麼項目可以省的)設定完成。－－ 這裡要把產品id記住，後面會用到
 
-Second Law - You may not write more of a unit test than is sufficient to fail, and not compiling is failing.">
+2。程式部份加入[StoreKit.f">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inApp01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inApp02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inApp03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inApp04.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Clean Code - TDDs 3 laws">
-<meta name="twitter:description" content="First Law - You may not write production code until you have written a failing unit test.
+<meta name="twitter:title" content="InApp Purchase Tutorial">
+<meta name="twitter:description" content="以下流程，將示範為程式加入inApp Purchase，一次性的購買，用以消除下方的Admob廣告
+1。在[ItunesConnect]裡，為你的app裡設定[App內購買項目]
+[Create New]
+[非消耗性項目]（如果要設定其他項目的話，也是差不多滴）
+[。。。。。] 中略，(沒有什麼項目可以省的)設定完成。－－ 這裡要把產品id記住，後面會用到
 
-Second Law - You may not write more of a unit test than is sufficient to fail, and not compiling is failing.">
+2。程式部份加入[StoreKit.f">
 
     
     <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
@@ -40,9 +57,9 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
-  <body>
-    <header>
-      <div>
+      <body>
+        <header>
+          <div>
 		
 			<div id="imglogo">
 				<a href="/"><img src="/img/logo.png" alt="沒有人的地盤" title="沒有人的地盤"/></a>
@@ -76,9 +93,9 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 				</ul>
 			</nav>			
 </div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+        </header>
+        <div id="container">
+          <div id="main" class="page" itemscope itemprop="blogPost">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- nobodyyu_right -->
 <ins class="adsbygoogle"
@@ -95,35 +112,34 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/08/Clean-Code-TDDs-3-laws/" title="Clean Code - TDDs 3 laws" itemprop="url">Clean Code - TDDs 3 laws</a>
+      <a href="/InApp-Purchase-Tutorial.html" title="InApp Purchase Tutorial" itemprop="url">InApp Purchase Tutorial</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-08T09:46:55.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    <time datetime="2015-04-16T12:18:02.000Z" itemprop="datePublished"> 發表於 2015-04-16</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
-		
-			
-		
-		</div>
-		
-		<ol>
-<li><p>First Law - You may not write production code until you have written a failing unit test.</p>
-</li>
-<li><p>Second Law - You may not write more of a unit test than is sufficient to fail, and not compiling is failing.</p>
-</li>
-<li><p>Third Law - You may not write more production code than is sufficient to pass the currently failing test.</p>
-</li>
-</ol>
-  
+		<p>以下流程，將示範為程式加入inApp Purchase，一次性的購買，用以消除下方的Admob廣告</p>
+<h3 id="1。在[ItunesConnect]裡，為你的app裡設定[App內購買項目]">1。在[ItunesConnect]裡，為你的app裡設定[App內購買項目]</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inApp01.png" alt="inApp01" style="width:310px"></p>
+<h4 id="[Create_New]">[Create New]</h4><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inApp02.png" alt="inApp02" style="width:310px"></p>
+<h4 id="[非消耗性項目]（如果要設定其他項目的話，也是差不多滴）">[非消耗性項目]（如果要設定其他項目的話，也是差不多滴）</h4><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inApp03.png" alt="inApp03" style="width:310px"></p>
+<h4 id="[。。。。。]_中略，(沒有什麼項目可以省的)設定完成。">[。。。。。] 中略，(沒有什麼項目可以省的)設定完成。</h4><p>－－ 這裡要把產品id記住，後面會用到</p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inApp04.png" alt="inApp04" style="width:310px"></p>
+<h3 id="2。程式部份">2。程式部份</h3><h4 id="加入[StoreKit-framework]">加入[StoreKit.framework]</h4><h4 id="檢查能不能付錢？">檢查能不能付錢？</h4><pre><code><span class="keyword">if</span> ([SKPaymentQueue canMakePayments])
+{
+    <span class="keyword">...</span> // Display a store to the user.
+}
+<span class="keyword">else</span>
+{
+    <span class="keyword">...</span> // Warn the user that purchases are disabled.
+}
+</code></pre><h3 id="3。">3。</h3><h3 id="4。">4。</h3><h3 id="5。">5。</h3><h3 id="6。">6。</h3><h3 id="7。">7。</h3><h3 id="8。">8。</h3><h3 id="9。">9。</h3><h3 id="10。">10。</h3>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -131,7 +147,7 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
+  <span></span> <a href="/undefined">undefined</a><a href="/undefined">undefined</a><a href="/undefined">undefined</a>
   </div>
 
 </div>
@@ -140,7 +156,7 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.yuaki.com/app/2015/04/08/Clean-Code-TDDs-3-laws/" data-title="Clean Code - TDDs 3 laws | 沒有人的地盤" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.yuaki.com/app/InApp-Purchase-Tutorial.html" data-title="InApp Purchase Tutorial | 沒有人的地盤" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -151,176 +167,11 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
    	       
 	</article>
 	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2015/04/08/Clean-Code-Error-Handling/" title="Clean Code - Error Handling">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Clean Code - Error Handling</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2015/04/08/Clean-Code-System/"  title="Clean Code - System">
- <strong>下一篇：</strong><br/> 
- <span>Clean Code - System
-</span>
-</a>
-</div>
-
-</nav>
-
 	
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
- 
- 
- 
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
-<aside class="clearfix">
-
-  
-
-  
-<div class="tagslist">
-	<p class="asidetitle">標簽</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/objc/" title="objc">objc<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Clean-Code/" title="Clean Code">Clean Code<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ios/" title="ios">ios<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/swift/" title="swift">swift<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/廣告/" title="廣告">廣告<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/UIButton/" title="UIButton">UIButton<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/setAssociatedObject/" title="setAssociatedObject">setAssociatedObject<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Send-Action/" title="Send Action">Send Action<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/pod/" title="pod">pod<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/symbol/" title="symbol">symbol<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/blog/" title="blog">blog<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Game/" title="Game">Game<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/GameKit/" title="GameKit">GameKit<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <!-- 
-<div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
-            
-          </li>
-        
-    </ul>
-</div>
- -->
-
-  
-
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
-</div>
-
-</aside>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- right -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-8983800189460499"
-     data-ad-slot="4813429766"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-    </div>
-    <footer><div id="footer" >
+        </div>
+        <footer><div id="footer" >
 		<p class="copyright">
 		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by Jacman © 2015 
 		
@@ -330,7 +181,7 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 		</p>
 </div>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
+        <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
@@ -373,36 +224,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
   });
 });
 </script>
@@ -495,5 +318,6 @@ $(document).ready(function(){
 
 <!-- Tiny_search End -->
 
-  </body>
-</html>
+      </body>
+     </html>
+     
