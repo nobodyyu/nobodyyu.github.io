@@ -4,52 +4,37 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>objc-WaterMonitor | 沒有人的地盤</title>
+    <title>iBeacon Scanner實作概念 | 沒有人的地盤</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="AKI YU">
     
 
     
-    <meta name="description" content="原始資料來源：http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx
-原始碼載點 (待app store審核)
-說明有許多資訊人對於週遭環境的關心，但是少了objc的版本，於此補上一份
-內容有
-1） html parser
-2） 動畫
-3） today extension
-4） vpon
-5） 其他小技巧
+    <meta name="description" content="1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置Code Snippet
+#import &amp;lt;CoreBluetooth/CoreBluetooth.h&amp;gt;
 
-html parser">
+@interface ViewController ()&amp;lt;CBCentralManagerDelegate, CBPeripheralDelegate&amp;gt;
+{
+    CBCentralManager *_m">
 <meta property="og:type" content="article">
-<meta property="og:title" content="objc-WaterMonitor">
-<meta property="og:url" content="http://www.yuaki.com/app/2015/04/07/objc-WaterMonitor/index.html">
+<meta property="og:title" content="iBeacon Scanner實作概念">
+<meta property="og:url" content="http://www.yuaki.com/app/2015/04/22/iBeacon-Scanner實作概念/index.html">
 <meta property="og:site_name" content="沒有人的地盤">
-<meta property="og:description" content="原始資料來源：http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx
-原始碼載點 (待app store審核)
-說明有許多資訊人對於週遭環境的關心，但是少了objc的版本，於此補上一份
-內容有
-1） html parser
-2） 動畫
-3） today extension
-4） vpon
-5） 其他小技巧
+<meta property="og:description" content="1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置Code Snippet
+#import &amp;lt;CoreBluetooth/CoreBluetooth.h&amp;gt;
 
-html parser">
+@interface ViewController ()&amp;lt;CBCentralManagerDelegate, CBPeripheralDelegate&amp;gt;
+{
+    CBCentralManager *_m">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="objc-WaterMonitor">
-<meta name="twitter:description" content="原始資料來源：http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx
-原始碼載點 (待app store審核)
-說明有許多資訊人對於週遭環境的關心，但是少了objc的版本，於此補上一份
-內容有
-1） html parser
-2） 動畫
-3） today extension
-4） vpon
-5） 其他小技巧
+<meta name="twitter:title" content="iBeacon Scanner實作概念">
+<meta name="twitter:description" content="1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置Code Snippet
+#import &amp;lt;CoreBluetooth/CoreBluetooth.h&amp;gt;
 
-html parser">
+@interface ViewController ()&amp;lt;CBCentralManagerDelegate, CBPeripheralDelegate&amp;gt;
+{
+    CBCentralManager *_m">
 
     
     <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
@@ -119,14 +104,14 @@ html parser">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/07/objc-WaterMonitor/" title="objc-WaterMonitor" itemprop="url">objc-WaterMonitor</a>
+      <a href="/2015/04/22/iBeacon-Scanner實作概念/" title="iBeacon Scanner實作概念" itemprop="url">iBeacon Scanner實作概念</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-07T02:32:05.000Z" itemprop="datePublished"> 發表於 2015-04-07</time>
+    <time datetime="2015-04-22T04:10:24.000Z" itemprop="datePublished"> 發表於 2015-04-22</time>
     
   </p>
 </header>
@@ -135,24 +120,121 @@ html parser">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原始碼"><span class="toc-number">1.</span> <span class="toc-text">原始碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#載點_(待app_store審核)"><span class="toc-number">2.</span> <span class="toc-text">載點 (待app store審核)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#說明"><span class="toc-number">3.</span> <span class="toc-text">說明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#html_parser_-_TFHpple"><span class="toc-number">3.1.</span> <span class="toc-text">html parser - TFHpple</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#water_effect_-_VWWater"><span class="toc-number">3.2.</span> <span class="toc-text">water effect - VWWater</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_利用_CoreBluetoooth_來找尋附近的藍芽裝置"><span class="toc-number">1.</span> <span class="toc-text">1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_接著利用_CLLocationManagerDelegate_對_已取得的UUID_對_iBeacon_做程式的實作"><span class="toc-number">2.</span> <span class="toc-text">2. 接著利用 CLLocationManagerDelegate 對 已取得的UUID 對 iBeacon 做程式的實作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打完收工"><span class="toc-number">3.</span> <span class="toc-text">打完收工</span></a></li></ol>
 		
 		</div>
 		
-		<p>原始資料來源：<br><a href="http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx" target="_blank" rel="external">http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx</a></p>
-<h2 id="原始碼"><a href="https://github.com/AKI-YU/WaterMonitor/" target="_blank" rel="external">原始碼</a></h2><h2 id="載點_(待app_store審核)"><a href="https://itunes.apple.com/us/app/tai-wan-shui-ku-shui-wei-jian/id940353315?l=zh&amp;ls=1&amp;mt=8" target="_blank" rel="external">載點</a> (待app store審核)</h2><hr>
-<h2 id="說明">說明</h2><p>有許多資訊人對於週遭環境的關心，但是少了objc的版本，於此補上一份</p>
-<p>內容有</p>
-<p>1） html parser</p>
-<p>2） 動畫</p>
-<p>3） today extension</p>
-<p>4） vpon</p>
-<p>5） 其他小技巧</p>
-<hr>
-<h3 id="html_parser_-_TFHpple">html parser - TFHpple</h3><h3 id="water_effect_-_VWWater">water effect - VWWater</h3><hr>
-<p><a href="https://github.com/jarvislin/Water-Restriction-Info" target="_blank" rel="external">https://github.com/jarvislin/Water-Restriction-Info</a></p>
-<p>向上面這個專案致敬.</p>
-  
+		<h3 id="1-_利用_CoreBluetoooth_來找尋附近的藍芽裝置">1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置</h3><p>Code Snippet</p>
+<pre><code><span class="preprocessor">#import <span class="title">&lt;CoreBluetooth/CoreBluetooth.h&gt;</span></span>
+
+<span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()&lt;<span class="title">CBCentralManagerDelegate</span>, <span class="title">CBPeripheralDelegate</span>&gt;</span>
+{
+    CBCentralManager *_manager;
+    CBPeripheral *_peripheral;
+}
+<span class="keyword">@end</span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span>
+
+- (<span class="keyword">void</span>)viewDidLoad {
+    [<span class="keyword">super</span> viewDidLoad];
+
+    _manager =  [[CBCentralManager alloc] initWithDelegate:<span class="keyword">self</span>
+                                                    queue:<span class="literal">nil</span>];
+
+
+}
+
+
+- (<span class="keyword">void</span>)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+    <span class="keyword">switch</span> ((<span class="keyword">int</span>)central<span class="variable">.state</span>)
+    {
+        <span class="keyword">case</span> CBCentralManagerStatePoweredOn:
+        {
+            <span class="built_in">NSDictionary</span> *options = @{
+                                      CBCentralManagerScanOptionAllowDuplicatesKey: @YES
+                                      };
+            [_manager scanForPeripheralsWithServices:<span class="literal">nil</span>
+                                             options:options];
+            <span class="built_in">NSLog</span>(<span class="string">@"I just started scanning for peripherals"</span>);
+            <span class="keyword">break</span>;
+        }
+    }
+}
+
+- (<span class="keyword">void</span>) centralManager:(CBCentralManager *)central
+    didDiscoverPeripheral:(CBPeripheral *)peripheral
+        advertisementData:(<span class="built_in">NSDictionary</span> *)advertisementData
+                     RSSI:(<span class="built_in">NSNumber</span> *)RSSI
+{
+
+    <span class="keyword">if</span>([advertisementData objectForKey:<span class="string">@"kCBAdvDataLocalName"</span>]!=<span class="literal">nil</span>){
+        <span class="built_in">NSLog</span>(<span class="string">@"I see an advertisement with identifer: %@, state: %ld, name: %@, services: %@, description: %@"</span>,
+              [peripheral identifier],
+              [peripheral state],
+              [peripheral name],
+              [peripheral services],
+              [advertisementData description]);
+    }
+
+
+
+    <span class="keyword">if</span> (_peripheral == <span class="literal">nil</span>)
+    {
+        <span class="built_in">NSLog</span>(<span class="string">@"Trying to connect to peripheral"</span>);
+        _peripheral = peripheral;
+        _peripheral<span class="variable">.delegate</span> = (<span class="keyword">id</span>)<span class="keyword">self</span>;
+        [central connectPeripheral:_peripheral
+                           options:<span class="literal">nil</span>];
+    }
+}
+
+- (<span class="keyword">void</span>) centralManager:(CBCentralManager *)central
+    didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    <span class="keyword">if</span> (peripheral == <span class="literal">nil</span>)
+    {
+        <span class="built_in">NSLog</span>(<span class="string">@"connect callback has nil peripheral"</span>);
+    } <span class="keyword">else</span> {
+        <span class="built_in">NSLog</span>(<span class="string">@"Connected to peripheral with identifer: %@, state: %ld, name: %@, services: %@"</span>,
+              [peripheral identifier],
+              [peripheral state],
+              [peripheral name],
+              [peripheral services]);
+
+        <span class="built_in">NSLog</span>(<span class="string">@"discovering services..."</span>);
+        _peripheral = peripheral;
+        _peripheral<span class="variable">.delegate</span> = (<span class="keyword">id</span>)<span class="keyword">self</span>;
+        [_peripheral discoverServices:<span class="literal">nil</span>];
+    }
+}
+
+- (<span class="keyword">void</span>) peripheral:(CBPeripheral *)peripheral
+    didDiscoverServices:(<span class="built_in">NSArray</span> *)serviceUuids
+{
+    <span class="built_in">NSLog</span>(<span class="string">@"discovered a peripheral's services: %@"</span>, serviceUuids);
+}
+</code></pre><p>其中可以過濾掉一些不會廣播的設備</p>
+<pre><code><span class="tag">if</span>([<span class="attribute">advertisementDataobjectForKey</span>:@<span class="string">"kCBAdvDataLocalName"</span>]!=nil){
+</code></pre><p>可以取該設備的UUID</p>
+<pre><code><span class="tag">&lt;__NSConcreteUUID 0x17403f520&gt;</span> <span class="keyword">2750A093</span>-A1C2-9953-A59F-A0769538DC15
+</code></pre><p>附帶一提的是，小米手環也會廣播自已的藍芽訊號</p>
+<h3 id="2-_接著利用_CLLocationManagerDelegate_對_已取得的UUID_對_iBeacon_做程式的實作">2. 接著利用 CLLocationManagerDelegate 對 已取得的UUID 對 iBeacon 做程式的實作</h3><pre><code> <span class="keyword">for</span> (NSUUID *uuid <span class="keyword">in</span> [APLDefaults sharedDefaults].supportedProximityUUIDs)
+    {
+        CLBeaconRegion *region = [[CLBeaconRegion alloc] <span class="string">initWithProximityUUID:</span>uuid <span class="string">identifier:</span>[uuid UUIDString]];
+        self.rangedRegions[region] = [NSArray array];
+    }
+
+
+#pragma mark - Location manager delegate
+
+- (<span class="typename">void</span>)<span class="string">locationManager:</span>(CLLocationManager *)manager <span class="string">didRangeBeacons:</span>(NSArray *)beacons <span class="string">inRegion:</span>(CLBeaconRegion *)region
+{
+    <span class="comment">// 這裡就可以取到 iBeacon 了</span>
+}
+</code></pre><p>在這裡 小米手環 不會出現在 CLLocationManagerDelegate，所以會出現的就只剩下iBeacon了</p>
+<h3 id="打完收工">打完收工</h3>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -160,7 +242,7 @@ html parser">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Taiwan/">Taiwan</a><a href="/tags/ios/">ios</a><a href="/tags/objc/">objc</a>
+  <span></span> <a href="/tags/CoreBluetooth/">CoreBluetooth</a><a href="/tags/iBeacon/">iBeacon</a><a href="/tags/objc/">objc</a>
   </div>
 
 </div>
@@ -169,7 +251,7 @@ html parser">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.yuaki.com/app/2015/04/07/objc-WaterMonitor/" data-title="objc-WaterMonitor | 沒有人的地盤" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.yuaki.com/app/2015/04/22/iBeacon-Scanner實作概念/" data-title="iBeacon Scanner實作概念 | 沒有人的地盤" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -182,14 +264,14 @@ html parser">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/04/07/swift-xmlParser之使用/" title="swift-xmlParser之使用">
-  <strong>上一篇：</strong><br/>
-  <span>
-  swift-xmlParser之使用</span>
+
+<div class="next">
+<a href="/2015/04/21/xcode6-打包自已做的framework/"  title="[xcode6]打包自已做的framework">
+ <strong>下一篇：</strong><br/> 
+ <span>[xcode6]打包自已做的framework
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -201,7 +283,7 @@ html parser">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原始碼"><span class="toc-number">1.</span> <span class="toc-text">原始碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#載點_(待app_store審核)"><span class="toc-number">2.</span> <span class="toc-text">載點 (待app store審核)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#說明"><span class="toc-number">3.</span> <span class="toc-text">說明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#html_parser_-_TFHpple"><span class="toc-number">3.1.</span> <span class="toc-text">html parser - TFHpple</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#water_effect_-_VWWater"><span class="toc-number">3.2.</span> <span class="toc-text">water effect - VWWater</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_利用_CoreBluetoooth_來找尋附近的藍芽裝置"><span class="toc-number">1.</span> <span class="toc-text">1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_接著利用_CLLocationManagerDelegate_對_已取得的UUID_對_iBeacon_做程式的實作"><span class="toc-number">2.</span> <span class="toc-text">2. 接著利用 CLLocationManagerDelegate 對 已取得的UUID 對 iBeacon 做程式的實作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打完收工"><span class="toc-number">3.</span> <span class="toc-text">打完收工</span></a></li></ol>
  
   </div>
 
