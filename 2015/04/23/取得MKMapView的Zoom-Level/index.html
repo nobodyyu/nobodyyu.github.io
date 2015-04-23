@@ -4,46 +4,37 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Clean Code - Error Handling | 沒有人的地盤</title>
+    <title>取得MKMapView的Zoom Level | 沒有人的地盤</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="AKI YU">
     
 
     
-    <meta name="description" content="Use Exceptions rather than Return Codes
+    <meta name="description" content="定義地球弧度
+#define MERCATOR_RADIUS 85445659.44705395 
+Method
+- (int)getZoomLevel:(MKMapView*)_mapView { 
 
-Write Your Try-Catch-Finally Statement First
-
-Use un-checked exceptions ＊
-
-Provide context with eceptions
-
-Define exception classes in terms of a caller’s need">
+    return 21－round(log2(_mapView.region.span.longitudeDelta * MERCATOR_RADIUS * M_PI / (180.0 * _">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Clean Code - Error Handling">
-<meta property="og:url" content="http://www.yuaki.com/app/2015/04/08/Clean-Code-Error-Handling/index.html">
+<meta property="og:title" content="取得MKMapView的Zoom Level">
+<meta property="og:url" content="http://www.yuaki.com/app/2015/04/23/取得MKMapView的Zoom-Level/index.html">
 <meta property="og:site_name" content="沒有人的地盤">
-<meta property="og:description" content="Use Exceptions rather than Return Codes
+<meta property="og:description" content="定義地球弧度
+#define MERCATOR_RADIUS 85445659.44705395 
+Method
+- (int)getZoomLevel:(MKMapView*)_mapView { 
 
-Write Your Try-Catch-Finally Statement First
-
-Use un-checked exceptions ＊
-
-Provide context with eceptions
-
-Define exception classes in terms of a caller’s need">
+    return 21－round(log2(_mapView.region.span.longitudeDelta * MERCATOR_RADIUS * M_PI / (180.0 * _">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Clean Code - Error Handling">
-<meta name="twitter:description" content="Use Exceptions rather than Return Codes
+<meta name="twitter:title" content="取得MKMapView的Zoom Level">
+<meta name="twitter:description" content="定義地球弧度
+#define MERCATOR_RADIUS 85445659.44705395 
+Method
+- (int)getZoomLevel:(MKMapView*)_mapView { 
 
-Write Your Try-Catch-Finally Statement First
-
-Use un-checked exceptions ＊
-
-Provide context with eceptions
-
-Define exception classes in terms of a caller’s need">
+    return 21－round(log2(_mapView.region.span.longitudeDelta * MERCATOR_RADIUS * M_PI / (180.0 * _">
 
     
     <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
@@ -113,14 +104,14 @@ Define exception classes in terms of a caller’s need">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/08/Clean-Code-Error-Handling/" title="Clean Code - Error Handling" itemprop="url">Clean Code - Error Handling</a>
+      <a href="/2015/04/23/取得MKMapView的Zoom-Level/" title="取得MKMapView的Zoom Level" itemprop="url">取得MKMapView的Zoom Level</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-08T09:47:45.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    <time datetime="2015-04-23T06:23:08.000Z" itemprop="datePublished"> 發表於 2015-04-23</time>
     
   </p>
 </header>
@@ -133,25 +124,21 @@ Define exception classes in terms of a caller’s need">
 		
 		</div>
 		
-		<ol>
-<li><p>Use Exceptions rather than Return Codes</p>
-</li>
-<li><p>Write Your Try-Catch-Finally Statement First</p>
-</li>
-<li><p>Use un-checked exceptions ＊</p>
-</li>
-<li><p>Provide context with eceptions</p>
-</li>
-<li><p>Define exception classes in terms of a caller’s needs</p>
-</li>
-<li><p>Define the normal flow</p>
-</li>
-<li><p>Don’t return null</p>
-</li>
-<li><p>Don’t pass null</p>
-</li>
-</ol>
-  
+		<p>定義地球弧度</p>
+<pre><code><span class="hexcolor">#def</span>ine MERCATOR_RADIUS <span class="number">85445659.44705395</span> 
+</code></pre><p>Method</p>
+<pre><code>- (<span class="built_in">int</span>)getZoomLevel:(MKMapView*)_mapView { 
+
+    <span class="keyword">return</span> <span class="number">21</span>－<span class="built_in">round</span>(log2(_mapView.region.span.longitudeDelta * MERCATOR_RADIUS * M_PI / (<span class="number">180.0</span> * _mapView.bounds.<span class="built_in">size</span>.<span class="variable">width</span>))); 
+
+} 
+</code></pre><p>測試一下</p>
+<pre><code>- (<span class="keyword">void</span>)mapView:(<span class="built_in">MKMapView</span> *)_mapView regionDidChangeAnimated:(<span class="built_in">BOOL</span>)animated { 
+
+    <span class="built_in">NSLog</span>(<span class="string">@"zoom level %d"</span>, [<span class="keyword">self</span> getZoomLevel:_mapView]); 
+
+} 
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -159,7 +146,7 @@ Define exception classes in terms of a caller’s need">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
+  <span></span> <a href="/tags/MKMapView/">MKMapView</a><a href="/tags/objc/">objc</a>
   </div>
 
 </div>
@@ -168,7 +155,7 @@ Define exception classes in terms of a caller’s need">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.yuaki.com/app/2015/04/08/Clean-Code-Error-Handling/" data-title="Clean Code - Error Handling | 沒有人的地盤" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.yuaki.com/app/2015/04/23/取得MKMapView的Zoom-Level/" data-title="取得MKMapView的Zoom Level | 沒有人的地盤" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -181,19 +168,11 @@ Define exception classes in terms of a caller’s need">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/04/08/Clean-Code-function/" title="Clean Code - function">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Clean Code - function</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/04/08/Clean-Code-TDDs-3-laws/"  title="Clean Code - TDDs 3 laws">
+<a href="/2015/04/22/iBeacon-Scanner實作概念/"  title="iBeacon Scanner實作概念">
  <strong>下一篇：</strong><br/> 
- <span>Clean Code - TDDs 3 laws
+ <span>iBeacon Scanner實作概念
 </span>
 </a>
 </div>

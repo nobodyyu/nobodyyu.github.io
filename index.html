@@ -95,6 +95,74 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/23/取得MKMapView的Zoom-Level/" title="取得MKMapView的Zoom Level" itemprop="url">取得MKMapView的Zoom Level</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-23T06:23:08.000Z" itemprop="datePublished"> 發表於 2015-04-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>定義地球弧度</p>
+<pre><code><span class="hexcolor">#def</span>ine MERCATOR_RADIUS <span class="number">85445659.44705395</span> 
+</code></pre><p>Method</p>
+<pre><code>- (<span class="built_in">int</span>)getZoomLevel:(MKMapView*)_mapView { 
+
+    <span class="keyword">return</span> <span class="number">21</span>－<span class="built_in">round</span>(log2(_mapView.region.span.longitudeDelta * MERCATOR_RADIUS * M_PI / (<span class="number">180.0</span> * _mapView.bounds.<span class="built_in">size</span>.<span class="variable">width</span>))); 
+
+} 
+</code></pre><p>測試一下</p>
+<pre><code>- (<span class="keyword">void</span>)mapView:(<span class="built_in">MKMapView</span> *)_mapView regionDidChangeAnimated:(<span class="built_in">BOOL</span>)animated { 
+
+    <span class="built_in">NSLog</span>(<span class="string">@"zoom level %d"</span>, [<span class="keyword">self</span> getZoomLevel:_mapView]); 
+
+} 
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/MKMapView/">MKMapView</a><a href="/tags/objc/">objc</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/22/iBeacon-Scanner實作概念/" title="iBeacon Scanner實作概念" itemprop="url">iBeacon Scanner實作概念</a>
   </h1>
   <p class="article-author">By
@@ -1026,78 +1094,6 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/08/Clean-Code-Error-Handling/" title="Clean Code - Error Handling" itemprop="url">Clean Code - Error Handling</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-08T09:47:45.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ol>
-<li><p>Use Exceptions rather than Return Codes</p>
-</li>
-<li><p>Write Your Try-Catch-Finally Statement First</p>
-</li>
-<li><p>Use un-checked exceptions ＊</p>
-</li>
-<li><p>Provide context with eceptions</p>
-</li>
-<li><p>Define exception classes in terms of a caller’s needs</p>
-</li>
-<li><p>Define the normal flow</p>
-</li>
-<li><p>Don’t return null</p>
-</li>
-<li><p>Don’t pass null</p>
-</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -1118,7 +1114,7 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/objc/" title="objc">objc<sup>7</sup></a></li>
+				<li><a href="/tags/objc/" title="objc">objc<sup>8</sup></a></li>
 			
 		
 			
@@ -1138,6 +1134,14 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
+				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
 			
 		
@@ -1146,11 +1150,7 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/廣告/" title="廣告">廣告<sup>1</sup></a></li>
+				<li><a href="/tags/MKMapView/" title="MKMapView">MKMapView<sup>1</sup></a></li>
 			
 		
 			
@@ -1166,7 +1166,7 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
+				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
 			
 		
 			
@@ -1191,10 +1191,6 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 		
 			
 				<li><a href="/tags/blog/" title="blog">blog<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Game/" title="Game">Game<sup>1</sup></a></li>
 			
 		
 		</ul>
