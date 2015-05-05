@@ -95,6 +95,241 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/05/add-MotionEffect-for-your-UIView/" title="add MotionEffect for your UIView" itemprop="url">add MotionEffect for your UIView</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-05T15:15:23.000Z" itemprop="datePublished"> 發表於 2015-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>為你的 UIView 加上 Motion的效果</p>
+<pre><code>UIInterpolatingMotionEffect <span class="keyword">*</span>xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:<span class="comment">@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];</span>
+xAxis.maximumRelativeValue = <span class="comment">@(40);</span>
+xAxis.minimumRelativeValue = <span class="comment">@(-40);</span>
+
+UIInterpolatingMotionEffect <span class="keyword">*</span>yAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:<span class="comment">@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];</span>
+yAxis.maximumRelativeValue = <span class="comment">@(40);</span>
+yAxis.minimumRelativeValue = <span class="comment">@(-40);</span>
+
+UIMotionEffectGroup <span class="keyword">*</span>group = [[UIMotionEffectGroup alloc] init];
+group.motionEffects = <span class="comment">@[xAxis,yAxis];</span>
+
+[btnMap addMotionEffect:group];
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/MotionEffect/">MotionEffect</a><a href="/tags/iOS/">iOS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/05/add-MotionEffect-for-your-UIView/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/05/make-UIRefreshControll-by-your-self/" title="make UIRefreshControll by your self" itemprop="url">make UIRefreshControll by your self</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-05T15:06:53.000Z" itemprop="datePublished"> 發表於 2015-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="裡面用到了幾個技示巧">裡面用到了幾個技示巧</h2><p>1。 旋轉的animation<br>2。 移動的animation<br>3。 移除不必要的UIActivityIndicator</p>
+<h3 id="bikeRegreshConrtol-h">bikeRegreshConrtol.h</h3><pre><code><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span>
+
+<span class="class"><span class="keyword">@interface</span> <span class="title">bikeRegreshConrtol</span> : <span class="title">UIRefreshControl</span></span>
+
+
+-(<span class="keyword">void</span>)makeAnimate;
+
+<span class="keyword">@end</span>
+</code></pre><h3 id="bikeRegreshConrtol-m">bikeRegreshConrtol.m</h3><h1 id="import_“bikeRegreshConrtol-h”">import “bikeRegreshConrtol.h”</h1><pre><code><span class="class"><span class="keyword">@implementation</span> <span class="title">bikeRegreshConrtol</span></span>
+
+-(instancetype)init{
+
+    <span class="keyword">self</span> = [<span class="keyword">super</span> init];
+    <span class="keyword">if</span> (<span class="keyword">self</span>) {
+
+    }
+
+
+    <span class="keyword">return</span>  <span class="keyword">self</span>;
+
+}
+
+-(<span class="keyword">void</span>)makeAnimate{
+
+    <span class="keyword">for</span> (<span class="built_in">UIView</span> *V <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.subviews</span>) {
+        <span class="keyword">if</span> ([[V class] isSubclassOfClass:[<span class="built_in">UIImageView</span> class]]) {
+            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[V class]);
+        }<span class="keyword">else</span>{
+            [V removeFromSuperview];
+        }
+    }
+
+    <span class="built_in">UIImageView</span> *wheel1 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
+                           [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"wheel.png"</span>]];
+
+    [wheel1 setFrame:CGRectMake(<span class="number">50</span>, <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>, <span class="number">30</span>, <span class="number">30</span>)];
+
+
+    <span class="built_in">UIImageView</span> *wheel2 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
+                           [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"wheel.png"</span>]];
+
+    [wheel2 setFrame:CGRectMake(<span class="number">90</span>, <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>, <span class="number">30</span>, <span class="number">30</span>)];
+
+
+    <span class="keyword">if</span> ([wheel1<span class="variable">.layer</span> animationForKey:<span class="string">@"SpinAnimation"</span>] == <span class="literal">nil</span>) {
+        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:<span class="string">@"transform.rotation.z"</span>];
+        animation<span class="variable">.fromValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat:<span class="number">0.0</span>f];
+        animation<span class="variable">.toValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat: <span class="number">2</span>*M_PI];
+        animation<span class="variable">.duration</span> = <span class="number">2.4</span>f;
+        animation<span class="variable">.repeatCount</span> = INFINITY;
+        [wheel1<span class="variable">.layer</span> addAnimation:animation forKey:<span class="string">@"SpinAnimation"</span>];
+    }
+
+    <span class="keyword">if</span> ([wheel2<span class="variable">.layer</span> animationForKey:<span class="string">@"SpinAnimation"</span>] == <span class="literal">nil</span>) {
+        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:<span class="string">@"transform.rotation.z"</span>];
+        animation<span class="variable">.fromValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat:<span class="number">0.0</span>f];
+        animation<span class="variable">.toValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat: <span class="number">2</span>*M_PI];
+        animation<span class="variable">.duration</span> = <span class="number">2.2</span>f;
+        animation<span class="variable">.repeatCount</span> = INFINITY;
+        [wheel2<span class="variable">.layer</span> addAnimation:animation forKey:<span class="string">@"SpinAnimation"</span>];
+    }
+
+    [<span class="keyword">self</span> insertSubview:wheel1 atIndex:<span class="number">3</span>];
+    [<span class="keyword">self</span> insertSubview:wheel2 atIndex:<span class="number">2</span>];
+
+    <span class="built_in">UIImageView</span> *back1 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
+                           [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"background.png"</span>]];
+
+    [back1 setFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span>)];
+
+    [<span class="keyword">self</span> insertSubview:back1 atIndex:<span class="number">1</span>];
+
+
+
+    <span class="built_in">UIImageView</span> *back2 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
+                          [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"background.png"</span>]];
+
+    [back2 setFrame:CGRectMake(<span class="number">320</span>, <span class="number">0</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span>)];
+
+    [<span class="keyword">self</span> insertSubview:back2 atIndex:<span class="number">0</span>];
+
+    [<span class="keyword">self</span> bringSubviewToFront:wheel1];
+    [<span class="keyword">self</span> bringSubviewToFront:wheel2];
+<span class="comment">//    </span>
+
+    [<span class="keyword">self</span> doAnimate:back1 :back2];
+
+
+}
+
+-(<span class="keyword">void</span>)doAnimate:(<span class="built_in">UIImageView</span> *)img :(<span class="built_in">UIImageView</span> *)img2{
+    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">32.0</span>f animations:^{
+        [img setFrame:CGRectMake(-<span class="number">320</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
+        [img2 setFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
+    } completion:^(<span class="built_in">BOOL</span> finished) {
+        [img setFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
+        [img2 setFrame:CGRectMake(<span class="number">320</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
+        [<span class="keyword">self</span> doAnimate:img :img2];
+    }];
+}
+</code></pre><h3 id="使用">使用</h3><pre><code><span class="setting">refreshControl = <span class="value">[[bikeRegreshConrtol alloc] init];</span></span>
+<span class="title">[refreshControl addTarget:self action:@selector(refresh)
+              forControlEvents:UIControlEventValueChanged]</span><span class="comment">;</span>
+<span class="title">[mTable addSubview:refreshControl]</span><span class="comment">;</span>
+
+<span class="title">[refreshControl makeAnimate]</span><span class="comment">;</span>
+</code></pre><h3 id="更新結束">更新結束</h3><pre><code><span class="title">[refreshControl endRefreshing]</span><span class="comment">;</span>
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/UI/">UI</a><a href="/tags/UIRefreshControll/">UIRefreshControll</a><a href="/tags/iOS/">iOS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/05/make-UIRefreshControll-by-your-self/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/04/make-HUD-by-your-self/" title="make HUD by your self" itemprop="url">make HUD by your self</a>
   </h1>
   <p class="article-author">By
@@ -990,154 +1225,6 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/08/Clean-Code-Boy-Scout-Rule/" title="Clean Code - Boy Scout Rule" itemprop="url">Clean Code - Boy Scout Rule</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-08T09:49:27.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="Leave_the_campground_cleaner_than_you_found_it-">Leave the campground cleaner than you found it.</h2><h3 id="整理好code再離開，不管是誰留下來的">整理好code再離開，不管是誰留下來的</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/08/Clean-Code-Boy-Scout-Rule/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/08/Clean-Code-Naming/" title="Clean Code - Naming" itemprop="url">Clean Code - Naming</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-08T09:48:55.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ol>
-<li><p>Use Intention-Revealing Names</p>
-</li>
-<li><p>Avoid Disinformation</p>
-</li>
-<li><p>Make Meaningful Distinctions</p>
-</li>
-<li><p>Use Pronounceable Names</p>
-</li>
-<li><p>Use Searchable Names</p>
-</li>
-<li><p>Avoid Encodings</p>
-</li>
-<li><p>Avoid Mental Mapping</p>
-</li>
-<li><p>Class Names - should have noun or noun phase names</p>
-</li>
-<li><p>Method Names - should have verb or verb phase names</p>
-</li>
-<li><p>Don’t be cute</p>
-</li>
-<li><p>Pick one word per concept</p>
-</li>
-<li><p>Don’t pun - don’t use the same word for two purposes</p>
-</li>
-<li><p>Use solution domain names</p>
-</li>
-<li><p>Use problem domain names</p>
-</li>
-<li><p>Add meaningful context</p>
-</li>
-<li><p>Don’t add gratuitous context</p>
-</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/08/Clean-Code-Naming/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -1166,6 +1253,10 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/ios/" title="ios">ios<sup>3</sup></a></li>
 			
 		
@@ -1178,15 +1269,11 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
+				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
+				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
 			
 		
 			
@@ -1194,7 +1281,7 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/MKMapView/" title="MKMapView">MKMapView<sup>1</sup></a></li>
+				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
 			
 		
 			
@@ -1214,11 +1301,19 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
+				<li><a href="/tags/pod/" title="pod">pod<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/pod/" title="pod">pod<sup>1</sup></a></li>
+				<li><a href="/tags/廣告/" title="廣告">廣告<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
 			
 		
 			
@@ -1226,15 +1321,7 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/UI/" title="UI">UI<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/iBeacon/" title="iBeacon">iBeacon<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/CoreBluetooth/" title="CoreBluetooth">CoreBluetooth<sup>1</sup></a></li>
 			
 		
 		</ul>

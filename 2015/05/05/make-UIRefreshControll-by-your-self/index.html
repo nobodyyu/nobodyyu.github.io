@@ -1,0 +1,646 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>make UIRefreshControll by your self | 沒有人的地盤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="AKI YU">
+    
+
+    
+    <meta name="description" content="裡面用到了幾個技示巧1。 旋轉的animation2。 移動的animation3。 移除不必要的UIActivityIndicator
+bikeRegreshConrtol.h#import &amp;lt;UIKit/UIKit.h&amp;gt;
+
+@interface bikeRegreshConrtol : UIRefreshControl
+
+
+-(void)makeAnimate;
+
+@end
+bik">
+<meta property="og:type" content="article">
+<meta property="og:title" content="make UIRefreshControll by your self">
+<meta property="og:url" content="http://www.yuaki.com/app/2015/05/05/make-UIRefreshControll-by-your-self/index.html">
+<meta property="og:site_name" content="沒有人的地盤">
+<meta property="og:description" content="裡面用到了幾個技示巧1。 旋轉的animation2。 移動的animation3。 移除不必要的UIActivityIndicator
+bikeRegreshConrtol.h#import &amp;lt;UIKit/UIKit.h&amp;gt;
+
+@interface bikeRegreshConrtol : UIRefreshControl
+
+
+-(void)makeAnimate;
+
+@end
+bik">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="make UIRefreshControll by your self">
+<meta name="twitter:description" content="裡面用到了幾個技示巧1。 旋轉的animation2。 移動的animation3。 移除不必要的UIActivityIndicator
+bikeRegreshConrtol.h#import &amp;lt;UIKit/UIKit.h&amp;gt;
+
+@interface bikeRegreshConrtol : UIRefreshControl
+
+
+-(void)makeAnimate;
+
+@end
+bik">
+
+    
+    <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="沒有人的地盤" title="沒有人的地盤"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="沒有人的地盤">沒有人的地盤</a></h1>
+				<h2 class="blog-motto">mobile app development</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:www.yuaki.com/app">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- nobodyyu_right -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8983800189460499"
+     data-ad-slot="6290162960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/05/make-UIRefreshControll-by-your-self/" title="make UIRefreshControll by your self" itemprop="url">make UIRefreshControll by your self</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-05T15:06:53.000Z" itemprop="datePublished"> 發表於 2015-05-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#裡面用到了幾個技示巧"><span class="toc-number">1.</span> <span class="toc-text">裡面用到了幾個技示巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bikeRegreshConrtol-h"><span class="toc-number">1.1.</span> <span class="toc-text">bikeRegreshConrtol.h</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bikeRegreshConrtol-m"><span class="toc-number">1.2.</span> <span class="toc-text">bikeRegreshConrtol.m</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_“bikeRegreshConrtol-h”"><span class="toc-number"></span> <span class="toc-text">import “bikeRegreshConrtol.h”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-number">0.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新結束"><span class="toc-number">0.2.</span> <span class="toc-text">更新結束</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="裡面用到了幾個技示巧">裡面用到了幾個技示巧</h2><p>1。 旋轉的animation<br>2。 移動的animation<br>3。 移除不必要的UIActivityIndicator</p>
+<h3 id="bikeRegreshConrtol-h">bikeRegreshConrtol.h</h3><pre><code><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span>
+
+<span class="class"><span class="keyword">@interface</span> <span class="title">bikeRegreshConrtol</span> : <span class="title">UIRefreshControl</span></span>
+
+
+-(<span class="keyword">void</span>)makeAnimate;
+
+<span class="keyword">@end</span>
+</code></pre><h3 id="bikeRegreshConrtol-m">bikeRegreshConrtol.m</h3><h1 id="import_“bikeRegreshConrtol-h”">import “bikeRegreshConrtol.h”</h1><pre><code><span class="class"><span class="keyword">@implementation</span> <span class="title">bikeRegreshConrtol</span></span>
+
+-(instancetype)init{
+
+    <span class="keyword">self</span> = [<span class="keyword">super</span> init];
+    <span class="keyword">if</span> (<span class="keyword">self</span>) {
+
+    }
+
+
+    <span class="keyword">return</span>  <span class="keyword">self</span>;
+
+}
+
+-(<span class="keyword">void</span>)makeAnimate{
+
+    <span class="keyword">for</span> (<span class="built_in">UIView</span> *V <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.subviews</span>) {
+        <span class="keyword">if</span> ([[V class] isSubclassOfClass:[<span class="built_in">UIImageView</span> class]]) {
+            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[V class]);
+        }<span class="keyword">else</span>{
+            [V removeFromSuperview];
+        }
+    }
+
+    <span class="built_in">UIImageView</span> *wheel1 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
+                           [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"wheel.png"</span>]];
+
+    [wheel1 setFrame:CGRectMake(<span class="number">50</span>, <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>, <span class="number">30</span>, <span class="number">30</span>)];
+
+
+    <span class="built_in">UIImageView</span> *wheel2 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
+                           [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"wheel.png"</span>]];
+
+    [wheel2 setFrame:CGRectMake(<span class="number">90</span>, <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>, <span class="number">30</span>, <span class="number">30</span>)];
+
+
+    <span class="keyword">if</span> ([wheel1<span class="variable">.layer</span> animationForKey:<span class="string">@"SpinAnimation"</span>] == <span class="literal">nil</span>) {
+        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:<span class="string">@"transform.rotation.z"</span>];
+        animation<span class="variable">.fromValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat:<span class="number">0.0</span>f];
+        animation<span class="variable">.toValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat: <span class="number">2</span>*M_PI];
+        animation<span class="variable">.duration</span> = <span class="number">2.4</span>f;
+        animation<span class="variable">.repeatCount</span> = INFINITY;
+        [wheel1<span class="variable">.layer</span> addAnimation:animation forKey:<span class="string">@"SpinAnimation"</span>];
+    }
+
+    <span class="keyword">if</span> ([wheel2<span class="variable">.layer</span> animationForKey:<span class="string">@"SpinAnimation"</span>] == <span class="literal">nil</span>) {
+        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:<span class="string">@"transform.rotation.z"</span>];
+        animation<span class="variable">.fromValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat:<span class="number">0.0</span>f];
+        animation<span class="variable">.toValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat: <span class="number">2</span>*M_PI];
+        animation<span class="variable">.duration</span> = <span class="number">2.2</span>f;
+        animation<span class="variable">.repeatCount</span> = INFINITY;
+        [wheel2<span class="variable">.layer</span> addAnimation:animation forKey:<span class="string">@"SpinAnimation"</span>];
+    }
+
+    [<span class="keyword">self</span> insertSubview:wheel1 atIndex:<span class="number">3</span>];
+    [<span class="keyword">self</span> insertSubview:wheel2 atIndex:<span class="number">2</span>];
+
+    <span class="built_in">UIImageView</span> *back1 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
+                           [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"background.png"</span>]];
+
+    [back1 setFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span>)];
+
+    [<span class="keyword">self</span> insertSubview:back1 atIndex:<span class="number">1</span>];
+
+
+
+    <span class="built_in">UIImageView</span> *back2 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
+                          [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"background.png"</span>]];
+
+    [back2 setFrame:CGRectMake(<span class="number">320</span>, <span class="number">0</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span>)];
+
+    [<span class="keyword">self</span> insertSubview:back2 atIndex:<span class="number">0</span>];
+
+    [<span class="keyword">self</span> bringSubviewToFront:wheel1];
+    [<span class="keyword">self</span> bringSubviewToFront:wheel2];
+<span class="comment">//    </span>
+
+    [<span class="keyword">self</span> doAnimate:back1 :back2];
+
+
+}
+
+-(<span class="keyword">void</span>)doAnimate:(<span class="built_in">UIImageView</span> *)img :(<span class="built_in">UIImageView</span> *)img2{
+    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">32.0</span>f animations:^{
+        [img setFrame:CGRectMake(-<span class="number">320</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
+        [img2 setFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
+    } completion:^(<span class="built_in">BOOL</span> finished) {
+        [img setFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
+        [img2 setFrame:CGRectMake(<span class="number">320</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
+        [<span class="keyword">self</span> doAnimate:img :img2];
+    }];
+}
+</code></pre><h3 id="使用">使用</h3><pre><code><span class="setting">refreshControl = <span class="value">[[bikeRegreshConrtol alloc] init];</span></span>
+<span class="title">[refreshControl addTarget:self action:@selector(refresh)
+              forControlEvents:UIControlEventValueChanged]</span><span class="comment">;</span>
+<span class="title">[mTable addSubview:refreshControl]</span><span class="comment">;</span>
+
+<span class="title">[refreshControl makeAnimate]</span><span class="comment">;</span>
+</code></pre><h3 id="更新結束">更新結束</h3><pre><code><span class="title">[refreshControl endRefreshing]</span><span class="comment">;</span>
+</code></pre>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/UI/">UI</a><a href="/tags/UIRefreshControll/">UIRefreshControll</a><a href="/tags/iOS/">iOS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://www.yuaki.com/app/2015/05/05/make-UIRefreshControll-by-your-self/" data-title="make UIRefreshControll by your self | 沒有人的地盤" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/05/add-MotionEffect-for-your-UIView/" title="add MotionEffect for your UIView">
+  <strong>上一篇：</strong><br/>
+  <span>
+  add MotionEffect for your UIView</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/05/04/make-HUD-by-your-self/"  title="make HUD by your self">
+ <strong>下一篇：</strong><br/> 
+ <span>make HUD by your self
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#裡面用到了幾個技示巧"><span class="toc-number">1.</span> <span class="toc-text">裡面用到了幾個技示巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bikeRegreshConrtol-h"><span class="toc-number">1.1.</span> <span class="toc-text">bikeRegreshConrtol.h</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bikeRegreshConrtol-m"><span class="toc-number">1.2.</span> <span class="toc-text">bikeRegreshConrtol.m</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_“bikeRegreshConrtol-h”"><span class="toc-number"></span> <span class="toc-text">import “bikeRegreshConrtol.h”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-number">0.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新結束"><span class="toc-number">0.2.</span> <span class="toc-text">更新結束</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/objc/" title="objc">objc<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Clean-Code/" title="Clean Code">Clean Code<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ios/" title="ios">ios<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/swift/" title="swift">swift<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UIButton/" title="UIButton">UIButton<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/setAssociatedObject/" title="setAssociatedObject">setAssociatedObject<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Send-Action/" title="Send Action">Send Action<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/pod/" title="pod">pod<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/廣告/" title="廣告">廣告<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Singleton/" title="Singleton">Singleton<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iBeacon/" title="iBeacon">iBeacon<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <!-- 
+<div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+ -->
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- right -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8983800189460499"
+     data-ad-slot="4813429766"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+    </div>
+    <footer><div id="footer" >
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by Jacman © 2015 
+		
+		<a href="http://www.yuaki.com/app/about" target="_blank" title="AKI YU">AKI YU</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'nobodyyu';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

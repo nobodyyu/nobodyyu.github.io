@@ -4,52 +4,28 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Clean Code - System | 沒有人的地盤</title>
+    <title>add MotionEffect for your UIView | 沒有人的地盤</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="AKI YU">
     
 
     
-    <meta name="description" content="Separate Constructing a System from Using It
-
-Separation of Main
-
-Factories
-
-Dependency Injection
-
-Scaling Up
-
-Cross-Cutting Concerns">
+    <meta name="description" content="為你的 UIView 加上 Motion的效果
+UIInterpolatingMotionEffect *xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@&quot;center.x&quot; type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+xAxis.maximu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Clean Code - System">
-<meta property="og:url" content="http://www.yuaki.com/app/2015/04/08/Clean-Code-System/index.html">
+<meta property="og:title" content="add MotionEffect for your UIView">
+<meta property="og:url" content="http://www.yuaki.com/app/2015/05/05/add-MotionEffect-for-your-UIView/index.html">
 <meta property="og:site_name" content="沒有人的地盤">
-<meta property="og:description" content="Separate Constructing a System from Using It
-
-Separation of Main
-
-Factories
-
-Dependency Injection
-
-Scaling Up
-
-Cross-Cutting Concerns">
+<meta property="og:description" content="為你的 UIView 加上 Motion的效果
+UIInterpolatingMotionEffect *xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@&quot;center.x&quot; type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+xAxis.maximu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Clean Code - System">
-<meta name="twitter:description" content="Separate Constructing a System from Using It
-
-Separation of Main
-
-Factories
-
-Dependency Injection
-
-Scaling Up
-
-Cross-Cutting Concerns">
+<meta name="twitter:title" content="add MotionEffect for your UIView">
+<meta name="twitter:description" content="為你的 UIView 加上 Motion的效果
+UIInterpolatingMotionEffect *xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@&quot;center.x&quot; type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+xAxis.maximu">
 
     
     <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
@@ -119,14 +95,14 @@ Cross-Cutting Concerns">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/08/Clean-Code-System/" title="Clean Code - System" itemprop="url">Clean Code - System</a>
+      <a href="/2015/05/05/add-MotionEffect-for-your-UIView/" title="add MotionEffect for your UIView" itemprop="url">add MotionEffect for your UIView</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-08T09:45:45.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    <time datetime="2015-05-05T15:15:23.000Z" itemprop="datePublished"> 發表於 2015-05-05</time>
     
   </p>
 </header>
@@ -139,21 +115,20 @@ Cross-Cutting Concerns">
 		
 		</div>
 		
-		<ol>
-<li><p>Separate Constructing a System from Using It</p>
-</li>
-<li><p>Separation of Main</p>
-</li>
-<li><p>Factories</p>
-</li>
-<li><p>Dependency Injection</p>
-</li>
-<li><p>Scaling Up</p>
-</li>
-<li><p>Cross-Cutting Concerns</p>
-</li>
-</ol>
-  
+		<p>為你的 UIView 加上 Motion的效果</p>
+<pre><code>UIInterpolatingMotionEffect <span class="keyword">*</span>xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:<span class="comment">@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];</span>
+xAxis.maximumRelativeValue = <span class="comment">@(40);</span>
+xAxis.minimumRelativeValue = <span class="comment">@(-40);</span>
+
+UIInterpolatingMotionEffect <span class="keyword">*</span>yAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:<span class="comment">@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];</span>
+yAxis.maximumRelativeValue = <span class="comment">@(40);</span>
+yAxis.minimumRelativeValue = <span class="comment">@(-40);</span>
+
+UIMotionEffectGroup <span class="keyword">*</span>group = [[UIMotionEffectGroup alloc] init];
+group.motionEffects = <span class="comment">@[xAxis,yAxis];</span>
+
+[btnMap addMotionEffect:group];
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -161,7 +136,7 @@ Cross-Cutting Concerns">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
+  <span></span> <a href="/tags/MotionEffect/">MotionEffect</a><a href="/tags/iOS/">iOS</a>
   </div>
 
 </div>
@@ -170,7 +145,7 @@ Cross-Cutting Concerns">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.yuaki.com/app/2015/04/08/Clean-Code-System/" data-title="Clean Code - System | 沒有人的地盤" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.yuaki.com/app/2015/05/05/add-MotionEffect-for-your-UIView/" data-title="add MotionEffect for your UIView | 沒有人的地盤" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -183,19 +158,11 @@ Cross-Cutting Concerns">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/04/08/Clean-Code-TDDs-3-laws/" title="Clean Code - TDDs 3 laws">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Clean Code - TDDs 3 laws</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/04/08/Android-leap-code-01/"  title="Android-leap-code-01">
+<a href="/2015/05/05/make-UIRefreshControll-by-your-self/"  title="make UIRefreshControll by your self">
  <strong>下一篇：</strong><br/> 
- <span>Android-leap-code-01
+ <span>make UIRefreshControll by your self
 </span>
 </a>
 </div>
