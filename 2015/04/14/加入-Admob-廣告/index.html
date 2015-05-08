@@ -83,7 +83,7 @@ pod &apos;Google-Mobile-Ads-SDK&apos;, &apos;~&amp;">
 				<h1 class="site-name"><a href="/" title="沒有人的地盤">沒有人的地盤</a></h1>
 				<h2 class="blog-motto">mobile app development</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -133,14 +133,14 @@ pod &apos;Google-Mobile-Ads-SDK&apos;, &apos;~&amp;">
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-14T14:57:56.000Z" itemprop="datePublished"> 發表於 2015-04-14</time>
+    <time datetime="2015-04-14T14:57:56.000Z" itemprop="datePublished"> 发表于 2015-04-14</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">文章目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AdMob網頁設定"><span class="toc-number">1.</span> <span class="toc-text">AdMob網頁設定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1。註冊AdMob_帳號"><span class="toc-number">1.1.</span> <span class="toc-text">1。註冊AdMob 帳號</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2。加入新的應用程式"><span class="toc-number">1.2.</span> <span class="toc-text">2。加入新的應用程式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手機程式"><span class="toc-number">2.</span> <span class="toc-text">手機程式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1。pod_install"><span class="toc-number">2.1.</span> <span class="toc-text">1。pod install</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2。在terminal下指令進行安裝"><span class="toc-number">2.2.</span> <span class="toc-text">2。在terminal下指令進行安裝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3。在xib檔建一個UIView,並且將其class改為"><span class="toc-number">2.3.</span> <span class="toc-text">3。在xib檔建一個UIView,並且將其class改為</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4。在_ViewDidLoad_(or_anywhere)_加入對應的程式碼"><span class="toc-number">2.4.</span> <span class="toc-text">4。在 ViewDidLoad (or anywhere) 加入對應的程式碼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5。看到測試用的ad出現"><span class="toc-number">2.5.</span> <span class="toc-text">5。看到測試用的ad出現</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AdMob網頁設定啟動"><span class="toc-number">3.</span> <span class="toc-text">AdMob網頁設定啟動</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打完收工"><span class="toc-number">4.</span> <span class="toc-text">打完收工</span></a></li></ol>
 		
@@ -227,24 +227,24 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">文章目录</strong>
  
  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AdMob網頁設定"><span class="toc-number">1.</span> <span class="toc-text">AdMob網頁設定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1。註冊AdMob_帳號"><span class="toc-number">1.1.</span> <span class="toc-text">1。註冊AdMob 帳號</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2。加入新的應用程式"><span class="toc-number">1.2.</span> <span class="toc-text">2。加入新的應用程式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手機程式"><span class="toc-number">2.</span> <span class="toc-text">手機程式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1。pod_install"><span class="toc-number">2.1.</span> <span class="toc-text">1。pod install</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2。在terminal下指令進行安裝"><span class="toc-number">2.2.</span> <span class="toc-text">2。在terminal下指令進行安裝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3。在xib檔建一個UIView,並且將其class改為"><span class="toc-number">2.3.</span> <span class="toc-text">3。在xib檔建一個UIView,並且將其class改為</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4。在_ViewDidLoad_(or_anywhere)_加入對應的程式碼"><span class="toc-number">2.4.</span> <span class="toc-text">4。在 ViewDidLoad (or anywhere) 加入對應的程式碼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5。看到測試用的ad出現"><span class="toc-number">2.5.</span> <span class="toc-text">5。看到測試用的ad出現</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AdMob網頁設定啟動"><span class="toc-number">3.</span> <span class="toc-text">AdMob網頁設定啟動</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打完收工"><span class="toc-number">4.</span> <span class="toc-text">打完收工</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
 
   
 <div class="tagslist">
-	<p class="asidetitle">標簽</p>
+	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
 			
@@ -333,7 +333,7 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 
   <!-- 
 <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">友情链接</p>
     <ul>
         
           <li>
@@ -356,7 +356,7 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
 </div>
 
 </aside>
@@ -551,7 +551,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
