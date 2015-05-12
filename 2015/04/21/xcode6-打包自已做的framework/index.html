@@ -66,7 +66,7 @@
 				<h1 class="site-name"><a href="/" title="沒有人的地盤">沒有人的地盤</a></h1>
 				<h2 class="blog-motto">mobile app development</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -82,7 +82,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:www.yuaki.com/app">
 					</form>
 					
@@ -116,14 +116,14 @@
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-21T12:56:17.000Z" itemprop="datePublished"> 發表於 2015-04-21</time>
+    <time datetime="2015-04-21T12:56:17.000Z" itemprop="datePublished"> Published 2015-04-21</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_新增一個專案，選取_[Framework_&_Library]_[Cocoa_Touch_Framework]"><span class="toc-number">1.</span> <span class="toc-text">1. 新增一個專案，選取 [Framework & Library] [Cocoa Touch Framework]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_在專案中，把要放的程式加到專案中"><span class="toc-number">2.</span> <span class="toc-text">2. 在專案中，把要放的程式加到專案中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_在[Target][Build_Phase][Headers]中設定，要給人看的表頭檔(-h)，和不給人看的表頭檔"><span class="toc-number">3.</span> <span class="toc-text">3. 在[Target][Build Phase][Headers]中設定，要給人看的表頭檔(.h)，和不給人看的表頭檔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_新增一個_[Aggregate_Target]"><span class="toc-number">4.</span> <span class="toc-text">4. 新增一個 [Aggregate Target]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_在新的_[Aggregate_Target][Build_Phases]加入_[Run_Script]"><span class="toc-number">5.</span> <span class="toc-text">5. 在新的 [Aggregate Target][Build Phases]加入 [Run Script]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-最後_builde_project，會在[Products]_生成你的個人的framework"><span class="toc-number">6.</span> <span class="toc-text">6.最後 builde project，會在[Products] 生成你的個人的framework</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ps-_如果要生成靜態的library使用，要注意一個設定"><span class="toc-number">6.1.</span> <span class="toc-text">ps. 如果要生成靜態的library使用，要注意一個設定</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-_最後給別人引用時_要注意一下，除了在[Linked_Frameworks_and_Libraries]下引用之外，還要在[Targer][General][Embeded_Binies]下加入自定義的framework"><span class="toc-number">7.</span> <span class="toc-text">7. 最後給別人引用時 要注意一下，除了在[Linked Frameworks and Libraries]下引用之外，還要在[Targer][General][Embeded Binies]下加入自定義的framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打完收工"><span class="toc-number">8.</span> <span class="toc-text">打完收工</span></a></li></ol>
 		
@@ -227,24 +227,24 @@ open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_新增一個專案，選取_[Framework_&_Library]_[Cocoa_Touch_Framework]"><span class="toc-number">1.</span> <span class="toc-text">1. 新增一個專案，選取 [Framework & Library] [Cocoa Touch Framework]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_在專案中，把要放的程式加到專案中"><span class="toc-number">2.</span> <span class="toc-text">2. 在專案中，把要放的程式加到專案中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_在[Target][Build_Phase][Headers]中設定，要給人看的表頭檔(-h)，和不給人看的表頭檔"><span class="toc-number">3.</span> <span class="toc-text">3. 在[Target][Build Phase][Headers]中設定，要給人看的表頭檔(.h)，和不給人看的表頭檔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_新增一個_[Aggregate_Target]"><span class="toc-number">4.</span> <span class="toc-text">4. 新增一個 [Aggregate Target]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_在新的_[Aggregate_Target][Build_Phases]加入_[Run_Script]"><span class="toc-number">5.</span> <span class="toc-text">5. 在新的 [Aggregate Target][Build Phases]加入 [Run Script]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-最後_builde_project，會在[Products]_生成你的個人的framework"><span class="toc-number">6.</span> <span class="toc-text">6.最後 builde project，會在[Products] 生成你的個人的framework</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ps-_如果要生成靜態的library使用，要注意一個設定"><span class="toc-number">6.1.</span> <span class="toc-text">ps. 如果要生成靜態的library使用，要注意一個設定</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-_最後給別人引用時_要注意一下，除了在[Linked_Frameworks_and_Libraries]下引用之外，還要在[Targer][General][Embeded_Binies]下加入自定義的framework"><span class="toc-number">7.</span> <span class="toc-text">7. 最後給別人引用時 要注意一下，除了在[Linked Frameworks and Libraries]下引用之外，還要在[Targer][General][Embeded Binies]下加入自定義的framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打完收工"><span class="toc-number">8.</span> <span class="toc-text">打完收工</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 
   
 <div class="tagslist">
-	<p class="asidetitle">標簽</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
 			
@@ -256,7 +256,7 @@ open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
 			
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>3</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>4</sup></a></li>
 			
 		
 			
@@ -276,7 +276,7 @@ open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
 			
 		
 			
-				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
+				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
 			
 		
 			
@@ -312,11 +312,11 @@ open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
 			
 		
 			
-				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
+				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
+				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
 			
 		
 			
@@ -324,7 +324,7 @@ open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
 			
 		
 			
-				<li><a href="/tags/iBeacon/" title="iBeacon">iBeacon<sup>1</sup></a></li>
+				<li><a href="/tags/inApp/" title="inApp">inApp<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -333,7 +333,7 @@ open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
 
   <!-- 
 <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -356,7 +356,7 @@ open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -551,7 +551,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

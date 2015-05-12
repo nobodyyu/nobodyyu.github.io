@@ -1,0 +1,851 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>inApp Purchase walkthrough | 沒有人的地盤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="AKI YU">
+    
+
+    
+    <meta name="description" content="前言 2015-05別人的walk through都有點年代了，而且關鍵的幾個點都沒有特別註明，所以只好自已來寫一個walk through
+unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果出現*是不允許的）
+[member center] - [Certificates, Identifiers &amp;amp; Profiles] - [App IDs]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="inApp Purchase walkthrough">
+<meta property="og:url" content="http://www.yuaki.com/app/2015/05/12/inApp-Purchase-walkthrough/index.html">
+<meta property="og:site_name" content="沒有人的地盤">
+<meta property="og:description" content="前言 2015-05別人的walk through都有點年代了，而且關鍵的幾個點都沒有特別註明，所以只好自已來寫一個walk through
+unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果出現*是不允許的）
+[member center] - [Certificates, Identifiers &amp;amp; Profiles] - [App IDs]">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp08.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp09.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp10.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="inApp Purchase walkthrough">
+<meta name="twitter:description" content="前言 2015-05別人的walk through都有點年代了，而且關鍵的幾個點都沒有特別註明，所以只好自已來寫一個walk through
+unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果出現*是不允許的）
+[member center] - [Certificates, Identifiers &amp;amp; Profiles] - [App IDs]">
+
+    
+    <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="沒有人的地盤" title="沒有人的地盤"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="沒有人的地盤">沒有人的地盤</a></h1>
+				<h2 class="blog-motto">mobile app development</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:www.yuaki.com/app">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- nobodyyu_right -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8983800189460499"
+     data-ad-slot="6290162960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/12/inApp-Purchase-walkthrough/" title="inApp Purchase walkthrough" itemprop="url">inApp Purchase walkthrough</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-12T07:14:47.000Z" itemprop="datePublished"> Published 2015-05-12</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言_2015-05"><span class="toc-number">1.</span> <span class="toc-text">前言 2015-05</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#unique_App_ID"><span class="toc-number"></span> <span class="toc-text">unique App ID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#[member_center]_-_[Certificates,_Identifiers_&_Profiles]_-_[App_IDs]"><span class="toc-number">1.</span> <span class="toc-text">[member center] - [Certificates, Identifiers & Profiles] - [App IDs]</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Provisioning_Profile"><span class="toc-number"></span> <span class="toc-text">Provisioning Profile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ItunesConnect_設定APP"><span class="toc-number"></span> <span class="toc-text">ItunesConnect 設定APP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新增_inAPP_Product"><span class="toc-number"></span> <span class="toc-text">新增 inAPP Product</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ProductID_一定要是_appid-name"><span class="toc-number"></span> <span class="toc-text">ProductID 一定要是 appid.name</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#檢查xcode裡iap的設定是否開啟"><span class="toc-number"></span> <span class="toc-text">檢查xcode裡iap的設定是否開啟</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Code"><span class="toc-number"></span> <span class="toc-text">Code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#加入_StoreKit-Framework"><span class="toc-number"></span> <span class="toc-text">加入 StoreKit.Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加入三支程式_Store-h、Store-m和一支放在server的iap-php"><span class="toc-number"></span> <span class="toc-text">加入三支程式 Store.h、Store.m和一支放在server的iap.php</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#感謝_Paul_Wu_大大的無私分享"><span class="toc-number">1.</span> <span class="toc-text">感謝 Paul Wu 大大的無私分享</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用"><span class="toc-number"></span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number"></span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#沙箱測試"><span class="toc-number"></span> <span class="toc-text">沙箱測試</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打完收功"><span class="toc-number">0.1.</span> <span class="toc-text">打完收功</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h3 id="前言_2015-05">前言 2015-05</h3><p>別人的walk through都有點年代了，而且關鍵的幾個點都沒有特別註明，所以只好自已來寫一個walk through</p>
+<h1 id="unique_App_ID">unique App ID</h1><p>意思是不可以使用Wildcard App ID來做APP的綁定（如果出現*是不允許的）</p>
+<h3 id="[member_center]_-_[Certificates,_Identifiers_&amp;_Profiles]_-_[App_IDs]">[member center] - [Certificates, Identifiers &amp; Profiles] - [App IDs]</h3><h1 id="Provisioning_Profile">Provisioning Profile</h1><p>provision profile要與App ID匹配</p>
+<h1 id="ItunesConnect_設定APP">ItunesConnect 設定APP</h1><p>新增一個app，該填的填</p>
+<h1 id="新增_inAPP_Product">新增 inAPP Product</h1><p>[APP] - [App 內購買項目] - [Create New] - [非消耗性項目]</p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp01.png" alt="inapp01" style="width:310px"></p>
+<p>非消耗性項目 把讓填的填一填後[儲存]</p>
+<h1 id="ProductID_一定要是_appid-name">ProductID 一定要是 appid.name</h1><p>在這裡卡關很久，很多walk through說ProdoctID只要unique，但是程式寫好，按下去就是 [StoreStateInvalidProduct]，要記得全部都要帶</p>
+<p>(範例為) com.yuaki.No5.Remove_AD  </p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp02.png" alt="inapp02" style="width:310px"></p>
+<h1 id="檢查xcode裡iap的設定是否開啟">檢查xcode裡iap的設定是否開啟</h1><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp03.png" alt="inapp03" style="width:310px"></p>
+<h1 id="Code">Code</h1><h2 id="加入_StoreKit-Framework">加入 StoreKit.Framework</h2><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp04.png" alt="inapp04" style="width:310px"></p>
+<h2 id="加入三支程式_Store-h、Store-m和一支放在server的iap-php">加入三支程式 Store.h、Store.m和一支放在server的iap.php</h2><h3 id="感謝_Paul_Wu_大大的無私分享">感謝 Paul Wu 大大的無私分享</h3><p>store.h</p>
+<pre><code><span class="comment">//</span>
+<span class="comment">//  Store.h</span>
+<span class="comment">//  DemoIAP</span>
+<span class="comment">//</span>
+<span class="comment">//  Created by Paul Wu on 2014/11/23.</span>
+<span class="comment">//  Copyright (c) 2014年 Prodisky. All rights reserved.</span>
+<span class="comment">//</span>
+
+<span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span>
+
+<span class="keyword">enum</span> {
+    StoreStatePurchasing,
+    StoreStatePurchased,
+    StoreStateRestored,
+    StoreStateDeferred,
+    StoreStateVerifyReceipt,
+    StoreStateMakePaymentsFail,
+    StoreStateInvalidProduct,
+    StoreStateFailedClientInvalid,
+    StoreStateFailedPaymentCancelled,
+    StoreStateFailedPaymentInvalid,
+    StoreStateFailedPaymentNotAllowed,
+    StoreStateFailedUnknown
+};
+<span class="keyword">typedef</span> NSUInteger StoreState;
+
+<span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span>
+<span class="preprocessor">#import <span class="title">&lt;StoreKit/StoreKit.h&gt;</span></span>
+
+<span class="class"><span class="keyword">@interface</span> <span class="title">Store</span> : <span class="title">NSObject</span> &lt;<span class="title">SKPaymentTransactionObserver</span>, <span class="title">SKProductsRequestDelegate</span>&gt;</span>
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^updatedState) (StoreState state, <span class="built_in">NSString</span> *productIdentifier);
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^verifyPass) (<span class="built_in">NSString</span> *productIdentifier);
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^verifyFail) (<span class="built_in">NSString</span> *productIdentifier);
+
++ (Store*)shared;
+- (<span class="keyword">void</span>)purchase:(<span class="built_in">NSString</span> *)productIdentifier;
+- (<span class="keyword">void</span>)restore;
+<span class="keyword">@end</span>
+</code></pre><p>store.m<br>    //<br>    //  Store.m<br>    //  DemoIAP<br>    //<br>    //  Created by Paul Wu on 2014/11/23.<br>    //  Copyright (c) 2014年 Prodisky. All rights reserved.<br>    //</p>
+<pre><code><span class="preprocessor">#import <span class="title">"Store.h"</span></span>
+<span class="preprocessor">#define verifyServerURL        @<span class="title">"http://XXX/iap.php"</span></span>
+
+<span class="preprocessor">#pragma mark</span>
+<span class="class"><span class="keyword">@interface</span> <span class="title">URLRequest</span> : <span class="title">NSMutableURLRequest</span></span>
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^didFinish) (<span class="built_in">NSData</span>* response);
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^didError) (<span class="built_in">NSError</span> *error);
+- (<span class="keyword">void</span>) startAsynchronous;
+<span class="keyword">@end</span>
+
+<span class="class"><span class="keyword">@interface</span> <span class="title">URLRequest</span> () </span>{
+    NSMutableData *responseData;
+    <span class="built_in">NSURLConnection</span> *urlconnection;
+}<span class="keyword">@end</span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">URLRequest</span></span>
+- (<span class="keyword">id</span>)init {
+    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) {
+        <span class="keyword">self</span><span class="variable">.timeoutInterval</span> = <span class="number">3.14</span>;
+        <span class="keyword">self</span><span class="variable">.HTTPShouldUsePipelining</span> = <span class="literal">YES</span>;
+    }
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+}
+- (<span class="keyword">void</span>)startAsynchronous {
+    urlconnection = [[<span class="built_in">NSURLConnection</span> alloc] initWithRequest:<span class="keyword">self</span> delegate:<span class="keyword">self</span>];
+}
+- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveResponse:(NSURLResponse *)response {
+    responseData = [NSMutableData new];
+}
+- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveData:(<span class="built_in">NSData</span> *)data {
+    [responseData appendData:data];
+}
+- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didFailWithError:(<span class="built_in">NSError</span> *)error {
+    [urlconnection cancel];
+    responseData = [NSMutableData new];
+    <span class="keyword">if</span> (_didError) _didError(error);
+}
+- (<span class="keyword">void</span>)connectionDidFinishLoading:(<span class="built_in">NSURLConnection</span> *)connection {
+    [urlconnection cancel];
+    urlconnection = <span class="literal">nil</span>;
+    <span class="keyword">if</span> (_didFinish) _didFinish(responseData);
+}
+<span class="keyword">@end</span>
+<span class="preprocessor">#pragma mark</span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">Store</span></span>
+<span class="keyword">static</span> Store *_shared = <span class="literal">nil</span>;
++ (Store*)shared {
+    <span class="keyword">if</span> (_shared == <span class="literal">nil</span>) _shared = [<span class="keyword">self</span> new];
+    <span class="keyword">return</span> _shared;
+}
+- (<span class="keyword">void</span>)verifyReceipt:(SKPaymentTransaction *)transaction {
+    <span class="built_in">NSString</span> *parameterString = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"receipt=%@"</span>, [[<span class="built_in">NSBundle</span> mainBundle] appStoreReceiptURL]];
+
+    URLRequest *request = [URLRequest new];
+    request<span class="variable">.URL</span> = [<span class="built_in">NSURL</span> URLWithString:verifyServerURL];
+    request<span class="variable">.cachePolicy</span> = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
+    request<span class="variable">.HTTPBody</span> = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
+    request<span class="variable">.HTTPMethod</span> = <span class="string">@"POST"</span>;
+    [request setValue:<span class="string">@"application/x-www-form-urlencoded"</span> forHTTPHeaderField:<span class="string">@"Content-Type"</span>];
+
+    request<span class="variable">.didFinish</span> = ^(<span class="built_in">NSData</span>* response) {
+        <span class="built_in">NSError</span>* error;
+        <span class="built_in">NSDictionary</span>* json = [NSJSONSerialization
+                              JSONObjectWithData:response
+                              options:kNilOptions
+                              error:&amp;error];
+
+        <span class="keyword">if</span> ([[json objectForKey:<span class="string">@"result"</span>] integerValue] &gt; <span class="number">0</span>) {
+            <span class="keyword">if</span> (_verifyPass) _verifyPass(transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+        } <span class="keyword">else</span> {
+            <span class="keyword">if</span> (_verifyFail) _verifyFail(transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+        }
+    };
+
+    request<span class="variable">.didError</span> = ^(<span class="built_in">NSError</span> *error){
+        <span class="keyword">if</span> (_verifyFail) _verifyFail(transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+    };
+    [request startAsynchronous];
+}
+- (<span class="keyword">id</span>)init {
+    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) {
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:<span class="keyword">self</span>];
+    }
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+}
+- (<span class="keyword">void</span>)purchase:(<span class="built_in">NSString</span> *)productIdentifier {
+    <span class="keyword">if</span> ([SKPaymentQueue canMakePayments]) {
+        SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:[<span class="built_in">NSSet</span> setWithObject:productIdentifier]];
+        request<span class="variable">.delegate</span> = <span class="keyword">self</span>;
+        [request start];
+    } <span class="keyword">else</span> {
+        <span class="keyword">if</span> (_updatedState) _updatedState(StoreStateMakePaymentsFail, productIdentifier);
+    }
+}
+- (<span class="keyword">void</span>)restore {
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+- (<span class="keyword">void</span>)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
+    <span class="keyword">if</span> ([response<span class="variable">.invalidProductIdentifiers</span> count] == <span class="number">0</span>) {
+        <span class="keyword">for</span> (NSUInteger i = <span class="number">0</span>; i &lt; [response<span class="variable">.products</span> count]; i++) {
+            SKProduct *product = [response<span class="variable">.products</span> objectAtIndex:i];
+            SKPayment *payment = [SKPayment paymentWithProduct:product];
+            [[SKPaymentQueue defaultQueue] addPayment:payment];
+        }
+    } <span class="keyword">else</span> {
+        <span class="keyword">if</span> (_updatedState)
+            <span class="keyword">for</span> (NSUInteger i = <span class="number">0</span>; i &lt; [response<span class="variable">.invalidProductIdentifiers</span> count]; i++)
+                _updatedState(StoreStateInvalidProduct, [response<span class="variable">.invalidProductIdentifiers</span> objectAtIndex:i]);
+    }
+}
+- (<span class="keyword">void</span>)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(<span class="built_in">NSArray</span> *)transactions {
+    <span class="keyword">for</span> (SKPaymentTransaction *transaction <span class="keyword">in</span> transactions) {
+        <span class="keyword">if</span> (transaction<span class="variable">.transactionState</span> != SKPaymentTransactionStatePurchasing)
+            [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+
+        <span class="keyword">if</span> (_updatedState) {
+            <span class="keyword">switch</span> (transaction<span class="variable">.transactionState</span>) {
+                <span class="keyword">case</span> SKPaymentTransactionStatePurchasing:
+                    _updatedState(StoreStatePurchasing, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> SKPaymentTransactionStatePurchased:
+                    _updatedState(StoreStatePurchased, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> SKPaymentTransactionStateFailed:
+                    <span class="keyword">switch</span> (transaction<span class="variable">.error</span><span class="variable">.code</span>) {
+                        <span class="keyword">case</span> SKErrorClientInvalid:
+                            _updatedState(StoreStateFailedClientInvalid, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+                            <span class="keyword">break</span>;
+                        <span class="keyword">case</span> SKErrorPaymentCancelled:
+                            _updatedState(StoreStateFailedPaymentCancelled, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+                            <span class="keyword">break</span>;
+                        <span class="keyword">case</span> SKErrorPaymentInvalid:
+                            _updatedState(StoreStateFailedPaymentInvalid, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+                            <span class="keyword">break</span>;
+                        <span class="keyword">case</span> SKErrorPaymentNotAllowed:
+                            _updatedState(StoreStateFailedPaymentNotAllowed, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+                            <span class="keyword">break</span>;
+                        <span class="keyword">case</span> SKErrorUnknown:
+                        <span class="keyword">default</span>:
+                            _updatedState(StoreStateFailedUnknown, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+                            <span class="keyword">break</span>;
+                    }
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> SKPaymentTransactionStateRestored:
+                    _updatedState(StoreStateRestored, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> SKPaymentTransactionStateDeferred:
+                    <span class="comment">//iOS 8 and later.</span>
+                    _updatedState(StoreStateDeferred, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
+                    <span class="keyword">break</span>;
+            }
+        }
+        <span class="keyword">if</span> (transaction<span class="variable">.transactionState</span> == SKPaymentTransactionStatePurchased ||
+            transaction<span class="variable">.transactionState</span> == SKPaymentTransactionStateRestored)
+            [<span class="keyword">self</span> verifyReceipt:transaction];
+    }
+}
+
+<span class="keyword">@end</span>
+</code></pre><p>Server code - iap.php</p>
+<pre><code>&lt;?php
+    function verify($receipt) {
+        <span class="keyword">if</span> (empty($receipt)) {
+            $<span class="literal">result</span>[<span class="string">"result"</span>] = <span class="number">0</span>;
+            <span class="keyword">return</span> $<span class="literal">result</span>;
+        }
+
+        $dataToPost = json_encode(<span class="type">array</span>(<span class="string">"receipt-data"</span> =&gt; $receipt));
+        $opts = <span class="type">array</span>('http' =&gt;
+            <span class="type">array</span>(
+                '<span class="keyword">method</span>'  =&gt; '<span class="type">POST</span>',
+                'header'  =&gt; '<span class="type">Content</span>-<span class="keyword">type</span>: application/x-www-form-urlencoded',
+                'content' =&gt; $dataToPost
+            )
+        );
+
+        $context  = stream_context_create($opts);
+
+        $verifyResult = file_get_contents('https://buy.itunes.apple.com/verifyReceipt', <span class="literal">false</span>, $context);
+        $verifyStatus = json_decode($verifyResult);
+
+        <span class="keyword">if</span> ($verifyStatus-&gt;{'status'} == <span class="number">0</span>) {
+            $<span class="literal">result</span>[<span class="string">"result"</span>] = <span class="number">1</span>;
+            <span class="keyword">return</span> $<span class="literal">result</span>;
+        }
+
+        $verifyResult = file_get_contents('https://sandbox.itunes.apple.com/verifyReceipt', <span class="literal">false</span>, $context);
+        $verifyStatus = json_decode($verifyResult);
+
+        <span class="keyword">if</span> ($verifyStatus-&gt;{'status'} == <span class="number">0</span>) {
+            $<span class="literal">result</span>[<span class="string">"result"</span>] = <span class="number">2</span>;
+            <span class="keyword">return</span> $<span class="literal">result</span>;
+        }
+
+        $<span class="literal">result</span>[<span class="string">"result"</span>] = -<span class="number">2</span>;
+        <span class="keyword">return</span> $<span class="literal">result</span>;
+    }
+
+    echo json_encode(verify($_REQUEST[<span class="string">"receipt"</span>]));
+?&gt;
+</code></pre><h1 id="使用">使用</h1><p>購買</p>
+<pre><code><span class="collection">[<span class="collection">[Store shared]</span> purchase:@<span class="string">"com.yuaki.No5.Remove_AD"</span>]</span><span class="comment">;</span>
+</code></pre><p>回復購買產品動作</p>
+<pre><code><span class="collection">[<span class="collection">[Store shared]</span> restore]</span><span class="comment">;</span>
+</code></pre><h1 id="其他">其他</h1><pre><code>-(<span class="typename">void</span>)checkStore{
+    [Store shared].updatedState = ^(StoreState state, NSString *productIdentifier) {
+        <span class="comment">//需要顯示購買過程時使用。</span>
+        <span class="keyword">switch</span> (state) {
+            <span class="keyword">case</span> <span class="string">StoreStatePurchasing:</span>
+                NSLog(@<span class="string">"StoreStatePurchasing %@"</span>, productIdentifier);
+
+
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStatePurchased:</span>
+                NSLog(@<span class="string">"StoreStatePurchased %@"</span>, productIdentifier);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateRestored:</span>
+                NSLog(@<span class="string">"StoreStateRestored %@"</span>, productIdentifier);
+                [self <span class="string">performSelector:</span><span class="annotation">@selector</span>(checkStore) <span class="string">withObject:</span>nil <span class="string">afterDelay:</span><span class="number">5.0</span>f];
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateDeferred:</span>
+                NSLog(@<span class="string">"StoreStateDeferred %@"</span>, productIdentifier);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateVerifyReceipt:</span>
+                NSLog(@<span class="string">"StoreStateVerifyReceipt %@"</span>, productIdentifier);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateMakePaymentsFail:</span>
+                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"付款失敗"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
+
+                NSLog(@<span class="string">"StoreStateMakePaymentsFail %@"</span>, productIdentifier);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateInvalidProduct:</span>
+                NSLog(@<span class="string">"StoreStateInvalidProduct %@"</span>, productIdentifier);
+                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"產品id無效"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
+
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateFailedClientInvalid:</span>
+                NSLog(@<span class="string">"StoreStateFailedClientInvalid %@"</span>, productIdentifier);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateFailedPaymentCancelled:</span>
+                NSLog(@<span class="string">"StoreStateFailedPaymentCancelled %@"</span>, productIdentifier);
+                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"付款取消"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
+
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateFailedPaymentInvalid:</span>
+                NSLog(@<span class="string">"StoreStateFailedPaymentInvalid %@"</span>, productIdentifier);
+                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"付款失效"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
+
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateFailedPaymentNotAllowed:</span>
+                NSLog(@<span class="string">"StoreStateFailedPaymentNotAllowed %@"</span>, productIdentifier);
+                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"不允許付款"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">StoreStateFailedUnknown:</span>
+                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"付款有未知的錯誤"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
+                NSLog(@<span class="string">"StoreStateFailedUnknown %@"</span>, productIdentifier);
+                <span class="keyword">break</span>;
+        }
+    };
+
+    [Store shared].verifyPass = ^(NSString *productIdentifier) {
+        [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"購買成功"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
+        <span class="comment">//remove AD</span>
+
+    };
+
+    [Store shared].verifyFail = ^(NSString *productIdentifier) {
+        [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"購買失敗"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
+    };
+}
+</code></pre><h1 id="沙箱測試">沙箱測試</h1><p>新增測試人員<br>[使用者和職能] - [測試人員] - [+]</p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp06.png" alt="inapp06" style="width:310px"></p>
+<p>該填的填一填<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp07.png" alt="inapp07" style="width:310px"></p>
+<p>好玩的是，不能使用既有的appid當做沙箱測試人員，只好去申請一個新的email來測試。</p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp08.png" alt="inapp08" style="width:310px"></p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp09.png" alt="inapp09" style="width:310px"></p>
+<p>在手機上[App Store] &gt; [精選項目] &gt; [登入] 沙箱測試人員</p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp10.png" alt="inapp10" style="width:310px"></p>
+<p>接著就可以進行購買測試了</p>
+<h4 id="打完收功">打完收功</h4>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iOS/">iOS</a><a href="/tags/inApp/">inApp</a><a href="/tags/itunes/">itunes</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://www.yuaki.com/app/2015/05/12/inApp-Purchase-walkthrough/" data-title="inApp Purchase walkthrough | 沒有人的地盤" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/05/05/add-MotionEffect-for-your-UIView/"  title="add MotionEffect for your UIView">
+ <strong>下一篇：</strong><br/> 
+ <span>add MotionEffect for your UIView
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言_2015-05"><span class="toc-number">1.</span> <span class="toc-text">前言 2015-05</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#unique_App_ID"><span class="toc-number"></span> <span class="toc-text">unique App ID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#[member_center]_-_[Certificates,_Identifiers_&_Profiles]_-_[App_IDs]"><span class="toc-number">1.</span> <span class="toc-text">[member center] - [Certificates, Identifiers & Profiles] - [App IDs]</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Provisioning_Profile"><span class="toc-number"></span> <span class="toc-text">Provisioning Profile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ItunesConnect_設定APP"><span class="toc-number"></span> <span class="toc-text">ItunesConnect 設定APP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新增_inAPP_Product"><span class="toc-number"></span> <span class="toc-text">新增 inAPP Product</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ProductID_一定要是_appid-name"><span class="toc-number"></span> <span class="toc-text">ProductID 一定要是 appid.name</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#檢查xcode裡iap的設定是否開啟"><span class="toc-number"></span> <span class="toc-text">檢查xcode裡iap的設定是否開啟</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Code"><span class="toc-number"></span> <span class="toc-text">Code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#加入_StoreKit-Framework"><span class="toc-number"></span> <span class="toc-text">加入 StoreKit.Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加入三支程式_Store-h、Store-m和一支放在server的iap-php"><span class="toc-number"></span> <span class="toc-text">加入三支程式 Store.h、Store.m和一支放在server的iap.php</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#感謝_Paul_Wu_大大的無私分享"><span class="toc-number">1.</span> <span class="toc-text">感謝 Paul Wu 大大的無私分享</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用"><span class="toc-number"></span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number"></span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#沙箱測試"><span class="toc-number"></span> <span class="toc-text">沙箱測試</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打完收功"><span class="toc-number">0.1.</span> <span class="toc-text">打完收功</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/objc/" title="objc">objc<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Clean-Code/" title="Clean Code">Clean Code<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ios/" title="ios">ios<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/swift/" title="swift">swift<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UIButton/" title="UIButton">UIButton<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/setAssociatedObject/" title="setAssociatedObject">setAssociatedObject<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Send-Action/" title="Send Action">Send Action<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/pod/" title="pod">pod<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/廣告/" title="廣告">廣告<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Singleton/" title="Singleton">Singleton<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/inApp/" title="inApp">inApp<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <!-- 
+<div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+ -->
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- right -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8983800189460499"
+     data-ad-slot="4813429766"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+    </div>
+    <footer><div id="footer" >
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by Jacman © 2015 
+		
+		<a href="http://www.yuaki.com/app/about" target="_blank" title="AKI YU">AKI YU</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'nobodyyu';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
