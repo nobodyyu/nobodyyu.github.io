@@ -95,68 +95,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/08/objc-AirMonitor/" title="objc-AirMonitor" itemprop="url">objc-AirMonitor</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-08T12:17:30.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>原始資料來源：<br><a href="http://taqm.epa.gov.tw/pm25/tw/PM25A.aspx?area=10" target="_blank" rel="external">http://taqm.epa.gov.tw/pm25/tw/PM25A.aspx?area=10</a></p>
-<h2 id="載點_(待app_store審核)"><a href="https://itunes.apple.com/us/app/tai-wan-kong-qi-wu-ran-jian-ce/id983539259?l=zh&amp;ls=1&amp;mt=8" target="_blank" rel="external">載點</a> (待app store審核)</h2><hr>
-<h2 id="說明">說明</h2><p>為台灣空氣污染監測設計的app </p>
-<p>主要監測細懸浮微粒(pm2.5)的單位濃度<br>許多研究已證實細懸浮微粒(pm2.5)會對呼吸系統和心血管系統造成傷害<br>導致哮喘 肺癌 心血管疾病 出生缺陷和過早死亡</p>
-<p>功能<br>－即時pm2.5資訊查詢<br>－列表顯示<br>－在今天的畫面可定義監控的顯示區域</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Taiwan/">Taiwan</a><a href="/tags/ios/">ios</a><a href="/tags/objc/">objc</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/08/objc-AirMonitor/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2015/04/08/Symbol-English/" title="Symbol - English" itemprop="url">Symbol - English</a>
   </h1>
   <p class="article-author">By
@@ -1009,6 +947,78 @@ public class <span class="type">ObjectOriented</span> {
 
 
 
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/08/Android-shrinkTextView/" title="Android-shrinkTextView" itemprop="url">Android-shrinkTextView</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-08T09:37:27.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="自動縮小字型的TextView">自動縮小字型的TextView</h2><pre><code><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">shrinkText</span><span class="params">(<span class="keyword">final</span> TextView wv, <span class="keyword">final</span> String word)</span> </span>{
+    wv.setTextSize(defaultTextSize);
+    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+                <span class="keyword">while</span> (wv.getWidth()&gt;<span class="number">0</span> &amp;&amp; wv.getPaint().measureText(word) &gt; wv.getWidth()) {
+                Logg.d(<span class="string">"word too big. Shrink from "</span> + wv.getTextSize()/density + <span class="string">" to "</span> + (wv.getTextSize()/density-<span class="number">1.0</span>f));
+                wv.post(<span class="keyword">new</span> Runnable() {
+                   <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+                      wv.setTextSize(wv.getTextSize() / density - <span class="number">1.0</span>f);
+                   }
+               });
+        }
+    }).start();
+}
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Android/">Android</a><a href="/tags/TextView/">TextView</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/08/Android-shrinkTextView/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -1037,11 +1047,11 @@ public class <span class="type">ObjectOriented</span> {
 			
 		
 			
-				<li><a href="/tags/Android/" title="Android">Android<sup>4</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>4</sup></a></li>
+				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
 			
 		
 			
@@ -1049,19 +1059,19 @@ public class <span class="type">ObjectOriented</span> {
 			
 		
 			
-				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
+				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MKMapView/" title="MKMapView">MKMapView<sup>1</sup></a></li>
+				<li><a href="/tags/Singleton/" title="Singleton">Singleton<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
 			
 		
 			
@@ -1073,19 +1083,7 @@ public class <span class="type">ObjectOriented</span> {
 			
 		
 			
-				<li><a href="/tags/Leap-Code/" title="Leap Code">Leap Code<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/push/" title="push">push<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/GCM/" title="GCM">GCM<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/google/" title="google">google<sup>1</sup></a></li>
+				<li><a href="/tags/pod/" title="pod">pod<sup>1</sup></a></li>
 			
 		
 			
@@ -1101,11 +1099,23 @@ public class <span class="type">ObjectOriented</span> {
 			
 		
 			
-				<li><a href="/tags/Singlton/" title="Singlton">Singlton<sup>1</sup></a></li>
+				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Singlton/" title="Singlton">Singlton<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
 			
 		
 		</ul>
