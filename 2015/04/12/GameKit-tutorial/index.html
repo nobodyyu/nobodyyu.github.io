@@ -65,7 +65,7 @@
 				<h1 class="site-name"><a href="/" title="沒有人的地盤">沒有人的地盤</a></h1>
 				<h2 class="blog-motto">mobile app development</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -81,7 +81,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:www.yuaki.com/app">
 					</form>
 					
@@ -115,14 +115,14 @@
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-12T08:53:19.000Z" itemprop="datePublished"> Published 2015-04-12</time>
+    <time datetime="2015-04-12T08:53:19.000Z" itemprop="datePublished"> 發表於 2015-04-12</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
+			<strong class="toc-title">文章目錄</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#開始使用GAME_CENTER"><span class="toc-number">1.</span> <span class="toc-text">開始使用GAME CENTER</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1。在project裡加入_GameKit-framework"><span class="toc-number">1.1.</span> <span class="toc-text">1。在project裡加入 GameKit.framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2。在iOS_Dev_Center_加入對應的AppID，並且在iTunes_Connect新增一個APP"><span class="toc-number">1.2.</span> <span class="toc-text">2。在iOS Dev Center 加入對應的AppID，並且在iTunes Connect新增一個APP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3。[My_App][xxxApp][Game_Center]下，設定啟用game_center"><span class="toc-number">1.3.</span> <span class="toc-text">3。[My App][xxxApp][Game Center]下，設定啟用game center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4。新增一個「個別排行榜」"><span class="toc-number">1.4.</span> <span class="toc-text">4。新增一個「個別排行榜」</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5。enable_Game_Center"><span class="toc-number">1.5.</span> <span class="toc-text">5。enable Game Center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6。加上_GameKitHelper_的程式碼"><span class="toc-number">1.6.</span> <span class="toc-text">6。加上 GameKitHelper 的程式碼</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GameKitHelper-h"><span class="toc-number">1.6.1.</span> <span class="toc-text">GameKitHelper.h</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GameKitHelper-m"><span class="toc-number">1.6.2.</span> <span class="toc-text">GameKitHelper.m</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7。確認Bundle_identifier是否一致"><span class="toc-number">1.7.</span> <span class="toc-text">7。確認Bundle identifier是否一致</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8。確認Capabilities_－_GameCenter_是否無錯誤"><span class="toc-number">1.8.</span> <span class="toc-text">8。確認Capabilities － GameCenter 是否無錯誤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9。確認info-plist_有無gamekit的Capabilities"><span class="toc-number">1.9.</span> <span class="toc-text">9。確認info.plist 有無gamekit的Capabilities</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10。在程式的啟動點加入_authenticateLocalPlayer"><span class="toc-number">1.10.</span> <span class="toc-text">10。在程式的啟動點加入 authenticateLocalPlayer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11。Submit_Score"><span class="toc-number">1.11.</span> <span class="toc-text">11。Submit Score</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12。Show_LeaderBoard"><span class="toc-number">1.12.</span> <span class="toc-text">12。Show LeaderBoard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13。在手機上測試"><span class="toc-number">1.13.</span> <span class="toc-text">13。在手機上測試</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#[設定]_[Game_Center]_[Sandbox]_設為開啟"><span class="toc-number">1.13.1.</span> <span class="toc-text">[設定] [Game Center] [Sandbox] 設為開啟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#xcode_執行_debug_啟動進入程式後會出現_Game_Center_Sandbox，依序完成"><span class="toc-number">1.13.2.</span> <span class="toc-text">xcode 執行 debug 啟動進入程式後會出現 Game Center Sandbox，依序完成</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#打完收功"><span class="toc-number"></span> <span class="toc-text">打完收功</span></a>
 		
@@ -350,24 +350,24 @@
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
+  <strong class="toc-title">文章目錄</strong>
  
  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#開始使用GAME_CENTER"><span class="toc-number">1.</span> <span class="toc-text">開始使用GAME CENTER</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1。在project裡加入_GameKit-framework"><span class="toc-number">1.1.</span> <span class="toc-text">1。在project裡加入 GameKit.framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2。在iOS_Dev_Center_加入對應的AppID，並且在iTunes_Connect新增一個APP"><span class="toc-number">1.2.</span> <span class="toc-text">2。在iOS Dev Center 加入對應的AppID，並且在iTunes Connect新增一個APP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3。[My_App][xxxApp][Game_Center]下，設定啟用game_center"><span class="toc-number">1.3.</span> <span class="toc-text">3。[My App][xxxApp][Game Center]下，設定啟用game center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4。新增一個「個別排行榜」"><span class="toc-number">1.4.</span> <span class="toc-text">4。新增一個「個別排行榜」</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5。enable_Game_Center"><span class="toc-number">1.5.</span> <span class="toc-text">5。enable Game Center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6。加上_GameKitHelper_的程式碼"><span class="toc-number">1.6.</span> <span class="toc-text">6。加上 GameKitHelper 的程式碼</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GameKitHelper-h"><span class="toc-number">1.6.1.</span> <span class="toc-text">GameKitHelper.h</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GameKitHelper-m"><span class="toc-number">1.6.2.</span> <span class="toc-text">GameKitHelper.m</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7。確認Bundle_identifier是否一致"><span class="toc-number">1.7.</span> <span class="toc-text">7。確認Bundle identifier是否一致</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8。確認Capabilities_－_GameCenter_是否無錯誤"><span class="toc-number">1.8.</span> <span class="toc-text">8。確認Capabilities － GameCenter 是否無錯誤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9。確認info-plist_有無gamekit的Capabilities"><span class="toc-number">1.9.</span> <span class="toc-text">9。確認info.plist 有無gamekit的Capabilities</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10。在程式的啟動點加入_authenticateLocalPlayer"><span class="toc-number">1.10.</span> <span class="toc-text">10。在程式的啟動點加入 authenticateLocalPlayer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11。Submit_Score"><span class="toc-number">1.11.</span> <span class="toc-text">11。Submit Score</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12。Show_LeaderBoard"><span class="toc-number">1.12.</span> <span class="toc-text">12。Show LeaderBoard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13。在手機上測試"><span class="toc-number">1.13.</span> <span class="toc-text">13。在手機上測試</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#[設定]_[Game_Center]_[Sandbox]_設為開啟"><span class="toc-number">1.13.1.</span> <span class="toc-text">[設定] [Game Center] [Sandbox] 設為開啟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#xcode_執行_debug_啟動進入程式後會出現_Game_Center_Sandbox，依序完成"><span class="toc-number">1.13.2.</span> <span class="toc-text">xcode 執行 debug 啟動進入程式後會出現 Game Center Sandbox，依序完成</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#打完收功"><span class="toc-number"></span> <span class="toc-text">打完收功</span></a>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
 <aside class="clearfix">
 
   
 
   
 <div class="tagslist">
-	<p class="asidetitle">Tags</p>
+	<p class="asidetitle">標簽</p>
 		<ul class="clearfix">
 		
 			
@@ -379,15 +379,15 @@
 			
 		
 			
+				<li><a href="/tags/Android/" title="Android">Android<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/iOS/" title="iOS">iOS<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/ios/" title="ios">ios<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
 			
 		
 			
@@ -399,7 +399,15 @@
 			
 		
 			
-				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
+				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MKMapView/" title="MKMapView">MKMapView<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
 			
 		
 			
@@ -407,7 +415,19 @@
 			
 		
 			
-				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
+				<li><a href="/tags/Leap-Code/" title="Leap Code">Leap Code<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/push/" title="push">push<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GCM/" title="GCM">GCM<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/google/" title="google">google<sup>1</sup></a></li>
 			
 		
 			
@@ -423,31 +443,11 @@
 			
 		
 			
-				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
+				<li><a href="/tags/Singlton/" title="Singlton">Singlton<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/pod/" title="pod">pod<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/廣告/" title="廣告">廣告<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Singleton/" title="Singleton">Singleton<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/inApp/" title="inApp">inApp<sup>1</sup></a></li>
+				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -456,7 +456,7 @@
 
   <!-- 
 <div class="linkslist">
-  <p class="asidetitle">Links</p>
+  <p class="asidetitle">友情鏈接</p>
     <ul>
         
           <li>
@@ -479,7 +479,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
 </div>
 
 </aside>
@@ -674,7 +674,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

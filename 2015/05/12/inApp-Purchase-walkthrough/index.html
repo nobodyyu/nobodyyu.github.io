@@ -61,7 +61,7 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 				<h1 class="site-name"><a href="/" title="沒有人的地盤">沒有人的地盤</a></h1>
 				<h2 class="blog-motto">mobile app development</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -77,7 +77,7 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:www.yuaki.com/app">
 					</form>
 					
@@ -111,14 +111,14 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-12T07:14:47.000Z" itemprop="datePublished"> Published 2015-05-12</time>
+    <time datetime="2015-05-12T07:14:47.000Z" itemprop="datePublished"> 發表於 2015-05-12</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
+			<strong class="toc-title">文章目錄</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言_2015-05"><span class="toc-number">1.</span> <span class="toc-text">前言 2015-05</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#unique_App_ID"><span class="toc-number"></span> <span class="toc-text">unique App ID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#[member_center]_-_[Certificates,_Identifiers_&_Profiles]_-_[App_IDs]"><span class="toc-number">1.</span> <span class="toc-text">[member center] - [Certificates, Identifiers & Profiles] - [App IDs]</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Provisioning_Profile"><span class="toc-number"></span> <span class="toc-text">Provisioning Profile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ItunesConnect_設定APP"><span class="toc-number"></span> <span class="toc-text">ItunesConnect 設定APP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新增_inAPP_Product"><span class="toc-number"></span> <span class="toc-text">新增 inAPP Product</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ProductID_一定要是_appid-name"><span class="toc-number"></span> <span class="toc-text">ProductID 一定要是 appid.name</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#檢查xcode裡iap的設定是否開啟"><span class="toc-number"></span> <span class="toc-text">檢查xcode裡iap的設定是否開啟</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Code"><span class="toc-number"></span> <span class="toc-text">Code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#加入_StoreKit-Framework"><span class="toc-number"></span> <span class="toc-text">加入 StoreKit.Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加入三支程式_Store-h、Store-m和一支放在server的iap-php"><span class="toc-number"></span> <span class="toc-text">加入三支程式 Store.h、Store.m和一支放在server的iap.php</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#感謝_Paul_Wu_大大的無私分享"><span class="toc-number">1.</span> <span class="toc-text">感謝 Paul Wu 大大的無私分享</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用"><span class="toc-number"></span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number"></span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#沙箱測試"><span class="toc-number"></span> <span class="toc-text">沙箱測試</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打完收功"><span class="toc-number">0.1.</span> <span class="toc-text">打完收功</span></a></li></ol></li></ol>
 		
@@ -487,6 +487,14 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/05/15/push/" title="push">
+  <strong>上一篇：</strong><br/>
+  <span>
+  push</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/05/05/add-MotionEffect-for-your-UIView/"  title="add MotionEffect for your UIView">
@@ -507,24 +515,24 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
+  <strong class="toc-title">文章目錄</strong>
  
  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言_2015-05"><span class="toc-number">1.</span> <span class="toc-text">前言 2015-05</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#unique_App_ID"><span class="toc-number"></span> <span class="toc-text">unique App ID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#[member_center]_-_[Certificates,_Identifiers_&_Profiles]_-_[App_IDs]"><span class="toc-number">1.</span> <span class="toc-text">[member center] - [Certificates, Identifiers & Profiles] - [App IDs]</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Provisioning_Profile"><span class="toc-number"></span> <span class="toc-text">Provisioning Profile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ItunesConnect_設定APP"><span class="toc-number"></span> <span class="toc-text">ItunesConnect 設定APP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新增_inAPP_Product"><span class="toc-number"></span> <span class="toc-text">新增 inAPP Product</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ProductID_一定要是_appid-name"><span class="toc-number"></span> <span class="toc-text">ProductID 一定要是 appid.name</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#檢查xcode裡iap的設定是否開啟"><span class="toc-number"></span> <span class="toc-text">檢查xcode裡iap的設定是否開啟</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Code"><span class="toc-number"></span> <span class="toc-text">Code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#加入_StoreKit-Framework"><span class="toc-number"></span> <span class="toc-text">加入 StoreKit.Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加入三支程式_Store-h、Store-m和一支放在server的iap-php"><span class="toc-number"></span> <span class="toc-text">加入三支程式 Store.h、Store.m和一支放在server的iap.php</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#感謝_Paul_Wu_大大的無私分享"><span class="toc-number">1.</span> <span class="toc-text">感謝 Paul Wu 大大的無私分享</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用"><span class="toc-number"></span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number"></span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#沙箱測試"><span class="toc-number"></span> <span class="toc-text">沙箱測試</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打完收功"><span class="toc-number">0.1.</span> <span class="toc-text">打完收功</span></a></li></ol></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
 <aside class="clearfix">
 
   
 
   
 <div class="tagslist">
-	<p class="asidetitle">Tags</p>
+	<p class="asidetitle">標簽</p>
 		<ul class="clearfix">
 		
 			
@@ -536,15 +544,15 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 			
 		
 			
+				<li><a href="/tags/Android/" title="Android">Android<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/iOS/" title="iOS">iOS<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/ios/" title="ios">ios<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
 			
 		
 			
@@ -556,7 +564,15 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 			
 		
 			
-				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
+				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MKMapView/" title="MKMapView">MKMapView<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
 			
 		
 			
@@ -564,7 +580,19 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 			
 		
 			
-				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
+				<li><a href="/tags/Leap-Code/" title="Leap Code">Leap Code<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/push/" title="push">push<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GCM/" title="GCM">GCM<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/google/" title="google">google<sup>1</sup></a></li>
 			
 		
 			
@@ -580,31 +608,11 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 			
 		
 			
-				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
+				<li><a href="/tags/Singlton/" title="Singlton">Singlton<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/pod/" title="pod">pod<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/廣告/" title="廣告">廣告<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Singleton/" title="Singleton">Singleton<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/inApp/" title="inApp">inApp<sup>1</sup></a></li>
+				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -613,7 +621,7 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 
   <!-- 
 <div class="linkslist">
-  <p class="asidetitle">Links</p>
+  <p class="asidetitle">友情鏈接</p>
     <ul>
         
           <li>
@@ -636,7 +644,7 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
 </div>
 
 </aside>
@@ -831,7 +839,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
