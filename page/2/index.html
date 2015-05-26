@@ -95,6 +95,103 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/21/xcode6-打包自已做的framework/" title="[xcode6]打包自已做的framework" itemprop="url">[xcode6]打包自已做的framework</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-21T12:56:17.000Z" itemprop="datePublished"> 發表於 2015-04-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>如何把自已做的code打包成一包framework，給其他人使用</p>
+<h3 id="1-_新增一個專案，選取_[Framework_&amp;_Library]_[Cocoa_Touch_Framework]">1. 新增一個專案，選取 [Framework &amp; Library] [Cocoa Touch Framework]</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework01.png" alt="framework01" style="width:310px"></p>
+<h3 id="2-_在專案中，把要放的程式加到專案中">2. 在專案中，把要放的程式加到專案中</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework02.png" alt="framework02" style="width:310px"></p>
+<h3 id="3-_在[Target][Build_Phase][Headers]中設定，要給人看的表頭檔(-h)，和不給人看的表頭檔">3. 在[Target][Build Phase][Headers]中設定，要給人看的表頭檔(.h)，和不給人看的表頭檔</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework03.png" alt="framework03" style="width:310px"></p>
+<h3 id="4-_新增一個_[Aggregate_Target]">4. 新增一個 [Aggregate Target]</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework04.png" alt="framework04" style="width:310px"></p>
+<h3 id="5-_在新的_[Aggregate_Target][Build_Phases]加入_[Run_Script]">5. 在新的 [Aggregate Target][Build Phases]加入 [Run Script]</h3><pre><code>FMK_NAME=<span class="variable">${PROJECT_NAME}</span>
+
+INSTALL_DIR=<span class="variable">${SRCROOT}</span>/Products/<span class="variable">${FMK_NAME}</span>.framework
+
+WRK_DIR=build
+DEVICE_DIR=<span class="variable">${WRK_DIR}</span>/Release-iphoneos/<span class="variable">${FMK_NAME}</span>.framework
+SIMULATOR_DIR=<span class="variable">${WRK_DIR}</span>/Release-iphonesimulator/<span class="variable">${FMK_NAME}</span>.framework
+
+<span class="comment"># -configuration ${CONFIGURATION}</span>
+<span class="comment"># Clean and Building both architectures.</span>
+xcodebuild -configuration <span class="string">"Release"</span> -target <span class="string">"<span class="variable">${FMK_NAME}</span>"</span> -sdk iphoneos clean build
+xcodebuild -configuration <span class="string">"Release"</span> -target <span class="string">"<span class="variable">${FMK_NAME}</span>"</span> -sdk iphonesimulator clean build
+
+<span class="comment"># Cleaning the oldest.</span>
+<span class="keyword">if</span> [ <span class="operator">-d</span> <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span> ]
+<span class="keyword">then</span>
+rm -rf <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
+<span class="keyword">fi</span>
+
+mkdir -p <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
+
+cp -R <span class="string">"<span class="variable">${DEVICE_DIR}</span>/"</span> <span class="string">"<span class="variable">${INSTALL_DIR}</span>/"</span>
+
+<span class="comment"># Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.</span>
+lipo -create <span class="string">"<span class="variable">${DEVICE_DIR}</span>/<span class="variable">${FMK_NAME}</span>"</span> <span class="string">"<span class="variable">${SIMULATOR_DIR}</span>/<span class="variable">${FMK_NAME}</span>"</span> -output <span class="string">"<span class="variable">${INSTALL_DIR}</span>/<span class="variable">${FMK_NAME}</span>"</span>
+
+rm -r <span class="string">"<span class="variable">${WRK_DIR}</span>"</span>
+
+open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
+</code></pre><p>如圖</p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework05.png" alt="framework05" style="width:310px"></p>
+<h3 id="6-最後_builde_project，會在[Products]_生成你的個人的framework">6.最後 builde project，會在[Products] 生成你的個人的framework</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework06.png" alt="framework06" style="width:210px"></p>
+<h4 id="ps-_如果要生成靜態的library使用，要注意一個設定">ps. 如果要生成靜態的library使用，要注意一個設定</h4><p>在 [Build Settings][Mach-O Type] 要選 [Static Library]</p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework07.png" alt="framework07" style="width:310px"></p>
+<h3 id="7-_最後給別人引用時_要注意一下，除了在[Linked_Frameworks_and_Libraries]下引用之外，還要在[Targer][General][Embeded_Binies]下加入自定義的framework">7. 最後給別人引用時 要注意一下，除了在[Linked Frameworks and Libraries]下引用之外，還要在[Targer][General][Embeded Binies]下加入自定義的framework</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework08.png" alt="framework08" style="width:310px"></p>
+<h3 id="打完收工">打完收工</h3>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Framework/">Framework</a><a href="/tags/XCode6/">XCode6</a><a href="/tags/iOS/">iOS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/21/xcode6-打包自已做的framework/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/14/加入-Admob-廣告/" title="加入 Admob 廣告" itemprop="url">加入 Admob 廣告</a>
   </h1>
   <p class="article-author">By
@@ -929,77 +1026,6 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/08/Clean-Code-System/" title="Clean Code - System" itemprop="url">Clean Code - System</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-08T09:45:45.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ol>
-<li><p>Separate Constructing a System from Using It</p>
-</li>
-<li><p>Separation of Main</p>
-</li>
-<li><p>Factories</p>
-</li>
-<li><p>Dependency Injection</p>
-</li>
-<li><p>Scaling Up</p>
-</li>
-<li><p>Cross-Cutting Concerns</p>
-</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/08/Clean-Code-System/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -1040,15 +1066,15 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
+				<li><a href="/tags/swift/" title="swift">swift<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
 			
 		
 			
@@ -1060,11 +1086,19 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/swift/" title="swift">swift<sup>1</sup></a></li>
+				<li><a href="/tags/NSAttributedString/" title="NSAttributedString">NSAttributedString<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/NSAttributedString/" title="NSAttributedString">NSAttributedString<sup>1</sup></a></li>
+				<li><a href="/tags/MKMapView/" title="MKMapView">MKMapView<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/game/" title="game">game<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spritekit/" title="spritekit">spritekit<sup>1</sup></a></li>
 			
 		
 			
@@ -1084,19 +1118,11 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/MKMapView/" title="MKMapView">MKMapView<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/AudioToolBox/" title="AudioToolBox">AudioToolBox<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/HUD/" title="HUD">HUD<sup>1</sup></a></li>
 			
 		
 		</ul>
