@@ -4,46 +4,31 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>swift spritekit walk through | 沒有人的地盤</title>
+    <title>swift shuffle | 沒有人的地盤</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="AKI YU">
     
 
     
-    <meta name="description" content="新增一個遊戲專案
-並且設定語言為swift
-
-此時，可以先砍掉一些沒有必要的檔案（iOS很貼心放了一個太空船在程式的template裡）
-加入一些遊戲需要用到的圖檔
-你可以放在images.asset或是直接拉到專案裡
-設一下GameViewController裡的 scene.sizescene.size = skView.bounds.size
-了解scene的生命週期、座標系統、基本屬性了解">
+    <meta name="description" content="為程式注入靈魂的小技巧 shufflefunc shuffle&amp;lt;C: MutableCollectionType where C.Index == Int&amp;gt;(var list: C) -&amp;gt; C {
+    let c = count(list)
+    for i in 0..&amp;lt;(c - 1) {
+        let j = Int(arc4random_uniform">
 <meta property="og:type" content="article">
-<meta property="og:title" content="swift spritekit walk through">
-<meta property="og:url" content="http://www.yuaki.com/app/2015/05/26/swift-spritekit-walk-through/index.html">
+<meta property="og:title" content="swift shuffle">
+<meta property="og:url" content="http://www.yuaki.com/app/2015/05/27/swift-shuffle/index.html">
 <meta property="og:site_name" content="沒有人的地盤">
-<meta property="og:description" content="新增一個遊戲專案
-並且設定語言為swift
-
-此時，可以先砍掉一些沒有必要的檔案（iOS很貼心放了一個太空船在程式的template裡）
-加入一些遊戲需要用到的圖檔
-你可以放在images.asset或是直接拉到專案裡
-設一下GameViewController裡的 scene.sizescene.size = skView.bounds.size
-了解scene的生命週期、座標系統、基本屬性了解">
-<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/spritekit01.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/spritekit02.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/spritekit03.png">
+<meta property="og:description" content="為程式注入靈魂的小技巧 shufflefunc shuffle&amp;lt;C: MutableCollectionType where C.Index == Int&amp;gt;(var list: C) -&amp;gt; C {
+    let c = count(list)
+    for i in 0..&amp;lt;(c - 1) {
+        let j = Int(arc4random_uniform">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="swift spritekit walk through">
-<meta name="twitter:description" content="新增一個遊戲專案
-並且設定語言為swift
-
-此時，可以先砍掉一些沒有必要的檔案（iOS很貼心放了一個太空船在程式的template裡）
-加入一些遊戲需要用到的圖檔
-你可以放在images.asset或是直接拉到專案裡
-設一下GameViewController裡的 scene.sizescene.size = skView.bounds.size
-了解scene的生命週期、座標系統、基本屬性了解">
+<meta name="twitter:title" content="swift shuffle">
+<meta name="twitter:description" content="為程式注入靈魂的小技巧 shufflefunc shuffle&amp;lt;C: MutableCollectionType where C.Index == Int&amp;gt;(var list: C) -&amp;gt; C {
+    let c = count(list)
+    for i in 0..&amp;lt;(c - 1) {
+        let j = Int(arc4random_uniform">
 
     
     <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
@@ -113,14 +98,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/26/swift-spritekit-walk-through/" title="swift spritekit walk through" itemprop="url">swift spritekit walk through</a>
+      <a href="/2015/05/27/swift-shuffle/" title="swift shuffle" itemprop="url">swift shuffle</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-26T09:06:03.000Z" itemprop="datePublished"> 發表於 2015-05-26</time>
+    <time datetime="2015-05-27T15:33:44.000Z" itemprop="datePublished"> 發表於 2015-05-27</time>
     
   </p>
 </header>
@@ -129,18 +114,37 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#新增一個遊戲專案"><span class="toc-number">1.</span> <span class="toc-text">新增一個遊戲專案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加入一些遊戲需要用到的圖檔"><span class="toc-number">2.</span> <span class="toc-text">加入一些遊戲需要用到的圖檔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設一下GameViewController裡的_scene-size"><span class="toc-number">3.</span> <span class="toc-text">設一下GameViewController裡的 scene.size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解scene的生命週期、座標系統、基本屬性"><span class="toc-number">4.</span> <span class="toc-text">了解scene的生命週期、座標系統、基本屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解sprite基本屬性"><span class="toc-number">5.</span> <span class="toc-text">了解sprite基本屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解texture基本屬性、打包textureAtlas(zip_file_with_-altas)"><span class="toc-number">6.</span> <span class="toc-text">了解texture基本屬性、打包textureAtlas(zip file with .altas)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解Action基本屬性"><span class="toc-number">7.</span> <span class="toc-text">了解Action基本屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解Animation基本屬性"><span class="toc-number">8.</span> <span class="toc-text">了解Animation基本屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解Physics"><span class="toc-number">9.</span> <span class="toc-text">了解Physics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#game_loop？？"><span class="toc-number">10.</span> <span class="toc-text">game loop？？</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#為程式注入靈魂的小技巧_shuffle"><span class="toc-number">1.</span> <span class="toc-text">為程式注入靈魂的小技巧 shuffle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extension"><span class="toc-number">2.</span> <span class="toc-text">extension</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="新增一個遊戲專案">新增一個遊戲專案</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/spritekit01.png" alt="spritekit01" style="width:310px"></p>
-<p>並且設定語言為swift</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/spritekit02.png" alt="spritekit02" style="width:310px"></p>
-<p>此時，可以先砍掉一些沒有必要的檔案（iOS很貼心放了一個太空船在程式的template裡）</p>
-<h3 id="加入一些遊戲需要用到的圖檔">加入一些遊戲需要用到的圖檔</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/spritekit03.png" alt="spritekit03" style="width:310px"></p>
-<p>你可以放在images.asset或是直接拉到專案裡</p>
-<h3 id="設一下GameViewController裡的_scene-size">設一下GameViewController裡的 scene.size</h3><pre><code>scene<span class="class">.size</span> = skView<span class="class">.bounds</span><span class="class">.size</span>
-</code></pre><h3 id="了解scene的生命週期、座標系統、基本屬性">了解scene的生命週期、座標系統、基本屬性</h3><h3 id="了解sprite基本屬性">了解sprite基本屬性</h3><h3 id="了解texture基本屬性、打包textureAtlas(zip_file_with_-altas)">了解texture基本屬性、打包textureAtlas(zip file with .altas)</h3><h3 id="了解Action基本屬性">了解Action基本屬性</h3><h3 id="了解Animation基本屬性">了解Animation基本屬性</h3><h3 id="了解Physics">了解Physics</h3><h3 id="game_loop？？">game loop？？</h3>  
+		<h3 id="為程式注入靈魂的小技巧_shuffle">為程式注入靈魂的小技巧 shuffle</h3><pre><code><span class="func"><span class="keyword">func</span> <span class="title">shuffle</span><span class="generics">&lt;C: MutableCollectionType where C.Index == Int&gt;</span><span class="params">(<span class="keyword">var</span> list: C)</span> -&gt; <span class="title">C</span> </span>{
+    <span class="keyword">let</span> <span class="built_in">c</span> = <span class="built_in">count</span>(list)
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;(<span class="built_in">c</span> - <span class="number">1</span>) {
+        <span class="keyword">let</span> j = <span class="type">Int</span>(arc4random_uniform(<span class="type">UInt32</span>(<span class="built_in">c</span> - i))) + i
+        <span class="built_in">swap</span>(&amp;list[i], &amp;list[j])
+    }
+    <span class="keyword">return</span> list
+}
+
+
+
+huffle([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>])        
+<span class="comment">// e.g., [6, 1, 8, 3, 2, 4, 7, 5]</span>
+shuffle([<span class="string">"hello"</span>, <span class="string">"goodbye"</span>, <span class="string">"ciao"</span>])    
+<span class="comment">// e.g., ["ciao", "goodbye", "hello"]</span>
+</code></pre><h3 id="extension">extension</h3><pre><code><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> </span>{
+    <span class="keyword">mutating</span> <span class="func"><span class="keyword">func</span> <span class="title">shuffle</span><span class="params">()</span> </span>{
+        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;(<span class="built_in">count</span> - <span class="number">1</span>) {
+            <span class="keyword">let</span> j = <span class="type">Int</span>(arc4random_uniform(<span class="type">UInt32</span>(<span class="built_in">count</span> - i))) + i
+            <span class="built_in">swap</span>(&amp;<span class="keyword">self</span>[i], &amp;<span class="keyword">self</span>[j])
+        }
+    }
+}
+
+<span class="keyword">var</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]
+numbers.shuffle()     
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -148,7 +152,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/game/">game</a><a href="/tags/spritekit/">spritekit</a><a href="/tags/swift/">swift</a>
+  <span></span> <a href="/tags/shuffle/">shuffle</a><a href="/tags/swift/">swift</a>
   </div>
 
 </div>
@@ -157,7 +161,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.yuaki.com/app/2015/05/26/swift-spritekit-walk-through/" data-title="swift spritekit walk through | 沒有人的地盤" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.yuaki.com/app/2015/05/27/swift-shuffle/" data-title="swift shuffle | 沒有人的地盤" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -170,19 +174,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/05/27/swift-shuffle/" title="swift shuffle">
-  <strong>上一篇：</strong><br/>
-  <span>
-  swift shuffle</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/05/21/在字串裡加上icon/"  title="在字串裡加上icon">
+<a href="/2015/05/26/swift-spritekit-walk-through/"  title="swift spritekit walk through">
  <strong>下一篇：</strong><br/> 
- <span>在字串裡加上icon
+ <span>swift spritekit walk through
 </span>
 </a>
 </div>
@@ -203,7 +199,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#新增一個遊戲專案"><span class="toc-number">1.</span> <span class="toc-text">新增一個遊戲專案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加入一些遊戲需要用到的圖檔"><span class="toc-number">2.</span> <span class="toc-text">加入一些遊戲需要用到的圖檔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設一下GameViewController裡的_scene-size"><span class="toc-number">3.</span> <span class="toc-text">設一下GameViewController裡的 scene.size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解scene的生命週期、座標系統、基本屬性"><span class="toc-number">4.</span> <span class="toc-text">了解scene的生命週期、座標系統、基本屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解sprite基本屬性"><span class="toc-number">5.</span> <span class="toc-text">了解sprite基本屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解texture基本屬性、打包textureAtlas(zip_file_with_-altas)"><span class="toc-number">6.</span> <span class="toc-text">了解texture基本屬性、打包textureAtlas(zip file with .altas)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解Action基本屬性"><span class="toc-number">7.</span> <span class="toc-text">了解Action基本屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解Animation基本屬性"><span class="toc-number">8.</span> <span class="toc-text">了解Animation基本屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解Physics"><span class="toc-number">9.</span> <span class="toc-text">了解Physics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#game_loop？？"><span class="toc-number">10.</span> <span class="toc-text">game loop？？</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#為程式注入靈魂的小技巧_shuffle"><span class="toc-number">1.</span> <span class="toc-text">為程式注入靈魂的小技巧 shuffle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extension"><span class="toc-number">2.</span> <span class="toc-text">extension</span></a></li></ol>
  
   </div>
 

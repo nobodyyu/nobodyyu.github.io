@@ -95,6 +95,173 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/22/iBeacon-Scanner實作概念/" title="iBeacon Scanner實作概念" itemprop="url">iBeacon Scanner實作概念</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-22T04:10:24.000Z" itemprop="datePublished"> 發表於 2015-04-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="1-_利用_CoreBluetoooth_來找尋附近的藍芽裝置">1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置</h3><p>Code Snippet</p>
+<pre><code><span class="preprocessor">#import <span class="title">&lt;CoreBluetooth/CoreBluetooth.h&gt;</span></span>
+
+<span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()&lt;<span class="title">CBCentralManagerDelegate</span>, <span class="title">CBPeripheralDelegate</span>&gt;</span>
+{
+    CBCentralManager *_manager;
+    CBPeripheral *_peripheral;
+}
+<span class="keyword">@end</span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span>
+
+- (<span class="keyword">void</span>)viewDidLoad {
+    [<span class="keyword">super</span> viewDidLoad];
+
+    _manager =  [[CBCentralManager alloc] initWithDelegate:<span class="keyword">self</span>
+                                                    queue:<span class="literal">nil</span>];
+
+
+}
+
+
+- (<span class="keyword">void</span>)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+    <span class="keyword">switch</span> ((<span class="keyword">int</span>)central<span class="variable">.state</span>)
+    {
+        <span class="keyword">case</span> CBCentralManagerStatePoweredOn:
+        {
+            <span class="built_in">NSDictionary</span> *options = @{
+                                      CBCentralManagerScanOptionAllowDuplicatesKey: @YES
+                                      };
+            [_manager scanForPeripheralsWithServices:<span class="literal">nil</span>
+                                             options:options];
+            <span class="built_in">NSLog</span>(<span class="string">@"I just started scanning for peripherals"</span>);
+            <span class="keyword">break</span>;
+        }
+    }
+}
+
+- (<span class="keyword">void</span>) centralManager:(CBCentralManager *)central
+    didDiscoverPeripheral:(CBPeripheral *)peripheral
+        advertisementData:(<span class="built_in">NSDictionary</span> *)advertisementData
+                     RSSI:(<span class="built_in">NSNumber</span> *)RSSI
+{
+
+    <span class="keyword">if</span>([advertisementData objectForKey:<span class="string">@"kCBAdvDataLocalName"</span>]!=<span class="literal">nil</span>){
+        <span class="built_in">NSLog</span>(<span class="string">@"I see an advertisement with identifer: %@, state: %ld, name: %@, services: %@, description: %@"</span>,
+              [peripheral identifier],
+              [peripheral state],
+              [peripheral name],
+              [peripheral services],
+              [advertisementData description]);
+    }
+
+
+
+    <span class="keyword">if</span> (_peripheral == <span class="literal">nil</span>)
+    {
+        <span class="built_in">NSLog</span>(<span class="string">@"Trying to connect to peripheral"</span>);
+        _peripheral = peripheral;
+        _peripheral<span class="variable">.delegate</span> = (<span class="keyword">id</span>)<span class="keyword">self</span>;
+        [central connectPeripheral:_peripheral
+                           options:<span class="literal">nil</span>];
+    }
+}
+
+- (<span class="keyword">void</span>) centralManager:(CBCentralManager *)central
+    didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    <span class="keyword">if</span> (peripheral == <span class="literal">nil</span>)
+    {
+        <span class="built_in">NSLog</span>(<span class="string">@"connect callback has nil peripheral"</span>);
+    } <span class="keyword">else</span> {
+        <span class="built_in">NSLog</span>(<span class="string">@"Connected to peripheral with identifer: %@, state: %ld, name: %@, services: %@"</span>,
+              [peripheral identifier],
+              [peripheral state],
+              [peripheral name],
+              [peripheral services]);
+
+        <span class="built_in">NSLog</span>(<span class="string">@"discovering services..."</span>);
+        _peripheral = peripheral;
+        _peripheral<span class="variable">.delegate</span> = (<span class="keyword">id</span>)<span class="keyword">self</span>;
+        [_peripheral discoverServices:<span class="literal">nil</span>];
+    }
+}
+
+- (<span class="keyword">void</span>) peripheral:(CBPeripheral *)peripheral
+    didDiscoverServices:(<span class="built_in">NSArray</span> *)serviceUuids
+{
+    <span class="built_in">NSLog</span>(<span class="string">@"discovered a peripheral's services: %@"</span>, serviceUuids);
+}
+</code></pre><p>其中可以過濾掉一些不會廣播的設備</p>
+<pre><code><span class="tag">if</span>([<span class="attribute">advertisementDataobjectForKey</span>:@<span class="string">"kCBAdvDataLocalName"</span>]!=nil){
+</code></pre><p>可以取該設備的UUID</p>
+<pre><code><span class="tag">&lt;__NSConcreteUUID 0x17403f520&gt;</span> <span class="keyword">2750A093</span>-A1C2-9953-A59F-A0769538DC15
+</code></pre><p>附帶一提的是，小米手環也會廣播自已的藍芽訊號</p>
+<h3 id="2-_接著利用_CLLocationManagerDelegate_對_已取得的UUID_對_iBeacon_做程式的實作">2. 接著利用 CLLocationManagerDelegate 對 已取得的UUID 對 iBeacon 做程式的實作</h3><pre><code> <span class="keyword">for</span> (NSUUID *uuid <span class="keyword">in</span> [APLDefaults sharedDefaults].supportedProximityUUIDs)
+    {
+        CLBeaconRegion *region = [[CLBeaconRegion alloc] <span class="string">initWithProximityUUID:</span>uuid <span class="string">identifier:</span>[uuid UUIDString]];
+        self.rangedRegions[region] = [NSArray array];
+    }
+
+
+#pragma mark - Location manager delegate
+
+- (<span class="typename">void</span>)<span class="string">locationManager:</span>(CLLocationManager *)manager <span class="string">didRangeBeacons:</span>(NSArray *)beacons <span class="string">inRegion:</span>(CLBeaconRegion *)region
+{
+    <span class="comment">// 這裡就可以取到 iBeacon 了</span>
+}
+</code></pre><p>在這裡 小米手環 不會出現在 CLLocationManagerDelegate，所以會出現的就只剩下iBeacon了</p>
+<h3 id="打完收工">打完收工</h3>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CoreBluetooth/">CoreBluetooth</a><a href="/tags/iBeacon/">iBeacon</a><a href="/tags/objc/">objc</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/22/iBeacon-Scanner實作概念/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/21/xcode6-打包自已做的framework/" title="[xcode6]打包自已做的framework" itemprop="url">[xcode6]打包自已做的framework</a>
   </h1>
   <p class="article-author">By
@@ -961,74 +1128,9 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/08/Clean-Code-TDDs-3-laws/" title="Clean Code - TDDs 3 laws" itemprop="url">Clean Code - TDDs 3 laws</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-08T09:46:55.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ol>
-<li><p>First Law - You may not write production code until you have written a failing unit test.</p>
-</li>
-<li><p>Second Law - You may not write more of a unit test than is sufficient to fail, and not compiling is failing.</p>
-</li>
-<li><p>Third Law - You may not write more production code than is sufficient to pass the currently failing test.</p>
-</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/08/Clean-Code-TDDs-3-laws/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 
 </div>
@@ -1058,6 +1160,10 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
+				<li><a href="/tags/swift/" title="swift">swift<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/ios/" title="ios">ios<sup>3</sup></a></li>
 			
 		
@@ -1067,10 +1173,6 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 		
 			
 				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/swift/" title="swift">swift<sup>2</sup></a></li>
 			
 		
 			
@@ -1102,6 +1204,10 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
+				<li><a href="/tags/shuffle/" title="shuffle">shuffle<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/UIButton/" title="UIButton">UIButton<sup>1</sup></a></li>
 			
 		
@@ -1119,10 +1225,6 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 		
 			
 				<li><a href="/tags/AudioToolBox/" title="AudioToolBox">AudioToolBox<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/AdMob/" title="AdMob">AdMob<sup>1</sup></a></li>
 			
 		
 		</ul>
