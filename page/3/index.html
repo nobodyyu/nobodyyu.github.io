@@ -95,6 +95,81 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/08/Clean-Code-Error-Handling/" title="Clean Code - Error Handling" itemprop="url">Clean Code - Error Handling</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-08T09:47:45.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ol>
+<li><p>Use Exceptions rather than Return Codes</p>
+</li>
+<li><p>Write Your Try-Catch-Finally Statement First</p>
+</li>
+<li><p>Use un-checked exceptions ＊</p>
+</li>
+<li><p>Provide context with eceptions</p>
+</li>
+<li><p>Define exception classes in terms of a caller’s needs</p>
+</li>
+<li><p>Define the normal flow</p>
+</li>
+<li><p>Don’t return null</p>
+</li>
+<li><p>Don’t pass null</p>
+</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/08/Clean-Code-Error-Handling/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/08/Clean-Code-TDDs-3-laws/" title="Clean Code - TDDs 3 laws" itemprop="url">Clean Code - TDDs 3 laws</a>
   </h1>
   <p class="article-author">By
@@ -951,103 +1026,6 @@ public class <span class="type">ObjectOriented</span> {
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/07/swift-xmlParser之使用/" title="swift-xmlParser之使用" itemprop="url">swift-xmlParser之使用</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-07T06:21:41.000Z" itemprop="datePublished"> 發表於 2015-04-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ol>
-<li>在ViewController後引用所需要的 delegate</li>
-</ol>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">ViewController</span>,<span class="title">NSXMLParserDelegate</span> </span>
-</code></pre><ol>
-<li><p>加入delegate所需要的function</p>
-<pre><code><span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!)</span> </span>{
-<span class="built_in">println</span>(<span class="string">"Element's name is <span class="subst">\(elementName)</span>"</span>)
-<span class="built_in">println</span>(<span class="string">"Element's attributes are <span class="subst">\(attributeDict)</span>"</span>)
-}
-
-<span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, foundCharacters string: String!)</span> </span>{
-}
-
-<span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!)</span> </span>{
-<span class="built_in">println</span>(<span class="string">"End"</span>)
-</code></pre><p> }</p>
-</li>
-</ol>
-<ol>
-<li><p>在接收到資料後，轉為nsdata，並使用parser去執行（以下為範例）</p>
-<pre><code>  let xml = ("<span class="pi">&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;</span><span class="tag">&lt;<span class="title">rsp</span> <span class="attribute">stat</span>=<span class="value">\"fail\"</span>&gt;</span><span class="tag">&lt;<span class="title">err</span> <span class="attribute">code</span>=<span class="value">\"123\"</span> <span class="attribute">msg</span>=<span class="value">\"Failed\"</span> <span class="attribute">desc</span>=<span class="value">\"錯誤\"</span>/&gt;</span><span class="tag">&lt;/<span class="title">rsp</span>&gt;</span>").dataUsingEncoding(NSUTF8StringEncoding)
-var xmlParser: NSXMLParser = NSXMLParser(data: xml)
-xmlParser.delegate = self
-
-xmlParser.parse()
-</code></pre></li>
-</ol>
-<ol>
-<li><p>跑跑看結果是否正確</p>
-<pre><code>Element<span class="attribute">'s</span> name <span class="keyword">is</span> rsp
-Element<span class="attribute">'s</span> attributes are [stat: fail]
-Element<span class="attribute">'s</span> name <span class="keyword">is</span> err
-Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯誤, code: <span class="number">123</span>]
-<span class="keyword">End</span>
-<span class="keyword">End</span>
-</code></pre></li>
-<li><p>收工</p>
-</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/ios/">ios</a><a href="/tags/swift/">swift</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/07/swift-xmlParser之使用/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -1072,7 +1050,7 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 			
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>7</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>8</sup></a></li>
 			
 		
 			
@@ -1092,15 +1070,15 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 			
 		
 			
-				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/XCode6/" title="XCode6">XCode6<sup>1</sup></a></li>
+				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
 			
 		
 			

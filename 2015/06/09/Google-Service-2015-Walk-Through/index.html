@@ -4,40 +4,43 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>make HUD by your self | 沒有人的地盤</title>
+    <title>Google Service 2015 Walk Through | 沒有人的地盤</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="AKI YU">
     
 
     
-    <meta name="description" content="首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境static LoadingView *myInstance = nil;
-
-+(LoadingView *)shared
-{
-    // check to see if an instance already exists
-    if (nil == myInstance) {
-        myInstan">
+    <meta name="description" content="2015 Google I/O  之後  很多東西都改了，所以來做一次walk through吧
+比較特別的是 gcm也可以發ios了
+https://developers.google.com/cloud-messaging/
+try it on iOS
+選擇語言 objc／swift
+使用cocoapods安裝 gcm／analyticsPodfile
+pod &apos;Google/Analytic">
 <meta property="og:type" content="article">
-<meta property="og:title" content="make HUD by your self">
-<meta property="og:url" content="http://www.yuaki.com/app/2015/05/04/make-HUD-by-your-self/index.html">
+<meta property="og:title" content="Google Service 2015 Walk Through">
+<meta property="og:url" content="http://www.yuaki.com/app/2015/06/09/Google-Service-2015-Walk-Through/index.html">
 <meta property="og:site_name" content="沒有人的地盤">
-<meta property="og:description" content="首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境static LoadingView *myInstance = nil;
-
-+(LoadingView *)shared
-{
-    // check to see if an instance already exists
-    if (nil == myInstance) {
-        myInstan">
+<meta property="og:description" content="2015 Google I/O  之後  很多東西都改了，所以來做一次walk through吧
+比較特別的是 gcm也可以發ios了
+https://developers.google.com/cloud-messaging/
+try it on iOS
+選擇語言 objc／swift
+使用cocoapods安裝 gcm／analyticsPodfile
+pod &apos;Google/Analytic">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm03.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="make HUD by your self">
-<meta name="twitter:description" content="首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境static LoadingView *myInstance = nil;
-
-+(LoadingView *)shared
-{
-    // check to see if an instance already exists
-    if (nil == myInstance) {
-        myInstan">
+<meta name="twitter:title" content="Google Service 2015 Walk Through">
+<meta name="twitter:description" content="2015 Google I/O  之後  很多東西都改了，所以來做一次walk through吧
+比較特別的是 gcm也可以發ios了
+https://developers.google.com/cloud-messaging/
+try it on iOS
+選擇語言 objc／swift
+使用cocoapods安裝 gcm／analyticsPodfile
+pod &apos;Google/Analytic">
 
     
     <link rel="alternative" href="/atom.xml" title="沒有人的地盤" type="application/atom+xml">
@@ -107,14 +110,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/04/make-HUD-by-your-self/" title="make HUD by your self" itemprop="url">make HUD by your self</a>
+      <a href="/2015/06/09/Google-Service-2015-Walk-Through/" title="Google Service 2015 Walk Through" itemprop="url">Google Service 2015 Walk Through</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-04T01:24:52.000Z" itemprop="datePublished"> 發表於 2015-05-04</time>
+    <time datetime="2015-06-09T15:55:30.000Z" itemprop="datePublished"> 發表於 2015-06-09</time>
     
   </p>
 </header>
@@ -123,64 +126,78 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境"><span class="toc-number">1.</span> <span class="toc-text">首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接著實作兩個_instanceMethod"><span class="toc-number">2.</span> <span class="toc-text">接著實作兩個 instanceMethod</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#兩個class_method"><span class="toc-number">3.</span> <span class="toc-text">兩個class method</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#try_it_on_iOS"><span class="toc-number">1.</span> <span class="toc-text">try it on iOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#選擇語言_objc／swift"><span class="toc-number">2.</span> <span class="toc-text">選擇語言 objc／swift</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用cocoapods安裝_gcm／analytics"><span class="toc-number">3.</span> <span class="toc-text">使用cocoapods安裝 gcm／analytics</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pod_要確認是否為最新版本，不然安裝後會有錯誤"><span class="toc-number">3.1.</span> <span class="toc-text">pod 要確認是否為最新版本，不然安裝後會有錯誤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GCM的一些code"><span class="toc-number">4.</span> <span class="toc-text">GCM的一些code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GA的一些code"><span class="toc-number">5.</span> <span class="toc-text">GA的一些code</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境">首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境</h3><pre><code>static <span class="class">LoadingView *myInstance = nil;</span>
+		<p>2015 Google I/O  之後  很多東西都改了，所以來做一次walk through吧</p>
+<p>比較特別的是 gcm也可以發ios了</p>
+<p><a href="">https://developers.google.com/cloud-messaging/</a></p>
+<h3 id="try_it_on_iOS">try it on iOS</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm01.png" alt="gcm01" style="width:310px"></p>
+<h3 id="選擇語言_objc／swift">選擇語言 objc／swift</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm02.png" alt="gcm02" style="width:310px"></p>
+<h3 id="使用cocoapods安裝_gcm／analytics">使用cocoapods安裝 gcm／analytics</h3><p>Podfile</p>
+<pre><code><span class="title">pod</span> <span class="string">'Google/Analytics'</span>
+pod <span class="string">'Google/CloudMessaging'</span>
+</code></pre><p>在所在目錄安裝</p>
+<pre><code>pod <span class="keyword">install</span>
+</code></pre><h4 id="pod_要確認是否為最新版本，不然安裝後會有錯誤">pod 要確認是否為最新版本，不然安裝後會有錯誤</h4><p>完成之後打開workspace會看到一堆framework</p>
+<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm03.png" alt="gcm03" style="width:310px"></p>
+<h3 id="GCM的一些code">GCM的一些code</h3><pre><code>- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions {
 
-+(LoadingView *<span class="function">)</span>shared
-{
-    //<span class="instruction"> check </span>to see<span class="instruction"> if </span>an<span class="instruction"> instance </span>already exists
-   <span class="instruction"> if </span>(nil == myInstance<span class="function">)</span> {
-        myInstance  = <span class="keyword">[</span><span class="keyword">[</span><span class="keyword">[</span>self class] alloc] init];
-        // initialize variables here
-    }
-    //<span class="instruction"> return </span>the<span class="instruction"> instance </span>of this class
-   <span class="instruction"> return </span>myInstance;
+    <span class="comment">// Register for remote notifications</span>
+    UIUserNotificationType allNotificationTypes =
+    (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+    UIUserNotificationSettings *settings =
+    [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:<span class="literal">nil</span>];
+    [[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:settings];
+    [[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];
+
+
+    <span class="keyword">return</span> <span class="literal">YES</span>;
 }
-</code></pre><h3 id="接著實作兩個_instanceMethod">接著實作兩個 instanceMethod</h3><pre><code>+ (<span class="keyword">void</span>)dismiss{
 
-    [[<span class="built_in">UIApplication</span> sharedApplication] endIgnoringInteractionEvents];
-    [[<span class="keyword">self</span> shared] selfHide];
-}
-+ (<span class="keyword">void</span>)show
-{
-    [[<span class="built_in">UIApplication</span> sharedApplication] beginIgnoringInteractionEvents];
-    [[<span class="keyword">self</span> shared] selfShow];
-}
-</code></pre><h3 id="兩個class_method">兩個class method</h3><p>自window中找到hud並移除</p>
-<pre><code><span class="tag">-</span>(void)<span class="tag">selfHide</span>{
-    <span class="attr_selector">[[((AppDelegate *)([UIApplication sharedApplication]</span><span class="class">.delegate</span>))<span class="class">.window</span> <span class="tag">viewWithTag</span><span class="pseudo">:56789</span>] <span class="tag">removeFromSuperview</span>];
-    <span class="attr_selector">[[((AppDelegate *)([UIApplication sharedApplication]</span><span class="class">.delegate</span>))<span class="class">.window</span> <span class="tag">viewWithTag</span><span class="pseudo">:56790</span>] <span class="tag">removeFromSuperview</span>];
-}
-</code></pre><p>將hud加到最上層的window，範例中的hud為中間一個靜置圖片，週遭再放一個不斷旋轉的圖片</p>
-<pre><code>-(<span class="typename">void</span>)selfShow{
 
-    UIImageView *mView = [[UIImageView alloc] <span class="string">initWithFrame:</span>CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];
-    [mView <span class="string">setImage:</span>[UIImage <span class="string">imageNamed:</span>@<span class="string">"loading.png"</span>]];
-    mView.tag = <span class="number">56789</span>;
-    [mView <span class="string">setCenter:</span>((AppDelegate *)([UIApplication sharedApplication].delegate)).window.center];
+-(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didRegisterForRemoteNotificationsWithDeviceToken:(<span class="built_in">NSData</span> *)deviceToken{
 
-    UIImageView *mView2 = [[UIImageView alloc] <span class="string">initWithFrame:</span>CGRectMake(<span class="number">0</span>,<span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];
-    [mView2 <span class="string">setImage:</span>[UIImage <span class="string">imageNamed:</span>@<span class="string">"loading2.png"</span>]];
-    mView2.tag = <span class="number">56790</span>;
-    [mView2 <span class="string">setCenter:</span>mView.center];
+    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,deviceToken);
 
-    <span class="keyword">if</span> ([mView2.layer <span class="string">animationForKey:</span>@<span class="string">"SpinAnimation"</span>] == nil) {
-        CABasicAnimation* animation = [CABasicAnimation <span class="string">animationWithKeyPath:</span>@<span class="string">"transform.rotation.z"</span>];
-        animation.fromValue = [NSNumber <span class="string">numberWithFloat:</span><span class="number">0.0</span>f];
-        animation.toValue = [NSNumber <span class="string">numberWithFloat:</span> <span class="number">2</span>*M_PI];
-        animation.duration = <span class="number">1.0</span>f;
-        animation.repeatCount = INFINITY;
-        [mView2.layer <span class="string">addAnimation:</span>animation <span class="string">forKey:</span>@<span class="string">"SpinAnimation"</span>];
-    }
+    [[GGLInstanceID sharedInstance] startWithConfig:[GGLInstanceIDConfig defaultConfig]];
+    _registrationOptions = @{kGGLInstanceIDRegisterAPNSOption:deviceToken,
+                             kGGLInstanceIDAPNSServerTypeSandboxOption:@YES};
+    [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:<span class="string">@"gswt-ea275"</span>
+                                                        scope:kGGLInstanceIDScopeGCM
+                                                      options:_registrationOptions
+                                                      handler:<span class="literal">nil</span>];
 
-    [((AppDelegate *)([UIApplication sharedApplication].delegate)).window <span class="string">addSubview:</span>mView];
-    [((AppDelegate *)([UIApplication sharedApplication].delegate)).window <span class="string">addSubview:</span>mView2];
 
 }
-</code></pre><p>接著，在其他地方引用，再呼叫 [LoadingView show]、[LoadingView dismiss] 就可以了</p>
+
+
+-(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didFailToRegisterForRemoteNotificationsWithError:(<span class="built_in">NSError</span> *)error{
+    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,error);
+}
+</code></pre><h3 id="GA的一些code">GA的一些code</h3><pre><code>-(<span class="typename">void</span>)<span class="string">GAScreen:</span>(NSString *)name{
+    dispatch_queue_t myQueue = dispatch_queue_create(<span class="string">"GAQueue"</span>,NULL);
+    dispatch_async(myQueue, ^{
+        id&lt;GAITracker&gt; tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker <span class="string">set:</span>kGAIScreenName <span class="string">value:</span>name];
+        [tracker <span class="string">send:</span>[[GAIDictionaryBuilder createScreenView] build]];
+    });
+
+}
+
+
+-(<span class="typename">void</span>)<span class="string">GAEvent:</span>(NSString *)<span class="string">CATEGORY :</span>(NSString *)<span class="string">ACTION :</span>(NSString *)<span class="string">LABEL :</span>(NSNumber *)Value{
+
+    dispatch_queue_t myQueue = dispatch_queue_create(<span class="string">"GAQueue"</span>,NULL);
+    dispatch_async(myQueue, ^{
+        id&lt;GAITracker&gt; tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker <span class="string">send:</span>[[GAIDictionaryBuilder <span class="string">createEventWithCategory:</span>CATEGORY <span class="string">action:</span>ACTION <span class="string">label:</span>LABEL <span class="string">value:</span>Value] build]];
+    });
+
+
+}
+</code></pre><p>希望對大家有幫助</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -189,7 +206,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/HUD/">HUD</a><a href="/tags/Singleton/">Singleton</a><a href="/tags/UI/">UI</a>
+  <span></span> <a href="/tags/Google/">Google</a><a href="/tags/Google-IO/">Google IO</a><a href="/tags/iOS/">iOS</a>
   </div>
 
 </div>
@@ -198,7 +215,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.yuaki.com/app/2015/05/04/make-HUD-by-your-self/" data-title="make HUD by your self | 沒有人的地盤" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.yuaki.com/app/2015/06/09/Google-Service-2015-Walk-Through/" data-title="Google Service 2015 Walk Through | 沒有人的地盤" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -211,19 +228,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/05/05/make-UIRefreshControll-by-your-self/" title="make UIRefreshControll by your self">
-  <strong>上一篇：</strong><br/>
-  <span>
-  make UIRefreshControll by your self</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/04/23/取得MKMapView的Zoom-Level/"  title="取得MKMapView的Zoom Level">
+<a href="/2015/05/27/swift-shuffle/"  title="swift shuffle">
  <strong>下一篇：</strong><br/> 
- <span>取得MKMapView的Zoom Level
+ <span>swift shuffle
 </span>
 </a>
 </div>
@@ -244,7 +253,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境"><span class="toc-number">1.</span> <span class="toc-text">首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接著實作兩個_instanceMethod"><span class="toc-number">2.</span> <span class="toc-text">接著實作兩個 instanceMethod</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#兩個class_method"><span class="toc-number">3.</span> <span class="toc-text">兩個class method</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#try_it_on_iOS"><span class="toc-number">1.</span> <span class="toc-text">try it on iOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#選擇語言_objc／swift"><span class="toc-number">2.</span> <span class="toc-text">選擇語言 objc／swift</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用cocoapods安裝_gcm／analytics"><span class="toc-number">3.</span> <span class="toc-text">使用cocoapods安裝 gcm／analytics</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pod_要確認是否為最新版本，不然安裝後會有錯誤"><span class="toc-number">3.1.</span> <span class="toc-text">pod 要確認是否為最新版本，不然安裝後會有錯誤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GCM的一些code"><span class="toc-number">4.</span> <span class="toc-text">GCM的一些code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GA的一些code"><span class="toc-number">5.</span> <span class="toc-text">GA的一些code</span></a></li></ol>
  
   </div>
 
