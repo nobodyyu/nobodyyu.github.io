@@ -95,6 +95,103 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/08/Clean-Code-function/" title="Clean Code - function" itemprop="url">Clean Code - function</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-08T09:48:23.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ol>
+<li><p>Small</p>
+</li>
+<li><p>Blocks and Indenting</p>
+</li>
+<li><p>Do one thing</p>
+</li>
+<li><p>One level of abstraction per function</p>
+</li>
+<li><p>Reading code from top to bottom: the Step Down Rule</p>
+</li>
+<li><p>Switch statements</p>
+</li>
+<li><p>Use descriptive names</p>
+</li>
+<li><p>Function arguments - the less the better</p>
+</li>
+<li><p>Common monadic forms *,Dyadic functions, Triads, Argument objects, Agrument Lists,</p>
+</li>
+<li><p>Flag arguments - passing a boolean into a function is a terrible practice</p>
+</li>
+<li><p>Verbs and keywords</p>
+</li>
+<li><p>Have no side effects - do not lie in function</p>
+</li>
+<li><p>Command Query Separation - don’t return different meaning in one function</p>
+</li>
+<li><p>Prefer exceptions to return error codes</p>
+</li>
+<li><p>Extract try/catch blocks</p>
+</li>
+<li><p>Error handling is one thing</p>
+</li>
+<li><p>Dependency magnet. don’t enum the errors</p>
+</li>
+<li><p>Don’t repeat yourself</p>
+</li>
+<li><p>Structured programming</p>
+</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/08/Clean-Code-function/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/08/Clean-Code-Error-Handling/" title="Clean Code - Error Handling" itemprop="url">Clean Code - Error Handling</a>
   </h1>
   <p class="article-author">By
@@ -926,106 +1023,6 @@ public class <span class="type">ObjectOriented</span> {
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/07/How-to-Hexo/" title="How to Hexo" itemprop="url">How to Hexo</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-07T08:12:37.000Z" itemprop="datePublished"> 發表於 2015-04-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="1-本機環境設定">1.本機環境設定</h2><hr>
-<p>首先你要有<a href="http://www.nodejs.org/" target="_blank" rel="external">node.js</a>，這是一套快速、簡單且功能強大的 Node.js 網誌框架。</p>
-<p>接著你要用 npm install -g hexo 來安裝</p>
-<p>理論上這樣就完成了，發現前面加上 sudo 就可以解決資料夾控制權的問題。</p>
-<h2 id="2-github帳號設定">2.github帳號設定</h2><hr>
-<p>有自已的github帳號</p>
-<p>在主頁右上方創建一個新的 [repo] [create new repo]</p>
-<p>Repository name 填入 github帳號.github.io 用來創建github page</p>
-<h2 id="3-開始使用hexo">3.開始使用hexo</h2><hr>
-<p>第一次建立hexo時要先將hexo初始化（建議建立一個hexo資料夾存放資料）</p>
-<pre><code><span class="title">hexo</span> init
-</code></pre><p>如果有提示要輸入 npm install的話  也要</p>
-<pre><code>npm <span class="keyword">install</span>
-</code></pre><p>接著  需要安裝 deployer</p>
-<pre><code>npm <span class="operator"><span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span>
-</code></pre><p>建立一篇文章，將會是Markdown形式，可以到source/_post/title.md去修改</p>
-<pre><code>hexo <span class="keyword">new</span> <span class="string">"title"</span>
-</code></pre><p>編輯md檔，增添你要的文章與tag，建議使用 <a href="http://25.io/mou/" target="_blank" rel="external">MOU</a> 編輯，可以很快地看到自已編寫的內容格式是否正確</p>
-<p>接著，生成public檔案</p>
-<pre><code>hexo <span class="keyword">ge</span><span class="label">nerate</span>
-</code></pre><p>可以在本機事先預覽（chrome需要用localhost來取代0.0.0.0）</p>
-<pre><code>hexo <span class="keyword">server</span>
-</code></pre><h2 id="4-上傳至github">4.上傳至github</h2><hr>
-<p>修改 hexo的資料夾裡的 _config.yml 檔案</p>
-<p>比對一下，原始檔，填入自已的資料</p>
-<pre><code><span class="preprocessor"># Site</span>
-<span class="label">title:</span> 沒有人的地盤
-<span class="label">subtitle:</span> mobile app development
-<span class="label">description:</span> 
-<span class="label">author:</span> AKI YU
-
-
-－－－－－－中間省略－－－－－－－－－－－－
-
-<span class="label">deploy:</span>
-  type: git
-  repository: git@github.com:github帳號/github帳號.github.io.git
-  branch: master
-</code></pre><p>編輯存檔後發佈</p>
-<pre><code><span class="title">hexo</span> deploy
-</code></pre><p>成功的話可以用瀏覽器看一下</p>
-<pre><code><span class="string">http:</span><span class="comment">//github帳號.github.io</span>
-</code></pre><p>打完收功</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/blog/">blog</a><a href="/tags/hexo/">hexo</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/07/How-to-Hexo/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -1046,7 +1043,7 @@ public class <span class="type">ObjectOriented</span> {
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/objc/" title="objc">objc<sup>8</sup></a></li>
+				<li><a href="/tags/objc/" title="objc">objc<sup>9</sup></a></li>
 			
 		
 			
