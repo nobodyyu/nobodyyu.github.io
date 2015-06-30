@@ -95,6 +95,82 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/08/objc-Thread-Save-Singleton/" title="objc-Thread-Save Singleton" itemprop="url">objc-Thread-Save Singleton</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-08T09:24:27.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="Thread-Save_Singleton">Thread-Save Singleton</h2><pre><code><span class="class"><span class="keyword">@implementation</span> <span class="title">SingletonClass</span></span>
+
++ (<span class="keyword">id</span>)sharedInstance
+{
+    <span class="keyword">static</span> SingletonClass *sharedMyInstance = <span class="literal">nil</span>;
+
+    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;
+    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^{
+    sharedMyInstance = [[<span class="keyword">super</span> allocWithZone:<span class="literal">nil</span>] init];
+    });
+
+    <span class="keyword">return</span> sharedMyInstance;
+}
+<span class="keyword">@end</span>
+
++ (<span class="keyword">id</span>)allocWithZone:(NSZone *)zone
+{
+    <span class="keyword">return</span> [<span class="keyword">self</span> sharedInstance];
+}
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/objc/">objc</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/08/objc-Thread-Save-Singleton/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/07/How-to-Hexo/" title="How to Hexo" itemprop="url">How to Hexo</a>
   </h1>
   <p class="article-author">By
@@ -388,7 +464,7 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 			
 		
 			
-				<li><a href="/tags/swift/" title="swift">swift<sup>3</sup></a></li>
+				<li><a href="/tags/swift/" title="swift">swift<sup>4</sup></a></li>
 			
 		
 			
@@ -408,11 +484,11 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 			
 		
 			
-				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
+				<li><a href="/tags/Game/" title="Game">Game<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
+				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
 			
 		
 			
