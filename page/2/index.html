@@ -95,6 +95,76 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/05/add-MotionEffect-for-your-UIView/" title="add MotionEffect for your UIView" itemprop="url">add MotionEffect for your UIView</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-05T15:15:23.000Z" itemprop="datePublished"> 發表於 2015-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>為你的 UIView 加上 Motion的效果</p>
+<pre><code>UIInterpolatingMotionEffect <span class="keyword">*</span>xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:<span class="comment">@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];</span>
+xAxis.maximumRelativeValue = <span class="comment">@(40);</span>
+xAxis.minimumRelativeValue = <span class="comment">@(-40);</span>
+
+UIInterpolatingMotionEffect <span class="keyword">*</span>yAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:<span class="comment">@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];</span>
+yAxis.maximumRelativeValue = <span class="comment">@(40);</span>
+yAxis.minimumRelativeValue = <span class="comment">@(-40);</span>
+
+UIMotionEffectGroup <span class="keyword">*</span>group = [[UIMotionEffectGroup alloc] init];
+group.motionEffects = <span class="comment">@[xAxis,yAxis];</span>
+
+[btnMap addMotionEffect:group];
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/MotionEffect/">MotionEffect</a><a href="/tags/iOS/">iOS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/05/add-MotionEffect-for-your-UIView/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/05/make-UIRefreshControll-by-your-self/" title="make UIRefreshControll by your self" itemprop="url">make UIRefreshControll by your self</a>
   </h1>
   <p class="article-author">By
@@ -1155,63 +1225,6 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/08/Clean-Code-Boy-Scout-Rule/" title="Clean Code - Boy Scout Rule" itemprop="url">Clean Code - Boy Scout Rule</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-08T09:49:27.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="Leave_the_campground_cleaner_than_you_found_it-">Leave the campground cleaner than you found it.</h2><h3 id="整理好code再離開，不管是誰留下來的">整理好code再離開，不管是誰留下來的</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/08/Clean-Code-Boy-Scout-Rule/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -1256,11 +1269,11 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
+				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
+				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
 			
 		
 			
@@ -1268,7 +1281,15 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 			
 		
 			
-				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
+				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XCode/" title="XCode">XCode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/debug/" title="debug">debug<sup>1</sup></a></li>
 			
 		
 			
@@ -1301,14 +1322,6 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 		
 			
 				<li><a href="/tags/Send-Action/" title="Send Action">Send Action<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/AudioToolBox/" title="AudioToolBox">AudioToolBox<sup>1</sup></a></li>
 			
 		
 		</ul>

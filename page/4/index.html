@@ -95,6 +95,113 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/08/objc-增加UIButton的點擊範圍-objc-setAssociatedObject-的應用/" title="objc-增加UIButton的點擊範圍 - objc_setAssociatedObject 的應用" itemprop="url">objc-增加UIButton的點擊範圍 - objc_setAssociatedObject 的應用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/app/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-08T09:26:53.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="UIButton的進階使用">UIButton的進階使用</h2><p>一般人比較少接觸到的runtime programming 以下為其中之一objc_setAssociatedObject 的應用</p>
+<pre><code><span class="class"><span class="keyword">@interface</span> <span class="title">UIButton</span>(<span class="title">EnlargeTouchArea</span>)</span>
+
+<span class="keyword">@end</span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">UIButton</span>(<span class="title">EnlargeTouchArea</span>)</span>
+
+<span class="keyword">static</span> <span class="keyword">char</span> topNameKey;
+<span class="keyword">static</span> <span class="keyword">char</span> rightNameKey;
+<span class="keyword">static</span> <span class="keyword">char</span> bottomNameKey;
+<span class="keyword">static</span> <span class="keyword">char</span> leftNameKey;
+
+- (<span class="keyword">void</span>) setEnlargeEdgeWithTop:(<span class="built_in">CGFloat</span>) top right:(<span class="built_in">CGFloat</span>) right bottom:(<span class="built_in">CGFloat</span>) bottom left:(<span class="built_in">CGFloat</span>) left
+{
+    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;topNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:top], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;rightNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:right], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;bottomNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:bottom], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;leftNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:left], OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (<span class="built_in">CGRect</span>) enlargedRect
+{
+    <span class="built_in">NSNumber</span>* topEdge = objc_getAssociatedObject(<span class="keyword">self</span>, &amp;topNameKey);
+    <span class="built_in">NSNumber</span>* rightEdge = objc_getAssociatedObject(<span class="keyword">self</span>, &amp;rightNameKey);
+    <span class="built_in">NSNumber</span>* bottomEdge = objc_getAssociatedObject(<span class="keyword">self</span>, &amp;bottomNameKey);
+    <span class="built_in">NSNumber</span>* leftEdge = objc_getAssociatedObject(<span class="keyword">self</span>, &amp;leftNameKey);
+    <span class="keyword">if</span> (topEdge &amp;&amp; rightEdge &amp;&amp; bottomEdge &amp;&amp; leftEdge)
+    {
+        <span class="keyword">return</span> CGRectMake(<span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.origin</span><span class="variable">.x</span> - leftEdge<span class="variable">.floatValue</span>,
+                          <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.origin</span><span class="variable">.y</span> - topEdge<span class="variable">.floatValue</span>,
+                          <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> + leftEdge<span class="variable">.floatValue</span> + rightEdge<span class="variable">.floatValue</span>,
+                          <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span> + topEdge<span class="variable">.floatValue</span> + bottomEdge<span class="variable">.floatValue</span>);
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.bounds</span>;
+    }
+}
+
+- (<span class="built_in">UIView</span>*) hitTest:(<span class="built_in">CGPoint</span>) point withEvent:(UIEvent*) event
+{
+    <span class="built_in">CGRect</span> rect = [<span class="keyword">self</span> enlargedRect];
+    <span class="keyword">if</span> (CGRectEqualToRect(rect, <span class="keyword">self</span><span class="variable">.bounds</span>))
+    {
+        <span class="keyword">return</span> [<span class="keyword">super</span> hitTest:point withEvent:event];
+    }
+    <span class="keyword">return</span> CGRectContainsPoint(rect, point) ? <span class="keyword">self</span> : <span class="literal">nil</span>;
+}
+
+<span class="keyword">@end</span>
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/UIButton/">UIButton</a><a href="/tags/objc/">objc</a><a href="/tags/setAssociatedObject/">setAssociatedObject</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/08/objc-增加UIButton的點擊範圍-objc-setAssociatedObject-的應用/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/08/objc-Thread-Save-Singleton/" title="objc-Thread-Save Singleton" itemprop="url">objc-Thread-Save Singleton</a>
   </h1>
   <p class="article-author">By
@@ -476,11 +583,11 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 			
 		
 			
-				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
+				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/UI/" title="UI">UI<sup>2</sup></a></li>
+				<li><a href="/tags/Taiwan/" title="Taiwan">Taiwan<sup>2</sup></a></li>
 			
 		
 			
@@ -488,7 +595,15 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 			
 		
 			
-				<li><a href="/tags/UIRefreshControll/" title="UIRefreshControll">UIRefreshControll<sup>1</sup></a></li>
+				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XCode/" title="XCode">XCode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/debug/" title="debug">debug<sup>1</sup></a></li>
 			
 		
 			
@@ -521,14 +636,6 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 		
 			
 				<li><a href="/tags/Send-Action/" title="Send Action">Send Action<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/iOS8/" title="iOS8">iOS8<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/AudioToolBox/" title="AudioToolBox">AudioToolBox<sup>1</sup></a></li>
 			
 		
 		</ul>
