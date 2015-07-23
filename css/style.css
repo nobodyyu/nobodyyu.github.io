@@ -401,7 +401,7 @@ body >header >div {
 }
 body >header a {
   display: block;
-  color: #fff;
+  color: #f8e71c;
 }
 #imglogo {
   float: left;
@@ -438,7 +438,6 @@ body >header a {
 }
 #textlogo h1.site-name {
   width: 86%;
-  text-color: #f8e71c;
   font-family: "covered_by_your_graceregular";
   font-size: 200%;
   line-height: 1.5;
