@@ -457,7 +457,7 @@ body >header a {
 #textlogo h2.blog-motto {
   font-size: 0.7em;
   font-weight: normal;
-  width: 50%;
+  width: 86%;
 }
 @media only screen and (min-width: 768px) {
   #textlogo h2.blog-motto {
@@ -538,7 +538,7 @@ header nav ul li a:hover {
   color: #e9cd4c;
 }
 .shownav {
-  max-height: 20em;
+  max-height: 10em;
 }
 .search {
   padding: 0.1em 0 0 1em;
