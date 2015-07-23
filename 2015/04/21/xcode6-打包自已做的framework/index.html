@@ -130,10 +130,10 @@
 		</div>
 		
 		<p>如何把自已做的code打包成一包framework，給其他人使用</p>
-<h3 id="1-_新增一個專案，選取_[Framework_&amp;_Library]_[Cocoa_Touch_Framework]">1. 新增一個專案，選取 [Framework &amp; Library] [Cocoa Touch Framework]</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework01.png" alt="framework01" style="width:310px"></p>
-<h3 id="2-_在專案中，把要放的程式加到專案中">2. 在專案中，把要放的程式加到專案中</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework02.png" alt="framework02" style="width:310px"></p>
-<h3 id="3-_在[Target][Build_Phase][Headers]中設定，要給人看的表頭檔(-h)，和不給人看的表頭檔">3. 在[Target][Build Phase][Headers]中設定，要給人看的表頭檔(.h)，和不給人看的表頭檔</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework03.png" alt="framework03" style="width:310px"></p>
-<h3 id="4-_新增一個_[Aggregate_Target]">4. 新增一個 [Aggregate Target]</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework04.png" alt="framework04" style="width:310px"></p>
+<h3 id="1-_新增一個專案，選取_[Framework_&amp;_Library]_[Cocoa_Touch_Framework]">1. 新增一個專案，選取 [Framework &amp; Library] [Cocoa Touch Framework]</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework01.png" alt="framework01" style="width:310px"></p>
+<h3 id="2-_在專案中，把要放的程式加到專案中">2. 在專案中，把要放的程式加到專案中</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework02.png" alt="framework02" style="width:310px"></p>
+<h3 id="3-_在[Target][Build_Phase][Headers]中設定，要給人看的表頭檔(-h)，和不給人看的表頭檔">3. 在[Target][Build Phase][Headers]中設定，要給人看的表頭檔(.h)，和不給人看的表頭檔</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework03.png" alt="framework03" style="width:310px"></p>
+<h3 id="4-_新增一個_[Aggregate_Target]">4. 新增一個 [Aggregate Target]</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework04.png" alt="framework04" style="width:310px"></p>
 <h3 id="5-_在新的_[Aggregate_Target][Build_Phases]加入_[Run_Script]">5. 在新的 [Aggregate Target][Build Phases]加入 [Run Script]</h3><pre><code>FMK_NAME=<span class="variable">${PROJECT_NAME}</span>
 
 INSTALL_DIR=<span class="variable">${SRCROOT}</span>/Products/<span class="variable">${FMK_NAME}</span>.framework
@@ -164,11 +164,11 @@ rm -r <span class="string">"<span class="variable">${WRK_DIR}</span>"</span>
 
 open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
 </code></pre><p>如圖</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework05.png" alt="framework05" style="width:310px"></p>
-<h3 id="6-最後_builde_project，會在[Products]_生成你的個人的framework">6.最後 builde project，會在[Products] 生成你的個人的framework</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework06.png" alt="framework06" style="width:210px"></p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework05.png" alt="framework05" style="width:310px"></p>
+<h3 id="6-最後_builde_project，會在[Products]_生成你的個人的framework">6.最後 builde project，會在[Products] 生成你的個人的framework</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework06.png" alt="framework06" style="width:210px"></p>
 <h4 id="ps-_如果要生成靜態的library使用，要注意一個設定">ps. 如果要生成靜態的library使用，要注意一個設定</h4><p>在 [Build Settings][Mach-O Type] 要選 [Static Library]</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework07.png" alt="framework07" style="width:310px"></p>
-<h3 id="7-_最後給別人引用時_要注意一下，除了在[Linked_Frameworks_and_Libraries]下引用之外，還要在[Targer][General][Embeded_Binies]下加入自定義的framework">7. 最後給別人引用時 要注意一下，除了在[Linked Frameworks and Libraries]下引用之外，還要在[Targer][General][Embeded Binies]下加入自定義的framework</h3><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework08.png" alt="framework08" style="width:310px"></p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework07.png" alt="framework07" style="width:310px"></p>
+<h3 id="7-_最後給別人引用時_要注意一下，除了在[Linked_Frameworks_and_Libraries]下引用之外，還要在[Targer][General][Embeded_Binies]下加入自定義的framework">7. 最後給別人引用時 要注意一下，除了在[Linked Frameworks and Libraries]下引用之外，還要在[Targer][General][Embeded Binies]下加入自定義的framework</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework08.png" alt="framework08" style="width:310px"></p>
 <h3 id="打完收工">打完收工</h3>  
 	</div>
 		<footer class="article-footer clearfix">

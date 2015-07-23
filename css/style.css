@@ -1077,6 +1077,8 @@ article .article-content p {
 article .article-content img,
 article .article-content video,
 article .article-content figure img {
+  -webkit-box-shadow: 0 0 2px 3px #ddd;
+  box-shadow: 0 0 2px 3px #ddd;
   max-width: 100%;
   height: auto;
   vertical-align: middle;

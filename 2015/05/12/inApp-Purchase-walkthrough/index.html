@@ -129,13 +129,13 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 <h3 id="[member_center]_-_[Certificates,_Identifiers_&amp;_Profiles]_-_[App_IDs]">[member center] - [Certificates, Identifiers &amp; Profiles] - [App IDs]</h3><h1 id="Provisioning_Profile">Provisioning Profile</h1><p>provision profile要與App ID匹配</p>
 <h1 id="ItunesConnect_設定APP">ItunesConnect 設定APP</h1><p>新增一個app，該填的填</p>
 <h1 id="新增_inAPP_Product">新增 inAPP Product</h1><p>[APP] - [App 內購買項目] - [Create New] - [非消耗性項目]</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp01.png" alt="inapp01" style="width:310px"></p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp01.png" alt="inapp01" style="width:310px"></p>
 <p>非消耗性項目 把讓填的填一填後[儲存]</p>
 <h1 id="ProductID_一定要是_appid-name">ProductID 一定要是 appid.name</h1><p>在這裡卡關很久，很多walk through說ProdoctID只要unique，但是程式寫好，按下去就是 [StoreStateInvalidProduct]，要記得全部都要帶</p>
 <p>(範例為) com.yuaki.No5.Remove_AD  </p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp02.png" alt="inapp02" style="width:310px"></p>
-<h1 id="檢查xcode裡iap的設定是否開啟">檢查xcode裡iap的設定是否開啟</h1><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp03.png" alt="inapp03" style="width:310px"></p>
-<h1 id="Code">Code</h1><h2 id="加入_StoreKit-Framework">加入 StoreKit.Framework</h2><p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp04.png" alt="inapp04" style="width:310px"></p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp02.png" alt="inapp02" style="width:310px"></p>
+<h1 id="檢查xcode裡iap的設定是否開啟">檢查xcode裡iap的設定是否開啟</h1><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp03.png" alt="inapp03" style="width:310px"></p>
+<h1 id="Code">Code</h1><h2 id="加入_StoreKit-Framework">加入 StoreKit.Framework</h2><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp04.png" alt="inapp04" style="width:310px"></p>
 <h2 id="加入三支程式_Store-h、Store-m和一支放在server的iap-php">加入三支程式 Store.h、Store.m和一支放在server的iap.php</h2><h3 id="感謝_Paul_Wu_大大的無私分享">感謝 Paul Wu 大大的無私分享</h3><p>store.h</p>
 <pre><code><span class="comment">//</span>
 <span class="comment">//  Store.h</span>
@@ -380,9 +380,8 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 ?&gt;
 </code></pre><h1 id="使用">使用</h1><p>購買</p>
 <pre><code><span class="collection">[<span class="collection">[Store shared]</span> purchase:@<span class="string">"com.yuaki.No5.Remove_AD"</span>]</span><span class="comment">;</span>
-</code></pre><p>回復購買產品動作</p>
-<pre><code><span class="collection">[<span class="collection">[Store shared]</span> restore]</span><span class="comment">;</span>
-</code></pre><h1 id="其他">其他</h1><pre><code>-(<span class="typename">void</span>)checkStore{
+</code></pre><p>回復購買產品動作<br>    [[Store shared] restore];</p>
+<h1 id="其他">其他</h1><pre><code>-(<span class="typename">void</span>)checkStore{
     [Store shared].updatedState = ^(StoreState state, NSString *productIdentifier) {
         <span class="comment">//需要顯示購買過程時使用。</span>
         <span class="keyword">switch</span> (state) {
@@ -449,13 +448,13 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
     };
 }
 </code></pre><h1 id="沙箱測試">沙箱測試</h1><p>新增測試人員<br>[使用者和職能] - [測試人員] - [+]</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp06.png" alt="inapp06" style="width:310px"></p>
-<p>該填的填一填<br><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp07.png" alt="inapp07" style="width:310px"></p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp06.png" alt="inapp06" style="width:310px"></p>
+<p>該填的填一填<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp07.png" alt="inapp07" style="width:310px"></p>
 <p>好玩的是，不能使用既有的appid當做沙箱測試人員，只好去申請一個新的email來測試。</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp08.png" alt="inapp08" style="width:310px"></p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp09.png" alt="inapp09" style="width:310px"></p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp08.png" alt="inapp08" style="width:310px"></p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp09.png" alt="inapp09" style="width:310px"></p>
 <p>在手機上[App Store] &gt; [精選項目] &gt; [登入] 沙箱測試人員</p>
-<p><img src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp10.png" alt="inapp10" style="width:310px"></p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp10.png" alt="inapp10" style="width:310px"></p>
 <p>接著就可以進行購買測試了</p>
 <h4 id="打完收功">打完收功</h4>  
 	</div>
