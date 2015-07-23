@@ -89,1144 +89,243 @@
 </div>
 <div id="main">
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/05/add-MotionEffect-for-your-UIView/" title="add MotionEffect for your UIView" itemprop="url">add MotionEffect for your UIView</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-05T15:15:23.000Z" itemprop="datePublished"> 發表於 2015-05-05</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>為你的 UIView 加上 Motion的效果</p>
-<pre><code>UIInterpolatingMotionEffect <span class="keyword">*</span>xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:<span class="comment">@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];</span>
-xAxis.maximumRelativeValue = <span class="comment">@(40);</span>
-xAxis.minimumRelativeValue = <span class="comment">@(-40);</span>
-
-UIInterpolatingMotionEffect <span class="keyword">*</span>yAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:<span class="comment">@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];</span>
-yAxis.maximumRelativeValue = <span class="comment">@(40);</span>
-yAxis.minimumRelativeValue = <span class="comment">@(-40);</span>
-
-UIMotionEffectGroup <span class="keyword">*</span>group = [[UIMotionEffectGroup alloc] init];
-group.motionEffects = <span class="comment">@[xAxis,yAxis];</span>
-
-[btnMap addMotionEffect:group];
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/tags/MotionEffect/">MotionEffect</a><a href="/tags/iOS/">iOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/05/add-MotionEffect-for-your-UIView/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/05/make-UIRefreshControll-by-your-self/" title="make UIRefreshControll by your self" itemprop="url">make UIRefreshControll by your self</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-05T15:06:53.000Z" itemprop="datePublished"> 發表於 2015-05-05</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="裡面用到了幾個技示巧">裡面用到了幾個技示巧</h2><p>1。 旋轉的animation<br>2。 移動的animation<br>3。 移除不必要的UIActivityIndicator</p>
-<h3 id="bikeRegreshConrtol-h">bikeRegreshConrtol.h</h3><pre><code><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span>
-
-<span class="class"><span class="keyword">@interface</span> <span class="title">bikeRegreshConrtol</span> : <span class="title">UIRefreshControl</span></span>
-
-
--(<span class="keyword">void</span>)makeAnimate;
-
-<span class="keyword">@end</span>
-</code></pre><h3 id="bikeRegreshConrtol-m">bikeRegreshConrtol.m</h3><h1 id="import_“bikeRegreshConrtol-h”">import “bikeRegreshConrtol.h”</h1><pre><code><span class="class"><span class="keyword">@implementation</span> <span class="title">bikeRegreshConrtol</span></span>
-
--(instancetype)init{
-
-    <span class="keyword">self</span> = [<span class="keyword">super</span> init];
-    <span class="keyword">if</span> (<span class="keyword">self</span>) {
-
-    }
-
-
-    <span class="keyword">return</span>  <span class="keyword">self</span>;
-
-}
-
--(<span class="keyword">void</span>)makeAnimate{
-
-    <span class="keyword">for</span> (<span class="built_in">UIView</span> *V <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.subviews</span>) {
-        <span class="keyword">if</span> ([[V class] isSubclassOfClass:[<span class="built_in">UIImageView</span> class]]) {
-            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[V class]);
-        }<span class="keyword">else</span>{
-            [V removeFromSuperview];
-        }
-    }
-
-    <span class="built_in">UIImageView</span> *wheel1 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
-                           [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"wheel.png"</span>]];
-
-    [wheel1 setFrame:CGRectMake(<span class="number">50</span>, <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>, <span class="number">30</span>, <span class="number">30</span>)];
-
-
-    <span class="built_in">UIImageView</span> *wheel2 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
-                           [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"wheel.png"</span>]];
-
-    [wheel2 setFrame:CGRectMake(<span class="number">90</span>, <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>, <span class="number">30</span>, <span class="number">30</span>)];
-
-
-    <span class="keyword">if</span> ([wheel1<span class="variable">.layer</span> animationForKey:<span class="string">@"SpinAnimation"</span>] == <span class="literal">nil</span>) {
-        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:<span class="string">@"transform.rotation.z"</span>];
-        animation<span class="variable">.fromValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat:<span class="number">0.0</span>f];
-        animation<span class="variable">.toValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat: <span class="number">2</span>*M_PI];
-        animation<span class="variable">.duration</span> = <span class="number">2.4</span>f;
-        animation<span class="variable">.repeatCount</span> = INFINITY;
-        [wheel1<span class="variable">.layer</span> addAnimation:animation forKey:<span class="string">@"SpinAnimation"</span>];
-    }
-
-    <span class="keyword">if</span> ([wheel2<span class="variable">.layer</span> animationForKey:<span class="string">@"SpinAnimation"</span>] == <span class="literal">nil</span>) {
-        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:<span class="string">@"transform.rotation.z"</span>];
-        animation<span class="variable">.fromValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat:<span class="number">0.0</span>f];
-        animation<span class="variable">.toValue</span> = [<span class="built_in">NSNumber</span> numberWithFloat: <span class="number">2</span>*M_PI];
-        animation<span class="variable">.duration</span> = <span class="number">2.2</span>f;
-        animation<span class="variable">.repeatCount</span> = INFINITY;
-        [wheel2<span class="variable">.layer</span> addAnimation:animation forKey:<span class="string">@"SpinAnimation"</span>];
-    }
-
-    [<span class="keyword">self</span> insertSubview:wheel1 atIndex:<span class="number">3</span>];
-    [<span class="keyword">self</span> insertSubview:wheel2 atIndex:<span class="number">2</span>];
-
-    <span class="built_in">UIImageView</span> *back1 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
-                           [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"background.png"</span>]];
-
-    [back1 setFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span>)];
-
-    [<span class="keyword">self</span> insertSubview:back1 atIndex:<span class="number">1</span>];
-
-
-
-    <span class="built_in">UIImageView</span> *back2 = [[<span class="built_in">UIImageView</span> alloc] initWithImage:
-                          [<span class="built_in">UIImage</span> imageNamed: <span class="string">@"background.png"</span>]];
-
-    [back2 setFrame:CGRectMake(<span class="number">320</span>, <span class="number">0</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span>)];
-
-    [<span class="keyword">self</span> insertSubview:back2 atIndex:<span class="number">0</span>];
-
-    [<span class="keyword">self</span> bringSubviewToFront:wheel1];
-    [<span class="keyword">self</span> bringSubviewToFront:wheel2];
-<span class="comment">//    </span>
-
-    [<span class="keyword">self</span> doAnimate:back1 :back2];
-
-
-}
-
--(<span class="keyword">void</span>)doAnimate:(<span class="built_in">UIImageView</span> *)img :(<span class="built_in">UIImageView</span> *)img2{
-    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">32.0</span>f animations:^{
-        [img setFrame:CGRectMake(-<span class="number">320</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
-        [img2 setFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
-    } completion:^(<span class="built_in">BOOL</span> finished) {
-        [img setFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
-        [img2 setFrame:CGRectMake(<span class="number">320</span>, <span class="number">0</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>)];
-        [<span class="keyword">self</span> doAnimate:img :img2];
-    }];
-}
-</code></pre><h3 id="使用">使用</h3><pre><code><span class="setting">refreshControl = <span class="value">[[bikeRegreshConrtol alloc] init];</span></span>
-<span class="title">[refreshControl addTarget:self action:@selector(refresh)
-              forControlEvents:UIControlEventValueChanged]</span><span class="comment">;</span>
-<span class="title">[mTable addSubview:refreshControl]</span><span class="comment">;</span>
-
-<span class="title">[refreshControl makeAnimate]</span><span class="comment">;</span>
-</code></pre><h3 id="更新結束">更新結束</h3><pre><code><span class="title">[refreshControl endRefreshing]</span><span class="comment">;</span>
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/UI/">UI</a><a href="/tags/UIRefreshControll/">UIRefreshControll</a><a href="/tags/iOS/">iOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/05/make-UIRefreshControll-by-your-self/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <a href="/2015/05/05/add-MotionEffect-for-your-UIView/" title="add MotionEffect for your UIView" itemprop="url">
+  
+    <h1 itemprop="name">add MotionEffect for your UIView</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/04/make-HUD-by-your-self/" title="make HUD by your self" itemprop="url">make HUD by your self</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-04T01:24:52.000Z" itemprop="datePublished"> 發表於 2015-05-04</time>
-    
-  </p>
-</header>
-    <div class="article-content">
+     
+           <p itemprop="description" >為你的 UIView 加上 Motion的效果
+UIInterpolatingMotionEffect *xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@&quot;center.x&quot; type:UIInterpo</p>
         
-        <h3 id="首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境">首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境</h3><pre><code>static <span class="class">LoadingView *myInstance = nil;</span>
+    
+    <time datetime="2015-05-05T15:15:23.000Z" itemprop="datePublished">2015-05-05</time>
+  </a>
+</section>
 
-+(LoadingView *<span class="function">)</span>shared
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/05/05/make-UIRefreshControll-by-your-self/" title="make UIRefreshControll by your self" itemprop="url">
+  
+    <h1 itemprop="name">make UIRefreshControll by your self</h1>
+    
+     
+           <p itemprop="description" >裡面用到了幾個技示巧1。 旋轉的animation2。 移動的animation3。 移除不必要的UIActivityIndicator
+bikeRegreshConrtol.h#import &amp;lt;UIKit/UIKit.h&amp;gt;
+
+@interface bikeRegre</p>
+        
+    
+    <time datetime="2015-05-05T15:06:53.000Z" itemprop="datePublished">2015-05-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/05/04/make-HUD-by-your-self/" title="make HUD by your self" itemprop="url">
+  
+    <h1 itemprop="name">make HUD by your self</h1>
+    
+     
+           <p itemprop="description" >首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境static LoadingView *myInstance = nil;
+
++(LoadingView *)shared
 {
-    //<span class="instruction"> check </span>to see<span class="instruction"> if </span>an<span class="instruction"> instance </span>already exists
-   <span class="instruction"> if </span>(nil == myInstance<span class="function">)</span> {
-        myInstance  = <span class="keyword">[</span><span class="keyword">[</span><span class="keyword">[</span>self class] alloc] init];
-        // initialize variables here
-    }
-    //<span class="instruction"> return </span>the<span class="instruction"> instance </span>of this class
-   <span class="instruction"> return </span>myInstance;
-}
-</code></pre><h3 id="接著實作兩個_instanceMethod">接著實作兩個 instanceMethod</h3><pre><code>+ (<span class="keyword">void</span>)dismiss{
-
-    [[<span class="built_in">UIApplication</span> sharedApplication] endIgnoringInteractionEvents];
-    [[<span class="keyword">self</span> shared] selfHide];
-}
-+ (<span class="keyword">void</span>)show
-{
-    [[<span class="built_in">UIApplication</span> sharedApplication] beginIgnoringInteractionEvents];
-    [[<span class="keyword">self</span> shared] selfShow];
-}
-</code></pre><h3 id="兩個class_method">兩個class method</h3><p>自window中找到hud並移除</p>
-<pre><code><span class="tag">-</span>(void)<span class="tag">selfHide</span>{
-    <span class="attr_selector">[[((AppDelegate *)([UIApplication sharedApplication]</span><span class="class">.delegate</span>))<span class="class">.window</span> <span class="tag">viewWithTag</span><span class="pseudo">:56789</span>] <span class="tag">removeFromSuperview</span>];
-    <span class="attr_selector">[[((AppDelegate *)([UIApplication sharedApplication]</span><span class="class">.delegate</span>))<span class="class">.window</span> <span class="tag">viewWithTag</span><span class="pseudo">:56790</span>] <span class="tag">removeFromSuperview</span>];
-}
-</code></pre><p>將hud加到最上層的window，範例中的hud為中間一個靜置圖片，週遭再放一個不斷旋轉的圖片</p>
-<pre><code>-(<span class="typename">void</span>)selfShow{
-
-    UIImageView *mView = [[UIImageView alloc] <span class="string">initWithFrame:</span>CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];
-    [mView <span class="string">setImage:</span>[UIImage <span class="string">imageNamed:</span>@<span class="string">"loading.png"</span>]];
-    mView.tag = <span class="number">56789</span>;
-    [mView <span class="string">setCenter:</span>((AppDelegate *)([UIApplication sharedApplication].delegate)).window.center];
-
-    UIImageView *mView2 = [[UIImageView alloc] <span class="string">initWithFrame:</span>CGRectMake(<span class="number">0</span>,<span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];
-    [mView2 <span class="string">setImage:</span>[UIImage <span class="string">imageNamed:</span>@<span class="string">"loading2.png"</span>]];
-    mView2.tag = <span class="number">56790</span>;
-    [mView2 <span class="string">setCenter:</span>mView.center];
-
-    <span class="keyword">if</span> ([mView2.layer <span class="string">animationForKey:</span>@<span class="string">"SpinAnimation"</span>] == nil) {
-        CABasicAnimation* animation = [CABasicAnimation <span class="string">animationWithKeyPath:</span>@<span class="string">"transform.rotation.z"</span>];
-        animation.fromValue = [NSNumber <span class="string">numberWithFloat:</span><span class="number">0.0</span>f];
-        animation.toValue = [NSNumber <span class="string">numberWithFloat:</span> <span class="number">2</span>*M_PI];
-        animation.duration = <span class="number">1.0</span>f;
-        animation.repeatCount = INFINITY;
-        [mView2.layer <span class="string">addAnimation:</span>animation <span class="string">forKey:</span>@<span class="string">"SpinAnimation"</span>];
-    }
-
-    [((AppDelegate *)([UIApplication sharedApplication].delegate)).window <span class="string">addSubview:</span>mView];
-    [((AppDelegate *)([UIApplication sharedApplication].delegate)).window <span class="string">addSubview:</span>mView2];
-
-}
-</code></pre><p>接著，在其他地方引用，再呼叫 [LoadingView show]、[LoadingView dismiss] 就可以了</p>
-
+    // check to see if an instance </p>
         
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
+    
+    <time datetime="2015-05-04T01:24:52.000Z" itemprop="datePublished">2015-05-04</time>
+  </a>
+</section>
 
 
-  <div class="article-tags">
+
+
+
+
   
-  <span></span> <a href="/tags/HUD/">HUD</a><a href="/tags/Singleton/">Singleton</a><a href="/tags/UI/">UI</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/04/make-HUD-by-your-self/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/23/取得MKMapView的Zoom-Level/" title="取得MKMapView的Zoom Level" itemprop="url">取得MKMapView的Zoom Level</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-23T06:23:08.000Z" itemprop="datePublished"> 發表於 2015-04-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>定義地球弧度</p>
-<pre><code><span class="hexcolor">#def</span>ine MERCATOR_RADIUS <span class="number">85445659.44705395</span> 
-</code></pre><p>Method</p>
-<pre><code>- (<span class="built_in">int</span>)getZoomLevel:(MKMapView*)_mapView { 
-
-    <span class="keyword">return</span> <span class="number">21</span>－<span class="built_in">round</span>(log2(_mapView.region.span.longitudeDelta * MERCATOR_RADIUS * M_PI / (<span class="number">180.0</span> * _mapView.bounds.<span class="built_in">size</span>.<span class="variable">width</span>))); 
-
-} 
-</code></pre><p>測試一下</p>
-<pre><code>- (<span class="keyword">void</span>)mapView:(<span class="built_in">MKMapView</span> *)_mapView regionDidChangeAnimated:(<span class="built_in">BOOL</span>)animated { 
-
-    <span class="built_in">NSLog</span>(<span class="string">@"zoom level %d"</span>, [<span class="keyword">self</span> getZoomLevel:_mapView]); 
-
-} 
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/MKMapView/">MKMapView</a><a href="/tags/objc/">objc</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/23/取得MKMapView的Zoom-Level/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/22/iBeacon-Scanner實作概念/" title="iBeacon Scanner實作概念" itemprop="url">iBeacon Scanner實作概念</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-22T04:10:24.000Z" itemprop="datePublished"> 發表於 2015-04-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="1-_利用_CoreBluetoooth_來找尋附近的藍芽裝置">1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置</h3><p>Code Snippet</p>
-<pre><code><span class="preprocessor">#import <span class="title">&lt;CoreBluetooth/CoreBluetooth.h&gt;</span></span>
-
-<span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()&lt;<span class="title">CBCentralManagerDelegate</span>, <span class="title">CBPeripheralDelegate</span>&gt;</span>
-{
-    CBCentralManager *_manager;
-    CBPeripheral *_peripheral;
-}
-<span class="keyword">@end</span>
-
-<span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span>
-
-- (<span class="keyword">void</span>)viewDidLoad {
-    [<span class="keyword">super</span> viewDidLoad];
-
-    _manager =  [[CBCentralManager alloc] initWithDelegate:<span class="keyword">self</span>
-                                                    queue:<span class="literal">nil</span>];
-
-
-}
-
-
-- (<span class="keyword">void</span>)centralManagerDidUpdateState:(CBCentralManager *)central
-{
-    <span class="keyword">switch</span> ((<span class="keyword">int</span>)central<span class="variable">.state</span>)
-    {
-        <span class="keyword">case</span> CBCentralManagerStatePoweredOn:
-        {
-            <span class="built_in">NSDictionary</span> *options = @{
-                                      CBCentralManagerScanOptionAllowDuplicatesKey: @YES
-                                      };
-            [_manager scanForPeripheralsWithServices:<span class="literal">nil</span>
-                                             options:options];
-            <span class="built_in">NSLog</span>(<span class="string">@"I just started scanning for peripherals"</span>);
-            <span class="keyword">break</span>;
-        }
-    }
-}
-
-- (<span class="keyword">void</span>) centralManager:(CBCentralManager *)central
-    didDiscoverPeripheral:(CBPeripheral *)peripheral
-        advertisementData:(<span class="built_in">NSDictionary</span> *)advertisementData
-                     RSSI:(<span class="built_in">NSNumber</span> *)RSSI
-{
-
-    <span class="keyword">if</span>([advertisementData objectForKey:<span class="string">@"kCBAdvDataLocalName"</span>]!=<span class="literal">nil</span>){
-        <span class="built_in">NSLog</span>(<span class="string">@"I see an advertisement with identifer: %@, state: %ld, name: %@, services: %@, description: %@"</span>,
-              [peripheral identifier],
-              [peripheral state],
-              [peripheral name],
-              [peripheral services],
-              [advertisementData description]);
-    }
-
-
-
-    <span class="keyword">if</span> (_peripheral == <span class="literal">nil</span>)
-    {
-        <span class="built_in">NSLog</span>(<span class="string">@"Trying to connect to peripheral"</span>);
-        _peripheral = peripheral;
-        _peripheral<span class="variable">.delegate</span> = (<span class="keyword">id</span>)<span class="keyword">self</span>;
-        [central connectPeripheral:_peripheral
-                           options:<span class="literal">nil</span>];
-    }
-}
-
-- (<span class="keyword">void</span>) centralManager:(CBCentralManager *)central
-    didConnectPeripheral:(CBPeripheral *)peripheral
-{
-    <span class="keyword">if</span> (peripheral == <span class="literal">nil</span>)
-    {
-        <span class="built_in">NSLog</span>(<span class="string">@"connect callback has nil peripheral"</span>);
-    } <span class="keyword">else</span> {
-        <span class="built_in">NSLog</span>(<span class="string">@"Connected to peripheral with identifer: %@, state: %ld, name: %@, services: %@"</span>,
-              [peripheral identifier],
-              [peripheral state],
-              [peripheral name],
-              [peripheral services]);
-
-        <span class="built_in">NSLog</span>(<span class="string">@"discovering services..."</span>);
-        _peripheral = peripheral;
-        _peripheral<span class="variable">.delegate</span> = (<span class="keyword">id</span>)<span class="keyword">self</span>;
-        [_peripheral discoverServices:<span class="literal">nil</span>];
-    }
-}
-
-- (<span class="keyword">void</span>) peripheral:(CBPeripheral *)peripheral
-    didDiscoverServices:(<span class="built_in">NSArray</span> *)serviceUuids
-{
-    <span class="built_in">NSLog</span>(<span class="string">@"discovered a peripheral's services: %@"</span>, serviceUuids);
-}
-</code></pre><p>其中可以過濾掉一些不會廣播的設備</p>
-<pre><code><span class="tag">if</span>([<span class="attribute">advertisementDataobjectForKey</span>:@<span class="string">"kCBAdvDataLocalName"</span>]!=nil){
-</code></pre><p>可以取該設備的UUID</p>
-<pre><code><span class="tag">&lt;__NSConcreteUUID 0x17403f520&gt;</span> <span class="keyword">2750A093</span>-A1C2-9953-A59F-A0769538DC15
-</code></pre><p>附帶一提的是，小米手環也會廣播自已的藍芽訊號</p>
-<h3 id="2-_接著利用_CLLocationManagerDelegate_對_已取得的UUID_對_iBeacon_做程式的實作">2. 接著利用 CLLocationManagerDelegate 對 已取得的UUID 對 iBeacon 做程式的實作</h3><pre><code> <span class="keyword">for</span> (NSUUID *uuid <span class="keyword">in</span> [APLDefaults sharedDefaults].supportedProximityUUIDs)
-    {
-        CLBeaconRegion *region = [[CLBeaconRegion alloc] <span class="string">initWithProximityUUID:</span>uuid <span class="string">identifier:</span>[uuid UUIDString]];
-        self.rangedRegions[region] = [NSArray array];
-    }
-
-
-#pragma mark - Location manager delegate
-
-- (<span class="typename">void</span>)<span class="string">locationManager:</span>(CLLocationManager *)manager <span class="string">didRangeBeacons:</span>(NSArray *)beacons <span class="string">inRegion:</span>(CLBeaconRegion *)region
-{
-    <span class="comment">// 這裡就可以取到 iBeacon 了</span>
-}
-</code></pre><p>在這裡 小米手環 不會出現在 CLLocationManagerDelegate，所以會出現的就只剩下iBeacon了</p>
-<h3 id="打完收工">打完收工</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+    <a href="/2015/04/23/取得MKMapView的Zoom-Level/" title="取得MKMapView的Zoom Level" itemprop="url">
   
-  <span></span> <a href="/tags/CoreBluetooth/">CoreBluetooth</a><a href="/tags/iBeacon/">iBeacon</a><a href="/tags/objc/">objc</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/22/iBeacon-Scanner實作概念/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <h1 itemprop="name">取得MKMapView的Zoom Level</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >定義地球弧度
+#define MERCATOR_RADIUS 85445659.44705395 
+Method
+- (int)getZoomLevel:(MKMapView*)_mapView { 
+
+    return 21－round(log2(_mapView.regi</p>
+        
     
-      <a href="/2015/04/21/xcode6-打包自已做的framework/" title="[xcode6]打包自已做的framework" itemprop="url">[xcode6]打包自已做的framework</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-21T12:56:17.000Z" itemprop="datePublished"> 發表於 2015-04-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>如何把自已做的code打包成一包framework，給其他人使用</p>
-<h3 id="1-_新增一個專案，選取_[Framework_&amp;_Library]_[Cocoa_Touch_Framework]">1. 新增一個專案，選取 [Framework &amp; Library] [Cocoa Touch Framework]</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework01.png" alt="framework01" style="width:310px"></p>
-<h3 id="2-_在專案中，把要放的程式加到專案中">2. 在專案中，把要放的程式加到專案中</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework02.png" alt="framework02" style="width:310px"></p>
-<h3 id="3-_在[Target][Build_Phase][Headers]中設定，要給人看的表頭檔(-h)，和不給人看的表頭檔">3. 在[Target][Build Phase][Headers]中設定，要給人看的表頭檔(.h)，和不給人看的表頭檔</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework03.png" alt="framework03" style="width:310px"></p>
-<h3 id="4-_新增一個_[Aggregate_Target]">4. 新增一個 [Aggregate Target]</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework04.png" alt="framework04" style="width:310px"></p>
-<h3 id="5-_在新的_[Aggregate_Target][Build_Phases]加入_[Run_Script]">5. 在新的 [Aggregate Target][Build Phases]加入 [Run Script]</h3><pre><code>FMK_NAME=<span class="variable">${PROJECT_NAME}</span>
-
-INSTALL_DIR=<span class="variable">${SRCROOT}</span>/Products/<span class="variable">${FMK_NAME}</span>.framework
-
-WRK_DIR=build
-DEVICE_DIR=<span class="variable">${WRK_DIR}</span>/Release-iphoneos/<span class="variable">${FMK_NAME}</span>.framework
-SIMULATOR_DIR=<span class="variable">${WRK_DIR}</span>/Release-iphonesimulator/<span class="variable">${FMK_NAME}</span>.framework
-
-<span class="comment"># -configuration ${CONFIGURATION}</span>
-<span class="comment"># Clean and Building both architectures.</span>
-xcodebuild -configuration <span class="string">"Release"</span> -target <span class="string">"<span class="variable">${FMK_NAME}</span>"</span> -sdk iphoneos clean build
-xcodebuild -configuration <span class="string">"Release"</span> -target <span class="string">"<span class="variable">${FMK_NAME}</span>"</span> -sdk iphonesimulator clean build
-
-<span class="comment"># Cleaning the oldest.</span>
-<span class="keyword">if</span> [ <span class="operator">-d</span> <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span> ]
-<span class="keyword">then</span>
-rm -rf <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
-<span class="keyword">fi</span>
-
-mkdir -p <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
-
-cp -R <span class="string">"<span class="variable">${DEVICE_DIR}</span>/"</span> <span class="string">"<span class="variable">${INSTALL_DIR}</span>/"</span>
-
-<span class="comment"># Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.</span>
-lipo -create <span class="string">"<span class="variable">${DEVICE_DIR}</span>/<span class="variable">${FMK_NAME}</span>"</span> <span class="string">"<span class="variable">${SIMULATOR_DIR}</span>/<span class="variable">${FMK_NAME}</span>"</span> -output <span class="string">"<span class="variable">${INSTALL_DIR}</span>/<span class="variable">${FMK_NAME}</span>"</span>
-
-rm -r <span class="string">"<span class="variable">${WRK_DIR}</span>"</span>
-
-open <span class="string">"<span class="variable">${INSTALL_DIR}</span>"</span>
-</code></pre><p>如圖</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework05.png" alt="framework05" style="width:310px"></p>
-<h3 id="6-最後_builde_project，會在[Products]_生成你的個人的framework">6.最後 builde project，會在[Products] 生成你的個人的framework</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework06.png" alt="framework06" style="width:210px"></p>
-<h4 id="ps-_如果要生成靜態的library使用，要注意一個設定">ps. 如果要生成靜態的library使用，要注意一個設定</h4><p>在 [Build Settings][Mach-O Type] 要選 [Static Library]</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework07.png" alt="framework07" style="width:310px"></p>
-<h3 id="7-_最後給別人引用時_要注意一下，除了在[Linked_Frameworks_and_Libraries]下引用之外，還要在[Targer][General][Embeded_Binies]下加入自定義的framework">7. 最後給別人引用時 要注意一下，除了在[Linked Frameworks and Libraries]下引用之外，還要在[Targer][General][Embeded Binies]下加入自定義的framework</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/framework08.png" alt="framework08" style="width:310px"></p>
-<h3 id="打完收工">打完收工</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
+    <time datetime="2015-04-23T06:23:08.000Z" itemprop="datePublished">2015-04-23</time>
+  </a>
+</section>
 
 
-  <div class="article-tags">
+
+
+
+
   
-  <span></span> <a href="/tags/Framework/">Framework</a><a href="/tags/XCode6/">XCode6</a><a href="/tags/iOS/">iOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/21/xcode6-打包自已做的framework/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/14/加入-Admob-廣告/" title="加入 Admob 廣告" itemprop="url">加入 Admob 廣告</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-14T14:57:56.000Z" itemprop="datePublished"> 發表於 2015-04-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="AdMob網頁設定">AdMob網頁設定</h2><h3 id="1。註冊AdMob_帳號">1。註冊AdMob 帳號</h3><p>不解釋</p>
-<h3 id="2。加入新的應用程式">2。加入新的應用程式</h3><p>點擊<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob01.png" alt="admob01" style="width:310px"></p>
-<p>手動新增應用程式</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob02.png" alt="admob02" style="width:310px"></p>
-<p>將廣告單編號複製起來</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob03.png" alt="admob03" style="width:310px"></p>
-<h2 id="手機程式">手機程式</h2><h3 id="1。pod_install">1。pod install</h3><p>在專案目錄下新增一個 Podfile 檔</p>
-<pre><code><span class="literal">source</span> <span class="string">'https://github.com/CocoaPods/Specs.git'</span>
-
-<span class="literal">platform</span> :ios, <span class="string">'7.0'</span>
-pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~&gt; 7.0'</span>
-</code></pre><h3 id="2。在terminal下指令進行安裝">2。在terminal下指令進行安裝</h3><pre><code>pod <span class="keyword">install</span>
-</code></pre><p>安裝好之後，打開新產生的專案的workspace</p>
-<h3 id="3。在xib檔建一個UIView,並且將其class改為">3。在xib檔建一個UIView,並且將其class改為</h3><pre><code>GADBannerView
-</code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob04.png" alt="admob04" style="width:310px"></p>
-<p>接著拉好相對應的 IBOutlet<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob05.png" alt="admob05" style="width:310px"></p>
-<p>記得import GoogleMobileAds （語法和一般的import不太一樣）</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob06.png" alt="admob06" style="width:310px"></p>
-<h3 id="4。在_ViewDidLoad_(or_anywhere)_加入對應的程式碼">4。在 ViewDidLoad (or anywhere) 加入對應的程式碼</h3><pre><code>bannerView.<span class="variable">adUnitID =</span> @<span class="string">"和網頁的那串相同"</span>;
-  bannerView.<span class="variable">rootViewController =</span> self;
-  [bannerView loadRequest:[GADRequest request]];
-</code></pre><h3 id="5。看到測試用的ad出現">5。看到測試用的ad出現</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob07.png" alt="admob07" style="width:310px"></p>
-<h2 id="AdMob網頁設定啟動">AdMob網頁設定啟動</h2><p>據aircon解釋，在上架一週後可以搜尋得到應用程式，接著進行連結，就可以啟動admob了</p>
-<h2 id="打完收工">打完收工</h2>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/AdMob/">AdMob</a><a href="/tags/pod/">pod</a><a href="/tags/廣告/">廣告</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/14/加入-Admob-廣告/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/12/GameKit-tutorial/" title="GameKit tutorial" itemprop="url">GameKit tutorial</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-12T08:53:19.000Z" itemprop="datePublished"> 發表於 2015-04-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="開始使用GAME_CENTER">開始使用GAME CENTER</h2><h3 id="1。在project裡加入_GameKit-framework">1。在project裡加入 GameKit.framework</h3><h3 id="2。在iOS_Dev_Center_加入對應的AppID，並且在iTunes_Connect新增一個APP">2。在iOS Dev Center 加入對應的AppID，並且在iTunes Connect新增一個APP</h3><h3 id="3。[My_App][xxxApp][Game_Center]下，設定啟用game_center">3。[My App][xxxApp][Game Center]下，設定啟用game center</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_01.png" alt="game01" style="width:310px"></p>
-<h3 id="4。新增一個「個別排行榜」">4。新增一個「個別排行榜」</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_02.png" alt="game02" style="width:310px"></p>
-<h3 id="5。enable_Game_Center">5。enable Game Center</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_03.png" alt="game03" style="width:310px"></p>
-<h3 id="6。加上_GameKitHelper_的程式碼">6。加上 GameKitHelper 的程式碼</h3><h4 id="GameKitHelper-h">GameKitHelper.h</h4><pre><code><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span>
-<span class="preprocessor">#import <span class="title">&lt;GameKit/GameKit.h&gt;</span></span>
-
-<span class="class"><span class="keyword">@protocol</span> <span class="title">GameKitHelperProtocol</span> &lt;<span class="title">NSObject</span>&gt;</span>
-
--(<span class="keyword">void</span>) onScoresSubmitted:(<span class="keyword">bool</span>)success;
-
-<span class="keyword">@end</span>
-
-<span class="class"><span class="keyword">@interface</span> <span class="title">GameKitHelper</span> : <span class="title">NSObject</span>&lt;<span class="title">GKGameCenterControllerDelegate</span>&gt;</span>
-{
-
-}
-<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>)
-<span class="keyword">id</span>&lt;GameKitHelperProtocol&gt; delegate;
-
-<span class="comment">// This property holds the last know error</span>
-<span class="comment">// that occured while using the Game Center API's</span>
-<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSError</span>* lastError;
-
-<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>)  <span class="built_in">BOOL</span> gameCenterFeaturesEnabled;
-
-+(<span class="keyword">id</span>) sharedGameKitHelper;
-
-<span class="comment">// Player authentication, info</span>
--(<span class="keyword">void</span>) authenticateLocalPlayer;
-
-<span class="comment">// Scores</span>
--(<span class="keyword">void</span>) submitScore:(int64_t)socre;
-
-<span class="comment">// Show Leaderboard</span>
--(<span class="keyword">void</span>) showLeaderboard;
-
-<span class="keyword">@end</span>
-</code></pre><h4 id="GameKitHelper-m">GameKitHelper.m</h4><pre><code><span class="preprocessor">#import <span class="title">"GameKitHelper.h"</span></span>
-
-<span class="preprocessor">#import <span class="title">"GameKitHelper.h"</span></span>
-
-<span class="class"><span class="keyword">@interface</span> <span class="title">GameKitHelper</span>()</span>
-&lt;GKGameCenterControllerDelegate, UIAlertViewDelegate&gt; {
-
-}
-<span class="keyword">@end</span>
-
-<span class="class"><span class="keyword">@implementation</span> <span class="title">GameKitHelper</span></span>
-<span class="keyword">@synthesize</span> gameCenterFeaturesEnabled;
-
-
-<span class="preprocessor">#pragma mark Singleton stuff</span>
-
-+(<span class="keyword">id</span>) sharedGameKitHelper {
-    <span class="keyword">static</span> GameKitHelper *sharedGameKitHelper;
-    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;
-    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^{
-        sharedGameKitHelper = [[GameKitHelper alloc] init];
-    });
-    <span class="keyword">return</span> sharedGameKitHelper;
-}
-
-<span class="preprocessor">#pragma mark Player Authentication</span>
-
--(<span class="keyword">void</span>) authenticateLocalPlayer {
-   __<span class="keyword">weak</span> __block GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
-
-    localPlayer<span class="variable">.authenticateHandler</span> =
-    ^(<span class="built_in">UIViewController</span> *viewController, <span class="built_in">NSError</span> *error) {
-        [<span class="keyword">self</span> setLastError:error];
-
-        <span class="comment">// Player already authenticated</span>
-        <span class="keyword">if</span> ( localPlayer<span class="variable">.authenticated</span>) {
-            gameCenterFeaturesEnabled = <span class="literal">YES</span>;
-        } <span class="keyword">else</span> <span class="keyword">if</span> (viewController) {
-            [<span class="keyword">self</span> presentViewController:viewController];
-        } <span class="keyword">else</span> {
-            gameCenterFeaturesEnabled = <span class="literal">NO</span>;
-        }
-    };
-}
-
-<span class="preprocessor">#pragma mark Property setters</span>
-
--(<span class="keyword">void</span>) setLastError:(<span class="built_in">NSError</span> *)error {
-    _lastError = [error <span class="keyword">copy</span>];
-    <span class="keyword">if</span> (_lastError) {
-        <span class="built_in">NSLog</span>(<span class="string">@"GameKitHelper ERROR: [%@] [%@]"</span>, [[_lastError userInfo] description], [_lastError localizedDescription]);
-        <span class="comment">/*
-         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Game Center Error" message:[_lastError localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-         [alert show];
-         [alert release];
-         */</span>
-    }
-}
-
-<span class="preprocessor">#pragma mark UIViewController stuff</span>
-
--(<span class="built_in">UIViewController</span>*) getRootViewController {
-    <span class="keyword">return</span> [<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.keyWindow</span><span class="variable">.rootViewController</span>;
-}
-
--(<span class="keyword">void</span>) presentViewController:(<span class="built_in">UIViewController</span>*)vc {
-    <span class="built_in">UIViewController</span>* rootVC = [<span class="keyword">self</span> getRootViewController];
-    [rootVC presentViewController:vc animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];
-}
-
--(<span class="keyword">void</span>) submitScore:(int64_t)score{
-    <span class="comment">// 1: Check if Game Center</span>
-    <span class="comment">// features are enabled</span>
-    <span class="keyword">if</span> (!gameCenterFeaturesEnabled) {
-        <span class="built_in">NSLog</span>(<span class="string">@"Player not authenticated"</span>);
-        <span class="keyword">return</span>;
-    }
-
-    <span class="comment">// 2: Create a GKScore object</span>
-    GKScore* gkScore = [[GKScore alloc]initWithLeaderboardIdentifier:<span class="string">@"yuaki_No5"</span>];
-
-    <span class="comment">// 3: Set the score value</span>
-    gkScore<span class="variable">.value</span> = score;
-
-    [GKScore reportScores:@[gkScore] withCompletionHandler:^(<span class="built_in">NSError</span> *error) {
-        <span class="keyword">if</span> (error) {
-            [<span class="keyword">self</span> setLastError:error];
-
-            <span class="built_in">BOOL</span> success = (error == <span class="literal">nil</span>);
-
-            <span class="keyword">if</span> ([_delegate respondsToSelector:<span class="keyword">@selector</span>(onScoresSubmitted:)]) {
-                [_delegate onScoresSubmitted:success];
-            }
-        }
-    }];
-
-}
-
--(<span class="keyword">void</span>) showLeaderboard{
-    <span class="keyword">if</span> (!gameCenterFeaturesEnabled) {
-        <span class="built_in">NSLog</span>(<span class="string">@"Player not authenticated"</span>);
-        <span class="keyword">return</span>;
-    }
-
-    GKGameCenterViewController* gameCenterViewController = [[GKGameCenterViewController alloc] init];
-    gameCenterViewController<span class="variable">.viewState</span> = GKGameCenterViewControllerStateLeaderboards;
-    gameCenterViewController<span class="variable">.gameCenterDelegate</span> = <span class="keyword">self</span>;
-    [[<span class="keyword">self</span> getRootViewController] presentViewController:gameCenterViewController animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];
-}
-
--(<span class="keyword">void</span>) gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController {
-    [[<span class="keyword">self</span> getRootViewController] dismissViewControllerAnimated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];
-}
-
-
-
-<span class="keyword">@end</span>
-</code></pre><h3 id="7。確認Bundle_identifier是否一致">7。確認Bundle identifier是否一致</h3><h3 id="8。確認Capabilities_－_GameCenter_是否無錯誤">8。確認Capabilities － GameCenter 是否無錯誤</h3><h3 id="9。確認info-plist_有無gamekit的Capabilities">9。確認info.plist 有無gamekit的Capabilities</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_04.png" alt="game04" style="width:310px"></p>
-<h3 id="10。在程式的啟動點加入_authenticateLocalPlayer">10。在程式的啟動點加入 authenticateLocalPlayer</h3><pre><code><span class="collection">[<span class="collection">[GameKitHelper sharedGameKitHelper]</span> authenticateLocalPlayer]</span><span class="comment">;</span>
-</code></pre><h3 id="11。Submit_Score">11。Submit Score</h3><pre><code><span class="string">[[GameKitHelper sharedGameKitHelper] submitScore:[lblScore.text integerValue]]</span>;
-</code></pre><h3 id="12。Show_LeaderBoard">12。Show LeaderBoard</h3><pre><code><span class="collection">[<span class="collection">[GameKitHelper sharedGameKitHelper]</span> showLeaderboard]</span><span class="comment">;</span>
-</code></pre><h3 id="13。在手機上測試">13。在手機上測試</h3><p>這裡有個小地方要注意一下 iOS8必需要在手機上開啟sandox mode，才能進行開發測試</p>
-<h4 id="[設定]_[Game_Center]_[Sandbox]_設為開啟">[設定] [Game Center] [Sandbox] 設為開啟</h4><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_05.PNG" alt="game05" style="width:310px"></p>
-<h4 id="xcode_執行_debug_啟動進入程式後會出現_Game_Center_Sandbox，依序完成">xcode 執行 debug 啟動進入程式後會出現 Game Center Sandbox，依序完成</h4><p>輸入 AppID<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_06.PNG" alt="game06" style="width:310px"></p>
-<p>確認 Terms and Conditions<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_07.PNG" alt="game07" style="width:310px"></p>
-<p>Create NickName<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_08.PNG" alt="game08" style="width:310px"><br>Privacy<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_09.PNG" alt="game09" style="width:310px"></p>
-<p>回到遊戲後即可看到 Game Center的歡迎訊息<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/game_center_10.PNG" alt="game10" style="width:310px"></p>
-<h1 id="打完收功">打完收功</h1>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+    <a href="/2015/04/22/iBeacon-Scanner實作概念/" title="iBeacon Scanner實作概念" itemprop="url">
   
-  <span></span> <a href="/tags/Game/">Game</a><a href="/tags/GameKit/">GameKit</a><a href="/tags/objc/">objc</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/12/GameKit-tutorial/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <h1 itemprop="name">iBeacon Scanner實作概念</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置Code Snippet
+#import &amp;lt;CoreBluetooth/CoreBluetooth.h&amp;gt;
+
+@interface ViewController ()&amp;lt;CBCentralManagerD</p>
+        
     
-      <a href="/2015/04/08/objc-AirMonitor/" title="objc-AirMonitor" itemprop="url">objc-AirMonitor</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-08T12:17:30.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>原始資料來源：<br><a href="http://taqm.epa.gov.tw/pm25/tw/PM25A.aspx?area=10" target="_blank" rel="external">http://taqm.epa.gov.tw/pm25/tw/PM25A.aspx?area=10</a></p>
-<h2 id="載點_(待app_store審核)"><a href="https://itunes.apple.com/us/app/tai-wan-kong-qi-wu-ran-jian-ce/id983539259?l=zh&amp;ls=1&amp;mt=8" target="_blank" rel="external">載點</a> (待app store審核)</h2><hr>
-<h2 id="說明">說明</h2><p>為台灣空氣污染監測設計的app </p>
-<p>主要監測細懸浮微粒(pm2.5)的單位濃度<br>許多研究已證實細懸浮微粒(pm2.5)會對呼吸系統和心血管系統造成傷害<br>導致哮喘 肺癌 心血管疾病 出生缺陷和過早死亡</p>
-<p>功能<br>－即時pm2.5資訊查詢<br>－列表顯示<br>－在今天的畫面可定義監控的顯示區域</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
+    <time datetime="2015-04-22T04:10:24.000Z" itemprop="datePublished">2015-04-22</time>
+  </a>
+</section>
 
 
-  <div class="article-tags">
+
+
+
+
   
-  <span></span> <a href="/tags/Taiwan/">Taiwan</a><a href="/tags/ios/">ios</a><a href="/tags/objc/">objc</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/08/objc-AirMonitor/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/08/Symbol-English/" title="Symbol - English" itemprop="url">Symbol - English</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-08T09:50:30.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>&amp;　Ampersand (And 符號)</p>
-<p>*　Asterisk (星號)</p>
-<p>@　At sign, at (At 符號，At)</p>
-<p>\　Backslash (反斜線)</p>
-<p>[　Open bracket (左中括弧)</p>
-<p>^　Caret (插入號)</p>
-<p>]　Close bracket (右中括弧)</p>
-<p>(　Open parenthesis (左括弧)</p>
-<p>)　Close parenthesis (右括弧)</p>
-<p>:　Colon (冒號)</p>
-<p>,　Comma (逗號)</p>
-<p>$　Dollar sign (錢符號)</p>
-<p>–　Double dash (雙破折號)</p>
-<p>…　Ellipsis (省略符號)</p>
-<p>‘　Single quote (單引號)</p>
-<p>“　Quote (雙引號)</p>
-<p>=　Equals (等號)</p>
-<p>+　Plus, plus sign (加，加號)</p>
-<p>!　Exclamation point (驚歎號)</p>
-<p>>　Greater than (大於)</p>
-<p>&lt;　Less than (小於)</p>
-<p>#　Pound sign (井字號)</p>
-<p>?　Question mark (問號)</p>
-<p>.　Period, dot (句號，點)</p>
-<p>;　Semicolon (分號)</p>
-<p>-　Hyphen (連字號)</p>
-<p>—　Dash (破折號)</p>
-<p>_　Underscore (底線)</p>
-<p>|　Vertical bar (垂直線)</p>
-<p>{　Open brace (左大括弧)</p>
-<p>}　Close brace (右大括弧)</p>
-<p>%　Percent, percent sign (百分比，百分比符號)</p>
-<p>/　Slash (斜線)</p>
-<p>//　Double slash (雙斜線)</p>
-<p>~　Tilde (取代符號，毛毛蟲)</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/symbol/">symbol</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/08/Symbol-English/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
+    <a href="/2015/04/21/xcode6-打包自已做的framework/" title="[xcode6]打包自已做的framework" itemprop="url">
+  
+    <h1 itemprop="name">[xcode6]打包自已做的framework</h1>
+    
+     
+           <p itemprop="description" >如何把自已做的code打包成一包framework，給其他人使用
+1. 新增一個專案，選取 [Framework &amp;amp; Library] [Cocoa Touch Framework]
+2. 在專案中，把要放的程式加到專案中
+3. 在[Target][Build Phase</p>
+        
+    
+    <time datetime="2015-04-21T12:56:17.000Z" itemprop="datePublished">2015-04-21</time>
+  </a>
+</section>
 
 
 
 
 
 
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/04/14/加入-Admob-廣告/" title="加入 Admob 廣告" itemprop="url">
+  
+    <h1 itemprop="name">加入 Admob 廣告</h1>
+    
+     
+           <p itemprop="description" >AdMob網頁設定1。註冊AdMob 帳號不解釋
+2。加入新的應用程式點擊
+手動新增應用程式
 
-  <nav id="page-nav" class="clearfix">
+將廣告單編號複製起來
+
+手機程式1。pod install在專案目錄下新增一個 Podfile 檔
+source &#39;https://github.com/CocoaPods/Specs</p>
+        
+    
+    <time datetime="2015-04-14T14:57:56.000Z" itemprop="datePublished">2015-04-14</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/04/12/GameKit-tutorial/" title="GameKit tutorial" itemprop="url">
+  
+    <h1 itemprop="name">GameKit tutorial</h1>
+    
+     
+           <p itemprop="description" >開始使用GAME CENTER1。在project裡加入 GameKit.framework2。在iOS Dev Center 加入對應的AppID，並且在iTunes Connect新增一個APP3。[My App][xxxApp][Game Center]下，設定啟用game</p>
+        
+    
+    <time datetime="2015-04-12T08:53:19.000Z" itemprop="datePublished">2015-04-12</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/04/08/objc-AirMonitor/" title="objc-AirMonitor" itemprop="url">
+  
+    <h1 itemprop="name">objc-AirMonitor</h1>
+    
+     
+           <p itemprop="description" >原始資料來源：http://taqm.epa.gov.tw/pm25/tw/PM25A.aspx?area=10
+載點 (待app store審核)
+說明為台灣空氣污染監測設計的app 
+主要監測細懸浮微粒(pm2.5)的單位濃度許多研究已證實細懸浮微粒(pm2.5)會對呼吸系統</p>
+        
+    
+    <time datetime="2015-04-08T12:17:30.000Z" itemprop="datePublished">2015-04-08</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/04/08/Symbol-English/" title="Symbol - English" itemprop="url">
+  
+    <h1 itemprop="name">Symbol - English</h1>
+    
+     
+           <p itemprop="description" >&amp;amp;　Ampersand (And 符號)
+*　Asterisk (星號)
+@　At sign, at (At 符號，At)
+\　Backslash (反斜線)
+[　Open bracket (左中括弧)
+^　Caret (插入號)
+]　Close bracket (右中括</p>
+        
+    
+    <time datetime="2015-04-08T09:50:30.000Z" itemprop="datePublished">2015-04-08</time>
+  </a>
+</section>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 

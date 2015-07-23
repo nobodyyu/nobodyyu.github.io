@@ -89,1428 +89,256 @@
 </div>
 <div id="main">
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/02/XCode-debug再進化/" title="XCode debug再進化" itemprop="url">XCode debug再進化</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-02T01:54:13.000Z" itemprop="datePublished"> 發表於 2015-07-02</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>當然，要先來個crash</p>
-<p>謝謝 Crashlytics 可以強制造成crash</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug01.png" alt="debug01" style="width:310px"></p>
-<h3 id="基礎debug_mode">基礎debug mode</h3><p>當crash發生時 xcode沒設定什麼東西時 程式會hang在這個讓人看不懂的地方</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug02.png" alt="debug02" style="width:310px"></p>
-<p>所以  要在xcode的地方設定一下  好方便未來的debug</p>
-<pre><code>xcode左邊的<span class="keyword">panel</span> 左邊數第<span class="number">7</span>個  右邊倒數第<span class="number">2</span>個頁籤 點下去
-</code></pre><p>－</p>
-<pre><code>下面的「+」 點下去
-</code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug03.png" alt="debug03" style="width:310px"></p>
-<pre><code>選擇第一個「<span class="keyword">Add</span> Exception Breakpoint」
-</code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug04.png" alt="debug04" style="width:310px"></p>
-<p>這時候會變成這個專案專屬的exception breakpoint</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug05.png" alt="debug05" style="width:310px"></p>
-<p>此時xcode有個小貼心的地方，就是可以把breakpoint設為USER，往後，每一個新增的專案都會有這個exception breakpoint</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug06.png" alt="debug06" style="width:310px"></p>
-<p>結果變成</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug07.png" alt="debug07" style="width:310px"></p>
-<p>再重新執行一次crash，就會停在比較易讀的位置，也可以利用下方的debug console 來進行debug了</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug08.png" alt="debug08" style="width:310px"></p>
-<p>下方的debug console最常使用的指令是</p>
-<pre><code><span class="title">po</span> xxx
-</code></pre><p>如果你真的很想知道有那些指令的話，可以在debug console輸入help</p>
-<font color="red">(不過我相信你絕對不會每一個都看完的)</font>
-
-<pre><code>(lldb) help
-Debugger commands:
-
-  apropos           -- Find a list <span class="keyword">of</span> debugger commands related <span class="keyword">to</span> a particular
-                       word/subject.
-  breakpoint        -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> breakpoints. Also see
-                       _regexp-break.
-  command           -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> managing <span class="keyword">or</span> customizing the
-                       debugger commands.
-  disassemble       -- Disassemble bytes <span class="keyword">in</span> the current <span class="keyword">function</span>, <span class="keyword">or</span> elsewhere
-                       <span class="keyword">in</span> the executable program <span class="keyword">as</span> specified <span class="keyword">by</span> the user.
-  expression        -- Evaluate an expression (ObjC++ <span class="keyword">or</span> Swift) <span class="keyword">in</span> the current
-                       program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-                       variables currently <span class="keyword">in</span> scope.
-  frame             -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> the current thread<span class="comment">'s</span>
-                       frames.
-  gdb-remote        -- Connect <span class="keyword">to</span> a remote GDB server.  <span class="keyword">If</span> no hostname <span class="keyword">is</span>
-                       provided, localhost <span class="keyword">is</span> assumed.
-  gui               -- Switch <span class="keyword">into</span> the curses based GUI mode.
-  help              -- Show a list <span class="keyword">of</span> all debugger commands, <span class="keyword">or</span> give details
-                       about specific commands.
-  kdp-remote        -- Connect <span class="keyword">to</span> a remote KDP server.  udp port <span class="number">41139</span> <span class="keyword">is</span> the
-                       <span class="keyword">default</span> port number.
-  log               -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> logs.
-  memory            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> memory.
-  platform          -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">to</span> manage <span class="keyword">and</span> create platforms.
-  plugin            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> managing <span class="keyword">or</span> customizing plugin
-                       commands.
-  process           -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> a process.
-  quit              -- Quit out <span class="keyword">of</span> the LLDB debugger.
-  register          -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">to</span> access thread registers.
-  script            -- Pass an expression <span class="keyword">to</span> the script interpreter <span class="keyword">for</span>
-                       evaluation <span class="keyword">and</span> <span class="keyword">return</span> the results. Drop <span class="keyword">into</span> the
-                       interactive interpreter <span class="keyword">if</span> no expression <span class="keyword">is</span> given.
-  settings          -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> manipulating internal settable
-                       debugger variables.
-  source            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> accessing source file information
-  target            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> debugger targets.
-  thread            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> one <span class="keyword">or</span> more threads
-                       within a running process.
-  type              -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> the type system
-  version           -- Show version <span class="keyword">of</span> LLDB debugger.
-  watchpoint        -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> watchpoints.
-
-Current command abbreviations (type <span class="comment">'help command alias' for more info):</span>
-
-  add-dsym  -- (<span class="comment">'target symbols add')  Add a debug symbol file to one of the</span>
-               target<span class="comment">'s current modules by specifying a path to a debug symbols</span>
-               file, <span class="keyword">or</span> <span class="keyword">using</span> the options <span class="keyword">to</span> specify a <span class="keyword">module</span> <span class="keyword">to</span> download
-               symbols <span class="keyword">for</span>.
-  attach    -- (<span class="comment">'_regexp-attach')  Attach to a process id if in decimal,</span>
-               otherwise treat the argument <span class="keyword">as</span> a process name <span class="keyword">to</span> attach <span class="keyword">to</span>.
-  b         -- (<span class="comment">'_regexp-break')  Set a breakpoint using a regular expression</span>
-               <span class="keyword">to</span> specify the location, <span class="keyword">where</span> &lt;linenum&gt; <span class="keyword">is</span> <span class="keyword">in</span> <span class="built_in">decimal</span> <span class="keyword">and</span>
-               &lt;address&gt; <span class="keyword">is</span> <span class="keyword">in</span> hex.
-  bt        -- (<span class="comment">'_regexp-bt')  Show a backtrace.  An optional argument is</span>
-               accepted; <span class="keyword">if</span> that argument <span class="keyword">is</span> a number, it specifies the number
-               <span class="keyword">of</span> frames <span class="keyword">to</span> display.  <span class="keyword">If</span> that argument <span class="keyword">is</span> <span class="comment">'all', full</span>
-               backtraces <span class="keyword">of</span> all threads are displayed.
-  c         -- (<span class="comment">'process continue')  Continue execution of all threads in the</span>
-               current process.
-  <span class="keyword">call</span>      -- (<span class="comment">'expression --')  Evaluate an expression (ObjC++ or Swift) in</span>
-               the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  <span class="keyword">continue</span>  -- (<span class="comment">'process continue')  Continue execution of all threads in the</span>
-               current process.
-  detach    -- (<span class="comment">'process detach')  Detach from the current process being</span>
-               debugged.
-  di        -- (<span class="comment">'disassemble')  Disassemble bytes in the current function, or</span>
-               elsewhere <span class="keyword">in</span> the executable program <span class="keyword">as</span> specified <span class="keyword">by</span> the user.
-  dis       -- (<span class="comment">'disassemble')  Disassemble bytes in the current function, or</span>
-               elsewhere <span class="keyword">in</span> the executable program <span class="keyword">as</span> specified <span class="keyword">by</span> the user.
-  display   -- (<span class="comment">'_regexp-display')  Add an expression evaluation stop-hook.</span>
-  down      -- (<span class="comment">'_regexp-down')  Go down "n" frames in the stack (1 frame by</span>
-               <span class="keyword">default</span>).
-  env       -- (<span class="comment">'_regexp-env')  Implements a shortcut to viewing and setting</span>
-               environment variables.
-  <span class="keyword">exit</span>      -- (<span class="comment">'quit')  Quit out of the LLDB debugger.</span>
-  f         -- (<span class="comment">'frame select')  Select a frame by index from within the</span>
-               current thread <span class="keyword">and</span> make it the current frame.
-  file      -- (<span class="comment">'target create')  Create a target using the argument as the</span>
-               main executable.
-  finish    -- (<span class="comment">'thread step-out')  Finish executing the function of the</span>
-               currently selected frame <span class="keyword">and</span> <span class="keyword">return</span> <span class="keyword">to</span> its <span class="keyword">call</span> site <span class="keyword">in</span>
-               specified thread (current thread, <span class="keyword">if</span> none specified).
-  image     -- (<span class="comment">'target modules')  A set of commands for accessing information</span>
-               <span class="keyword">for</span> one <span class="keyword">or</span> more target modules.
-  j         -- (<span class="comment">'_regexp-jump')  Sets the program counter to a new address.</span>
-  jump      -- (<span class="comment">'_regexp-jump')  Sets the program counter to a new address.</span>
-  kill      -- (<span class="comment">'process kill')  Terminate the current process being debugged.</span>
-  l         -- (<span class="comment">'_regexp-list')  Implements the GDB 'list' command in all of</span>
-               its forms except FILE:<span class="keyword">FUNCTION</span> <span class="keyword">and</span> maps them <span class="keyword">to</span> the appropriate
-               <span class="comment">'source list' commands.</span>
-  list      -- (<span class="comment">'_regexp-list')  Implements the GDB 'list' command in all of</span>
-               its forms except FILE:<span class="keyword">FUNCTION</span> <span class="keyword">and</span> maps them <span class="keyword">to</span> the appropriate
-               <span class="comment">'source list' commands.</span>
-  n         -- (<span class="comment">'thread step-over')  Source level single step in specified</span>
-               thread (current thread, <span class="keyword">if</span> none specified), stepping over calls.
-  <span class="keyword">next</span>      -- (<span class="comment">'thread step-over')  Source level single step in specified</span>
-               thread (current thread, <span class="keyword">if</span> none specified), stepping over calls.
-  nexti     -- (<span class="comment">'thread step-inst-over')  Single step one instruction in</span>
-               specified thread (current thread, <span class="keyword">if</span> none specified), stepping
-               over calls.
-  ni        -- (<span class="comment">'thread step-inst-over')  Single step one instruction in</span>
-               specified thread (current thread, <span class="keyword">if</span> none specified), stepping
-               over calls.
-  p         -- (<span class="comment">'expression --')  Evaluate an expression (ObjC++ or Swift) in</span>
-               the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  po        -- (<span class="comment">'expression -O  -- ')  Evaluate an expression (ObjC++ or Swift)</span>
-               <span class="keyword">in</span> the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  print     -- (<span class="comment">'expression --')  Evaluate an expression (ObjC++ or Swift) in</span>
-               the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  q         -- (<span class="comment">'quit')  Quit out of the LLDB debugger.</span>
-  r         -- (<span class="comment">'process launch -c /bin/sh --')  Launch the executable in the</span>
-               debugger.
-  rbreak    -- (<span class="comment">'breakpoint set -r %1')  Sets a breakpoint or set of</span>
-               breakpoints <span class="keyword">in</span> the executable.
-  repl      -- (<span class="comment">'expression -r  -- ')  Evaluate an expression (ObjC++ or Swift)</span>
-               <span class="keyword">in</span> the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  run       -- (<span class="comment">'process launch -c /bin/sh --')  Launch the executable in the</span>
-               debugger.
-  s         -- (<span class="comment">'thread step-in')  Source level single step in specified thread</span>
-               (current thread, <span class="keyword">if</span> none specified).
-  si        -- (<span class="comment">'thread step-inst')  Single step one instruction in specified</span>
-               thread (current thread, <span class="keyword">if</span> none specified).
-  <span class="keyword">step</span>      -- (<span class="comment">'thread step-in')  Source level single step in specified thread</span>
-               (current thread, <span class="keyword">if</span> none specified).
-  stepi     -- (<span class="comment">'thread step-inst')  Single step one instruction in specified</span>
-               thread (current thread, <span class="keyword">if</span> none specified).
-  t         -- (<span class="comment">'thread select')  Select a thread as the currently active</span>
-               thread.
-  tbreak    -- (<span class="comment">'_regexp-tbreak')  Set a one shot breakpoint using a regular</span>
-               expression <span class="keyword">to</span> specify the location, <span class="keyword">where</span> &lt;linenum&gt; <span class="keyword">is</span> <span class="keyword">in</span>
-               <span class="built_in">decimal</span> <span class="keyword">and</span> &lt;address&gt; <span class="keyword">is</span> <span class="keyword">in</span> hex.
-  undisplay -- (<span class="comment">'_regexp-undisplay')  Remove an expression evaluation</span>
-               <span class="keyword">stop</span>-hook.
-  up        -- (<span class="comment">'_regexp-up')  Go up "n" frames in the stack (1 frame by</span>
-               <span class="keyword">default</span>).
-  x         -- (<span class="comment">'memory read')  Read from the memory of the process being</span>
-           debugged.
-
-<span class="keyword">For</span> more information <span class="keyword">on</span> any command, type <span class="comment">'help <span class="xmlDocTag">&lt;command-name&gt;</span>'.</span>
-</code></pre><h3 id="進階debug_mode">進階debug mode</h3><p>故事當然不會就醬子結束，breakpoint停在 </p>
-<pre><code><span class="number">1</span> [AppDelegate <span class="string">application:</span><span class="string">didFinishLaunchingWithOptions:</span>] at <span class="regexp">/Users/</span>minghongyu<span class="regexp">/Documents/</span>work<span class="regexp">/iphone/</span>OpenPoint<span class="regexp">/OpenPoint/</span>AppDelegate.<span class="string">m:</span><span class="number">32</span>
-</code></pre><p>如圖</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug09.png" alt="debug09" style="width:310px"></p>
-<p>但是  好像還有個</p>
-<pre><code><span class="number">0</span> [Crashlytics crash]
-</code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug10.png" alt="debug10" style="width:310px"></p>
-<p>會停在一堆機器碼的地方，真的讓人有點難以閱讀咧</p>
-<p>接著在 debug console裡輸入</p>
-<font color="red">(不要問，很可怕)</font>
-
-<pre><code><span class="title">po</span> <span class="variable">$arg1</span>
-</code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug11.png" alt="debug11" style="width:310px"></p>
-<p>發現他會吐出當下的crash的human－readable的解釋！！！！</p>
-<p>很重要  所以要說三次</p>
-<pre><code>真的是太好了！！！！！！
-真的是太好了！！！！！！
-真的是太好了！！！！！！
-</code></pre><p>但是  每次又要用手打 <font color="red">po ＄arg1</font> 很辛苦有沒有？？很辛苦有沒有？？</p>
-<p>還好 xcode真的很貼心</p>
-<pre><code>在<span class="literal">All</span> Exception上按右鍵  選擇編輯「Edit Breakpoint」
-</code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug12.png" alt="debug12" style="width:310px"></p>
-<pre><code>點選「<span class="keyword">Add</span> Action」
-</code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug13.png" alt="debug13" style="width:310px"></p>
-<pre><code>輸入 po <span class="variable">$arg1</span>
-</code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug14.png" alt="debug14" style="width:310px"></p>
-<p>The End~~~</p>
-<p>有沒有很酷？  有沒有?  有沒有? </p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/tags/XCode/">XCode</a><a href="/tags/debug/">debug</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/07/02/XCode-debug再進化/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/06/30/DungeonGenerator/" title="DungeonGenerator" itemprop="url">DungeonGenerator</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-06-30T10:10:12.000Z" itemprop="datePublished"> 發表於 2015-06-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>以「切割法」亂數產生房間</p>
-<p>牆壁－寛1  出口－寛1</p>
-<p><a href="https://github.com/nobodyyu/DungeonGenerator/tree/master" target="_blank" rel="external">GitHub下載連結</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/Game/">Game</a><a href="/tags/swift/">swift</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/06/30/DungeonGenerator/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/06/16/dropbox-practice-2015/" title="dropbox practice 2015" itemprop="url">dropbox practice 2015</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-06-15T16:25:47.000Z" itemprop="datePublished"> 發表於 2015-06-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="在APP_Console開一個app">在APP Console開一個app</h3><p><a href="">https://www.dropbox.com/developers/apps</a></p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/dropbox01.png" alt="dropbox01" style="width:310px"></p>
-<p>把其中的app key 和 app secret複製下來 </p>
-<h3 id="下載sdk範例程式">下載sdk範例程式</h3><p><a href="">https://www.dropbox.com/developers/core/sdks/ios</a></p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/dropbox02.png" alt="dropbox02" style="width:310px"></p>
-<h3 id="把_app_key_與_app_secret貼到範例的delegate-m_裡">把 app key 與 app secret貼到範例的delegate.m 裡</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/dropbox03.png" alt="dropbox03" style="width:310px"></p>
-<p>記得要設定根目錄 </p>
-<pre><code><span class="attribute">NSString *root </span>=<span class="string"> kDBRootDropbox;</span>
-</code></pre><p>或</p>
-<pre><code><span class="attribute">NSString *root </span>=<span class="string"> kDBRootAppFolder；</span>
-</code></pre><h3 id="設定url_schema_讓_dropbox_signon_可以回得來">設定url schema 讓 dropbox signon 可以回得來</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/dropbox04.png" alt="dropbox04" style="width:310px"></p>
-<h3 id="好了的話就把程式run起來">好了的話就把程式run起來</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/dropbox05.png" alt="dropbox05" style="width:310px"></p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/dropbox06.png" alt="dropbox06" style="width:310px"></p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/dropbox07.png" alt="dropbox07" style="width:310px"></p>
-<p>拍洗  照片不給看～</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+    <a href="/2015/07/02/XCode-debug再進化/" title="XCode debug再進化" itemprop="url">
   
-  <span></span> <a href="/tags/dropbox/">dropbox</a><a href="/tags/objc/">objc</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/06/16/dropbox-practice-2015/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <h1 itemprop="name">XCode debug再進化</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >當然，要先來個crash
+謝謝 Crashlytics 可以強制造成crash
+
+基礎debug mode當crash發生時 xcode沒設定什麼東西時 程式會hang在這個讓人看不懂的地方
+
+所以  要在xcode的地方設定一下  好方便未來的debug
+xcode左邊的pan</p>
+        
     
-      <a href="/2015/06/09/Google-Service-2015-Walk-Through/" title="Google Service 2015 Walk Through" itemprop="url">Google Service 2015 Walk Through</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-06-09T15:55:30.000Z" itemprop="datePublished"> 發表於 2015-06-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>2015 Google I/O  之後  很多東西都改了，所以來做一次walk through吧</p>
-<p>比較特別的是 gcm也可以發ios了</p>
-<p><a href="">https://developers.google.com/cloud-messaging/</a></p>
-<h3 id="try_it_on_iOS">try it on iOS</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm01.png" alt="gcm01" style="width:310px"></p>
-<h3 id="選擇語言_objc／swift">選擇語言 objc／swift</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm02.png" alt="gcm02" style="width:310px"></p>
-<h3 id="使用cocoapods安裝_gcm／analytics">使用cocoapods安裝 gcm／analytics</h3><p>Podfile</p>
-<pre><code><span class="title">pod</span> <span class="string">'Google/Analytics'</span>
-pod <span class="string">'Google/CloudMessaging'</span>
-</code></pre><p>在所在目錄安裝</p>
-<pre><code>pod <span class="keyword">install</span>
-</code></pre><h4 id="pod_要確認是否為最新版本，不然安裝後會有錯誤">pod 要確認是否為最新版本，不然安裝後會有錯誤</h4><p>完成之後打開workspace會看到一堆framework</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm03.png" alt="gcm03" style="width:310px"></p>
-<h3 id="GCM的一些code">GCM的一些code</h3><pre><code>- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions {
-
-    <span class="comment">// Register for remote notifications</span>
-    UIUserNotificationType allNotificationTypes =
-    (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
-    UIUserNotificationSettings *settings =
-    [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:<span class="literal">nil</span>];
-    [[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:settings];
-    [[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];
+    <time datetime="2015-07-02T01:54:13.000Z" itemprop="datePublished">2015-07-02</time>
+  </a>
+</section>
 
 
-    <span class="keyword">return</span> <span class="literal">YES</span>;
-}
 
 
--(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didRegisterForRemoteNotificationsWithDeviceToken:(<span class="built_in">NSData</span> *)deviceToken{
-
-    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,deviceToken);
-
-    [[GGLInstanceID sharedInstance] startWithConfig:[GGLInstanceIDConfig defaultConfig]];
-    _registrationOptions = @{kGGLInstanceIDRegisterAPNSOption:deviceToken,
-                             kGGLInstanceIDAPNSServerTypeSandboxOption:@YES};
-    [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:<span class="string">@"gswt-ea275"</span>
-                                                        scope:kGGLInstanceIDScopeGCM
-                                                      options:_registrationOptions
-                                                      handler:<span class="literal">nil</span>];
 
 
-}
-
-
--(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didFailToRegisterForRemoteNotificationsWithError:(<span class="built_in">NSError</span> *)error{
-    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,error);
-}
-</code></pre><h3 id="GA的一些code">GA的一些code</h3><pre><code>-(<span class="typename">void</span>)<span class="string">GAScreen:</span>(NSString *)name{
-    dispatch_queue_t myQueue = dispatch_queue_create(<span class="string">"GAQueue"</span>,NULL);
-    dispatch_async(myQueue, ^{
-        id&lt;GAITracker&gt; tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker <span class="string">set:</span>kGAIScreenName <span class="string">value:</span>name];
-        [tracker <span class="string">send:</span>[[GAIDictionaryBuilder createScreenView] build]];
-    });
-
-}
-
-
--(<span class="typename">void</span>)<span class="string">GAEvent:</span>(NSString *)<span class="string">CATEGORY :</span>(NSString *)<span class="string">ACTION :</span>(NSString *)<span class="string">LABEL :</span>(NSNumber *)Value{
-
-    dispatch_queue_t myQueue = dispatch_queue_create(<span class="string">"GAQueue"</span>,NULL);
-    dispatch_async(myQueue, ^{
-        id&lt;GAITracker&gt; tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker <span class="string">send:</span>[[GAIDictionaryBuilder <span class="string">createEventWithCategory:</span>CATEGORY <span class="string">action:</span>ACTION <span class="string">label:</span>LABEL <span class="string">value:</span>Value] build]];
-    });
-
-
-}
-</code></pre><p>希望對大家有幫助</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/tags/Google/">Google</a><a href="/tags/Google-IO/">Google IO</a><a href="/tags/iOS/">iOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/06/09/Google-Service-2015-Walk-Through/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/27/swift-shuffle/" title="swift shuffle" itemprop="url">swift shuffle</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-27T15:33:44.000Z" itemprop="datePublished"> 發表於 2015-05-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="為程式注入靈魂的小技巧_shuffle">為程式注入靈魂的小技巧 shuffle</h3><pre><code><span class="func"><span class="keyword">func</span> <span class="title">shuffle</span><span class="generics">&lt;C: MutableCollectionType where C.Index == Int&gt;</span><span class="params">(<span class="keyword">var</span> list: C)</span> -&gt; <span class="title">C</span> </span>{
-    <span class="keyword">let</span> <span class="built_in">c</span> = <span class="built_in">count</span>(list)
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;(<span class="built_in">c</span> - <span class="number">1</span>) {
-        <span class="keyword">let</span> j = <span class="type">Int</span>(arc4random_uniform(<span class="type">UInt32</span>(<span class="built_in">c</span> - i))) + i
-        <span class="built_in">swap</span>(&amp;list[i], &amp;list[j])
-    }
-    <span class="keyword">return</span> list
-}
-
-
-
-huffle([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>])        
-<span class="comment">// e.g., [6, 1, 8, 3, 2, 4, 7, 5]</span>
-shuffle([<span class="string">"hello"</span>, <span class="string">"goodbye"</span>, <span class="string">"ciao"</span>])    
-<span class="comment">// e.g., ["ciao", "goodbye", "hello"]</span>
-</code></pre><h3 id="extension">extension</h3><pre><code><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> </span>{
-    <span class="keyword">mutating</span> <span class="func"><span class="keyword">func</span> <span class="title">shuffle</span><span class="params">()</span> </span>{
-        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;(<span class="built_in">count</span> - <span class="number">1</span>) {
-            <span class="keyword">let</span> j = <span class="type">Int</span>(arc4random_uniform(<span class="type">UInt32</span>(<span class="built_in">count</span> - i))) + i
-            <span class="built_in">swap</span>(&amp;<span class="keyword">self</span>[i], &amp;<span class="keyword">self</span>[j])
-        }
-    }
-}
-
-<span class="keyword">var</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]
-numbers.shuffle()     
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/shuffle/">shuffle</a><a href="/tags/swift/">swift</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/27/swift-shuffle/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/26/swift-spritekit-walk-through/" title="swift spritekit walk through" itemprop="url">swift spritekit walk through</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-26T09:06:03.000Z" itemprop="datePublished"> 發表於 2015-05-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="新增一個遊戲專案">新增一個遊戲專案</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/spritekit01.png" alt="spritekit01" style="width:310px"></p>
-<p>並且設定語言為swift</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/spritekit02.png" alt="spritekit02" style="width:310px"></p>
-<p>此時，可以先砍掉一些沒有必要的檔案（iOS很貼心放了一個太空船在程式的template裡）</p>
-<h3 id="加入一些遊戲需要用到的圖檔">加入一些遊戲需要用到的圖檔</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/spritekit03.png" alt="spritekit03" style="width:310px"></p>
-<p>你可以放在images.asset或是直接拉到專案裡</p>
-<h3 id="設一下GameViewController裡的_scene-size">設一下GameViewController裡的 scene.size</h3><pre><code>scene<span class="class">.size</span> = skView<span class="class">.bounds</span><span class="class">.size</span>
-</code></pre><h3 id="了解scene的生命週期、座標系統、基本屬性">了解scene的生命週期、座標系統、基本屬性</h3><h3 id="了解sprite基本屬性">了解sprite基本屬性</h3><h3 id="了解texture基本屬性、打包textureAtlas(zip_file_with_-altas)">了解texture基本屬性、打包textureAtlas(zip file with .altas)</h3><h3 id="了解Action基本屬性">了解Action基本屬性</h3><h3 id="了解Animation基本屬性">了解Animation基本屬性</h3><h3 id="了解Physics">了解Physics</h3><h3 id="game_loop？？">game loop？？</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+    <a href="/2015/06/30/DungeonGenerator/" title="DungeonGenerator" itemprop="url">
   
-  <span></span> <a href="/tags/game/">game</a><a href="/tags/spritekit/">spritekit</a><a href="/tags/swift/">swift</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/26/swift-spritekit-walk-through/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <h1 itemprop="name">DungeonGenerator</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >以「切割法」亂數產生房間
+牆壁－寛1  出口－寛1
+GitHub下載連結</p>
+        
     
-      <a href="/2015/05/21/在字串裡加上icon/" title="在字串裡加上icon" itemprop="url">在字串裡加上icon</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-21T03:46:16.000Z" itemprop="datePublished"> 發表於 2015-05-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="在UILabel裡要怎麼做到呢？">在UILabel裡要怎麼做到呢？</h1><p>ABC <img class="img-shadow" src="http://c360232.r32.cf2.rackcdn.com/blog/wp-content/uploads/2008/06/new.jpg" width="30"> CDE</p>
-<pre><code>NSTextAttachment *<span class="variable">attachment =</span> [[NSTextAttachment alloc] init];
-attachment.<span class="variable">image =</span> [UIImage imageNamed:@<span class="string">"MyIcon.png"</span>];
-
-NSAttributedString *<span class="variable">attachmentString =</span> [NSAttributedString attributedStringWithAttachment:attachment];
-
-NSMutableAttributedString *<span class="variable">myString=</span> [[NSMutableAttributedString alloc] initWithString:@<span class="string">"My label text"</span>];
-[myString appendAttributedString:attachmentString];
-
-myLabel.<span class="variable">attributedText =</span> myString;
-</code></pre><p>不難懂～</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
+    <time datetime="2015-06-30T10:10:12.000Z" itemprop="datePublished">2015-06-30</time>
+  </a>
+</section>
 
 
-  <div class="article-tags">
+
+
+
+
   
-  <span></span> <a href="/tags/NSAttributedString/">NSAttributedString</a><a href="/tags/iOS/">iOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/21/在字串裡加上icon/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/15/2015-AudioToolBox-walk-through/" title="2015 AudioToolBox walk through " itemprop="url">2015 AudioToolBox walk through </a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-15T14:42:44.000Z" itemprop="datePublished"> 發表於 2015-05-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>google出很多版本，沒幾個能用的，看官網後試出來的</p>
-<pre><code><span class="built_in">NSString</span> *path  = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"button_click"</span> ofType:<span class="string">@"mp3"</span>];
-           <span class="built_in">NSURL</span> *filePath = [<span class="built_in">NSURL</span> fileURLWithPath:path];
-           OSStatus status1 = AudioServicesCreateSystemSoundID((__bridge CFURLRef)filePath, &amp;soundFileObject);
-           <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,(<span class="keyword">int</span>)status1);
-
-
-
-
-       AudioServicesPlaySystemSound (soundFileObject);
-</code></pre><p>話說 osstatus 好像有點新，如果有人可以分享的話，那是再好也不過的事了</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/AudioToolBox/">AudioToolBox</a><a href="/tags/iOS/">iOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/15/2015-AudioToolBox-walk-through/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/15/iOS-Language-ID/" title="iOS Language ID" itemprop="url">iOS Language ID</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-15T12:23:31.000Z" itemprop="datePublished"> 發表於 2015-05-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <table>
-<thead>
-<tr>
-<th>Language</th>
-<th>.lporj Language Code</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>English</td>
-<td>en    </td>
-</tr>
-<tr>
-<td>English (British)</td>
-<td>en-GB    </td>
-</tr>
-<tr>
-<td>English (Australian)</td>
-<td>en-AU    </td>
-</tr>
-<tr>
-<td>English (Canadian)</td>
-<td>en-CA    </td>
-</tr>
-<tr>
-<td>English (Indian)</td>
-<td>en-IN    </td>
-</tr>
-<tr>
-<td>French</td>
-<td>fr    </td>
-</tr>
-<tr>
-<td>French (Canadian)</td>
-<td>fr-CA    </td>
-</tr>
-<tr>
-<td>Spanish</td>
-<td>es    </td>
-</tr>
-<tr>
-<td>Spanish (Mexico)</td>
-<td>es-M    </td>
-</tr>
-<tr>
-<td>Portuguese</td>
-<td>pt    </td>
-</tr>
-<tr>
-<td>Portuguese (Brazil)</td>
-<td>pt-BR    </td>
-</tr>
-<tr>
-<td>Italian</td>
-<td>it    </td>
-</tr>
-<tr>
-<td>German</td>
-<td>de    </td>
-</tr>
-<tr>
-<td>Chinese</td>
-<td></td>
-</tr>
-<tr>
-<td>Chinese (Simplified)</td>
-<td>zh-Hans    </td>
-</tr>
-<tr>
-<td>Chinese (Traditional)</td>
-<td>zh-Hant    </td>
-</tr>
-<tr>
-<td>Chinese (Hong Kong)</td>
-<td>zh-HK    </td>
-</tr>
-<tr>
-<td>Dutch</td>
-<td>nl    </td>
-</tr>
-<tr>
-<td>Japanese</td>
-<td>ja    </td>
-</tr>
-<tr>
-<td>Korean</td>
-<td>ko    </td>
-</tr>
-<tr>
-<td>Vietnamese</td>
-<td>vi    </td>
-</tr>
-<tr>
-<td>Russian</td>
-<td>ru    </td>
-</tr>
-<tr>
-<td>Swedish</td>
-<td>sv    </td>
-</tr>
-<tr>
-<td>Danish</td>
-<td>da    </td>
-</tr>
-<tr>
-<td>Finnish</td>
-<td>fi    </td>
-</tr>
-<tr>
-<td>Norwegian (Bokmal)</td>
-<td>nb    </td>
-</tr>
-<tr>
-<td>Turkish</td>
-<td>tr    </td>
-</tr>
-<tr>
-<td>Greek</td>
-<td>el    </td>
-</tr>
-<tr>
-<td>Indonesian</td>
-<td>id    </td>
-</tr>
-<tr>
-<td>Malay</td>
-<td>ms    </td>
-</tr>
-<tr>
-<td>Thai</td>
-<td>th    </td>
-</tr>
-<tr>
-<td>Hindi</td>
-<td>hi    </td>
-</tr>
-<tr>
-<td>Hungarian</td>
-<td>hu    </td>
-</tr>
-<tr>
-<td>Polish</td>
-<td>pl    </td>
-</tr>
-<tr>
-<td>Czech</td>
-<td>cs    </td>
-</tr>
-<tr>
-<td>Slovak</td>
-<td>sk    </td>
-</tr>
-<tr>
-<td>Ukrainian</td>
-<td>uk    </td>
-</tr>
-<tr>
-<td>Croatian</td>
-<td>hr    </td>
-</tr>
-<tr>
-<td>Catalan</td>
-<td>ca    </td>
-</tr>
-<tr>
-<td>Romanian</td>
-<td>ro    </td>
-</tr>
-<tr>
-<td>Hebrew</td>
-<td>he    </td>
-</tr>
-<tr>
-<td>Arabic</td>
-<td>ar</td>
-</tr>
-</tbody>
-</table>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+    <a href="/2015/06/16/dropbox-practice-2015/" title="dropbox practice 2015" itemprop="url">
   
-  <span></span> <a href="/tags/MultiLanguage/">MultiLanguage</a><a href="/tags/iOS/">iOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/15/iOS-Language-ID/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <h1 itemprop="name">dropbox practice 2015</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >在APP Console開一個apphttps://www.dropbox.com/developers/apps
+
+把其中的app key 和 app secret複製下來 
+下載sdk範例程式https://www.dropbox.com/developers/core/sd</p>
+        
     
-      <a href="/2015/05/12/inApp-Purchase-walkthrough/" title="inApp Purchase walkthrough" itemprop="url">inApp Purchase walkthrough</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-12T07:14:47.000Z" itemprop="datePublished"> 發表於 2015-05-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="前言_2015-05">前言 2015-05</h3><p>別人的walk through都有點年代了，而且關鍵的幾個點都沒有特別註明，所以只好自已來寫一個walk through</p>
-<h1 id="unique_App_ID">unique App ID</h1><p>意思是不可以使用Wildcard App ID來做APP的綁定（如果出現*是不允許的）</p>
-<h3 id="[member_center]_-_[Certificates,_Identifiers_&amp;_Profiles]_-_[App_IDs]">[member center] - [Certificates, Identifiers &amp; Profiles] - [App IDs]</h3><h1 id="Provisioning_Profile">Provisioning Profile</h1><p>provision profile要與App ID匹配</p>
-<h1 id="ItunesConnect_設定APP">ItunesConnect 設定APP</h1><p>新增一個app，該填的填</p>
-<h1 id="新增_inAPP_Product">新增 inAPP Product</h1><p>[APP] - [App 內購買項目] - [Create New] - [非消耗性項目]</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp01.png" alt="inapp01" style="width:310px"></p>
-<p>非消耗性項目 把讓填的填一填後[儲存]</p>
-<h1 id="ProductID_一定要是_appid-name">ProductID 一定要是 appid.name</h1><p>在這裡卡關很久，很多walk through說ProdoctID只要unique，但是程式寫好，按下去就是 [StoreStateInvalidProduct]，要記得全部都要帶</p>
-<p>(範例為) com.yuaki.No5.Remove_AD  </p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp02.png" alt="inapp02" style="width:310px"></p>
-<h1 id="檢查xcode裡iap的設定是否開啟">檢查xcode裡iap的設定是否開啟</h1><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp03.png" alt="inapp03" style="width:310px"></p>
-<h1 id="Code">Code</h1><h2 id="加入_StoreKit-Framework">加入 StoreKit.Framework</h2><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp04.png" alt="inapp04" style="width:310px"></p>
-<h2 id="加入三支程式_Store-h、Store-m和一支放在server的iap-php">加入三支程式 Store.h、Store.m和一支放在server的iap.php</h2><h3 id="感謝_Paul_Wu_大大的無私分享">感謝 Paul Wu 大大的無私分享</h3><p>store.h</p>
-<pre><code><span class="comment">//</span>
-<span class="comment">//  Store.h</span>
-<span class="comment">//  DemoIAP</span>
-<span class="comment">//</span>
-<span class="comment">//  Created by Paul Wu on 2014/11/23.</span>
-<span class="comment">//  Copyright (c) 2014年 Prodisky. All rights reserved.</span>
-<span class="comment">//</span>
-
-<span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span>
-
-<span class="keyword">enum</span> {
-    StoreStatePurchasing,
-    StoreStatePurchased,
-    StoreStateRestored,
-    StoreStateDeferred,
-    StoreStateVerifyReceipt,
-    StoreStateMakePaymentsFail,
-    StoreStateInvalidProduct,
-    StoreStateFailedClientInvalid,
-    StoreStateFailedPaymentCancelled,
-    StoreStateFailedPaymentInvalid,
-    StoreStateFailedPaymentNotAllowed,
-    StoreStateFailedUnknown
-};
-<span class="keyword">typedef</span> NSUInteger StoreState;
-
-<span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span>
-<span class="preprocessor">#import <span class="title">&lt;StoreKit/StoreKit.h&gt;</span></span>
-
-<span class="class"><span class="keyword">@interface</span> <span class="title">Store</span> : <span class="title">NSObject</span> &lt;<span class="title">SKPaymentTransactionObserver</span>, <span class="title">SKProductsRequestDelegate</span>&gt;</span>
-<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^updatedState) (StoreState state, <span class="built_in">NSString</span> *productIdentifier);
-<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^verifyPass) (<span class="built_in">NSString</span> *productIdentifier);
-<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^verifyFail) (<span class="built_in">NSString</span> *productIdentifier);
-
-+ (Store*)shared;
-- (<span class="keyword">void</span>)purchase:(<span class="built_in">NSString</span> *)productIdentifier;
-- (<span class="keyword">void</span>)restore;
-<span class="keyword">@end</span>
-</code></pre><p>store.m<br>    //<br>    //  Store.m<br>    //  DemoIAP<br>    //<br>    //  Created by Paul Wu on 2014/11/23.<br>    //  Copyright (c) 2014年 Prodisky. All rights reserved.<br>    //</p>
-<pre><code><span class="preprocessor">#import <span class="title">"Store.h"</span></span>
-<span class="preprocessor">#define verifyServerURL        @<span class="title">"http://XXX/iap.php"</span></span>
-
-<span class="preprocessor">#pragma mark</span>
-<span class="class"><span class="keyword">@interface</span> <span class="title">URLRequest</span> : <span class="title">NSMutableURLRequest</span></span>
-<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^didFinish) (<span class="built_in">NSData</span>* response);
-<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^didError) (<span class="built_in">NSError</span> *error);
-- (<span class="keyword">void</span>) startAsynchronous;
-<span class="keyword">@end</span>
-
-<span class="class"><span class="keyword">@interface</span> <span class="title">URLRequest</span> () </span>{
-    NSMutableData *responseData;
-    <span class="built_in">NSURLConnection</span> *urlconnection;
-}<span class="keyword">@end</span>
-
-<span class="class"><span class="keyword">@implementation</span> <span class="title">URLRequest</span></span>
-- (<span class="keyword">id</span>)init {
-    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) {
-        <span class="keyword">self</span><span class="variable">.timeoutInterval</span> = <span class="number">3.14</span>;
-        <span class="keyword">self</span><span class="variable">.HTTPShouldUsePipelining</span> = <span class="literal">YES</span>;
-    }
-    <span class="keyword">return</span> <span class="keyword">self</span>;
-}
-- (<span class="keyword">void</span>)startAsynchronous {
-    urlconnection = [[<span class="built_in">NSURLConnection</span> alloc] initWithRequest:<span class="keyword">self</span> delegate:<span class="keyword">self</span>];
-}
-- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveResponse:(NSURLResponse *)response {
-    responseData = [NSMutableData new];
-}
-- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveData:(<span class="built_in">NSData</span> *)data {
-    [responseData appendData:data];
-}
-- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didFailWithError:(<span class="built_in">NSError</span> *)error {
-    [urlconnection cancel];
-    responseData = [NSMutableData new];
-    <span class="keyword">if</span> (_didError) _didError(error);
-}
-- (<span class="keyword">void</span>)connectionDidFinishLoading:(<span class="built_in">NSURLConnection</span> *)connection {
-    [urlconnection cancel];
-    urlconnection = <span class="literal">nil</span>;
-    <span class="keyword">if</span> (_didFinish) _didFinish(responseData);
-}
-<span class="keyword">@end</span>
-<span class="preprocessor">#pragma mark</span>
-
-<span class="class"><span class="keyword">@implementation</span> <span class="title">Store</span></span>
-<span class="keyword">static</span> Store *_shared = <span class="literal">nil</span>;
-+ (Store*)shared {
-    <span class="keyword">if</span> (_shared == <span class="literal">nil</span>) _shared = [<span class="keyword">self</span> new];
-    <span class="keyword">return</span> _shared;
-}
-- (<span class="keyword">void</span>)verifyReceipt:(SKPaymentTransaction *)transaction {
-    <span class="built_in">NSString</span> *parameterString = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"receipt=%@"</span>, [[<span class="built_in">NSBundle</span> mainBundle] appStoreReceiptURL]];
-
-    URLRequest *request = [URLRequest new];
-    request<span class="variable">.URL</span> = [<span class="built_in">NSURL</span> URLWithString:verifyServerURL];
-    request<span class="variable">.cachePolicy</span> = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
-    request<span class="variable">.HTTPBody</span> = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
-    request<span class="variable">.HTTPMethod</span> = <span class="string">@"POST"</span>;
-    [request setValue:<span class="string">@"application/x-www-form-urlencoded"</span> forHTTPHeaderField:<span class="string">@"Content-Type"</span>];
-
-    request<span class="variable">.didFinish</span> = ^(<span class="built_in">NSData</span>* response) {
-        <span class="built_in">NSError</span>* error;
-        <span class="built_in">NSDictionary</span>* json = [NSJSONSerialization
-                              JSONObjectWithData:response
-                              options:kNilOptions
-                              error:&amp;error];
-
-        <span class="keyword">if</span> ([[json objectForKey:<span class="string">@"result"</span>] integerValue] &gt; <span class="number">0</span>) {
-            <span class="keyword">if</span> (_verifyPass) _verifyPass(transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-        } <span class="keyword">else</span> {
-            <span class="keyword">if</span> (_verifyFail) _verifyFail(transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-        }
-    };
-
-    request<span class="variable">.didError</span> = ^(<span class="built_in">NSError</span> *error){
-        <span class="keyword">if</span> (_verifyFail) _verifyFail(transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-    };
-    [request startAsynchronous];
-}
-- (<span class="keyword">id</span>)init {
-    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) {
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:<span class="keyword">self</span>];
-    }
-    <span class="keyword">return</span> <span class="keyword">self</span>;
-}
-- (<span class="keyword">void</span>)purchase:(<span class="built_in">NSString</span> *)productIdentifier {
-    <span class="keyword">if</span> ([SKPaymentQueue canMakePayments]) {
-        SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:[<span class="built_in">NSSet</span> setWithObject:productIdentifier]];
-        request<span class="variable">.delegate</span> = <span class="keyword">self</span>;
-        [request start];
-    } <span class="keyword">else</span> {
-        <span class="keyword">if</span> (_updatedState) _updatedState(StoreStateMakePaymentsFail, productIdentifier);
-    }
-}
-- (<span class="keyword">void</span>)restore {
-    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-}
-
-- (<span class="keyword">void</span>)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-    <span class="keyword">if</span> ([response<span class="variable">.invalidProductIdentifiers</span> count] == <span class="number">0</span>) {
-        <span class="keyword">for</span> (NSUInteger i = <span class="number">0</span>; i &lt; [response<span class="variable">.products</span> count]; i++) {
-            SKProduct *product = [response<span class="variable">.products</span> objectAtIndex:i];
-            SKPayment *payment = [SKPayment paymentWithProduct:product];
-            [[SKPaymentQueue defaultQueue] addPayment:payment];
-        }
-    } <span class="keyword">else</span> {
-        <span class="keyword">if</span> (_updatedState)
-            <span class="keyword">for</span> (NSUInteger i = <span class="number">0</span>; i &lt; [response<span class="variable">.invalidProductIdentifiers</span> count]; i++)
-                _updatedState(StoreStateInvalidProduct, [response<span class="variable">.invalidProductIdentifiers</span> objectAtIndex:i]);
-    }
-}
-- (<span class="keyword">void</span>)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(<span class="built_in">NSArray</span> *)transactions {
-    <span class="keyword">for</span> (SKPaymentTransaction *transaction <span class="keyword">in</span> transactions) {
-        <span class="keyword">if</span> (transaction<span class="variable">.transactionState</span> != SKPaymentTransactionStatePurchasing)
-            [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-
-        <span class="keyword">if</span> (_updatedState) {
-            <span class="keyword">switch</span> (transaction<span class="variable">.transactionState</span>) {
-                <span class="keyword">case</span> SKPaymentTransactionStatePurchasing:
-                    _updatedState(StoreStatePurchasing, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-                    <span class="keyword">break</span>;
-                <span class="keyword">case</span> SKPaymentTransactionStatePurchased:
-                    _updatedState(StoreStatePurchased, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-                    <span class="keyword">break</span>;
-                <span class="keyword">case</span> SKPaymentTransactionStateFailed:
-                    <span class="keyword">switch</span> (transaction<span class="variable">.error</span><span class="variable">.code</span>) {
-                        <span class="keyword">case</span> SKErrorClientInvalid:
-                            _updatedState(StoreStateFailedClientInvalid, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-                            <span class="keyword">break</span>;
-                        <span class="keyword">case</span> SKErrorPaymentCancelled:
-                            _updatedState(StoreStateFailedPaymentCancelled, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-                            <span class="keyword">break</span>;
-                        <span class="keyword">case</span> SKErrorPaymentInvalid:
-                            _updatedState(StoreStateFailedPaymentInvalid, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-                            <span class="keyword">break</span>;
-                        <span class="keyword">case</span> SKErrorPaymentNotAllowed:
-                            _updatedState(StoreStateFailedPaymentNotAllowed, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-                            <span class="keyword">break</span>;
-                        <span class="keyword">case</span> SKErrorUnknown:
-                        <span class="keyword">default</span>:
-                            _updatedState(StoreStateFailedUnknown, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-                            <span class="keyword">break</span>;
-                    }
-                    <span class="keyword">break</span>;
-                <span class="keyword">case</span> SKPaymentTransactionStateRestored:
-                    _updatedState(StoreStateRestored, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-                    <span class="keyword">break</span>;
-                <span class="keyword">case</span> SKPaymentTransactionStateDeferred:
-                    <span class="comment">//iOS 8 and later.</span>
-                    _updatedState(StoreStateDeferred, transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>);
-                    <span class="keyword">break</span>;
-            }
-        }
-        <span class="keyword">if</span> (transaction<span class="variable">.transactionState</span> == SKPaymentTransactionStatePurchased ||
-            transaction<span class="variable">.transactionState</span> == SKPaymentTransactionStateRestored)
-            [<span class="keyword">self</span> verifyReceipt:transaction];
-    }
-}
-
-<span class="keyword">@end</span>
-</code></pre><p>Server code - iap.php</p>
-<pre><code>&lt;?php
-    function verify($receipt) {
-        <span class="keyword">if</span> (empty($receipt)) {
-            $<span class="literal">result</span>[<span class="string">"result"</span>] = <span class="number">0</span>;
-            <span class="keyword">return</span> $<span class="literal">result</span>;
-        }
-
-        $dataToPost = json_encode(<span class="type">array</span>(<span class="string">"receipt-data"</span> =&gt; $receipt));
-        $opts = <span class="type">array</span>('http' =&gt;
-            <span class="type">array</span>(
-                '<span class="keyword">method</span>'  =&gt; '<span class="type">POST</span>',
-                'header'  =&gt; '<span class="type">Content</span>-<span class="keyword">type</span>: application/x-www-form-urlencoded',
-                'content' =&gt; $dataToPost
-            )
-        );
-
-        $context  = stream_context_create($opts);
-
-        $verifyResult = file_get_contents('https://buy.itunes.apple.com/verifyReceipt', <span class="literal">false</span>, $context);
-        $verifyStatus = json_decode($verifyResult);
-
-        <span class="keyword">if</span> ($verifyStatus-&gt;{'status'} == <span class="number">0</span>) {
-            $<span class="literal">result</span>[<span class="string">"result"</span>] = <span class="number">1</span>;
-            <span class="keyword">return</span> $<span class="literal">result</span>;
-        }
-
-        $verifyResult = file_get_contents('https://sandbox.itunes.apple.com/verifyReceipt', <span class="literal">false</span>, $context);
-        $verifyStatus = json_decode($verifyResult);
-
-        <span class="keyword">if</span> ($verifyStatus-&gt;{'status'} == <span class="number">0</span>) {
-            $<span class="literal">result</span>[<span class="string">"result"</span>] = <span class="number">2</span>;
-            <span class="keyword">return</span> $<span class="literal">result</span>;
-        }
-
-        $<span class="literal">result</span>[<span class="string">"result"</span>] = -<span class="number">2</span>;
-        <span class="keyword">return</span> $<span class="literal">result</span>;
-    }
-
-    echo json_encode(verify($_REQUEST[<span class="string">"receipt"</span>]));
-?&gt;
-</code></pre><h1 id="使用">使用</h1><p>購買</p>
-<pre><code><span class="collection">[<span class="collection">[Store shared]</span> purchase:@<span class="string">"com.yuaki.No5.Remove_AD"</span>]</span><span class="comment">;</span>
-</code></pre><p>回復購買產品動作<br>    [[Store shared] restore];</p>
-<h1 id="其他">其他</h1><pre><code>-(<span class="typename">void</span>)checkStore{
-    [Store shared].updatedState = ^(StoreState state, NSString *productIdentifier) {
-        <span class="comment">//需要顯示購買過程時使用。</span>
-        <span class="keyword">switch</span> (state) {
-            <span class="keyword">case</span> <span class="string">StoreStatePurchasing:</span>
-                NSLog(@<span class="string">"StoreStatePurchasing %@"</span>, productIdentifier);
+    <time datetime="2015-06-15T16:25:47.000Z" itemprop="datePublished">2015-06-16</time>
+  </a>
+</section>
 
 
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStatePurchased:</span>
-                NSLog(@<span class="string">"StoreStatePurchased %@"</span>, productIdentifier);
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateRestored:</span>
-                NSLog(@<span class="string">"StoreStateRestored %@"</span>, productIdentifier);
-                [self <span class="string">performSelector:</span><span class="annotation">@selector</span>(checkStore) <span class="string">withObject:</span>nil <span class="string">afterDelay:</span><span class="number">5.0</span>f];
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateDeferred:</span>
-                NSLog(@<span class="string">"StoreStateDeferred %@"</span>, productIdentifier);
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateVerifyReceipt:</span>
-                NSLog(@<span class="string">"StoreStateVerifyReceipt %@"</span>, productIdentifier);
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateMakePaymentsFail:</span>
-                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"付款失敗"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
-
-                NSLog(@<span class="string">"StoreStateMakePaymentsFail %@"</span>, productIdentifier);
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateInvalidProduct:</span>
-                NSLog(@<span class="string">"StoreStateInvalidProduct %@"</span>, productIdentifier);
-                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"產品id無效"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
-
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateFailedClientInvalid:</span>
-                NSLog(@<span class="string">"StoreStateFailedClientInvalid %@"</span>, productIdentifier);
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateFailedPaymentCancelled:</span>
-                NSLog(@<span class="string">"StoreStateFailedPaymentCancelled %@"</span>, productIdentifier);
-                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"付款取消"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
-
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateFailedPaymentInvalid:</span>
-                NSLog(@<span class="string">"StoreStateFailedPaymentInvalid %@"</span>, productIdentifier);
-                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"付款失效"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
-
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateFailedPaymentNotAllowed:</span>
-                NSLog(@<span class="string">"StoreStateFailedPaymentNotAllowed %@"</span>, productIdentifier);
-                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"不允許付款"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="string">StoreStateFailedUnknown:</span>
-                [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"付款有未知的錯誤"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
-                NSLog(@<span class="string">"StoreStateFailedUnknown %@"</span>, productIdentifier);
-                <span class="keyword">break</span>;
-        }
-    };
-
-    [Store shared].verifyPass = ^(NSString *productIdentifier) {
-        [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"購買成功"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
-        <span class="comment">//remove AD</span>
-
-    };
-
-    [Store shared].verifyFail = ^(NSString *productIdentifier) {
-        [[[UIAlertView alloc] <span class="string">initWithTitle:</span>@<span class="string">""</span> <span class="string">message:</span>@<span class="string">"購買失敗"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"確定"</span> <span class="string">otherButtonTitles:</span>nil] show];
-    };
-}
-</code></pre><h1 id="沙箱測試">沙箱測試</h1><p>新增測試人員<br>[使用者和職能] - [測試人員] - [+]</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp06.png" alt="inapp06" style="width:310px"></p>
-<p>該填的填一填<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp07.png" alt="inapp07" style="width:310px"></p>
-<p>好玩的是，不能使用既有的appid當做沙箱測試人員，只好去申請一個新的email來測試。</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp08.png" alt="inapp08" style="width:310px"></p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp09.png" alt="inapp09" style="width:310px"></p>
-<p>在手機上[App Store] &gt; [精選項目] &gt; [登入] 沙箱測試人員</p>
-<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp10.png" alt="inapp10" style="width:310px"></p>
-<p>接著就可以進行購買測試了</p>
-<h4 id="打完收功">打完收功</h4>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
 
 
-  <div class="article-tags">
+
+
   
-  <span></span> <a href="/tags/iOS/">iOS</a><a href="/tags/inApp/">inApp</a><a href="/tags/itunes/">itunes</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/12/inApp-Purchase-walkthrough/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/06/09/Google-Service-2015-Walk-Through/" title="Google Service 2015 Walk Through" itemprop="url">
+  
+    <h1 itemprop="name">Google Service 2015 Walk Through</h1>
+    
+     
+           <p itemprop="description" >2015 Google I/O  之後  很多東西都改了，所以來做一次walk through吧
+比較特別的是 gcm也可以發ios了
+https://developers.google.com/cloud-messaging/
+try it on iOS
+選擇語言 objc／s</p>
+        
+    
+    <time datetime="2015-06-09T15:55:30.000Z" itemprop="datePublished">2015-06-09</time>
+  </a>
+</section>
 
 
 
 
 
 
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/05/27/swift-shuffle/" title="swift shuffle" itemprop="url">
+  
+    <h1 itemprop="name">swift shuffle</h1>
+    
+     
+           <p itemprop="description" >為程式注入靈魂的小技巧 shufflefunc shuffle&amp;lt;C: MutableCollectionType where C.Index == Int&amp;gt;(var list: C) -&amp;gt; C {
+    let c = count(list)
+    for </p>
+        
+    
+    <time datetime="2015-05-27T15:33:44.000Z" itemprop="datePublished">2015-05-27</time>
+  </a>
+</section>
 
-  <nav id="page-nav" class="clearfix">
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/05/26/swift-spritekit-walk-through/" title="swift spritekit walk through" itemprop="url">
+  
+    <h1 itemprop="name">swift spritekit walk through</h1>
+    
+     
+           <p itemprop="description" >新增一個遊戲專案
+並且設定語言為swift
+
+此時，可以先砍掉一些沒有必要的檔案（iOS很貼心放了一個太空船在程式的template裡）
+加入一些遊戲需要用到的圖檔
+你可以放在images.asset或是直接拉到專案裡
+設一下GameViewController裡的 scene.</p>
+        
+    
+    <time datetime="2015-05-26T09:06:03.000Z" itemprop="datePublished">2015-05-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/05/21/在字串裡加上icon/" title="在字串裡加上icon" itemprop="url">
+  
+    <h1 itemprop="name">在字串裡加上icon</h1>
+    
+     
+           <p itemprop="description" >在UILabel裡要怎麼做到呢？ABC  CDE
+NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+attachment.image = [UIImage imageNamed:@&quot;MyIcon.png</p>
+        
+    
+    <time datetime="2015-05-21T03:46:16.000Z" itemprop="datePublished">2015-05-21</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/05/15/2015-AudioToolBox-walk-through/" title="2015 AudioToolBox walk through " itemprop="url">
+  
+    <h1 itemprop="name">2015 AudioToolBox walk through </h1>
+    
+     
+           <p itemprop="description" >google出很多版本，沒幾個能用的，看官網後試出來的
+NSString *path  = [[NSBundle mainBundle] pathForResource:@&quot;button_click&quot; ofType:@&quot;mp3&quot;];
+           NSURL *fileP</p>
+        
+    
+    <time datetime="2015-05-15T14:42:44.000Z" itemprop="datePublished">2015-05-15</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/05/15/iOS-Language-ID/" title="iOS Language ID" itemprop="url">
+  
+    <h1 itemprop="name">iOS Language ID</h1>
+    
+     
+           <p itemprop="description" >Language
+.lporj Language Code
+
+
+
+
+English
+en    
+
+
+English (British)
+en-GB    
+
+
+English (Australian)
+en-AU    
+
+
+English (Canadian)
+en-CA  </p>
+        
+    
+    <time datetime="2015-05-15T12:23:31.000Z" itemprop="datePublished">2015-05-15</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/05/12/inApp-Purchase-walkthrough/" title="inApp Purchase walkthrough" itemprop="url">
+  
+    <h1 itemprop="name">inApp Purchase walkthrough</h1>
+    
+     
+           <p itemprop="description" >前言 2015-05別人的walk through都有點年代了，而且關鍵的幾個點都沒有特別註明，所以只好自已來寫一個walk through
+unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果出現*是不允許的）
+[member cent</p>
+        
+    
+    <time datetime="2015-05-12T07:14:47.000Z" itemprop="datePublished">2015-05-12</time>
+  </a>
+</section>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix unexpand">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
