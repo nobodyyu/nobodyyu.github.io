@@ -1093,7 +1093,8 @@ article .article-content figure img {
 }
 article .article-content .img-topic,
 article .article-content .img-logo {
-  display: none;
+  display: display block;
+  position: relative;
 }
 article .article-content .img-center {
   display: block;
