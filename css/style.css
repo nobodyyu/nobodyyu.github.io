@@ -287,6 +287,10 @@ input[type="search"]::-webkit-search-decoration {
   -ms-animation-name: fadeOut;
   animation-name: fadeOut;
 }
+.center-cropped {
+  object-fit: none; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+}
 @-moz-keyframes fadeInDown {
   0% {
     opacity: 0;
