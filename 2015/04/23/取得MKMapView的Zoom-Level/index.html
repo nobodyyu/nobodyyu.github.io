@@ -27,6 +27,7 @@ Method
 - (int)getZoomLevel:(MKMapView*)_mapView { 
 
     return 21－round(log2(_mapView.region.span.longitudeDelta * MERCATOR_RADIUS * M_PI / (180.0 * _">
+<meta property="og:updated_time" content="2015-07-25T14:03:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="取得MKMapView的Zoom Level">
 <meta name="twitter:description" content="定義地球弧度
@@ -129,9 +130,9 @@ Method
 		<p>定義地球弧度</p>
 <pre><code><span class="hexcolor">#def</span>ine MERCATOR_RADIUS <span class="number">85445659.44705395</span> 
 </code></pre><p>Method</p>
-<pre><code>- (<span class="built_in">int</span>)getZoomLevel:(MKMapView*)_mapView { 
+<pre><code>- <span class="params">(int)</span>getZoomLevel:<span class="params">(MKMapView*)</span>_mapView { 
 
-    <span class="keyword">return</span> <span class="number">21</span>－<span class="built_in">round</span>(log2(_mapView.region.span.longitudeDelta * MERCATOR_RADIUS * M_PI / (<span class="number">180.0</span> * _mapView.bounds.<span class="built_in">size</span>.<span class="variable">width</span>))); 
+    return <span class="number">21</span>－<span class="built_in">round</span><span class="params">(log2<span class="params">(_mapView.region.span.longitudeDelta * MERCATOR_RADIUS * M_<span class="literal">PI</span> / <span class="params">(<span class="number">180.0</span> * _mapView.bounds.size.width)</span>)</span>)</span>; 
 
 } 
 </code></pre><p>測試一下</p>
@@ -219,7 +220,7 @@ Method
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

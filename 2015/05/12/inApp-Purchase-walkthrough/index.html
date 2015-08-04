@@ -30,6 +30,7 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp08.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp09.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/inapp10.png">
+<meta property="og:updated_time" content="2015-07-24T09:16:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="inApp Purchase walkthrough">
 <meta name="twitter:description" content="前言 2015-05別人的walk through都有點年代了，而且關鍵的幾個點都沒有特別註明，所以只好自已來寫一個walk through
@@ -163,7 +164,7 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
     StoreStateFailedPaymentNotAllowed,
     StoreStateFailedUnknown
 };
-<span class="keyword">typedef</span> NSUInteger StoreState;
+<span class="keyword">typedef</span> <span class="built_in">NSUInteger</span> StoreState;
 
 <span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span>
 <span class="preprocessor">#import <span class="title">&lt;StoreKit/StoreKit.h&gt;</span></span>
@@ -189,7 +190,7 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 <span class="keyword">@end</span>
 
 <span class="class"><span class="keyword">@interface</span> <span class="title">URLRequest</span> () </span>{
-    NSMutableData *responseData;
+    <span class="built_in">NSMutableData</span> *responseData;
     <span class="built_in">NSURLConnection</span> *urlconnection;
 }<span class="keyword">@end</span>
 
@@ -204,15 +205,15 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 - (<span class="keyword">void</span>)startAsynchronous {
     urlconnection = [[<span class="built_in">NSURLConnection</span> alloc] initWithRequest:<span class="keyword">self</span> delegate:<span class="keyword">self</span>];
 }
-- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveResponse:(NSURLResponse *)response {
-    responseData = [NSMutableData new];
+- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveResponse:(<span class="built_in">NSURLResponse</span> *)response {
+    responseData = [<span class="built_in">NSMutableData</span> new];
 }
 - (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveData:(<span class="built_in">NSData</span> *)data {
     [responseData appendData:data];
 }
 - (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didFailWithError:(<span class="built_in">NSError</span> *)error {
     [urlconnection cancel];
-    responseData = [NSMutableData new];
+    responseData = [<span class="built_in">NSMutableData</span> new];
     <span class="keyword">if</span> (_didError) _didError(error);
 }
 - (<span class="keyword">void</span>)connectionDidFinishLoading:(<span class="built_in">NSURLConnection</span> *)connection {
@@ -234,14 +235,14 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 
     URLRequest *request = [URLRequest new];
     request<span class="variable">.URL</span> = [<span class="built_in">NSURL</span> URLWithString:verifyServerURL];
-    request<span class="variable">.cachePolicy</span> = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
-    request<span class="variable">.HTTPBody</span> = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
+    request<span class="variable">.cachePolicy</span> = <span class="built_in">NSURLRequestReloadIgnoringLocalAndRemoteCacheData</span>;
+    request<span class="variable">.HTTPBody</span> = [parameterString dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];
     request<span class="variable">.HTTPMethod</span> = <span class="string">@"POST"</span>;
     [request setValue:<span class="string">@"application/x-www-form-urlencoded"</span> forHTTPHeaderField:<span class="string">@"Content-Type"</span>];
 
     request<span class="variable">.didFinish</span> = ^(<span class="built_in">NSData</span>* response) {
         <span class="built_in">NSError</span>* error;
-        <span class="built_in">NSDictionary</span>* json = [NSJSONSerialization
+        <span class="built_in">NSDictionary</span>* json = [<span class="built_in">NSJSONSerialization</span>
                               JSONObjectWithData:response
                               options:kNilOptions
                               error:&amp;error];
@@ -279,14 +280,14 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 
 - (<span class="keyword">void</span>)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     <span class="keyword">if</span> ([response<span class="variable">.invalidProductIdentifiers</span> count] == <span class="number">0</span>) {
-        <span class="keyword">for</span> (NSUInteger i = <span class="number">0</span>; i &lt; [response<span class="variable">.products</span> count]; i++) {
+        <span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i = <span class="number">0</span>; i &lt; [response<span class="variable">.products</span> count]; i++) {
             SKProduct *product = [response<span class="variable">.products</span> objectAtIndex:i];
             SKPayment *payment = [SKPayment paymentWithProduct:product];
             [[SKPaymentQueue defaultQueue] addPayment:payment];
         }
     } <span class="keyword">else</span> {
         <span class="keyword">if</span> (_updatedState)
-            <span class="keyword">for</span> (NSUInteger i = <span class="number">0</span>; i &lt; [response<span class="variable">.invalidProductIdentifiers</span> count]; i++)
+            <span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i = <span class="number">0</span>; i &lt; [response<span class="variable">.invalidProductIdentifiers</span> count]; i++)
                 _updatedState(StoreStateInvalidProduct, [response<span class="variable">.invalidProductIdentifiers</span> objectAtIndex:i]);
     }
 }
@@ -341,47 +342,47 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 <span class="keyword">@end</span>
 </code></pre><p>Server code - iap.php</p>
 <pre><code>&lt;?php
-    function verify($receipt) {
-        <span class="keyword">if</span> (empty($receipt)) {
-            $<span class="literal">result</span>[<span class="string">"result"</span>] = <span class="number">0</span>;
-            <span class="keyword">return</span> $<span class="literal">result</span>;
+    <span class="keyword">function</span> verify(<span class="variable">$receipt</span>) {
+        if (empty(<span class="variable">$receipt</span>)) {
+            <span class="variable">$result</span>[<span class="string">"result"</span>] = <span class="number">0</span>;
+            return <span class="variable">$result</span>;
         }
 
-        $dataToPost = json_encode(<span class="type">array</span>(<span class="string">"receipt-data"</span> =&gt; $receipt));
-        $opts = <span class="type">array</span>('http' =&gt;
-            <span class="type">array</span>(
-                '<span class="keyword">method</span>'  =&gt; '<span class="type">POST</span>',
-                'header'  =&gt; '<span class="type">Content</span>-<span class="keyword">type</span>: application/x-www-form-urlencoded',
-                'content' =&gt; $dataToPost
+        <span class="variable">$dataToPost</span> = json_encode(array(<span class="string">"receipt-data"</span> =&gt; <span class="variable">$receipt</span>));
+        <span class="variable">$opts</span> = array(<span class="string">'http'</span> =&gt;
+            array(
+                <span class="string">'method'</span>  =&gt; <span class="string">'POST'</span>,
+                <span class="string">'header'</span>  =&gt; <span class="string">'Content-type: application/x-www-form-urlencoded'</span>,
+                <span class="string">'content'</span> =&gt; <span class="variable">$dataToPost</span>
             )
         );
 
-        $context  = stream_context_create($opts);
+        <span class="variable">$context</span>  = stream_context_create(<span class="variable">$opts</span>);
 
-        $verifyResult = file_get_contents('https://buy.itunes.apple.com/verifyReceipt', <span class="literal">false</span>, $context);
-        $verifyStatus = json_decode($verifyResult);
+        <span class="variable">$verifyResult</span> = file_get_contents(<span class="string">'https://buy.itunes.apple.com/verifyReceipt'</span>, false, <span class="variable">$context</span>);
+        <span class="variable">$verifyStatus</span> = json_decode(<span class="variable">$verifyResult</span>);
 
-        <span class="keyword">if</span> ($verifyStatus-&gt;{'status'} == <span class="number">0</span>) {
-            $<span class="literal">result</span>[<span class="string">"result"</span>] = <span class="number">1</span>;
-            <span class="keyword">return</span> $<span class="literal">result</span>;
+        if (<span class="variable">$verifyStatus-</span>&gt;{<span class="string">'status'</span>} == <span class="number">0</span>) {
+            <span class="variable">$result</span>[<span class="string">"result"</span>] = <span class="number">1</span>;
+            return <span class="variable">$result</span>;
         }
 
-        $verifyResult = file_get_contents('https://sandbox.itunes.apple.com/verifyReceipt', <span class="literal">false</span>, $context);
-        $verifyStatus = json_decode($verifyResult);
+        <span class="variable">$verifyResult</span> = file_get_contents(<span class="string">'https://sandbox.itunes.apple.com/verifyReceipt'</span>, false, <span class="variable">$context</span>);
+        <span class="variable">$verifyStatus</span> = json_decode(<span class="variable">$verifyResult</span>);
 
-        <span class="keyword">if</span> ($verifyStatus-&gt;{'status'} == <span class="number">0</span>) {
-            $<span class="literal">result</span>[<span class="string">"result"</span>] = <span class="number">2</span>;
-            <span class="keyword">return</span> $<span class="literal">result</span>;
+        if (<span class="variable">$verifyStatus-</span>&gt;{<span class="string">'status'</span>} == <span class="number">0</span>) {
+            <span class="variable">$result</span>[<span class="string">"result"</span>] = <span class="number">2</span>;
+            return <span class="variable">$result</span>;
         }
 
-        $<span class="literal">result</span>[<span class="string">"result"</span>] = -<span class="number">2</span>;
-        <span class="keyword">return</span> $<span class="literal">result</span>;
+        <span class="variable">$result</span>[<span class="string">"result"</span>] = -<span class="number">2</span>;
+        return <span class="variable">$result</span>;
     }
 
     echo json_encode(verify($_REQUEST[<span class="string">"receipt"</span>]));
 ?&gt;
 </code></pre><h1 id="使用">使用</h1><p>購買</p>
-<pre><code><span class="collection">[<span class="collection">[Store shared]</span> purchase:@<span class="string">"com.yuaki.No5.Remove_AD"</span>]</span><span class="comment">;</span>
+<pre><code><span class="attr_selector">[[Store shared]</span> <span class="rule"><span class="attribute">purchase</span>:<span class="value">@<span class="string">"com.yuaki.No5.Remove_AD"</span>]</span></span>;
 </code></pre><p>回復購買產品動作<br>    [[Store shared] restore];</p>
 <h1 id="其他">其他</h1><pre><code>-(<span class="typename">void</span>)checkStore{
     [Store shared].updatedState = ^(StoreState state, NSString *productIdentifier) {
@@ -537,7 +538,7 @@ unique App ID意思是不可以使用Wildcard App ID來做APP的綁定（如果�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

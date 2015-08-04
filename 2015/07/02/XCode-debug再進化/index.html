@@ -51,6 +51,7 @@ xcode左邊的panel 左邊數第7個  右邊倒數第2個頁籤 點下去
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug12.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug13.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug14.png">
+<meta property="og:updated_time" content="2015-07-24T09:29:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XCode debug再進化">
 <meta name="twitter:description" content="當然，要先來個crash
@@ -161,11 +162,11 @@ xcode左邊的panel 左邊數第7個  右邊倒數第2個頁籤 點下去
 <h3 id="基礎debug_mode">基礎debug mode</h3><p>當crash發生時 xcode沒設定什麼東西時 程式會hang在這個讓人看不懂的地方</p>
 <p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug02.png" alt="debug02" style="width:310px"></p>
 <p>所以  要在xcode的地方設定一下  好方便未來的debug</p>
-<pre><code>xcode左邊的<span class="keyword">panel</span> 左邊數第<span class="number">7</span>個  右邊倒數第<span class="number">2</span>個頁籤 點下去
+<pre><code>xcode左邊的panel 左邊數第<span class="number">7</span>個  右邊倒數第<span class="number">2</span>個頁籤 點下去
 </code></pre><p>－</p>
 <pre><code>下面的「+」 點下去
 </code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug03.png" alt="debug03" style="width:310px"></p>
-<pre><code>選擇第一個「<span class="keyword">Add</span> Exception Breakpoint」
+<pre><code>選擇第一個「<span class="keyword">Add </span>Exception <span class="keyword">Breakpoint」</span>
 </code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug04.png" alt="debug04" style="width:310px"></p>
 <p>這時候會變成這個專案專屬的exception breakpoint</p>
 <p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug05.png" alt="debug05" style="width:310px"></p>
@@ -180,152 +181,152 @@ xcode左邊的panel 左邊數第7個  右邊倒數第2個頁籤 點下去
 </code></pre><p>如果你真的很想知道有那些指令的話，可以在debug console輸入help</p>
 <font color="red">(不過我相信你絕對不會每一個都看完的)</font>
 
-<pre><code>(lldb) help
+<pre><code>(lldb) <span class="operator"><span class="keyword">help</span>
 Debugger commands:
 
-  apropos           -- Find a list <span class="keyword">of</span> debugger commands related <span class="keyword">to</span> a particular
+  apropos           <span class="comment">-- Find a list of debugger commands related to a particular</span>
                        word/subject.
-  breakpoint        -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> breakpoints. Also see
+  breakpoint        <span class="comment">-- A set of commands for operating on breakpoints. Also see</span>
                        _regexp-break.
-  command           -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> managing <span class="keyword">or</span> customizing the
+  command           <span class="comment">-- A set of commands for managing or customizing the</span>
                        debugger commands.
-  disassemble       -- Disassemble bytes <span class="keyword">in</span> the current <span class="keyword">function</span>, <span class="keyword">or</span> elsewhere
-                       <span class="keyword">in</span> the executable program <span class="keyword">as</span> specified <span class="keyword">by</span> the user.
-  expression        -- Evaluate an expression (ObjC++ <span class="keyword">or</span> Swift) <span class="keyword">in</span> the current
-                       program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-                       variables currently <span class="keyword">in</span> scope.
-  frame             -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> the current thread<span class="comment">'s</span>
+  disassemble       <span class="comment">-- Disassemble bytes in the current function, or elsewhere</span>
+                       <span class="keyword">in</span> the executable program <span class="keyword">as</span> specified <span class="keyword">by</span> the <span class="keyword">user</span>.
+  expression        <span class="comment">-- Evaluate an expression (ObjC++ or Swift) in the current</span>
+                       program <span class="keyword">context</span>, <span class="keyword">using</span> <span class="keyword">user</span> defined <span class="keyword">variables</span> <span class="keyword">and</span>
+                       <span class="keyword">variables</span> currently <span class="keyword">in</span> <span class="keyword">scope</span>.
+  frame             <span class="comment">-- A set of commands for operating on the current thread's</span>
                        frames.
-  gdb-remote        -- Connect <span class="keyword">to</span> a remote GDB server.  <span class="keyword">If</span> no hostname <span class="keyword">is</span>
+  gdb-remote        <span class="comment">-- Connect to a remote GDB server.  If no hostname is</span>
                        provided, localhost <span class="keyword">is</span> assumed.
-  gui               -- Switch <span class="keyword">into</span> the curses based GUI mode.
-  help              -- Show a list <span class="keyword">of</span> all debugger commands, <span class="keyword">or</span> give details
+  gui               <span class="comment">-- Switch into the curses based GUI mode.</span>
+  <span class="keyword">help</span>              <span class="comment">-- Show a list of all debugger commands, or give details</span>
                        about specific commands.
-  kdp-remote        -- Connect <span class="keyword">to</span> a remote KDP server.  udp port <span class="number">41139</span> <span class="keyword">is</span> the
-                       <span class="keyword">default</span> port number.
-  log               -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> logs.
-  memory            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> memory.
-  platform          -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">to</span> manage <span class="keyword">and</span> create platforms.
-  plugin            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> managing <span class="keyword">or</span> customizing plugin
+  kdp-remote        <span class="comment">-- Connect to a remote KDP server.  udp port 41139 is the</span>
+                       <span class="keyword">default</span> port <span class="built_in">number</span>.
+  <span class="keyword">log</span>               <span class="comment">-- A set of commands for operating on logs.</span>
+  <span class="keyword">memory</span>            <span class="comment">-- A set of commands for operating on memory.</span>
+  platform          <span class="comment">-- A set of commands to manage and create platforms.</span>
+  <span class="keyword">plugin</span>            <span class="comment">-- A set of commands for managing or customizing plugin</span>
                        commands.
-  process           -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> a process.
-  quit              -- Quit out <span class="keyword">of</span> the LLDB debugger.
-  register          -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">to</span> access thread registers.
-  script            -- Pass an expression <span class="keyword">to</span> the script interpreter <span class="keyword">for</span>
-                       evaluation <span class="keyword">and</span> <span class="keyword">return</span> the results. Drop <span class="keyword">into</span> the
-                       interactive interpreter <span class="keyword">if</span> no expression <span class="keyword">is</span> given.
-  settings          -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> manipulating internal settable
-                       debugger variables.
-  source            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> accessing source file information
-  target            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> debugger targets.
-  thread            -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> one <span class="keyword">or</span> more threads
-                       within a running process.
-  type              -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> the type system
-  version           -- Show version <span class="keyword">of</span> LLDB debugger.
-  watchpoint        -- A <span class="keyword">set</span> <span class="keyword">of</span> commands <span class="keyword">for</span> operating <span class="keyword">on</span> watchpoints.
+  process           <span class="comment">-- A set of commands for operating on a process.</span>
+  quit              <span class="comment">-- Quit out of the LLDB debugger.</span>
+  <span class="keyword">register</span>          <span class="comment">-- A set of commands to access thread registers.</span>
+  script            <span class="comment">-- Pass an expression to the script interpreter for</span>
+                       evaluation <span class="keyword">and</span> <span class="keyword">return</span> the results. <span class="keyword">Drop</span> <span class="keyword">into</span> the
+                       interactive interpreter <span class="keyword">if</span> <span class="keyword">no</span> expression <span class="keyword">is</span> given.
+  <span class="keyword">settings</span>          <span class="comment">-- A set of commands for manipulating internal settable</span>
+                       debugger <span class="keyword">variables</span>.
+  <span class="keyword">source</span>            <span class="comment">-- A set of commands for accessing source file information</span>
+  target            <span class="comment">-- A set of commands for operating on debugger targets.</span>
+  <span class="keyword">thread</span>            <span class="comment">-- A set of commands for operating on one or more threads</span>
+                       <span class="keyword">within</span> a running process.
+  <span class="keyword">type</span>              <span class="comment">-- A set of commands for operating on the type system</span>
+  <span class="keyword">version</span>           <span class="comment">-- Show version of LLDB debugger.</span>
+  watchpoint        <span class="comment">-- A set of commands for operating on watchpoints.</span>
 
-Current command abbreviations (type <span class="comment">'help command alias' for more info):</span>
+<span class="keyword">Current</span> command abbreviations (<span class="keyword">type</span> <span class="string">'help command alias'</span> <span class="keyword">for</span> more info):
 
-  add-dsym  -- (<span class="comment">'target symbols add')  Add a debug symbol file to one of the</span>
-               target<span class="comment">'s current modules by specifying a path to a debug symbols</span>
-               file, <span class="keyword">or</span> <span class="keyword">using</span> the options <span class="keyword">to</span> specify a <span class="keyword">module</span> <span class="keyword">to</span> download
-               symbols <span class="keyword">for</span>.
-  attach    -- (<span class="comment">'_regexp-attach')  Attach to a process id if in decimal,</span>
-               otherwise treat the argument <span class="keyword">as</span> a process name <span class="keyword">to</span> attach <span class="keyword">to</span>.
-  b         -- (<span class="comment">'_regexp-break')  Set a breakpoint using a regular expression</span>
-               <span class="keyword">to</span> specify the location, <span class="keyword">where</span> &lt;linenum&gt; <span class="keyword">is</span> <span class="keyword">in</span> <span class="built_in">decimal</span> <span class="keyword">and</span>
-               &lt;address&gt; <span class="keyword">is</span> <span class="keyword">in</span> hex.
-  bt        -- (<span class="comment">'_regexp-bt')  Show a backtrace.  An optional argument is</span>
-               accepted; <span class="keyword">if</span> that argument <span class="keyword">is</span> a number, it specifies the number
-               <span class="keyword">of</span> frames <span class="keyword">to</span> display.  <span class="keyword">If</span> that argument <span class="keyword">is</span> <span class="comment">'all', full</span>
-               backtraces <span class="keyword">of</span> all threads are displayed.
-  c         -- (<span class="comment">'process continue')  Continue execution of all threads in the</span>
+  <span class="keyword">add</span>-dsym  <span class="comment">-- ('target symbols add')  Add a debug symbol file to one of the</span>
+               target<span class="string">'s current modules by specifying a path to a debug symbols
+               file, or using the options to specify a module to download
+               symbols for.
+  attach    -- ('</span>_regexp-attach<span class="string">')  Attach to a process id if in decimal,
+               otherwise treat the argument as a process name to attach to.
+  b         -- ('</span>_regexp-break<span class="string">')  Set a breakpoint using a regular expression
+               to specify the location, where &lt;linenum&gt; is in decimal and
+               &lt;address&gt; is in hex.
+  bt        -- ('</span>_regexp-bt<span class="string">')  Show a backtrace.  An optional argument is
+               accepted; if that argument is a number, it specifies the number
+               of frames to display.  If that argument is '</span>all<span class="string">', full
+               backtraces of all threads are displayed.
+  c         -- ('</span>process continue<span class="string">')  Continue execution of all threads in the
                current process.
-  <span class="keyword">call</span>      -- (<span class="comment">'expression --')  Evaluate an expression (ObjC++ or Swift) in</span>
-               the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  <span class="keyword">continue</span>  -- (<span class="comment">'process continue')  Continue execution of all threads in the</span>
-               current process.
-  detach    -- (<span class="comment">'process detach')  Detach from the current process being</span>
+  call      -- ('</span>expression <span class="comment">--')  Evaluate an expression (ObjC++ or Swift) in</span>
+               the <span class="keyword">current</span> program <span class="keyword">context</span>, <span class="keyword">using</span> <span class="keyword">user</span> defined <span class="keyword">variables</span> <span class="keyword">and</span>
+               <span class="keyword">variables</span> currently <span class="keyword">in</span> <span class="keyword">scope</span>.
+  continue  <span class="comment">-- ('process continue')  Continue execution of all threads in the</span>
+               <span class="keyword">current</span> process.
+  detach    <span class="comment">-- ('process detach')  Detach from the current process being</span>
                debugged.
-  di        -- (<span class="comment">'disassemble')  Disassemble bytes in the current function, or</span>
-               elsewhere <span class="keyword">in</span> the executable program <span class="keyword">as</span> specified <span class="keyword">by</span> the user.
-  dis       -- (<span class="comment">'disassemble')  Disassemble bytes in the current function, or</span>
-               elsewhere <span class="keyword">in</span> the executable program <span class="keyword">as</span> specified <span class="keyword">by</span> the user.
-  display   -- (<span class="comment">'_regexp-display')  Add an expression evaluation stop-hook.</span>
-  down      -- (<span class="comment">'_regexp-down')  Go down "n" frames in the stack (1 frame by</span>
+  di        <span class="comment">-- ('disassemble')  Disassemble bytes in the current function, or</span>
+               elsewhere <span class="keyword">in</span> the executable program <span class="keyword">as</span> specified <span class="keyword">by</span> the <span class="keyword">user</span>.
+  dis       <span class="comment">-- ('disassemble')  Disassemble bytes in the current function, or</span>
+               elsewhere <span class="keyword">in</span> the executable program <span class="keyword">as</span> specified <span class="keyword">by</span> the <span class="keyword">user</span>.
+  display   <span class="comment">-- ('_regexp-display')  Add an expression evaluation stop-hook.</span>
+  down      <span class="comment">-- ('_regexp-down')  Go down "n" frames in the stack (1 frame by</span>
                <span class="keyword">default</span>).
-  env       -- (<span class="comment">'_regexp-env')  Implements a shortcut to viewing and setting</span>
-               environment variables.
-  <span class="keyword">exit</span>      -- (<span class="comment">'quit')  Quit out of the LLDB debugger.</span>
-  f         -- (<span class="comment">'frame select')  Select a frame by index from within the</span>
-               current thread <span class="keyword">and</span> make it the current frame.
-  file      -- (<span class="comment">'target create')  Create a target using the argument as the</span>
-               main executable.
-  finish    -- (<span class="comment">'thread step-out')  Finish executing the function of the</span>
+  env       <span class="comment">-- ('_regexp-env')  Implements a shortcut to viewing and setting</span>
+               environment <span class="keyword">variables</span>.
+  <span class="keyword">exit</span>      <span class="comment">-- ('quit')  Quit out of the LLDB debugger.</span>
+  <span class="keyword">f</span>         <span class="comment">-- ('frame select')  Select a frame by index from within the</span>
+               <span class="keyword">current</span> <span class="keyword">thread</span> <span class="keyword">and</span> make it the <span class="keyword">current</span> frame.
+  <span class="keyword">file</span>      <span class="comment">-- ('target create')  Create a target using the argument as the</span>
+               <span class="keyword">main</span> executable.
+  <span class="keyword">finish</span>    <span class="comment">-- ('thread step-out')  Finish executing the function of the</span>
                currently selected frame <span class="keyword">and</span> <span class="keyword">return</span> <span class="keyword">to</span> its <span class="keyword">call</span> site <span class="keyword">in</span>
-               specified thread (current thread, <span class="keyword">if</span> none specified).
-  image     -- (<span class="comment">'target modules')  A set of commands for accessing information</span>
+               specified <span class="keyword">thread</span> (<span class="keyword">current</span> <span class="keyword">thread</span>, <span class="keyword">if</span> <span class="keyword">none</span> specified).
+  image     <span class="comment">-- ('target modules')  A set of commands for accessing information</span>
                <span class="keyword">for</span> one <span class="keyword">or</span> more target modules.
-  j         -- (<span class="comment">'_regexp-jump')  Sets the program counter to a new address.</span>
-  jump      -- (<span class="comment">'_regexp-jump')  Sets the program counter to a new address.</span>
-  kill      -- (<span class="comment">'process kill')  Terminate the current process being debugged.</span>
-  l         -- (<span class="comment">'_regexp-list')  Implements the GDB 'list' command in all of</span>
-               its forms except FILE:<span class="keyword">FUNCTION</span> <span class="keyword">and</span> maps them <span class="keyword">to</span> the appropriate
-               <span class="comment">'source list' commands.</span>
-  list      -- (<span class="comment">'_regexp-list')  Implements the GDB 'list' command in all of</span>
-               its forms except FILE:<span class="keyword">FUNCTION</span> <span class="keyword">and</span> maps them <span class="keyword">to</span> the appropriate
-               <span class="comment">'source list' commands.</span>
-  n         -- (<span class="comment">'thread step-over')  Source level single step in specified</span>
-               thread (current thread, <span class="keyword">if</span> none specified), stepping over calls.
-  <span class="keyword">next</span>      -- (<span class="comment">'thread step-over')  Source level single step in specified</span>
-               thread (current thread, <span class="keyword">if</span> none specified), stepping over calls.
-  nexti     -- (<span class="comment">'thread step-inst-over')  Single step one instruction in</span>
-               specified thread (current thread, <span class="keyword">if</span> none specified), stepping
-               over calls.
-  ni        -- (<span class="comment">'thread step-inst-over')  Single step one instruction in</span>
-               specified thread (current thread, <span class="keyword">if</span> none specified), stepping
-               over calls.
-  p         -- (<span class="comment">'expression --')  Evaluate an expression (ObjC++ or Swift) in</span>
-               the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  po        -- (<span class="comment">'expression -O  -- ')  Evaluate an expression (ObjC++ or Swift)</span>
-               <span class="keyword">in</span> the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  print     -- (<span class="comment">'expression --')  Evaluate an expression (ObjC++ or Swift) in</span>
-               the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  q         -- (<span class="comment">'quit')  Quit out of the LLDB debugger.</span>
-  r         -- (<span class="comment">'process launch -c /bin/sh --')  Launch the executable in the</span>
+  j         <span class="comment">-- ('_regexp-jump')  Sets the program counter to a new address.</span>
+  jump      <span class="comment">-- ('_regexp-jump')  Sets the program counter to a new address.</span>
+  <span class="keyword">kill</span>      <span class="comment">-- ('process kill')  Terminate the current process being debugged.</span>
+  <span class="keyword">l</span>         <span class="comment">-- ('_regexp-list')  Implements the GDB 'list' command in all of</span>
+               its forms <span class="keyword">except</span> <span class="keyword">FILE</span>:<span class="keyword">FUNCTION</span> <span class="keyword">and</span> maps them <span class="keyword">to</span> the appropriate
+               <span class="string">'source list'</span> commands.
+  <span class="keyword">list</span>      <span class="comment">-- ('_regexp-list')  Implements the GDB 'list' command in all of</span>
+               its forms <span class="keyword">except</span> <span class="keyword">FILE</span>:<span class="keyword">FUNCTION</span> <span class="keyword">and</span> maps them <span class="keyword">to</span> the appropriate
+               <span class="string">'source list'</span> commands.
+  <span class="keyword">n</span>         <span class="comment">-- ('thread step-over')  Source level single step in specified</span>
+               <span class="keyword">thread</span> (<span class="keyword">current</span> <span class="keyword">thread</span>, <span class="keyword">if</span> <span class="keyword">none</span> specified), stepping <span class="keyword">over</span> calls.
+  <span class="keyword">next</span>      <span class="comment">-- ('thread step-over')  Source level single step in specified</span>
+               <span class="keyword">thread</span> (<span class="keyword">current</span> <span class="keyword">thread</span>, <span class="keyword">if</span> <span class="keyword">none</span> specified), stepping <span class="keyword">over</span> calls.
+  nexti     <span class="comment">-- ('thread step-inst-over')  Single step one instruction in</span>
+               specified <span class="keyword">thread</span> (<span class="keyword">current</span> <span class="keyword">thread</span>, <span class="keyword">if</span> <span class="keyword">none</span> specified), stepping
+               <span class="keyword">over</span> calls.
+  ni        <span class="comment">-- ('thread step-inst-over')  Single step one instruction in</span>
+               specified <span class="keyword">thread</span> (<span class="keyword">current</span> <span class="keyword">thread</span>, <span class="keyword">if</span> <span class="keyword">none</span> specified), stepping
+               <span class="keyword">over</span> calls.
+  <span class="keyword">p</span>         <span class="comment">-- ('expression --')  Evaluate an expression (ObjC++ or Swift) in</span>
+               the <span class="keyword">current</span> program <span class="keyword">context</span>, <span class="keyword">using</span> <span class="keyword">user</span> defined <span class="keyword">variables</span> <span class="keyword">and</span>
+               <span class="keyword">variables</span> currently <span class="keyword">in</span> <span class="keyword">scope</span>.
+  po        <span class="comment">-- ('expression -O  -- ')  Evaluate an expression (ObjC++ or Swift)</span>
+               <span class="keyword">in</span> the <span class="keyword">current</span> program <span class="keyword">context</span>, <span class="keyword">using</span> <span class="keyword">user</span> defined <span class="keyword">variables</span> <span class="keyword">and</span>
+               <span class="keyword">variables</span> currently <span class="keyword">in</span> <span class="keyword">scope</span>.
+  print     <span class="comment">-- ('expression --')  Evaluate an expression (ObjC++ or Swift) in</span>
+               the <span class="keyword">current</span> program <span class="keyword">context</span>, <span class="keyword">using</span> <span class="keyword">user</span> defined <span class="keyword">variables</span> <span class="keyword">and</span>
+               <span class="keyword">variables</span> currently <span class="keyword">in</span> <span class="keyword">scope</span>.
+  q         <span class="comment">-- ('quit')  Quit out of the LLDB debugger.</span>
+  r         <span class="comment">-- ('process launch -c /bin/sh --')  Launch the executable in the</span>
                debugger.
-  rbreak    -- (<span class="comment">'breakpoint set -r %1')  Sets a breakpoint or set of</span>
+  rbreak    <span class="comment">-- ('breakpoint set -r %1')  Sets a breakpoint or set of</span>
                breakpoints <span class="keyword">in</span> the executable.
-  repl      -- (<span class="comment">'expression -r  -- ')  Evaluate an expression (ObjC++ or Swift)</span>
-               <span class="keyword">in</span> the current program context, <span class="keyword">using</span> user defined variables <span class="keyword">and</span>
-               variables currently <span class="keyword">in</span> scope.
-  run       -- (<span class="comment">'process launch -c /bin/sh --')  Launch the executable in the</span>
+  repl      <span class="comment">-- ('expression -r  -- ')  Evaluate an expression (ObjC++ or Swift)</span>
+               <span class="keyword">in</span> the <span class="keyword">current</span> program <span class="keyword">context</span>, <span class="keyword">using</span> <span class="keyword">user</span> defined <span class="keyword">variables</span> <span class="keyword">and</span>
+               <span class="keyword">variables</span> currently <span class="keyword">in</span> <span class="keyword">scope</span>.
+  run       <span class="comment">-- ('process launch -c /bin/sh --')  Launch the executable in the</span>
                debugger.
-  s         -- (<span class="comment">'thread step-in')  Source level single step in specified thread</span>
-               (current thread, <span class="keyword">if</span> none specified).
-  si        -- (<span class="comment">'thread step-inst')  Single step one instruction in specified</span>
-               thread (current thread, <span class="keyword">if</span> none specified).
-  <span class="keyword">step</span>      -- (<span class="comment">'thread step-in')  Source level single step in specified thread</span>
-               (current thread, <span class="keyword">if</span> none specified).
-  stepi     -- (<span class="comment">'thread step-inst')  Single step one instruction in specified</span>
-               thread (current thread, <span class="keyword">if</span> none specified).
-  t         -- (<span class="comment">'thread select')  Select a thread as the currently active</span>
-               thread.
-  tbreak    -- (<span class="comment">'_regexp-tbreak')  Set a one shot breakpoint using a regular</span>
+  s         <span class="comment">-- ('thread step-in')  Source level single step in specified thread</span>
+               (<span class="keyword">current</span> <span class="keyword">thread</span>, <span class="keyword">if</span> <span class="keyword">none</span> specified).
+  si        <span class="comment">-- ('thread step-inst')  Single step one instruction in specified</span>
+               <span class="keyword">thread</span> (<span class="keyword">current</span> <span class="keyword">thread</span>, <span class="keyword">if</span> <span class="keyword">none</span> specified).
+  step      <span class="comment">-- ('thread step-in')  Source level single step in specified thread</span>
+               (<span class="keyword">current</span> <span class="keyword">thread</span>, <span class="keyword">if</span> <span class="keyword">none</span> specified).
+  stepi     <span class="comment">-- ('thread step-inst')  Single step one instruction in specified</span>
+               <span class="keyword">thread</span> (<span class="keyword">current</span> <span class="keyword">thread</span>, <span class="keyword">if</span> <span class="keyword">none</span> specified).
+  <span class="keyword">t</span>         <span class="comment">-- ('thread select')  Select a thread as the currently active</span>
+               <span class="keyword">thread</span>.
+  tbreak    <span class="comment">-- ('_regexp-tbreak')  Set a one shot breakpoint using a regular</span>
                expression <span class="keyword">to</span> specify the location, <span class="keyword">where</span> &lt;linenum&gt; <span class="keyword">is</span> <span class="keyword">in</span>
-               <span class="built_in">decimal</span> <span class="keyword">and</span> &lt;address&gt; <span class="keyword">is</span> <span class="keyword">in</span> hex.
-  undisplay -- (<span class="comment">'_regexp-undisplay')  Remove an expression evaluation</span>
+               <span class="built_in">decimal</span> <span class="keyword">and</span> &lt;address&gt; <span class="keyword">is</span> <span class="keyword">in</span> <span class="keyword">hex</span>.
+  undisplay <span class="comment">-- ('_regexp-undisplay')  Remove an expression evaluation</span>
                <span class="keyword">stop</span>-hook.
-  up        -- (<span class="comment">'_regexp-up')  Go up "n" frames in the stack (1 frame by</span>
+  up        <span class="comment">-- ('_regexp-up')  Go up "n" frames in the stack (1 frame by</span>
                <span class="keyword">default</span>).
-  x         -- (<span class="comment">'memory read')  Read from the memory of the process being</span>
+  x         <span class="comment">-- ('memory read')  Read from the memory of the process being</span>
            debugged.
 
-<span class="keyword">For</span> more information <span class="keyword">on</span> any command, type <span class="comment">'help <span class="xmlDocTag">&lt;command-name&gt;</span>'.</span>
+<span class="keyword">For</span> more information <span class="keyword">on</span> <span class="keyword">any</span> command, <span class="keyword">type</span> <span class="string">'help &lt;command-name&gt;'</span>.</span>
 </code></pre><h3 id="進階debug_mode">進階debug mode</h3><p>故事當然不會就醬子結束，breakpoint停在 </p>
 <pre><code><span class="number">1</span> [AppDelegate <span class="string">application:</span><span class="string">didFinishLaunchingWithOptions:</span>] at <span class="regexp">/Users/</span>minghongyu<span class="regexp">/Documents/</span>work<span class="regexp">/iphone/</span>OpenPoint<span class="regexp">/OpenPoint/</span>AppDelegate.<span class="string">m:</span><span class="number">32</span>
 </code></pre><p>如圖</p>
@@ -337,7 +338,7 @@ Current command abbreviations (type <span class="comment">'help command alias' f
 <p>接著在 debug console裡輸入</p>
 <font color="red">(不要問，很可怕)</font>
 
-<pre><code><span class="title">po</span> <span class="variable">$arg1</span>
+<pre><code>po <span class="variable">$arg1</span>
 </code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug11.png" alt="debug11" style="width:310px"></p>
 <p>發現他會吐出當下的crash的human－readable的解釋！！！！</p>
 <p>很重要  所以要說三次</p>
@@ -346,9 +347,9 @@ Current command abbreviations (type <span class="comment">'help command alias' f
 真的是太好了！！！！！！
 </code></pre><p>但是  每次又要用手打 <font color="red">po ＄arg1</font> 很辛苦有沒有？？很辛苦有沒有？？</p>
 <p>還好 xcode真的很貼心</p>
-<pre><code>在<span class="literal">All</span> Exception上按右鍵  選擇編輯「Edit Breakpoint」
+<pre><code>在<span class="built_in">All</span> Exception上按右鍵  選擇編輯「Edit Breakpoint」
 </code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug12.png" alt="debug12" style="width:310px"></p>
-<pre><code>點選「<span class="keyword">Add</span> Action」
+<pre><code>點選「<span class="keyword">Add </span>Action」
 </code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug13.png" alt="debug13" style="width:310px"></p>
 <pre><code>輸入 po <span class="variable">$arg1</span>
 </code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug14.png" alt="debug14" style="width:310px"></p>
@@ -433,7 +434,7 @@ Current command abbreviations (type <span class="comment">'help command alias' f
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

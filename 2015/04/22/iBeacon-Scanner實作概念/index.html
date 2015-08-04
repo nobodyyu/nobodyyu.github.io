@@ -27,6 +27,7 @@
 @interface ViewController ()&amp;lt;CBCentralManagerDelegate, CBPeripheralDelegate&amp;gt;
 {
     CBCentralManager *_m">
+<meta property="og:updated_time" content="2015-07-25T13:56:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iBeacon Scanner實作概念">
 <meta name="twitter:description" content="1. 利用 CoreBluetoooth 來找尋附近的藍芽裝置Code Snippet
@@ -220,18 +221,18 @@
 </code></pre><p>其中可以過濾掉一些不會廣播的設備</p>
 <pre><code><span class="tag">if</span>([<span class="attribute">advertisementDataobjectForKey</span>:@<span class="string">"kCBAdvDataLocalName"</span>]!=nil){
 </code></pre><p>可以取該設備的UUID</p>
-<pre><code><span class="tag">&lt;__NSConcreteUUID 0x17403f520&gt;</span> <span class="keyword">2750A093</span>-A1C2-9953-A59F-A0769538DC15
+<pre><code>&lt;__NSConcreteUUID <span class="number">0x17403f52</span>0&gt; <span class="number">2750A093</span>-<span class="keyword">A</span><span class="number">1C2-9953</span>-A59F-<span class="keyword">A</span><span class="number">0769538</span>DC15
 </code></pre><p>附帶一提的是，小米手環也會廣播自已的藍芽訊號</p>
-<h3 id="2-_接著利用_CLLocationManagerDelegate_對_已取得的UUID_對_iBeacon_做程式的實作">2. 接著利用 CLLocationManagerDelegate 對 已取得的UUID 對 iBeacon 做程式的實作</h3><pre><code> <span class="keyword">for</span> (NSUUID *uuid <span class="keyword">in</span> [APLDefaults sharedDefaults].supportedProximityUUIDs)
+<h3 id="2-_接著利用_CLLocationManagerDelegate_對_已取得的UUID_對_iBeacon_做程式的實作">2. 接著利用 CLLocationManagerDelegate 對 已取得的UUID 對 iBeacon 做程式的實作</h3><pre><code> <span class="keyword">for</span> (<span class="built_in">NSUUID</span> *uuid <span class="keyword">in</span> [APLDefaults sharedDefaults]<span class="variable">.supportedProximityUUIDs</span>)
     {
-        CLBeaconRegion *region = [[CLBeaconRegion alloc] <span class="string">initWithProximityUUID:</span>uuid <span class="string">identifier:</span>[uuid UUIDString]];
-        self.rangedRegions[region] = [NSArray array];
+        CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityU<span class="built_in">UID</span>:uuid identifier:[uuid U<span class="built_in">UIDString</span>]];
+        <span class="keyword">self</span><span class="variable">.rangedRegions</span>[region] = [<span class="built_in">NSArray</span> array];
     }
 
 
-#pragma mark - Location manager delegate
+<span class="preprocessor">#pragma mark - Location manager delegate</span>
 
-- (<span class="typename">void</span>)<span class="string">locationManager:</span>(CLLocationManager *)manager <span class="string">didRangeBeacons:</span>(NSArray *)beacons <span class="string">inRegion:</span>(CLBeaconRegion *)region
+- (<span class="keyword">void</span>)locationManager:(CLLocationManager *)manager didRangeBeacons:(<span class="built_in">NSArray</span> *)beacons inRegion:(CLBeaconRegion *)region
 {
     <span class="comment">// 這裡就可以取到 iBeacon 了</span>
 }
@@ -315,7 +316,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

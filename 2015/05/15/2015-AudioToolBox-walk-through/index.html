@@ -23,6 +23,7 @@ NSString *path  = [[NSBundle mainBundle] pathForResource:@&quot;button_click&quo
 NSString *path  = [[NSBundle mainBundle] pathForResource:@&quot;button_click&quot; ofType:@&quot;mp3&quot;];
            NSURL *filePath = [NSURL fileURLWithPath:path];
            OSStatus stat">
+<meta property="og:updated_time" content="2015-07-25T14:04:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2015 AudioToolBox walk through ">
 <meta name="twitter:description" content="google出很多版本，沒幾個能用的，看官網後試出來的
@@ -123,7 +124,7 @@ NSString *path  = [[NSBundle mainBundle] pathForResource:@&quot;button_click&quo
 		<p>google出很多版本，沒幾個能用的，看官網後試出來的</p>
 <pre><code><span class="built_in">NSString</span> *path  = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"button_click"</span> ofType:<span class="string">@"mp3"</span>];
            <span class="built_in">NSURL</span> *filePath = [<span class="built_in">NSURL</span> fileURLWithPath:path];
-           OSStatus status1 = AudioServicesCreateSystemSoundID((__bridge CFURLRef)filePath, &amp;soundFileObject);
+           OSStatus status1 = AudioServicesCreateSystemSoundID((__bridge <span class="built_in">CFURLRef</span>)filePath, &amp;soundFileObject);
            <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,(<span class="keyword">int</span>)status1);
 
 
@@ -210,7 +211,7 @@ NSString *path  = [[NSBundle mainBundle] pathForResource:@&quot;button_click&quo
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

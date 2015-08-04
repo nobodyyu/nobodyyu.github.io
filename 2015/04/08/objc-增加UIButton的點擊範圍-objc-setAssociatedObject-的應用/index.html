@@ -33,6 +33,7 @@ static c">
 
 static char topNameKey;
 static c">
+<meta property="og:updated_time" content="2015-07-25T13:47:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="objc-增加UIButton的點擊範圍 - objc_setAssociatedObject 的應用">
 <meta name="twitter:description" content="UIButton的進階使用一般人比較少接觸到的runtime programming 以下為其中之一objc_setAssociatedObject 的應用
@@ -149,10 +150,10 @@ static c">
 
 - (<span class="keyword">void</span>) setEnlargeEdgeWithTop:(<span class="built_in">CGFloat</span>) top right:(<span class="built_in">CGFloat</span>) right bottom:(<span class="built_in">CGFloat</span>) bottom left:(<span class="built_in">CGFloat</span>) left
 {
-    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;topNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:top], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;rightNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:right], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;bottomNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:bottom], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;leftNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:left], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;topNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:top], OBJC_ASSO<span class="built_in">CIATION_COPY_NONATOMIC</span>);
+    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;rightNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:right], OBJC_ASSO<span class="built_in">CIATION_COPY_NONATOMIC</span>);
+    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;bottomNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:bottom], OBJC_ASSO<span class="built_in">CIATION_COPY_NONATOMIC</span>);
+    objc_setAssociatedObject(<span class="keyword">self</span>, &amp;leftNameKey, [<span class="built_in">NSNumber</span> numberWithFloat:left], OBJC_ASSO<span class="built_in">CIATION_COPY_NONATOMIC</span>);
 }
 
 - (<span class="built_in">CGRect</span>) enlargedRect
@@ -163,7 +164,7 @@ static c">
     <span class="built_in">NSNumber</span>* leftEdge = objc_getAssociatedObject(<span class="keyword">self</span>, &amp;leftNameKey);
     <span class="keyword">if</span> (topEdge &amp;&amp; rightEdge &amp;&amp; bottomEdge &amp;&amp; leftEdge)
     {
-        <span class="keyword">return</span> CGRectMake(<span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.origin</span><span class="variable">.x</span> - leftEdge<span class="variable">.floatValue</span>,
+        <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(<span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.origin</span><span class="variable">.x</span> - leftEdge<span class="variable">.floatValue</span>,
                           <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.origin</span><span class="variable">.y</span> - topEdge<span class="variable">.floatValue</span>,
                           <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> + leftEdge<span class="variable">.floatValue</span> + rightEdge<span class="variable">.floatValue</span>,
                           <span class="keyword">self</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span> + topEdge<span class="variable">.floatValue</span> + bottomEdge<span class="variable">.floatValue</span>);
@@ -174,14 +175,14 @@ static c">
     }
 }
 
-- (<span class="built_in">UIView</span>*) hitTest:(<span class="built_in">CGPoint</span>) point withEvent:(UIEvent*) event
+- (<span class="built_in">UIView</span>*) hitTest:(<span class="built_in">CGPoint</span>) point withEvent:(<span class="built_in">UIEvent</span>*) event
 {
     <span class="built_in">CGRect</span> rect = [<span class="keyword">self</span> enlargedRect];
-    <span class="keyword">if</span> (CGRectEqualToRect(rect, <span class="keyword">self</span><span class="variable">.bounds</span>))
+    <span class="keyword">if</span> (<span class="built_in">CGRectEqualToRect</span>(rect, <span class="keyword">self</span><span class="variable">.bounds</span>))
     {
         <span class="keyword">return</span> [<span class="keyword">super</span> hitTest:point withEvent:event];
     }
-    <span class="keyword">return</span> CGRectContainsPoint(rect, point) ? <span class="keyword">self</span> : <span class="literal">nil</span>;
+    <span class="keyword">return</span> <span class="built_in">CGRectContainsPoint</span>(rect, point) ? <span class="keyword">self</span> : <span class="literal">nil</span>;
 }
 
 <span class="keyword">@end</span>
@@ -264,7 +265,7 @@ static c">
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

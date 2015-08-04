@@ -25,6 +25,7 @@
     new Thread(new Runnable() {
         @Override
         public void run() {">
+<meta property="og:updated_time" content="2015-07-25T14:00:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android-shrinkTextView">
 <meta name="twitter:description" content="自動縮小字型的TextViewprivate void shrinkText(final TextView wv, final String word) {
@@ -123,20 +124,20 @@
 		
 		</div>
 		
-		<h2 id="自動縮小字型的TextView">自動縮小字型的TextView</h2><pre><code><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">shrinkText</span><span class="params">(<span class="keyword">final</span> TextView wv, <span class="keyword">final</span> String word)</span> </span>{
-    wv.setTextSize(defaultTextSize);
-    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
-        <span class="annotation">@Override</span>
-        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
-                <span class="keyword">while</span> (wv.getWidth()&gt;<span class="number">0</span> &amp;&amp; wv.getPaint().measureText(word) &gt; wv.getWidth()) {
-                Logg.d(<span class="string">"word too big. Shrink from "</span> + wv.getTextSize()/density + <span class="string">" to "</span> + (wv.getTextSize()/density-<span class="number">1.0</span>f));
-                wv.post(<span class="keyword">new</span> Runnable() {
-                   <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
-                      wv.setTextSize(wv.getTextSize() / density - <span class="number">1.0</span>f);
+		<h2 id="自動縮小字型的TextView">自動縮小字型的TextView</h2><pre><code>private void shrinkText<span class="params">(final TextView wv, final String word)</span> {
+    wv.setTextSize<span class="params">(defaultTextSize)</span>;
+    new Thread<span class="params">(new Runnable<span class="params">()</span> {
+        @Override
+        public void run<span class="params">()</span> {
+                while <span class="params">(wv.getWidth<span class="params">()</span>&gt;<span class="number">0</span> &amp;&amp; wv.getPaint<span class="params">()</span>.measureText<span class="params">(word)</span> &gt; wv.getWidth<span class="params">()</span>)</span> {
+                Logg.d<span class="params">(<span class="string">"word too big. Shrink from "</span> + wv.getTextSize<span class="params">()</span>/density + <span class="string">" to "</span> + <span class="params">(wv.getTextSize<span class="params">()</span>/density-<span class="number">1.0</span>f)</span>)</span>;
+                wv.post<span class="params">(new Runnable<span class="params">()</span> {
+                   public void run<span class="params">()</span> {
+                      wv.setTextSize<span class="params">(wv.getTextSize<span class="params">()</span> / density - <span class="number">1.0</span>f)</span>;
                    }
-               });
+               })</span>;
         }
-    }).start();
+    })</span>.start<span class="params">()</span>;
 }
 </code></pre>  
 	</div>
@@ -217,7 +218,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

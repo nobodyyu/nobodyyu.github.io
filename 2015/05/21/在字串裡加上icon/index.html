@@ -26,6 +26,7 @@ attachment.image = [UIImage imageNamed:@&quot;MyIcon.png&quot;];
 
 NSAttributedString *attachmentString = [NSAttributedStr">
 <meta property="og:image" content="http://c360232.r32.cf2.rackcdn.com/blog/wp-content/uploads/2008/06/new.jpg">
+<meta property="og:updated_time" content="2015-07-25T14:04:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在字串裡加上icon">
 <meta name="twitter:description" content="在UILabel裡要怎麼做到呢？ABC  CDE
@@ -125,15 +126,15 @@ NSAttributedString *attachmentString = [NSAttributedStr">
 		</div>
 		
 		<h1 id="在UILabel裡要怎麼做到呢？">在UILabel裡要怎麼做到呢？</h1><p>ABC <img class="img-shadow" src="http://c360232.r32.cf2.rackcdn.com/blog/wp-content/uploads/2008/06/new.jpg" width="30"> CDE</p>
-<pre><code>NSTextAttachment *<span class="variable">attachment =</span> [[NSTextAttachment alloc] init];
-attachment.<span class="variable">image =</span> [UIImage imageNamed:@<span class="string">"MyIcon.png"</span>];
+<pre><code><span class="built_in">NSTextAttachment</span> *attachment = [[<span class="built_in">NSTextAttachment</span> alloc] init];
+attachment<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"MyIcon.png"</span>];
 
-NSAttributedString *<span class="variable">attachmentString =</span> [NSAttributedString attributedStringWithAttachment:attachment];
+<span class="built_in">NSAttributedString</span> *attachmentString = [<span class="built_in">NSAttributedString</span> attributedStringWithAttachment:attachment];
 
-NSMutableAttributedString *<span class="variable">myString=</span> [[NSMutableAttributedString alloc] initWithString:@<span class="string">"My label text"</span>];
+<span class="built_in">NSMutableAttributedString</span> *myString= [[<span class="built_in">NSMutableAttributedString</span> alloc] initWithString:<span class="string">@"My label text"</span>];
 [myString appendAttributedString:attachmentString];
 
-myLabel.<span class="variable">attributedText =</span> myString;
+myLabel<span class="variable">.attributedText</span> = myString;
 </code></pre><p>不難懂～</p>
   
 	</div>
@@ -214,7 +215,7 @@ myLabel.<span class="variable">attributedText =</span> myString;
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

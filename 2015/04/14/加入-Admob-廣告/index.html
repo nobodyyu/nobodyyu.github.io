@@ -44,6 +44,7 @@ pod &apos;Google-Mobile-Ads-SDK&apos;, &apos;~&amp;">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob05.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob06.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob07.png">
+<meta property="og:updated_time" content="2015-07-25T14:05:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="加入 Admob 廣告">
 <meta name="twitter:description" content="AdMob網頁設定1。註冊AdMob 帳號不解釋
@@ -155,9 +156,9 @@ pod &apos;Google-Mobile-Ads-SDK&apos;, &apos;~&amp;">
 <p>將廣告單編號複製起來</p>
 <p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob03.png" alt="admob03" style="width:310px"></p>
 <h2 id="手機程式">手機程式</h2><h3 id="1。pod_install">1。pod install</h3><p>在專案目錄下新增一個 Podfile 檔</p>
-<pre><code><span class="literal">source</span> <span class="string">'https://github.com/CocoaPods/Specs.git'</span>
+<pre><code><span class="keyword">source</span> <span class="string">'https://github.com/CocoaPods/Specs.git'</span>
 
-<span class="literal">platform</span> :ios, <span class="string">'7.0'</span>
+<span class="keyword">platform</span> :ios, <span class="string">'7.0'</span>
 pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~&gt; 7.0'</span>
 </code></pre><h3 id="2。在terminal下指令進行安裝">2。在terminal下指令進行安裝</h3><pre><code>pod <span class="keyword">install</span>
 </code></pre><p>安裝好之後，打開新產生的專案的workspace</p>
@@ -166,9 +167,9 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 <p>接著拉好相對應的 IBOutlet<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob05.png" alt="admob05" style="width:310px"></p>
 <p>記得import GoogleMobileAds （語法和一般的import不太一樣）</p>
 <p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob06.png" alt="admob06" style="width:310px"></p>
-<h3 id="4。在_ViewDidLoad_(or_anywhere)_加入對應的程式碼">4。在 ViewDidLoad (or anywhere) 加入對應的程式碼</h3><pre><code>bannerView.<span class="variable">adUnitID =</span> @<span class="string">"和網頁的那串相同"</span>;
-  bannerView.<span class="variable">rootViewController =</span> self;
-  [bannerView loadRequest:[GADRequest request]];
+<h3 id="4。在_ViewDidLoad_(or_anywhere)_加入對應的程式碼">4。在 ViewDidLoad (or anywhere) 加入對應的程式碼</h3><pre><code><span class="keyword">bannerView.adUnitID </span>= <span class="comment">@"和網頁的那串相同";</span>
+  <span class="keyword">bannerView.rootViewController </span>= <span class="keyword">self;
+</span>  [<span class="keyword">bannerView </span>loadRequest:[GADRequest request]]<span class="comment">;</span>
 </code></pre><h3 id="5。看到測試用的ad出現">5。看到測試用的ad出現</h3><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/admob07.png" alt="admob07" style="width:310px"></p>
 <h2 id="AdMob網頁設定啟動">AdMob網頁設定啟動</h2><p>據aircon解釋，在上架一週後可以搜尋得到應用程式，接著進行連結，就可以啟動admob了</p>
 <h2 id="打完收工">打完收工</h2>  
@@ -250,7 +251,7 @@ pod <span class="string">'Google-Mobile-Ads-SDK'</span>, <span class="string">'~
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

@@ -29,6 +29,7 @@
     // check to see if an instance already exists
     if (nil == myInstance) {
         myInstan">
+<meta property="og:updated_time" content="2015-07-25T13:53:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="make HUD by your self">
 <meta name="twitter:description" content="首先，需要一個singleton來統管這個HUD，避免一次出現兩個hud以上的窘境static LoadingView *myInstance = nil;
@@ -141,15 +142,15 @@
     //<span class="instruction"> return </span>the<span class="instruction"> instance </span>of this class
    <span class="instruction"> return </span>myInstance;
 }
-</code></pre><h3 id="接著實作兩個_instanceMethod">接著實作兩個 instanceMethod</h3><pre><code>+ (<span class="keyword">void</span>)dismiss{
+</code></pre><h3 id="接著實作兩個_instanceMethod">接著實作兩個 instanceMethod</h3><pre><code>+ (void)dismiss{
 
-    [[<span class="built_in">UIApplication</span> sharedApplication] endIgnoringInteractionEvents];
-    [[<span class="keyword">self</span> shared] selfHide];
+    <span class="comment">[<span class="comment">[UIApplication sharedApplication]</span> endIgnoringInteractionEvents]</span>;
+    <span class="comment">[<span class="comment">[self shared]</span> selfHide]</span>;
 }
-+ (<span class="keyword">void</span>)show
++ (void)show
 {
-    [[<span class="built_in">UIApplication</span> sharedApplication] beginIgnoringInteractionEvents];
-    [[<span class="keyword">self</span> shared] selfShow];
+    <span class="comment">[<span class="comment">[UIApplication sharedApplication]</span> beginIgnoringInteractionEvents]</span>;
+    <span class="comment">[<span class="comment">[self shared]</span> selfShow]</span>;
 }
 </code></pre><h3 id="兩個class_method">兩個class method</h3><p>自window中找到hud並移除</p>
 <pre><code><span class="tag">-</span>(void)<span class="tag">selfHide</span>{
@@ -157,29 +158,29 @@
     <span class="attr_selector">[[((AppDelegate *)([UIApplication sharedApplication]</span><span class="class">.delegate</span>))<span class="class">.window</span> <span class="tag">viewWithTag</span><span class="pseudo">:56790</span>] <span class="tag">removeFromSuperview</span>];
 }
 </code></pre><p>將hud加到最上層的window，範例中的hud為中間一個靜置圖片，週遭再放一個不斷旋轉的圖片</p>
-<pre><code>-(<span class="typename">void</span>)selfShow{
+<pre><code>-(<span class="atom">void</span>)<span class="atom">selfShow</span>{
 
-    UIImageView *mView = [[UIImageView alloc] <span class="string">initWithFrame:</span>CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];
-    [mView <span class="string">setImage:</span>[UIImage <span class="string">imageNamed:</span>@<span class="string">"loading.png"</span>]];
-    mView.tag = <span class="number">56789</span>;
-    [mView <span class="string">setCenter:</span>((AppDelegate *)([UIApplication sharedApplication].delegate)).window.center];
+    <span class="name">UIImageView</span> *<span class="atom">mView</span> = [[<span class="name">UIImageView</span> <span class="atom">alloc</span>] <span class="atom">initWithFrame</span>:<span class="name">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];
+    [<span class="atom">mView</span> <span class="atom">setImage</span>:[<span class="name">UIImage</span> <span class="atom">imageNamed</span>:@<span class="string">"loading.png"</span>]];
+    <span class="atom">mView</span>.<span class="atom">tag</span> = <span class="number">56789</span>;
+    [<span class="atom">mView</span> <span class="atom">setCenter</span>:((<span class="name">AppDelegate</span> *)([<span class="name">UIApplication</span> <span class="atom">sharedApplication</span>].<span class="atom">delegate</span>)).<span class="atom">window</span>.<span class="atom">center</span>];
 
-    UIImageView *mView2 = [[UIImageView alloc] <span class="string">initWithFrame:</span>CGRectMake(<span class="number">0</span>,<span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];
-    [mView2 <span class="string">setImage:</span>[UIImage <span class="string">imageNamed:</span>@<span class="string">"loading2.png"</span>]];
-    mView2.tag = <span class="number">56790</span>;
-    [mView2 <span class="string">setCenter:</span>mView.center];
+    <span class="name">UIImageView</span> *<span class="atom">mView2</span> = [[<span class="name">UIImageView</span> <span class="atom">alloc</span>] <span class="atom">initWithFrame</span>:<span class="name">CGRectMake</span>(<span class="number">0</span>,<span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];
+    [<span class="atom">mView2</span> <span class="atom">setImage</span>:[<span class="name">UIImage</span> <span class="atom">imageNamed</span>:@<span class="string">"loading2.png"</span>]];
+    <span class="atom">mView2</span>.<span class="atom">tag</span> = <span class="number">56790</span>;
+    [<span class="atom">mView2</span> <span class="atom">setCenter</span>:<span class="atom">mView</span>.<span class="atom">center</span>];
 
-    <span class="keyword">if</span> ([mView2.layer <span class="string">animationForKey:</span>@<span class="string">"SpinAnimation"</span>] == nil) {
-        CABasicAnimation* animation = [CABasicAnimation <span class="string">animationWithKeyPath:</span>@<span class="string">"transform.rotation.z"</span>];
-        animation.fromValue = [NSNumber <span class="string">numberWithFloat:</span><span class="number">0.0</span>f];
-        animation.toValue = [NSNumber <span class="string">numberWithFloat:</span> <span class="number">2</span>*M_PI];
-        animation.duration = <span class="number">1.0</span>f;
-        animation.repeatCount = INFINITY;
-        [mView2.layer <span class="string">addAnimation:</span>animation <span class="string">forKey:</span>@<span class="string">"SpinAnimation"</span>];
+    <span class="atom">if</span> ([<span class="atom">mView2</span>.<span class="atom">layer</span> <span class="atom">animationForKey</span>:@<span class="string">"SpinAnimation"</span>] == <span class="atom">nil</span>) {
+        <span class="name">CABasicAnimation</span>* <span class="atom">animation</span> = [<span class="name">CABasicAnimation</span> <span class="atom">animationWithKeyPath</span>:@<span class="string">"transform.rotation.z"</span>];
+        <span class="atom">animation</span>.<span class="atom">fromValue</span> = [<span class="name">NSNumber</span> <span class="atom">numberWithFloat</span>:<span class="number">0.0</span><span class="atom">f</span>];
+        <span class="atom">animation</span>.<span class="atom">toValue</span> = [<span class="name">NSNumber</span> <span class="atom">numberWithFloat</span>: <span class="number">2</span>*<span class="name">M_PI</span>];
+        <span class="atom">animation</span>.<span class="atom">duration</span> = <span class="number">1.0</span><span class="atom">f</span>;
+        <span class="atom">animation</span>.<span class="atom">repeatCount</span> = <span class="name">INFINITY</span>;
+        [<span class="atom">mView2</span>.<span class="atom">layer</span> <span class="atom">addAnimation</span>:<span class="atom">animation</span> <span class="atom">forKey</span>:@<span class="string">"SpinAnimation"</span>];
     }
 
-    [((AppDelegate *)([UIApplication sharedApplication].delegate)).window <span class="string">addSubview:</span>mView];
-    [((AppDelegate *)([UIApplication sharedApplication].delegate)).window <span class="string">addSubview:</span>mView2];
+    [((<span class="name">AppDelegate</span> *)([<span class="name">UIApplication</span> <span class="atom">sharedApplication</span>].<span class="atom">delegate</span>)).<span class="atom">window</span> <span class="atom">addSubview</span>:<span class="atom">mView</span>];
+    [((<span class="name">AppDelegate</span> *)([<span class="name">UIApplication</span> <span class="atom">sharedApplication</span>].<span class="atom">delegate</span>)).<span class="atom">window</span> <span class="atom">addSubview</span>:<span class="atom">mView2</span>];
 
 }
 </code></pre><p>接著，在其他地方引用，再呼叫 [LoadingView show]、[LoadingView dismiss] 就可以了</p>
@@ -262,7 +263,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

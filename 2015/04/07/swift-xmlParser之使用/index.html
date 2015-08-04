@@ -27,6 +27,7 @@ class ViewController: ViewController,NSXMLParserDelegate
 
 加入delegate所需要的function
 func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI:">
+<meta property="og:updated_time" content="2015-07-25T13:43:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="swift-xmlParser之使用">
 <meta name="twitter:description" content="在ViewController後引用所需要的 delegate
@@ -129,18 +130,18 @@ func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespac
 		<ol>
 <li>在ViewController後引用所需要的 delegate</li>
 </ol>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">ViewController</span>,<span class="title">NSXMLParserDelegate</span> </span>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="typename">ViewController</span>,<span class="typename">NSXMLParserDelegate </span></span>
 </code></pre><ol>
 <li><p>加入delegate所需要的function</p>
-<pre><code><span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!)</span> </span>{
+<pre><code><span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!)</span></span> {
 <span class="built_in">println</span>(<span class="string">"Element's name is <span class="subst">\(elementName)</span>"</span>)
 <span class="built_in">println</span>(<span class="string">"Element's attributes are <span class="subst">\(attributeDict)</span>"</span>)
 }
 
-<span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, foundCharacters string: String!)</span> </span>{
+<span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, foundCharacters string: String!)</span></span> {
 }
 
-<span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!)</span> </span>{
+<span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!)</span></span> {
 <span class="built_in">println</span>(<span class="string">"End"</span>)
 </code></pre><p> }</p>
 </li>
@@ -156,10 +157,10 @@ xmlParser.parse()
 </ol>
 <ol>
 <li><p>跑跑看結果是否正確</p>
-<pre><code>Element<span class="attribute">'s</span> name <span class="keyword">is</span> rsp
-Element<span class="attribute">'s</span> attributes are [stat: fail]
-Element<span class="attribute">'s</span> name <span class="keyword">is</span> err
-Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯誤, code: <span class="number">123</span>]
+<pre><code>Element<span class="comment">'s name is rsp</span>
+Element<span class="comment">'s attributes are [stat: fail]</span>
+Element<span class="comment">'s name is err</span>
+Element<span class="comment">'s attributes are [msg: Failed, desc: 錯誤, code: 123]</span>
 <span class="keyword">End</span>
 <span class="keyword">End</span>
 </code></pre></li>
@@ -245,7 +246,7 @@ Element<span class="attribute">'s</span> attributes are [msg: Failed, desc: 錯�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

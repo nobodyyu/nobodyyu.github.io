@@ -32,6 +32,7 @@ pod &apos;Google/Analytic">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm01.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm02.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/gcm03.png">
+<meta property="og:updated_time" content="2015-07-24T09:18:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Service 2015 Walk Through">
 <meta name="twitter:description" content="2015 Google I/O  之後  很多東西都改了，所以來做一次walk through吧
@@ -147,10 +148,10 @@ pod <span class="string">'Google/CloudMessaging'</span>
 <h3 id="GCM的一些code">GCM的一些code</h3><pre><code>- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions {
 
     <span class="comment">// Register for remote notifications</span>
-    UIUserNotificationType allNotificationTypes =
-    (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
-    UIUserNotificationSettings *settings =
-    [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:<span class="literal">nil</span>];
+    <span class="built_in">UIUserNotificationType</span> allNotificationTypes =
+    (<span class="built_in">UIUserNotificationTypeSound</span> | <span class="built_in">UIUserNotificationTypeAlert</span> | <span class="built_in">UIUserNotificationTypeBadge</span>);
+    <span class="built_in">UIUserNotificationSettings</span> *settings =
+    [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:allNotificationTypes categories:<span class="literal">nil</span>];
     [[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:settings];
     [[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];
 
@@ -164,8 +165,8 @@ pod <span class="string">'Google/CloudMessaging'</span>
     <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,deviceToken);
 
     [[GGLInstanceID sharedInstance] startWithConfig:[GGLInstanceIDConfig defaultConfig]];
-    _registrationOptions = @{kGGLInstanceIDRegisterAPNSOption:deviceToken,
-                             kGGLInstanceIDAPNSServerTypeSandboxOption:@YES};
+    _registrationOptions = @{kGGLInstanceIDRegisterAP<span class="built_in">NSOption</span>:deviceToken,
+                             kGGLInstanceIDAP<span class="built_in">NSServerTypeSandboxOption</span>:@YES};
     [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:<span class="string">@"gswt-ea275"</span>
                                                         scope:kGGLInstanceIDScopeGCM
                                                       options:_registrationOptions
@@ -178,23 +179,23 @@ pod <span class="string">'Google/CloudMessaging'</span>
 -(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didFailToRegisterForRemoteNotificationsWithError:(<span class="built_in">NSError</span> *)error{
     <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,error);
 }
-</code></pre><h3 id="GA的一些code">GA的一些code</h3><pre><code>-(<span class="typename">void</span>)<span class="string">GAScreen:</span>(NSString *)name{
-    dispatch_queue_t myQueue = dispatch_queue_create(<span class="string">"GAQueue"</span>,NULL);
-    dispatch_async(myQueue, ^{
-        id&lt;GAITracker&gt; tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker <span class="string">set:</span>kGAIScreenName <span class="string">value:</span>name];
-        [tracker <span class="string">send:</span>[[GAIDictionaryBuilder createScreenView] build]];
+</code></pre><h3 id="GA的一些code">GA的一些code</h3><pre><code>-(<span class="keyword">void</span>)GAScreen:(<span class="built_in">NSString</span> *)name{
+    <span class="built_in">dispatch_queue_t</span> myQueue = dispatch_queue_create(<span class="string">"GAQueue"</span>,<span class="literal">NULL</span>);
+    <span class="built_in">dispatch_async</span>(myQueue, ^{
+        <span class="keyword">id</span>&lt;GAITracker&gt; tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:name];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     });
 
 }
 
 
--(<span class="typename">void</span>)<span class="string">GAEvent:</span>(NSString *)<span class="string">CATEGORY :</span>(NSString *)<span class="string">ACTION :</span>(NSString *)<span class="string">LABEL :</span>(NSNumber *)Value{
+-(<span class="keyword">void</span>)GAEvent:(<span class="built_in">NSString</span> *)<span class="built_in">CATEGORY</span> :(<span class="built_in">NSString</span> *)ACTION :(<span class="built_in">NSString</span> *)LABEL :(<span class="built_in">NSNumber</span> *)Value{
 
-    dispatch_queue_t myQueue = dispatch_queue_create(<span class="string">"GAQueue"</span>,NULL);
-    dispatch_async(myQueue, ^{
-        id&lt;GAITracker&gt; tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker <span class="string">send:</span>[[GAIDictionaryBuilder <span class="string">createEventWithCategory:</span>CATEGORY <span class="string">action:</span>ACTION <span class="string">label:</span>LABEL <span class="string">value:</span>Value] build]];
+    <span class="built_in">dispatch_queue_t</span> myQueue = dispatch_queue_create(<span class="string">"GAQueue"</span>,<span class="literal">NULL</span>);
+    <span class="built_in">dispatch_async</span>(myQueue, ^{
+        <span class="keyword">id</span>&lt;GAITracker&gt; tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:<span class="built_in">CATEGORY</span> action:ACTION label:LABEL value:Value] build]];
     });
 
 
@@ -279,7 +280,7 @@ pod <span class="string">'Google/CloudMessaging'</span>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			

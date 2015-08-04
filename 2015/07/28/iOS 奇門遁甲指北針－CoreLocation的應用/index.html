@@ -1,0 +1,592 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS 奇門遁甲指北針－CoreLocation的應用 | YUAKI APP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="AKI YU">
+    
+
+    
+    <meta name="description" content="準備好一個新專案，以及CoreLocation.Framework
+應該有的素材1。奇門遁甲圓盤
+2。旋轉用的太極(裝飾用)
+3。UISegment 切換「磁北」、「真北」
+4。四個UILabel 顯示經緯度、高度、與方向角度
+程式的撰寫info.plist
+NSLocationWhenInUseUsageDescription
+NSLocationAlwaysUsageDescription
+V">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 奇門遁甲指北針－CoreLocation的應用">
+<meta property="og:url" content="http://www.yuaki.com/2015/07/28/iOS 奇門遁甲指北針－CoreLocation的應用/index.html">
+<meta property="og:site_name" content="YUAKI APP">
+<meta property="og:description" content="準備好一個新專案，以及CoreLocation.Framework
+應該有的素材1。奇門遁甲圓盤
+2。旋轉用的太極(裝飾用)
+3。UISegment 切換「磁北」、「真北」
+4。四個UILabel 顯示經緯度、高度、與方向角度
+程式的撰寫info.plist
+NSLocationWhenInUseUsageDescription
+NSLocationAlwaysUsageDescription
+V">
+<meta property="og:updated_time" content="2015-07-28T15:24:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 奇門遁甲指北針－CoreLocation的應用">
+<meta name="twitter:description" content="準備好一個新專案，以及CoreLocation.Framework
+應該有的素材1。奇門遁甲圓盤
+2。旋轉用的太極(裝飾用)
+3。UISegment 切換「磁北」、「真北」
+4。四個UILabel 顯示經緯度、高度、與方向角度
+程式的撰寫info.plist
+NSLocationWhenInUseUsageDescription
+NSLocationAlwaysUsageDescription
+V">
+
+    
+    <link rel="alternative" href="/" title="YUAKI APP" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="YUAKI APP" title="YUAKI APP"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="YUAKI APP">YUAKI APP</a></h1>
+				<h2 class="blog-motto">we app what you have</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="http://www.yuaki.com">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:www.yuaki.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- nobodyyu_right -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8983800189460499"
+     data-ad-slot="6290162960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/28/iOS 奇門遁甲指北針－CoreLocation的應用/" title="iOS 奇門遁甲指北針－CoreLocation的應用" itemprop="url">iOS 奇門遁甲指北針－CoreLocation的應用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-28T13:57:56.000Z" itemprop="datePublished"> 發表於 2015-07-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#準備好一個新專案，以及CoreLocation-Framework"><span class="toc-number">1.</span> <span class="toc-text">準備好一個新專案，以及CoreLocation.Framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#應該有的素材"><span class="toc-number">2.</span> <span class="toc-text">應該有的素材</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程式的撰寫"><span class="toc-number">3.</span> <span class="toc-text">程式的撰寫</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="準備好一個新專案，以及CoreLocation-Framework">準備好一個新專案，以及CoreLocation.Framework</h3><p><br><br><br></p>
+<h3 id="應該有的素材">應該有的素材</h3><pre><code><span class="number">1</span>。奇門遁甲圓盤
+<span class="number">2</span>。旋轉用的太極(裝飾用)
+<span class="number">3</span>。UISegment 切換「磁北」、「真北」
+<span class="number">4</span>。四個UILabel 顯示經緯度、高度、與方向角度
+</code></pre><h3 id="程式的撰寫">程式的撰寫</h3><p><br><br><br><br>info.plist</p>
+<pre><code><span class="built_in">NSLocationWhenInUseUsageDescription</span>
+<span class="built_in">NSLocationAlwaysUsageDescription</span>
+</code></pre><p>ViewController.h</p>
+<pre><code><span class="preprocessor">#import <span class="title">&lt;CoreLocation/CoreLocation.h&gt;</span></span>
+
+&lt;CLLocationManagerDelegate&gt;
+
+<span class="keyword">IBOutlet</span> <span class="built_in">UIImageView</span> *imgCompass;
+
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,retain) CLLocationManager *locationManager;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,retain) CLHeading *currentHeading;
+</code></pre><p>ViewController.m</p>
+<pre><code>- (<span class="keyword">void</span>)viewDidLoad {
+    [<span class="keyword">super</span> viewDidLoad];
+    <span class="keyword">self</span><span class="variable">.currentHeading</span> = [[CLHeading alloc] init];
+
+
+
+    <span class="keyword">if</span> ([CLLocationManager locationServicesEnabled]) <span class="comment">//處理定位</span>
+    {
+        <span class="keyword">if</span>([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied){
+            <span class="built_in">UIAlertView</span> *alert = [[<span class="built_in">UIAlertView</span> alloc] initWithTitle:<span class="string">@""</span> message:<span class="string">@"請先開啟定位"</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"確認"</span> otherButtonTitles:<span class="literal">nil</span>];
+            alert<span class="variable">.tag</span> =<span class="number">999</span>;
+            [<span class="keyword">self</span><span class="variable">.view</span> addSubview:alert];
+            [alert show];
+            isLocation = <span class="literal">NO</span>;
+            <span class="keyword">return</span>;
+        }<span class="keyword">else</span>{
+
+            isLocation = <span class="literal">YES</span>;
+            <span class="keyword">self</span><span class="variable">.locationManager</span> = [[CLLocationManager alloc] init];
+            <span class="keyword">self</span><span class="variable">.locationManager</span><span class="variable">.desiredAccuracy</span> = kCLLocationAccuracyBest;
+            <span class="keyword">self</span><span class="variable">.locationManager</span><span class="variable">.headingFilter</span> = <span class="number">1</span>;
+            <span class="keyword">self</span><span class="variable">.locationManager</span><span class="variable">.delegate</span> = <span class="keyword">self</span>;
+
+
+            <span class="keyword">if</span>([locationManager respondsToSelector:<span class="keyword">@selector</span>(requestWhenInUseAuthorization)]){
+                [locationManager requestWhenInUseAuthorization];
+            }
+
+            [<span class="keyword">self</span><span class="variable">.locationManager</span> startUpdatingLocation];
+
+
+
+        }
+    }
+    <span class="keyword">else</span> {
+
+
+        <span class="built_in">UIAlertView</span> *alert = [[<span class="built_in">UIAlertView</span> alloc] initWithTitle:<span class="string">@""</span> message:<span class="string">@"請先開啟定位"</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"確認"</span> otherButtonTitles:<span class="literal">nil</span>];
+        alert<span class="variable">.tag</span> =<span class="number">999</span>;
+        [<span class="keyword">self</span><span class="variable">.view</span> addSubview:alert];
+        isLocation = <span class="literal">NO</span>;
+        [alert show];
+        <span class="keyword">return</span>;
+
+    }
+
+
+    [<span class="keyword">self</span><span class="variable">.locationManager</span> startUpdatingHeading];
+
+}
+
+
+
+
+-(<span class="keyword">void</span>)locationManager:(CLLocationManager *)manager didUpdateLocations:(<span class="built_in">NSArray</span> *)locations{
+    CLLocation* location = [locations objectAtIndex:<span class="number">0</span>];
+    <span class="built_in">NSLog</span>(<span class="string">@"%f-%f"</span>,location<span class="variable">.coordinate</span><span class="variable">.latitude</span>,location<span class="variable">.coordinate</span><span class="variable">.longitude</span>);
+
+    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f"</span>,location<span class="variable">.coordinate</span><span class="variable">.latitude</span>] forKey:<span class="string">@"Lat"</span>];
+    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f"</span>,location<span class="variable">.coordinate</span><span class="variable">.longitude</span>] forKey:<span class="string">@"Lng"</span>];
+    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f"</span>,location<span class="variable">.altitude</span>] forKey:<span class="string">@"Alt"</span>];
+    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] synchronize];
+
+
+    lblLat<span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f"</span>,location<span class="variable">.coordinate</span><span class="variable">.latitude</span>];
+    lblLong<span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f"</span>,location<span class="variable">.coordinate</span><span class="variable">.longitude</span>];
+    lblAlt<span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f"</span>,location<span class="variable">.altitude</span>];
+}
+
+-(<span class="keyword">void</span>)locationManager:(CLLocationManager *)manager didFailWithError:(<span class="built_in">NSError</span> *)error{
+    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,error);
+}
+
+<span class="preprocessor">#pragma LocationManager Delegate</span>
+-(<span class="keyword">void</span>)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading{
+
+
+    <span class="keyword">self</span><span class="variable">.currentHeading</span> = newHeading;
+
+    <span class="keyword">if</span>(segNorth<span class="variable">.selectedSegmentIndex</span>==<span class="number">1</span>){
+        <span class="keyword">float</span> heading = newHeading<span class="variable">.magneticHeading</span>; <span class="comment">//in degrees</span>
+        <span class="keyword">float</span> headingDegrees = (heading*M_PI/<span class="number">180</span>); <span class="comment">//assuming needle points to top of iphone. convert to radians</span>
+        imgCompass<span class="variable">.transform</span> = <span class="built_in">CGAffineTransformMakeRotation</span>(headingDegrees);
+
+
+        <span class="built_in">NSLog</span>(<span class="string">@"heading %f"</span>,heading);
+        <span class="built_in">NSLog</span>(<span class="string">@"heading %f"</span>,headingDegrees);
+    }<span class="keyword">else</span>{
+        <span class="keyword">float</span> heading = newHeading<span class="variable">.trueHeading</span>; <span class="comment">//in degrees</span>
+        <span class="keyword">float</span> headingDegrees = (heading*M_PI/<span class="number">180</span>); <span class="comment">//assuming needle points to top of iphone. convert to radians</span>
+        imgCompass<span class="variable">.transform</span> = <span class="built_in">CGAffineTransformMakeRotation</span>(headingDegrees);
+
+        <span class="built_in">NSLog</span>(<span class="string">@"heading %f"</span>,heading);
+
+        <span class="built_in">NSLog</span>(<span class="string">@"heading %f"</span>,headingDegrees);
+    }
+
+
+}
+</code></pre><p>完整專案放在 <a href="https://github.com/nobodyyu/ChimenCompass" target="_blank" rel="external">GitHub</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iOS/">iOS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://www.yuaki.com/2015/07/28/iOS 奇門遁甲指北針－CoreLocation的應用/" data-title="iOS 奇門遁甲指北針－CoreLocation的應用 | YUAKI APP" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/08/04/LinkedInSDK-Walk-Through/" title="LinkedInSDK-Walk-Through">
+  <strong>上一篇：</strong><br/>
+  <span>
+  LinkedInSDK-Walk-Through</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/07/27/TouchID/"  title="TouchID Walk Through">
+ <strong>下一篇：</strong><br/> 
+ <span>TouchID Walk Through
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#準備好一個新專案，以及CoreLocation-Framework"><span class="toc-number">1.</span> <span class="toc-text">準備好一個新專案，以及CoreLocation.Framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#應該有的素材"><span class="toc-number">2.</span> <span class="toc-text">應該有的素材</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程式的撰寫"><span class="toc-number">3.</span> <span class="toc-text">程式的撰寫</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標籤</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Clean-Code/" title="Clean Code">Clean Code<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/其他/" title="其他">其他<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/遊戲/" title="遊戲">遊戲<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <!-- 
+<div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+ -->
+
+  
+
+
+</aside>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- right -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8983800189460499"
+     data-ad-slot="4813429766"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+    </div>
+    <footer><div id="footer" >
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by Jacman © 2015 
+		
+		<a href="http://www.yuaki.com/about" target="_blank" title="AKI YU">AKI YU</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'nobodyyu';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

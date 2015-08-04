@@ -23,6 +23,7 @@
     let c = count(list)
     for i in 0..&amp;lt;(c - 1) {
         let j = Int(arc4random_uniform">
+<meta property="og:updated_time" content="2015-07-25T13:43:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="swift shuffle">
 <meta name="twitter:description" content="為程式注入靈魂的小技巧 shufflefunc shuffle&amp;lt;C: MutableCollectionType where C.Index == Int&amp;gt;(var list: C) -&amp;gt; C {
@@ -120,23 +121,23 @@
 		
 		</div>
 		
-		<h3 id="為程式注入靈魂的小技巧_shuffle">為程式注入靈魂的小技巧 shuffle</h3><pre><code><span class="func"><span class="keyword">func</span> <span class="title">shuffle</span><span class="generics">&lt;C: MutableCollectionType where C.Index == Int&gt;</span><span class="params">(<span class="keyword">var</span> list: C)</span> -&gt; <span class="title">C</span> </span>{
-    <span class="keyword">let</span> <span class="built_in">c</span> = <span class="built_in">count</span>(list)
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;(<span class="built_in">c</span> - <span class="number">1</span>) {
-        <span class="keyword">let</span> j = <span class="type">Int</span>(arc4random_uniform(<span class="type">UInt32</span>(<span class="built_in">c</span> - i))) + i
-        <span class="built_in">swap</span>(&amp;list[i], &amp;list[j])
+		<h3 id="為程式注入靈魂的小技巧_shuffle">為程式注入靈魂的小技巧 shuffle</h3><pre><code>func shuffle&lt;C: MutableCollectionType where C.Index == Int&gt;(var <span class="built_in">list</span>: C) -&gt; C {
+    let c = count(<span class="built_in">list</span>)
+    <span class="keyword">for</span> i in <span class="number">0.</span>.&lt;(c - <span class="number">1</span>) {
+        let j = Int(arc4random_uniform(UInt32(c - i))) + <span class="function">i
+        <span class="title">swap</span><span class="params">(&amp;<span class="built_in">list</span>[i], &amp;<span class="built_in">list</span>[j])</span>
     }
-    <span class="keyword">return</span> list
+    return <span class="built_in">list</span>
 }
 
 
 
-huffle([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>])        
+<span class="title">huffle</span><span class="params">([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>])</span>        
 <span class="comment">// e.g., [6, 1, 8, 3, 2, 4, 7, 5]</span>
-shuffle([<span class="string">"hello"</span>, <span class="string">"goodbye"</span>, <span class="string">"ciao"</span>])    
-<span class="comment">// e.g., ["ciao", "goodbye", "hello"]</span>
+<span class="title">shuffle</span><span class="params">([<span class="string">"hello"</span>, <span class="string">"goodbye"</span>, <span class="string">"ciao"</span>])</span>    
+<span class="comment">// e.g., ["ciao", "goodbye", "hello"]</span></span>
 </code></pre><h3 id="extension">extension</h3><pre><code><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> </span>{
-    <span class="keyword">mutating</span> <span class="func"><span class="keyword">func</span> <span class="title">shuffle</span><span class="params">()</span> </span>{
+    <span class="keyword">mutating</span> <span class="func"><span class="keyword">func</span> <span class="title">shuffle</span><span class="params">()</span></span> {
         <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;(<span class="built_in">count</span> - <span class="number">1</span>) {
             <span class="keyword">let</span> j = <span class="type">Int</span>(arc4random_uniform(<span class="type">UInt32</span>(<span class="built_in">count</span> - i))) + i
             <span class="built_in">swap</span>(&amp;<span class="keyword">self</span>[i], &amp;<span class="keyword">self</span>[j])
@@ -225,7 +226,7 @@ numbers.shuffle()
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>25</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>27</sup></a></li>
 			
 		
 			
