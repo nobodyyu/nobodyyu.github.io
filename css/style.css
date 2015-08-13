@@ -1106,6 +1106,7 @@ article .article-content .img-center {
 article .article-content .img-shadow {
   -webkit-box-shadow: 0 0 2px 3px #ddd;
   box-shadow: 0 0 2px 3px #ddd;
+  margin: auto;
 }
 article .article-content figcaption,
 article .article-content .caption {
