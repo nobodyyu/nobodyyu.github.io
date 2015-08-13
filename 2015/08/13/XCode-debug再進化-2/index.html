@@ -4,44 +4,43 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Android-Thread-Save Singleton | YUAKI APP</title>
+    <title>XCode debug再進化－2 | YUAKI APP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="AKI YU">
     
 
     
-    <meta name="description" content="Android Thread-Save Singletonpublic class ThreadSafeSingleton {
-
-    private static final Object instance = new Object();
-
-    protected ThreadSafeSingleton() {
-    }
-
-    // Runtime initialization">
+    <meta name="description" content="學海無涯，唯勤是岸，今天又要教一些xcode debug好用的小技巧了。這次是要介紹中斷點(BreakPoint)的使用
+為你的程式加入中斷點先來一段小程式
+for(int i=0;i&amp;lt;100;i++){
+   NSLog(@&quot;%d&quot;,i);
+}
+接著  在旁邊的行數的區域用滑鼠點一下，就會看到中斷點的藍標跑出來想要移除中斷點可以用拖曳該中斷點  到中間的編輯區時會出現X，放掉就刪除了（有點">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android-Thread-Save Singleton">
-<meta property="og:url" content="http://www.yuaki.com/2015/04/08/Android-Thread-Save-Singleton/index.html">
+<meta property="og:title" content="XCode debug再進化－2">
+<meta property="og:url" content="http://www.yuaki.com/2015/08/13/XCode-debug再進化-2/index.html">
 <meta property="og:site_name" content="YUAKI APP">
-<meta property="og:description" content="Android Thread-Save Singletonpublic class ThreadSafeSingleton {
-
-    private static final Object instance = new Object();
-
-    protected ThreadSafeSingleton() {
-    }
-
-    // Runtime initialization">
-<meta property="og:updated_time" content="2015-07-25T13:58:40.000Z">
+<meta property="og:description" content="學海無涯，唯勤是岸，今天又要教一些xcode debug好用的小技巧了。這次是要介紹中斷點(BreakPoint)的使用
+為你的程式加入中斷點先來一段小程式
+for(int i=0;i&amp;lt;100;i++){
+   NSLog(@&quot;%d&quot;,i);
+}
+接著  在旁邊的行數的區域用滑鼠點一下，就會看到中斷點的藍標跑出來想要移除中斷點可以用拖曳該中斷點  到中間的編輯區時會出現X，放掉就刪除了（有點">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-05.png">
+<meta property="og:updated_time" content="2015-08-13T06:20:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android-Thread-Save Singleton">
-<meta name="twitter:description" content="Android Thread-Save Singletonpublic class ThreadSafeSingleton {
-
-    private static final Object instance = new Object();
-
-    protected ThreadSafeSingleton() {
-    }
-
-    // Runtime initialization">
+<meta name="twitter:title" content="XCode debug再進化－2">
+<meta name="twitter:description" content="學海無涯，唯勤是岸，今天又要教一些xcode debug好用的小技巧了。這次是要介紹中斷點(BreakPoint)的使用
+為你的程式加入中斷點先來一段小程式
+for(int i=0;i&amp;lt;100;i++){
+   NSLog(@&quot;%d&quot;,i);
+}
+接著  在旁邊的行數的區域用滑鼠點一下，就會看到中斷點的藍標跑出來想要移除中斷點可以用拖曳該中斷點  到中間的編輯區時會出現X，放掉就刪除了（有點">
 
     
     <link rel="alternative" href="/" title="YUAKI APP" type="application/atom+xml">
@@ -113,14 +112,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/08/Android-Thread-Save-Singleton/" title="Android-Thread-Save Singleton" itemprop="url">Android-Thread-Save Singleton</a>
+      <a href="/2015/08/13/XCode-debug再進化-2/" title="XCode debug再進化－2" itemprop="url">XCode debug再進化－2</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-08T09:38:45.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    <time datetime="2015-08-13T11:54:13.000Z" itemprop="datePublished"> 發表於 2015-08-13</time>
     
   </p>
 </header>
@@ -129,24 +128,39 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android_Thread-Save_Singleton"><span class="toc-number">1.</span> <span class="toc-text">Android Thread-Save Singleton</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#為你的程式加入中斷點"><span class="toc-number">1.</span> <span class="toc-text">為你的程式加入中斷點</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="Android_Thread-Save_Singleton">Android Thread-Save Singleton</h2><pre><code>public class ThreadSafeSingleton {
-
-   <span class="keyword"> private</span><span class="keyword"> static</span><span class="keyword"> final</span> Object<span class="instruction"> instance </span>=<span class="instruction"> new </span>Object(<span class="function">)</span>;
-
-   <span class="keyword"> protected</span><span class="function"> ThreadSafeSingleton(</span><span class="function">)</span> {
-    }
-
-    // Runtime initialization
-    // By defualt ThreadSafe
-   <span class="keyword"> public</span><span class="keyword"> static</span> Object<span class="function"> getInstance(</span><span class="function">)</span> {
-       <span class="instruction"> return </span>instance;
-    }
+		<p>學海無涯，唯勤是岸，今天又要教一些xcode debug好用的小技巧了。<br><br><br><br>這次是要介紹中斷點(BreakPoint)的使用</p>
+<h3 id="為你的程式加入中斷點">為你的程式加入中斷點</h3><p>先來一段小程式</p>
+<pre><code><span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span><span class="comment">;i&lt;100;i++){</span>
+   NSLog(@<span class="string">"%d"</span>,i)<span class="comment">;</span>
 }
-</code></pre>  
+</code></pre><p>接著  在旁邊的行數的區域用滑鼠點一下，就會看到中斷點的藍標跑出來<br>想要移除中斷點可以用拖曳該中斷點  到中間的編輯區時會出現X，放掉就刪除了（有點像丟垃圾桶）。</p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-01.png" alt="debug1-01" style="width:310px"></p>
+<p>接著，運行程式，會發現程式在一觸碰到中斷點時就會停下來等你debug</p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-02.png" alt="debug1-02" style="width:310px"></p>
+<p>此時下方的[Debug Navigator]會自已彈出來<br>會有一些基本的變數訊息在左邊  告訴我們此時 </p>
+<pre><code>i=<span class="number">0</span>;
+</code></pre><p><br><br>當然，因為一碰到中斷點時馬上就停下來，所以i＝0時就停了</p>
+<p>那…….我想要在 i=49 時，來做一個debug的動作呢？</p>
+<p><br><br>=============== Of Course YES =================<br><br>=============== Of Course YES =================<br><br>=============== Of Course YES =================</p>
+<p>在breakpoint上滑鼠右鍵，並且選擇[Edit BreakPoint]<br><br><br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-03.png" alt="debug1-03" style="width:310px"></p>
+<p>此時，會有幾個參數可以使用<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-04.png" alt="debug1-04" style="width:310px"></p>
+<pre><code><span class="number">1.</span> Condition
+<span class="number">2.</span> Ignore
+<span class="number">3.</span> Action
+<span class="number">4.</span> Options - Automatically <span class="keyword">continue</span> after evaluating actions
+</code></pre><p>在上述的情境中我們可以做的是</p>
+<pre><code><span class="number">1.</span> 在Condition 裡輸入 [ i == <span class="number">49</span> ]
+或
+<span class="number">2.</span> Ignore <span class="number">48</span> 
+</code></pre><p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug1-05.png" alt="debug1-05" style="width:310px"></p>
+<p>接著重跑一次程式，媽呀～ 太神奇了，同樣的中斷點，程式跑到第49次才停下來！！！！！</p>
+<p>醬子的話  就可以隨心所欲的想中斷就中斷，不用一直按 [Step Over] 了</p>
+<p><br><br><br><br></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -154,7 +168,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Android/">Android</a>
+  <span></span> <a href="/tags/iOS/">iOS</a>
   </div>
 
 </div>
@@ -163,7 +177,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.yuaki.com/2015/04/08/Android-Thread-Save-Singleton/" data-title="Android-Thread-Save Singleton | YUAKI APP" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.yuaki.com/2015/08/13/XCode-debug再進化-2/" data-title="XCode debug再進化－2 | YUAKI APP" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -177,18 +191,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/04/08/Android-leap-code-01/" title="Android-leap-code-01">
+ <a href="/2015/08/13/XCode-debug再進化-3/" title="XCode debug再進化－3">
   <strong>上一篇：</strong><br/>
   <span>
-  Android-leap-code-01</span>
+  XCode debug再進化－3</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/04/08/Android-shrinkTextView/"  title="Android-shrinkTextView">
+<a href="/2015/08/04/LinkedInSDK-Walk-Through/"  title="LinkedInSDK-Walk-Through">
  <strong>下一篇：</strong><br/> 
- <span>Android-shrinkTextView
+ <span>LinkedInSDK-Walk-Through
 </span>
 </a>
 </div>
@@ -209,7 +223,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android_Thread-Save_Singleton"><span class="toc-number">1.</span> <span class="toc-text">Android Thread-Save Singleton</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#為你的程式加入中斷點"><span class="toc-number">1.</span> <span class="toc-text">為你的程式加入中斷點</span></a></li></ol>
  
   </div>
 

@@ -4,44 +4,48 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Android-Thread-Save Singleton | YUAKI APP</title>
+    <title>XCode debug再進化－3 | YUAKI APP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="AKI YU">
     
 
     
-    <meta name="description" content="Android Thread-Save Singletonpublic class ThreadSafeSingleton {
+    <meta name="description" content="在xcode debug時，有些功能可能用不太到，不過既然知道了，就分享出來給大家知道，致於想不想用，什麼時候用，就端看自已的判斷了
+這次是要介紹如何在debug模式下，做到更新 UI 的指令
+先中斷一下吧在一個範例的按鈕裡裡先拉一個 IBAction  然後給一個中斷點
 
-    private static final Object instance = new Object();
+在debug前的 UI 長成這樣
 
-    protected ThreadSafeSingleton() {
-    }
-
-    // Runtime initialization">
+按下按鈕，被中斷後，在debug navagator的lldb裡下指令
+e id $my">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android-Thread-Save Singleton">
-<meta property="og:url" content="http://www.yuaki.com/2015/04/08/Android-Thread-Save-Singleton/index.html">
+<meta property="og:title" content="XCode debug再進化－3">
+<meta property="og:url" content="http://www.yuaki.com/2015/08/13/XCode-debug再進化-3/index.html">
 <meta property="og:site_name" content="YUAKI APP">
-<meta property="og:description" content="Android Thread-Save Singletonpublic class ThreadSafeSingleton {
+<meta property="og:description" content="在xcode debug時，有些功能可能用不太到，不過既然知道了，就分享出來給大家知道，致於想不想用，什麼時候用，就端看自已的判斷了
+這次是要介紹如何在debug模式下，做到更新 UI 的指令
+先中斷一下吧在一個範例的按鈕裡裡先拉一個 IBAction  然後給一個中斷點
 
-    private static final Object instance = new Object();
+在debug前的 UI 長成這樣
 
-    protected ThreadSafeSingleton() {
-    }
-
-    // Runtime initialization">
-<meta property="og:updated_time" content="2015-07-25T13:58:40.000Z">
+按下按鈕，被中斷後，在debug navagator的lldb裡下指令
+e id $my">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug2-01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug2-02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug2-03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug2-04.png">
+<meta property="og:updated_time" content="2015-08-13T06:49:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android-Thread-Save Singleton">
-<meta name="twitter:description" content="Android Thread-Save Singletonpublic class ThreadSafeSingleton {
+<meta name="twitter:title" content="XCode debug再進化－3">
+<meta name="twitter:description" content="在xcode debug時，有些功能可能用不太到，不過既然知道了，就分享出來給大家知道，致於想不想用，什麼時候用，就端看自已的判斷了
+這次是要介紹如何在debug模式下，做到更新 UI 的指令
+先中斷一下吧在一個範例的按鈕裡裡先拉一個 IBAction  然後給一個中斷點
 
-    private static final Object instance = new Object();
+在debug前的 UI 長成這樣
 
-    protected ThreadSafeSingleton() {
-    }
-
-    // Runtime initialization">
+按下按鈕，被中斷後，在debug navagator的lldb裡下指令
+e id $my">
 
     
     <link rel="alternative" href="/" title="YUAKI APP" type="application/atom+xml">
@@ -113,14 +117,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/08/Android-Thread-Save-Singleton/" title="Android-Thread-Save Singleton" itemprop="url">Android-Thread-Save Singleton</a>
+      <a href="/2015/08/13/XCode-debug再進化-3/" title="XCode debug再進化－3" itemprop="url">XCode debug再進化－3</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-08T09:38:45.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    <time datetime="2015-08-13T12:14:13.000Z" itemprop="datePublished"> 發表於 2015-08-13</time>
     
   </p>
 </header>
@@ -129,24 +133,35 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android_Thread-Save_Singleton"><span class="toc-number">1.</span> <span class="toc-text">Android Thread-Save Singleton</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先中斷一下吧"><span class="toc-number">1.</span> <span class="toc-text">先中斷一下吧</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="Android_Thread-Save_Singleton">Android Thread-Save Singleton</h2><pre><code>public class ThreadSafeSingleton {
-
-   <span class="keyword"> private</span><span class="keyword"> static</span><span class="keyword"> final</span> Object<span class="instruction"> instance </span>=<span class="instruction"> new </span>Object(<span class="function">)</span>;
-
-   <span class="keyword"> protected</span><span class="function"> ThreadSafeSingleton(</span><span class="function">)</span> {
-    }
-
-    // Runtime initialization
-    // By defualt ThreadSafe
-   <span class="keyword"> public</span><span class="keyword"> static</span> Object<span class="function"> getInstance(</span><span class="function">)</span> {
-       <span class="instruction"> return </span>instance;
-    }
-}
-</code></pre>  
+		<p>在xcode debug時，有些功能可能用不太到，不過既然知道了，就分享出來給大家知道，致於想不想用，什麼時候用，就端看自已的判斷了</p>
+<p><br><br><br>這次是要介紹如何在debug模式下，做到更新 UI 的指令</p>
+<h3 id="先中斷一下吧">先中斷一下吧</h3><p>在一個範例的按鈕裡裡先拉一個 IBAction  然後給一個中斷點</p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug2-01.png" alt="debug2-01" style="width:310px"></p>
+<p>在debug前的 UI 長成這樣</p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug2-02.png" alt="debug2-02" style="width:310px"></p>
+<p>按下按鈕，被中斷後，在debug navagator的lldb裡下指令</p>
+<pre><code>e id <span class="variable">$myView</span> = (id)<span class="number">0x154d0e9d0</span>
+</code></pre><p>其中</p>
+<pre><code>e 是 expresss 的簡寫
+id 是型別
+<span class="variable">$myView</span> 是變數容器
+<span class="number">0x154d0e9d0</span> 是記憶體位址 （需要與左側的變數的記憶體位址一致）
+</code></pre><p>結果如下圖</p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug2-03.png" alt="debug2-03" style="width:310px"></p>
+<p>接著 可以輸入想要做的事情</p>
+<pre><code>e (void)[<span class="variable">$myView</span> setBackgroundColor:[UIColor redColor]]
+</code></pre><p>內容就不多解釋了，只是，醬子打完後  手機是不會動的（廢話，因為還卡在中斷點）</p>
+<p><br><br>所以，要通知 UI 做更新才行</p>
+<pre><code>e (<span class="keyword">void</span>)[<span class="built_in">CATransaction</span> flush]
+</code></pre><p>你會發現，還在中斷點的debug模式下，手機的畫面更新了！！！！（如下圖）<br><br></p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/debug2-04.png" alt="debug2-04" style="width:310px"></p>
+<p>真的太神奇了，傑克</p>
+<p><br><br><br><br></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -154,7 +169,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Android/">Android</a>
+  <span></span> <a href="/tags/iOS/">iOS</a>
   </div>
 
 </div>
@@ -163,7 +178,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.yuaki.com/2015/04/08/Android-Thread-Save-Singleton/" data-title="Android-Thread-Save Singleton | YUAKI APP" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.yuaki.com/2015/08/13/XCode-debug再進化-3/" data-title="XCode debug再進化－3 | YUAKI APP" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -177,18 +192,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/04/08/Android-leap-code-01/" title="Android-leap-code-01">
+ <a href="/2015/08/13/XCode-debug再進化-4/" title="XCode debug再進化－4">
   <strong>上一篇：</strong><br/>
   <span>
-  Android-leap-code-01</span>
+  XCode debug再進化－4</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/04/08/Android-shrinkTextView/"  title="Android-shrinkTextView">
+<a href="/2015/08/13/XCode-debug再進化-2/"  title="XCode debug再進化－2">
  <strong>下一篇：</strong><br/> 
- <span>Android-shrinkTextView
+ <span>XCode debug再進化－2
 </span>
 </a>
 </div>
@@ -209,7 +224,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android_Thread-Save_Singleton"><span class="toc-number">1.</span> <span class="toc-text">Android Thread-Save Singleton</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先中斷一下吧"><span class="toc-number">1.</span> <span class="toc-text">先中斷一下吧</span></a></li></ol>
  
   </div>
 
