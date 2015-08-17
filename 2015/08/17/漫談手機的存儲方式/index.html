@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://www.yuaki.com/2015/08/17/漫談手機的存儲方式/index.html">
 <meta property="og:site_name" content="YUAKI APP">
 <meta property="og:description" content="如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－－－大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的">
-<meta property="og:updated_time" content="2015-08-17T09:49:21.000Z">
+<meta property="og:updated_time" content="2015-08-17T09:52:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漫談手機的存儲方式">
 <meta name="twitter:description" content="如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－－－大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的">
@@ -125,35 +125,29 @@
 <span class="attr_selector">[[NSUserDefaults standardUserDefaults]</span> <span class="tag">synchronize</span>];
 </code></pre><h4 id="read_Data">read Data</h4><pre><code><span class="attr_selector">[[NSUserDefaults standardUserDefaults]</span> <span class="rule"><span class="attribute">objectForKey</span>:<span class="value">@<span class="string">"key"</span>]</span></span>;
 <span class="attr_selector">[[NSUserDefaults standardUserDefaults]</span> <span class="tag">synchronize</span>];
-</code></pre><h3 id="實體檔案存取(NSFileManager)">實體檔案存取(NSFileManager)</h3><h4 id="Create_File">Create File</h4><pre><code>- (void)createFileWithName:(NSString *)fileName
+</code></pre><h3 id="實體檔案存取(NSFileManager)">實體檔案存取(NSFileManager)</h3><h4 id="Create_File">Create File</h4><pre><code>- (<span class="keyword">void</span>)createFileWithName:(<span class="built_in">NSString</span> *)fileName
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:<span class="operator">0];</span>
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
-
-    NSFileManager *manager = [NSFileManager defaultManager];
-    // 1st, This funcion could allow you to <span class="operator"><span class="keyword">create</span> a <span class="keyword">file</span> <span class="keyword">with</span> <span class="keyword">initial</span> <span class="keyword">contents</span>.
-    // <span class="number">2</span>nd, You could specify the <span class="keyword">attributes</span> <span class="keyword">of</span> <span class="keyword">values</span> <span class="keyword">for</span> the owner, <span class="keyword">group</span>, <span class="keyword">and</span> permissions.
-    // Here we <span class="keyword">use</span> nil, which means we <span class="keyword">use</span> <span class="keyword">default</span> <span class="keyword">values</span> <span class="keyword">for</span> these attibutes.
-    // <span class="number">3</span>rd, it will <span class="keyword">return</span> YES <span class="keyword">if</span> NSFileManager <span class="keyword">create</span> it successfully <span class="keyword">or</span> it <span class="keyword">exists</span> already.
-    <span class="keyword">if</span> ([manager createFileAtPath:filePath <span class="keyword">contents</span>:nil <span class="keyword">attributes</span>:nil]) {
-        NSLog(@<span class="string">"Created the File Successfully."</span>);</span>
-    } else {
-        NSLog(@"Failed to <span class="operator"><span class="keyword">Create</span> the <span class="keyword">File</span><span class="string">");
-    }
-}</span></span>
-</code></pre><h4 id="Read_File">Read File</h4><pre><code>- (<span class="keyword">void</span>)readFileWithName:(<span class="built_in">NSString</span> *)fileName
-{
-    <span class="comment">// Fetch directory path of document for local application.</span>
     <span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);
     <span class="built_in">NSString</span> *documentsDirectory = [paths objectAtIndex:<span class="number">0</span>];
-    <span class="comment">// Have the absolute path of file named fileName by joining the document path with fileName, separated by path separator.</span>
     <span class="built_in">NSString</span> *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
 
-    <span class="comment">// NSFileManager is the manager organize all the files on device.</span>
+    <span class="built_in">NSFileManager</span> *manager = [<span class="built_in">NSFileManager</span> defaultManager];
+
+    <span class="keyword">if</span> ([manager createFileAtPath:filePath contents:<span class="literal">nil</span> attributes:<span class="literal">nil</span>]) {
+        <span class="built_in">NSLog</span>(<span class="string">@"Created the File Successfully."</span>);
+    } <span class="keyword">else</span> {
+        <span class="built_in">NSLog</span>(<span class="string">@"Failed to Create the File"</span>);
+    }
+}
+</code></pre><h4 id="Read_File">Read File</h4><pre><code>- (<span class="keyword">void</span>)readFileWithName:(<span class="built_in">NSString</span> *)fileName
+{
+
+    <span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);
+    <span class="built_in">NSString</span> *documentsDirectory = [paths objectAtIndex:<span class="number">0</span>];
+    <span class="built_in">NSString</span> *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+
     <span class="built_in">NSFileManager</span> *manager = [<span class="built_in">NSFileManager</span> defaultManager];
     <span class="keyword">if</span> ([manager fileExistsAtPath:filePath]) {
-        <span class="comment">// Start to Read.</span>
         <span class="built_in">NSError</span> *error = <span class="literal">nil</span>;
         <span class="built_in">NSString</span> *content = [<span class="built_in">NSString</span> stringWithContentsOfFile:filePath encoding:<span class="built_in">NSStringEncodingConversionAllowLossy</span> error:&amp;error];
         <span class="built_in">NSLog</span>(<span class="string">@"File Content: %@"</span>, content);
@@ -167,26 +161,13 @@
 }
 </code></pre><h4 id="Write_File">Write File</h4><pre><code>- (<span class="keyword">void</span>)writeString:(<span class="built_in">NSString</span> *)content toFile:(<span class="built_in">NSString</span> *)fileName
 {
-    <span class="comment">// Fetch directory path of document for local application.</span>
     <span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);
     <span class="built_in">NSString</span> *documentsDirectory = [paths objectAtIndex:<span class="number">0</span>];
-    <span class="comment">// Have the absolute path of file named fileName by joining the document path with fileName, separated by path separator.</span>
     <span class="built_in">NSString</span> *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
-
-    <span class="comment">// NSFileManager is the manager organize all the files on device.</span>
     <span class="built_in">NSFileManager</span> *manager = [<span class="built_in">NSFileManager</span> defaultManager];
-    <span class="comment">// Check if the file named fileName exists.</span>
     <span class="keyword">if</span> ([manager fileExistsAtPath:filePath]) {
         <span class="built_in">NSError</span> *error = <span class="literal">nil</span>;
-        <span class="comment">// Since [writeToFile: atomically: encoding: error:] will overwrite all the existing contents in the file, you could keep the content temperatorily, then append content to it, and assign it back to content.</span>
-        <span class="comment">// To use it, simply uncomment it.</span>
-<span class="comment">//        NSString *tmp = [[NSString alloc] initWithContentsOfFile:fileName usedEncoding:NSStringEncodingConversionAllowLossy error:nil];</span>
-<span class="comment">//        if (tmp) {</span>
-<span class="comment">//            content = [tmp stringByAppendingString:content];</span>
-<span class="comment">//        }</span>
-        <span class="comment">// Write NSString content to the file.</span>
         [content writeToFile:filePath atomically:<span class="literal">YES</span> encoding:<span class="built_in">NSStringEncodingConversionAllowLossy</span> error:&amp;error];
-        <span class="comment">// If error happens, log it.</span>
         <span class="keyword">if</span> (error) {
             <span class="built_in">NSLog</span>(<span class="string">@"There is an Error: %@"</span>, error);
         }
@@ -202,16 +183,13 @@
 {
     <span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);
     <span class="built_in">NSString</span> *documentsDirectory = [paths objectAtIndex:<span class="number">0</span>];
-    <span class="comment">// Have the absolute path of file named fileName by joining the document path with fileName, separated by path separator.</span>
     <span class="built_in">NSString</span> *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
 
     <span class="built_in">NSFileManager</span> *manager = [<span class="built_in">NSFileManager</span> defaultManager];
     <span class="comment">// Need to check if the to be deleted file exists.</span>
     <span class="keyword">if</span> ([manager fileExistsAtPath:filePath]) {
         <span class="built_in">NSError</span> *error = <span class="literal">nil</span>;
-        <span class="comment">// This function also returnsYES if the item was removed successfully or if path was nil.</span>
-        <span class="comment">// Returns NO if an error occurred.</span>
-        [manager removeItemAtPath:filePath error:&amp;error];
+       [manager removeItemAtPath:filePath error:&amp;error];
         <span class="keyword">if</span> (error) {
             <span class="built_in">NSLog</span>(<span class="string">@"There is an Error: %@"</span>, error);
         }
