@@ -1,0 +1,615 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>漫談手機的存儲方式 | YUAKI APP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="AKI YU">
+    
+
+    
+    <meta name="description" content="如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的好處">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漫談手機的存儲方式">
+<meta property="og:url" content="http://www.yuaki.com/2015/08/17/漫談手機的存儲方式/index.html">
+<meta property="og:site_name" content="YUAKI APP">
+<meta property="og:description" content="如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的好處">
+<meta property="og:updated_time" content="2015-08-17T09:42:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="漫談手機的存儲方式">
+<meta name="twitter:description" content="如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的好處">
+
+    
+    <link rel="alternative" href="/" title="YUAKI APP" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="YUAKI APP" title="YUAKI APP"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="YUAKI APP">YUAKI APP</a></h1>
+				<h2 class="blog-motto">we app what you have</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="http://www.yuaki.com">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:www.yuaki.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- nobodyyu_right -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8983800189460499"
+     data-ad-slot="6290162960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/17/漫談手機的存儲方式/" title="漫談手機的存儲方式" itemprop="url">漫談手機的存儲方式</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-17T11:54:13.000Z" itemprop="datePublished"> 發表於 2015-08-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSUserDefault"><span class="toc-number">1.</span> <span class="toc-text">NSUserDefault</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#regist_Data"><span class="toc-number">1.1.</span> <span class="toc-text">regist Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#write_Data"><span class="toc-number">1.2.</span> <span class="toc-text">write Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#remove_Data"><span class="toc-number">1.3.</span> <span class="toc-text">remove Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#read_Data"><span class="toc-number">1.4.</span> <span class="toc-text">read Data</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#實體檔案存取(NSFileManager)"><span class="toc-number">2.</span> <span class="toc-text">實體檔案存取(NSFileManager)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Create_File"><span class="toc-number">2.1.</span> <span class="toc-text">Create File</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Read_File"><span class="toc-number">2.2.</span> <span class="toc-text">Read File</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Write_File"><span class="toc-number">2.3.</span> <span class="toc-text">Write File</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#delete_File"><span class="toc-number">2.4.</span> <span class="toc-text">delete File</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQLite"><span class="toc-number">3.</span> <span class="toc-text">SQLite</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#首先你要先把_libsqlite3-dylib_加進library"><span class="toc-number">3.1.</span> <span class="toc-text">首先你要先把 libsqlite3.dylib 加進library</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OpenDB"><span class="toc-number">3.2.</span> <span class="toc-text">OpenDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#insertData"><span class="toc-number">3.3.</span> <span class="toc-text">insertData</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#readData"><span class="toc-number">3.4.</span> <span class="toc-text">readData</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#updateData"><span class="toc-number">3.5.</span> <span class="toc-text">updateData</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#deleteData"><span class="toc-number">3.6.</span> <span class="toc-text">deleteData</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CloseDB"><span class="toc-number">3.7.</span> <span class="toc-text">CloseDB</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－<br>大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的好處和便捷性，這邊就不多解釋了，如果有人有更好的存儲方式，也請不吝告知。</p>
+<h3 id="NSUserDefault">NSUserDefault</h3><p>有許多型別可以使用，這裡使用比較常用的object當範例，其他類似的就不一一介紹。</p>
+<h4 id="regist_Data">regist Data</h4><pre><code><span class="collection">[<span class="collection">[NSUserDefaults standardUserDefaults]</span> registerDefaults:&lt;#<span class="list">(<span class="keyword">NSDictionary</span> *)</span>#&gt;]</span>
+<span class="collection">[<span class="collection">[NSUserDefaults standardUserDefaults]</span> synchronize]</span><span class="comment">;</span>
+</code></pre><h4 id="write_Data">write Data</h4><pre><code><span class="attr_selector">[[NSUserDefaults standardUserDefaults]</span> <span class="rule"><span class="attribute">setObject</span>:<span class="value">data forKey:@<span class="string">"key"</span>]</span></span>;
+<span class="attr_selector">[[NSUserDefaults standardUserDefaults]</span> <span class="tag">synchronize</span>];
+</code></pre><h4 id="remove_Data">remove Data</h4><pre><code><span class="collection">[<span class="collection">[NSUserDefaults standardUserDefaults]</span> removeObjectForKey:@<span class="string">"key"</span>]</span>    
+<span class="collection">[<span class="collection">[NSUserDefaults standardUserDefaults]</span> synchronize]</span><span class="comment">;</span>
+</code></pre><p>或是</p>
+<pre><code><span class="attr_selector">[[NSUserDefaults standardUserDefaults]</span> <span class="rule"><span class="attribute">setObject</span>:<span class="value">nil forKey:@<span class="string">"key"</span>]</span></span>;
+<span class="attr_selector">[[NSUserDefaults standardUserDefaults]</span> <span class="tag">synchronize</span>];
+</code></pre><h4 id="read_Data">read Data</h4><pre><code><span class="attr_selector">[[NSUserDefaults standardUserDefaults]</span> <span class="rule"><span class="attribute">objectForKey</span>:<span class="value">@<span class="string">"key"</span>]</span></span>;
+<span class="attr_selector">[[NSUserDefaults standardUserDefaults]</span> <span class="tag">synchronize</span>];
+</code></pre><h3 id="實體檔案存取(NSFileManager)">實體檔案存取(NSFileManager)</h3><h4 id="Create_File">Create File</h4><pre><code>- (void)createFileWithName:(NSString *)fileName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:<span class="operator">0];</span>
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+
+    NSFileManager *manager = [NSFileManager defaultManager];
+    // 1st, This funcion could allow you to <span class="operator"><span class="keyword">create</span> a <span class="keyword">file</span> <span class="keyword">with</span> <span class="keyword">initial</span> <span class="keyword">contents</span>.
+    // <span class="number">2</span>nd, You could specify the <span class="keyword">attributes</span> <span class="keyword">of</span> <span class="keyword">values</span> <span class="keyword">for</span> the owner, <span class="keyword">group</span>, <span class="keyword">and</span> permissions.
+    // Here we <span class="keyword">use</span> nil, which means we <span class="keyword">use</span> <span class="keyword">default</span> <span class="keyword">values</span> <span class="keyword">for</span> these attibutes.
+    // <span class="number">3</span>rd, it will <span class="keyword">return</span> YES <span class="keyword">if</span> NSFileManager <span class="keyword">create</span> it successfully <span class="keyword">or</span> it <span class="keyword">exists</span> already.
+    <span class="keyword">if</span> ([manager createFileAtPath:filePath <span class="keyword">contents</span>:nil <span class="keyword">attributes</span>:nil]) {
+        NSLog(@<span class="string">"Created the File Successfully."</span>);</span>
+    } else {
+        NSLog(@"Failed to <span class="operator"><span class="keyword">Create</span> the <span class="keyword">File</span><span class="string">");
+    }
+}</span></span>
+</code></pre><h4 id="Read_File">Read File</h4><pre><code>- (<span class="keyword">void</span>)readFileWithName:(<span class="built_in">NSString</span> *)fileName
+{
+    <span class="comment">// Fetch directory path of document for local application.</span>
+    <span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);
+    <span class="built_in">NSString</span> *documentsDirectory = [paths objectAtIndex:<span class="number">0</span>];
+    <span class="comment">// Have the absolute path of file named fileName by joining the document path with fileName, separated by path separator.</span>
+    <span class="built_in">NSString</span> *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+
+    <span class="comment">// NSFileManager is the manager organize all the files on device.</span>
+    <span class="built_in">NSFileManager</span> *manager = [<span class="built_in">NSFileManager</span> defaultManager];
+    <span class="keyword">if</span> ([manager fileExistsAtPath:filePath]) {
+        <span class="comment">// Start to Read.</span>
+        <span class="built_in">NSError</span> *error = <span class="literal">nil</span>;
+        <span class="built_in">NSString</span> *content = [<span class="built_in">NSString</span> stringWithContentsOfFile:filePath encoding:<span class="built_in">NSStringEncodingConversionAllowLossy</span> error:&amp;error];
+        <span class="built_in">NSLog</span>(<span class="string">@"File Content: %@"</span>, content);
+
+        <span class="keyword">if</span> (error) {
+            <span class="built_in">NSLog</span>(<span class="string">@"There is an Error: %@"</span>, error);
+        }
+    } <span class="keyword">else</span> {
+        <span class="built_in">NSLog</span>(<span class="string">@"File %@ doesn't exists"</span>, fileName);
+    }
+}
+</code></pre><h4 id="Write_File">Write File</h4><pre><code>- (<span class="keyword">void</span>)writeString:(<span class="built_in">NSString</span> *)content toFile:(<span class="built_in">NSString</span> *)fileName
+{
+    <span class="comment">// Fetch directory path of document for local application.</span>
+    <span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);
+    <span class="built_in">NSString</span> *documentsDirectory = [paths objectAtIndex:<span class="number">0</span>];
+    <span class="comment">// Have the absolute path of file named fileName by joining the document path with fileName, separated by path separator.</span>
+    <span class="built_in">NSString</span> *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+
+    <span class="comment">// NSFileManager is the manager organize all the files on device.</span>
+    <span class="built_in">NSFileManager</span> *manager = [<span class="built_in">NSFileManager</span> defaultManager];
+    <span class="comment">// Check if the file named fileName exists.</span>
+    <span class="keyword">if</span> ([manager fileExistsAtPath:filePath]) {
+        <span class="built_in">NSError</span> *error = <span class="literal">nil</span>;
+        <span class="comment">// Since [writeToFile: atomically: encoding: error:] will overwrite all the existing contents in the file, you could keep the content temperatorily, then append content to it, and assign it back to content.</span>
+        <span class="comment">// To use it, simply uncomment it.</span>
+<span class="comment">//        NSString *tmp = [[NSString alloc] initWithContentsOfFile:fileName usedEncoding:NSStringEncodingConversionAllowLossy error:nil];</span>
+<span class="comment">//        if (tmp) {</span>
+<span class="comment">//            content = [tmp stringByAppendingString:content];</span>
+<span class="comment">//        }</span>
+        <span class="comment">// Write NSString content to the file.</span>
+        [content writeToFile:filePath atomically:<span class="literal">YES</span> encoding:<span class="built_in">NSStringEncodingConversionAllowLossy</span> error:&amp;error];
+        <span class="comment">// If error happens, log it.</span>
+        <span class="keyword">if</span> (error) {
+            <span class="built_in">NSLog</span>(<span class="string">@"There is an Error: %@"</span>, error);
+        }
+    } <span class="keyword">else</span> {
+        <span class="comment">// If the file doesn't exists, log it.</span>
+        <span class="built_in">NSLog</span>(<span class="string">@"File %@ doesn't exists"</span>, fileName);
+    }
+
+    <span class="comment">// This function could also be written without NSFileManager checking on the existence of file,</span>
+    <span class="comment">// since the system will atomatically create it for you if it doesn't exist.</span>
+}
+</code></pre><h4 id="delete_File">delete File</h4><pre><code>- (<span class="keyword">void</span>)deleteFileWithName:(<span class="built_in">NSString</span> *)fileName
+{
+    <span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);
+    <span class="built_in">NSString</span> *documentsDirectory = [paths objectAtIndex:<span class="number">0</span>];
+    <span class="comment">// Have the absolute path of file named fileName by joining the document path with fileName, separated by path separator.</span>
+    <span class="built_in">NSString</span> *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+
+    <span class="built_in">NSFileManager</span> *manager = [<span class="built_in">NSFileManager</span> defaultManager];
+    <span class="comment">// Need to check if the to be deleted file exists.</span>
+    <span class="keyword">if</span> ([manager fileExistsAtPath:filePath]) {
+        <span class="built_in">NSError</span> *error = <span class="literal">nil</span>;
+        <span class="comment">// This function also returnsYES if the item was removed successfully or if path was nil.</span>
+        <span class="comment">// Returns NO if an error occurred.</span>
+        [manager removeItemAtPath:filePath error:&amp;error];
+        <span class="keyword">if</span> (error) {
+            <span class="built_in">NSLog</span>(<span class="string">@"There is an Error: %@"</span>, error);
+        }
+    } <span class="keyword">else</span> {
+        <span class="built_in">NSLog</span>(<span class="string">@"File %@ doesn't exists"</span>, fileName);
+    }
+}
+</code></pre><h3 id="SQLite">SQLite</h3><p>這裡我使用最常用的FMDB來當做範例<br><a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">FMDB on GitHub</a></p>
+<h4 id="首先你要先把_libsqlite3-dylib_加進library">首先你要先把 libsqlite3.dylib 加進library</h4><p>不解釋</p>
+<h4 id="OpenDB">OpenDB</h4><pre><code><span class="built_in">NSURL</span> *appUrl = [[[<span class="built_in">NSFileManager</span> defaultManager] 
+     URLsForDirectory:<span class="built_in">NSDocumentDirectory</span> 
+            inDomains:<span class="built_in">NSUserDomainMask</span>] lastObject];
+<span class="built_in">NSString</span> *dbPath = [[appUrl path] stringByAppendingPathComponent:<span class="string">@"MyDatabase.db"</span>];   
+FMDatabase* db = [FMDatabase databaseWithPath:dbPath];
+
+<span class="keyword">if</span> (![db open]) {       
+ <span class="built_in">NSLog</span>(<span class="string">@"Could not open db"</span>);     
+ <span class="keyword">return</span>;  
+}
+</code></pre><h4 id="insertData">insertData</h4><pre><code>if(![db executeUpdate:@"<span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">user</span> (<span class="keyword">name</span>, description) <span class="keyword">VALUES</span> (?,?)<span class="string">", name, description])
+{
+ NSLog(@"</span>Could <span class="keyword">not</span> <span class="keyword">insert</span> <span class="keyword">data</span>: %@<span class="string">", [db lastErrorMessage]);
+}</span></span>
+</code></pre><p>這裡的代數是用？</p>
+<h4 id="readData">readData</h4><pre><code>NSMutableArray* items = [NSMutableArray <span class="string">arrayWithCapacity:</span><span class="number">0</span>];
+FMResultSet *rs = [db <span class="string">executeQuery:</span>@<span class="string">"SELECT uid, name, description from user"</span>];
+
+<span class="keyword">while</span> ([rs next]) {       
+ <span class="typename">int</span> uid = [rs <span class="string">intForColumn:</span>@<span class="string">"uid"</span>];
+ NSString *name = [rs <span class="string">stringForColumn:</span>@<span class="string">"name"</span>];       
+ NSString *description = [rs <span class="string">stringForColumn:</span>@<span class="string">"description"</span>];       
+
+ [items <span class="string">addObject:</span>[NSDictionary <span class="string">dictionaryWithObjectsAndKeys:</span>
+       [NSNumber <span class="string">numberWithInt:</span>uid], @<span class="string">"uid"</span>,
+       name, @<span class="string">"name"</span>,
+       description, @<span class="string">"description"</span>,
+       nil]];
+}
+
+[rs close];   
+</code></pre><h4 id="updateData">updateData</h4><pre><code>if(![db executeUpdate:@"<span class="operator"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">set</span> <span class="keyword">name</span>=?, description＝? <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'?'</span>“,@<span class="string">"1"</span>,@<span class="string">"2"</span>,@<span class="string">"1"</span>]);</span>
+    {
+     NSLog(@"Could not <span class="operator"><span class="keyword">update</span> <span class="keyword">data</span>: %@<span class="string">", [db lastErrorMessage]);
+    }</span></span>
+</code></pre><h4 id="deleteData">deleteData</h4><pre><code>if(![_db executeUpdate:@"<span class="operator"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> uid = ?<span class="string">", [NSNumber numberWithInt:uid]])
+{
+ NSLog(@"</span>Could <span class="keyword">not</span> <span class="keyword">delete</span> <span class="keyword">data</span>: %@<span class="string">", [db lastErrorMessage]);
+}</span></span>
+</code></pre><h4 id="CloseDB">CloseDB</h4><pre><code>[db close]
+</code></pre><p>執行FMDB的指令有她的生命週期，都是<br><br><br>1.open db<br><br><br>2.執行<br><br><br>3.close db</p>
+<p>如果沒有確實的open與close的話  是很容易造成exception而crash的<br><br><br><br><br>最後，因為sqlite是以一個檔案型態存在的，因此在multi－thread讀寫資料時很容易出現錯誤，官方說明與建議的方法如下：<br><br><br></p>
+<pre><code>Using a single<span class="instruction"> instance </span>of FMDatabase from multiple threads at once is a bad idea. It has always been OK to make a FMDatabase object per thread. Just don't share a single<span class="instruction"> instance </span>across threads,<span class="instruction"> and </span>definitely<span class="instruction"> not </span>across multiple threads at the same time. Bad things will eventually happen<span class="instruction"> and </span>you'll eventually get something to crash,<span class="instruction"> or </span>maybe get an exception,<span class="instruction"> or </span>maybe meteorites will fall out of the sky<span class="instruction"> and </span>hit your Mac Pro. This would suck.
+
+So don't instantiate a single FMDatabase object<span class="instruction"> and </span>use it across multiple threads.
+
+Instead, use FMDatabaseQueue. It's your friend<span class="instruction"> and </span>it's here to help. Here's how to use it:
+
+First, make your queue.
+</code></pre><p>用FMDatabaseQueue來解決，<br><br>範例：</p>
+<pre><code>FMDatabaseQueue *queue = [FMDatabaseQueue <span class="string">databaseQueueWithPath:</span>aPath];
+Then use it like <span class="string">so:</span>
+
+[queue <span class="string">inDatabase:</span>^(FMDatabase *db) {
+    [db <span class="string">executeUpdate:</span>@<span class="string">"INSERT INTO myTable VALUES (?)"</span>, [NSNumber <span class="string">numberWithInt:</span><span class="number">1</span>]];
+    [db <span class="string">executeUpdate:</span>@<span class="string">"INSERT INTO myTable VALUES (?)"</span>, [NSNumber <span class="string">numberWithInt:</span><span class="number">2</span>]];
+    [db <span class="string">executeUpdate:</span>@<span class="string">"INSERT INTO myTable VALUES (?)"</span>, [NSNumber <span class="string">numberWithInt:</span><span class="number">3</span>]];
+
+FMResultSet *rs = [db <span class="string">executeQuery:</span>@<span class="string">"select * from foo"</span>];
+    <span class="keyword">while</span> ([rs next]) {
+        …
+    }
+}];
+</code></pre><p><br><br>就醬，其實不難～<br><br><br><br><br><br><br></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iOS/">iOS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://www.yuaki.com/2015/08/17/漫談手機的存儲方式/" data-title="漫談手機的存儲方式 | YUAKI APP" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/13/XCode-debug再進化-4/"  title="XCode debug再進化－4">
+ <strong>下一篇：</strong><br/> 
+ <span>XCode debug再進化－4
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSUserDefault"><span class="toc-number">1.</span> <span class="toc-text">NSUserDefault</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#regist_Data"><span class="toc-number">1.1.</span> <span class="toc-text">regist Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#write_Data"><span class="toc-number">1.2.</span> <span class="toc-text">write Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#remove_Data"><span class="toc-number">1.3.</span> <span class="toc-text">remove Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#read_Data"><span class="toc-number">1.4.</span> <span class="toc-text">read Data</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#實體檔案存取(NSFileManager)"><span class="toc-number">2.</span> <span class="toc-text">實體檔案存取(NSFileManager)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Create_File"><span class="toc-number">2.1.</span> <span class="toc-text">Create File</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Read_File"><span class="toc-number">2.2.</span> <span class="toc-text">Read File</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Write_File"><span class="toc-number">2.3.</span> <span class="toc-text">Write File</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#delete_File"><span class="toc-number">2.4.</span> <span class="toc-text">delete File</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQLite"><span class="toc-number">3.</span> <span class="toc-text">SQLite</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#首先你要先把_libsqlite3-dylib_加進library"><span class="toc-number">3.1.</span> <span class="toc-text">首先你要先把 libsqlite3.dylib 加進library</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OpenDB"><span class="toc-number">3.2.</span> <span class="toc-text">OpenDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#insertData"><span class="toc-number">3.3.</span> <span class="toc-text">insertData</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#readData"><span class="toc-number">3.4.</span> <span class="toc-text">readData</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#updateData"><span class="toc-number">3.5.</span> <span class="toc-text">updateData</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#deleteData"><span class="toc-number">3.6.</span> <span class="toc-text">deleteData</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CloseDB"><span class="toc-number">3.7.</span> <span class="toc-text">CloseDB</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標籤</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>31</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Clean-Code/" title="Clean Code">Clean Code<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/其他/" title="其他">其他<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/遊戲/" title="遊戲">遊戲<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <!-- 
+<div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+ -->
+
+  
+
+
+</aside>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- right -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8983800189460499"
+     data-ad-slot="4813429766"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+    </div>
+    <footer><div id="footer" >
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by Jacman © 2015 
+		
+		<a href="http://www.yuaki.com/about" target="_blank" title="AKI YU">AKI YU</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'nobodyyu';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
