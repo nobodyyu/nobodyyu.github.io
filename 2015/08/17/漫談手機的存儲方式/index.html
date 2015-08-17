@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://www.yuaki.com/2015/08/17/漫談手機的存儲方式/index.html">
 <meta property="og:site_name" content="YUAKI APP">
 <meta property="og:description" content="如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－－－大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的">
-<meta property="og:updated_time" content="2015-08-17T09:53:35.000Z">
+<meta property="og:updated_time" content="2015-08-17T09:55:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漫談手機的存儲方式">
 <meta name="twitter:description" content="如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－－－大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的">
@@ -249,7 +249,6 @@ Instead, use FMDatabaseQueue. It's your friend<span class="instruction"> and </s
 First, make your queue.
 </code></pre><p>用FMDatabaseQueue來解決，<br><br>範例：</p>
 <pre><code>FMDatabaseQueue *queue = [FMDatabaseQueue <span class="string">databaseQueueWithPath:</span>aPath];
-Then use it like <span class="string">so:</span>
 
 [queue <span class="string">inDatabase:</span>^(FMDatabase *db) {
     [db <span class="string">executeUpdate:</span>@<span class="string">"INSERT INTO myTable VALUES (?)"</span>, [NSNumber <span class="string">numberWithInt:</span><span class="number">1</span>]];
