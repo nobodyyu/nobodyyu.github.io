@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://www.yuaki.com/2015/08/17/漫談手機的存儲方式/index.html">
 <meta property="og:site_name" content="YUAKI APP">
 <meta property="og:description" content="如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的好處">
-<meta property="og:updated_time" content="2015-08-17T09:42:58.000Z">
+<meta property="og:updated_time" content="2015-08-17T09:46:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漫談手機的存儲方式">
 <meta name="twitter:description" content="如何在手機上存資料是我常常被問到的問題，因此開一篇文章來討論一下實務上幾個比較常見的到資料存儲方式，不過，這裡不會提到CoreData，原因在於－大部份的手機專案都是iOS／Android兩個手機專案在並行，因此大部份的owner會想要兩邊的流程是一致的，因此在選擇資料存儲的方式時，大多選擇兩個手機台平能夠共用的方式，sqlite就是一個比較好說服owner的方式。當然coredata也有他的好處">
@@ -252,10 +252,12 @@ FMResultSet *rs = [db <span class="string">executeQuery:</span>@<span class="str
 }
 
 [rs close];   
-</code></pre><h4 id="updateData">updateData</h4><pre><code>if(![db executeUpdate:@"<span class="operator"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">set</span> <span class="keyword">name</span>=?, description＝? <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'?'</span>“,@<span class="string">"1"</span>,@<span class="string">"2"</span>,@<span class="string">"1"</span>]);</span>
+</code></pre><h4 id="updateData">updateData</h4><pre><code>[db beginTransaction];
+if(![db executeUpdate:@"<span class="operator"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">set</span> <span class="keyword">name</span>=?, description＝? <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'?'</span>“,@<span class="string">"1"</span>,@<span class="string">"2"</span>,@<span class="string">"1"</span>]);</span>
     {
      NSLog(@"Could not <span class="operator"><span class="keyword">update</span> <span class="keyword">data</span>: %@<span class="string">", [db lastErrorMessage]);
-    }</span></span>
+    }
+[db commit];</span></span>
 </code></pre><h4 id="deleteData">deleteData</h4><pre><code>if(![_db executeUpdate:@"<span class="operator"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> uid = ?<span class="string">", [NSNumber numberWithInt:uid]])
 {
  NSLog(@"</span>Could <span class="keyword">not</span> <span class="keyword">delete</span> <span class="keyword">data</span>: %@<span class="string">", [db lastErrorMessage]);
