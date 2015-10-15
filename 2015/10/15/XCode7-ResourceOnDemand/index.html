@@ -4,29 +4,49 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Clean Code - TDDs 3 laws | YUAKI</title>
+    <title>XCode7-ResourceOnDemand.md | YUAKI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="AKI YU">
     
 
     
-    <meta name="description" content="First Law - You may not write production code until you have written a failing unit test.
+    <meta name="description" content="XCode7、iOS9新功能－Resource On Demand 資源檔分段下載XCode7的專案多了一個標籤[Resource Tags]
 
-Second Law - You may not write more of a unit test than is sufficient to fail, and not compiling is failing.">
+打開來看長這樣
+
+接著解說一下各自的用意
+Initial Install Tags: 在一開始安裝時就包在ipa裡讓人下載的資源檔
+Prefetched Tag Order: 第一次開啟app時才下載資源檔
+Download Only On Demand">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Clean Code - TDDs 3 laws">
-<meta property="og:url" content="http://www.yuaki.com/2015/04/08/Clean-Code-TDDs-3-laws/index.html">
+<meta property="og:title" content="XCode7-ResourceOnDemand.md">
+<meta property="og:url" content="http://www.yuaki.com/2015/10/15/XCode7-ResourceOnDemand/index.html">
 <meta property="og:site_name" content="YUAKI">
-<meta property="og:description" content="First Law - You may not write production code until you have written a failing unit test.
+<meta property="og:description" content="XCode7、iOS9新功能－Resource On Demand 資源檔分段下載XCode7的專案多了一個標籤[Resource Tags]
 
-Second Law - You may not write more of a unit test than is sufficient to fail, and not compiling is failing.">
-<meta property="og:updated_time" content="2015-07-25T13:57:26.000Z">
+打開來看長這樣
+
+接著解說一下各自的用意
+Initial Install Tags: 在一開始安裝時就包在ipa裡讓人下載的資源檔
+Prefetched Tag Order: 第一次開啟app時才下載資源檔
+Download Only On Demand">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag05.png">
+<meta property="og:updated_time" content="2015-10-15T07:40:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Clean Code - TDDs 3 laws">
-<meta name="twitter:description" content="First Law - You may not write production code until you have written a failing unit test.
+<meta name="twitter:title" content="XCode7-ResourceOnDemand.md">
+<meta name="twitter:description" content="XCode7、iOS9新功能－Resource On Demand 資源檔分段下載XCode7的專案多了一個標籤[Resource Tags]
 
-Second Law - You may not write more of a unit test than is sufficient to fail, and not compiling is failing.">
+打開來看長這樣
+
+接著解說一下各自的用意
+Initial Install Tags: 在一開始安裝時就包在ipa裡讓人下載的資源檔
+Prefetched Tag Order: 第一次開啟app時才下載資源檔
+Download Only On Demand">
 
     
     <link rel="alternative" href="/" title="YUAKI" type="application/atom+xml">
@@ -101,14 +121,14 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/08/Clean-Code-TDDs-3-laws/" title="Clean Code - TDDs 3 laws" itemprop="url">Clean Code - TDDs 3 laws</a>
+      <a href="/2015/10/15/XCode7-ResourceOnDemand/" title="XCode7-ResourceOnDemand.md" itemprop="url">XCode7-ResourceOnDemand.md</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://www.yuaki.com/about" title="AKI YU" target="_blank" itemprop="author">AKI YU</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-08T09:46:55.000Z" itemprop="datePublished"> 發表於 2015-04-08</time>
+    <time datetime="2015-10-15T14:57:56.000Z" itemprop="datePublished"> 發表於 2015-10-15</time>
     
   </p>
 </header>
@@ -117,18 +137,43 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XCode7、iOS9新功能－Resource_On_Demand_資源檔分段下載"><span class="toc-number">1.</span> <span class="toc-text">XCode7、iOS9新功能－Resource On Demand 資源檔分段下載</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#範例"><span class="toc-number">2.</span> <span class="toc-text">範例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#設定資源檔的tag"><span class="toc-number">2.1.</span> <span class="toc-text">設定資源檔的tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#呼叫程式下載資源檔"><span class="toc-number">2.2.</span> <span class="toc-text">呼叫程式下載資源檔</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#beginAccessingResourcesWithCompletionHandler"><span class="toc-number">2.2.1.</span> <span class="toc-text">beginAccessingResourcesWithCompletionHandler</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#conditionallyBeginAccessingResourcesWithCompletionHandler"><span class="toc-number">2.2.2.</span> <span class="toc-text">conditionallyBeginAccessingResourcesWithCompletionHandler</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<ol>
-<li><p>First Law - You may not write production code until you have written a failing unit test.</p>
-</li>
-<li><p>Second Law - You may not write more of a unit test than is sufficient to fail, and not compiling is failing.</p>
-</li>
-<li><p>Third Law - You may not write more production code than is sufficient to pass the currently failing test.</p>
-</li>
-</ol>
+		<h2 id="XCode7、iOS9新功能－Resource_On_Demand_資源檔分段下載">XCode7、iOS9新功能－Resource On Demand 資源檔分段下載</h2><p>XCode7的專案多了一個標籤[Resource Tags]</p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag01.png" alt="resourcetag01" style="width:310px"></p>
+<p>打開來看長這樣</p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag02.png" alt="resourcetag02" style="width:310px"></p>
+<p>接著解說一下各自的用意</p>
+<p>Initial Install Tags: 在一開始安裝時就包在ipa裡讓人下載的資源檔</p>
+<p>Prefetched Tag Order: 第一次開啟app時才下載資源檔</p>
+<p>Download Only On Demand: 以程式判斷，需要下載時才下載（這段好像由apple代理，只要寫程式去抓資源檔回來）</p>
+<p>##套用情境<br>假設我寫了一個電子書app，全部資源檔包一包上傳到store，結果有30MB，此時手機如果在3G模式下，是沒有辦法下載這個app的（上限20MB），此時若將資源檔移至 [Prefetched Tag Order] 把主程式壓在20MB以下的話，3G模式下的使用者就可以下載了，另外的10MB，則是使用者第一次開啟時才會將這10MB下載回來。</p>
+<p>內容的部份，我有10本書，每本10MB，如果在[Prefetched Tag Order]一口氣全下載回來的話，會慢到讓user以為是當機吧。所以內容可以等到使用者單獨開啟某一本書時再去下載，就可以放在[Download Only On Demand]，再用程式去判斷。</p>
+<h2 id="範例">範例</h2><h3 id="設定資源檔的tag">設定資源檔的tag</h3><p>在Images.xcassets找到需要設定的圖檔，並在且右方屬性的地方找找[On Demand Resources Tags]，如圖</p>
+<p><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag03.png" alt="resourcetag03" style="width:310px"></p>
+<p>打入[book1]，看起來很像標籤雲，實際上一個資源檔可以輸入多個tag，如圖<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag04.png" alt="resourcetag04" style="width:310px"></p>
+<p>輸入完成後，回到[Resource Tags]看一眼，發現檔案自動出現在[Download Only On Demand]<br><img class="img-shadow" src="https://raw.githubusercontent.com/nobodyyu/GraphicsBed/master/resourcetag05.png" alt="resourcetag05" style="width:310px"></p>
+<h3 id="呼叫程式下載資源檔">呼叫程式下載資源檔</h3><p>iOS9 提供了兩個方法呼叫  看程式，bj4</p>
+<h4 id="beginAccessingResourcesWithCompletionHandler">beginAccessingResourcesWithCompletionHandler</h4><p>-(void)preloadResourceWithTags:(NSArray *)tagArray{</p>
+<pre><code><span class="built_in">NSSet</span> *tagSet = [<span class="built_in">NSSet</span> setWithArray:tagArray];
+
+<span class="built_in">NSBundleResourceRequest</span> *resourceRequest = [[<span class="built_in">NSBundleResourceRequest</span> alloc] initWithTags:tagSet];
+[resourceRequest beginAccessingResourcesWithCompletionHandler:^(<span class="built_in">NSError</span> * _Nullable error) {
+    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,error);
+}];
+</code></pre><p>}</p>
+<h4 id="conditionallyBeginAccessingResourcesWithCompletionHandler">conditionallyBeginAccessingResourcesWithCompletionHandler</h4><p>-(void)loadResourceWithTags:(NSArray <em>)tagArray{<br>    NSSet </em>tagSet = [NSSet setWithArray:tagArray];</p>
+<pre><code><span class="built_in">NSBundleResourceRequest</span> *resourceRequest = [[<span class="built_in">NSBundleResourceRequest</span> alloc] initWithTags:tagSet];
+[resourceRequest conditionallyBeginAccessingResourcesWithCompletionHandler:^(<span class="built_in">BOOL</span> resourcesAvailable) {
+
+    <span class="keyword">if</span>(resourcesAvailable){
+        <span class="built_in">NSLog</span>(<span class="string">@"Resources Available"</span>);
+    }
+
+}];
+</code></pre><p>}</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -137,7 +182,7 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Clean-Code/">Clean Code</a>
+  <span></span> <a href="/tags/iOS/">iOS</a>
   </div>
 
 </div>
@@ -146,7 +191,7 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.yuaki.com/2015/04/08/Clean-Code-TDDs-3-laws/" data-title="Clean Code - TDDs 3 laws | YUAKI" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.yuaki.com/2015/10/15/XCode7-ResourceOnDemand/" data-title="XCode7-ResourceOnDemand.md | YUAKI" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -159,19 +204,11 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/04/08/Clean-Code-Error-Handling/" title="Clean Code - Error Handling">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Clean Code - Error Handling</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/04/08/Clean-Code-System/"  title="Clean Code - System">
+<a href="/2015/08/17/漫談手機的存儲方式/"  title="漫談手機的存儲方式">
  <strong>下一篇：</strong><br/> 
- <span>Clean Code - System
+ <span>漫談手機的存儲方式
 </span>
 </a>
 </div>
@@ -192,7 +229,7 @@ Second Law - You may not write more of a unit test than is sufficient to fail, a
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XCode7、iOS9新功能－Resource_On_Demand_資源檔分段下載"><span class="toc-number">1.</span> <span class="toc-text">XCode7、iOS9新功能－Resource On Demand 資源檔分段下載</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#範例"><span class="toc-number">2.</span> <span class="toc-text">範例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#設定資源檔的tag"><span class="toc-number">2.1.</span> <span class="toc-text">設定資源檔的tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#呼叫程式下載資源檔"><span class="toc-number">2.2.</span> <span class="toc-text">呼叫程式下載資源檔</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#beginAccessingResourcesWithCompletionHandler"><span class="toc-number">2.2.1.</span> <span class="toc-text">beginAccessingResourcesWithCompletionHandler</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#conditionallyBeginAccessingResourcesWithCompletionHandler"><span class="toc-number">2.2.2.</span> <span class="toc-text">conditionallyBeginAccessingResourcesWithCompletionHandler</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
